@@ -21,6 +21,21 @@
  * memory map. The behavior in these addresses is described in the 
  * Screen and Keyboard chip specifications given in the book.
  */
+ 
+ // function memory(in, load, addr){
+ //   let res
+ //   if(addr[14] == 0){
+ //     res = ram(in, load, addr[0..14])
+ //   }else{
+ //     if(addr[13] == 0){
+ //       res = screen(in, load, addr[0..11])
+ //     }else{
+ //       if(addr[13] == 1) res = keyIo()
+ //     }
+ //   }
+ //   return res
+ // }
+
 
 CHIP Memory {
     IN in[16], load, address[15];
@@ -28,23 +43,74 @@ CHIP Memory {
 
     PARTS:
     // Put your code here:
-    Dmux(in=in, sel=selctor, a=a, b=b);
-    RAM16K(in=in, load=load, address=address[0..14], out=out);
-    Screen(in=in, load=load, address=address, out=out);
-    Keyboard(out=out);
+
+    // if(address[14] == 0){
+    //   memory address
+    // }else{ 
+    //   io device
+    // } 
+    DMux(in=load, sel=address[14], a=mem, b=io);
+
+
+    // pass load signal and address to RAM
+    RAM16K(in=in, load=mem, address=address[0..13], out=memOut);
+
+
+    // notKbd = (address[13] == 0)
+    Not(in=address[13], out=notKbd);
+
+    // useScreen = (address[14] == 1 && address[13] == 0)
+    And(a=address[14], b=notKbd, out=useScreen);
+    // if(useScreen == 1) scrnLoad = io
+    Mux(a=false, b=io, sel=useScreen, out=scrnLoad);
+    
+    Screen(in=in, load=scrnLoad, address=address[0..12], out=scrOut);
+    Keyboard(out=kbdOut);
+
+    // 00 = a
+    // 01 = b
+    // 10 = c
+    // 11 = d
+
+    Mux4Way16(a=memOut, b=memOut, c=scrOut, d=kbdOut, sel=address[13..14], out=out);
+
 }
 
 // Ram16K range:
+// 0 -> 16383
+
+// AKA
+
 // 00000000_00000000 -> 00111111_11111111
 
+// --------------
 
 // Screen:
 
 // Screen === RAM8K
 
 // Screen range:
+
+// 16384 -> 24575
+
+// AKA
+
 // 01000000_00000000 -> 01011111_11111111
+
+// -----------------
 
 // Keyboard:
 
+// 24576
+
+// AKA
+
 // 01100000_00000000
+
+// Invalid:
+
+// >= 24577
+
+// AKA
+
+//  >= 0110000000000001
