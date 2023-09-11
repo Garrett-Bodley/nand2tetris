@@ -15,3 +15,8 @@ CHIP Mux4Way16 {
     Mux16(a=c[0..15], b=d[0..15], sel=sel[0], out=y);
     Mux16(a=x, b=y, sel=sel[1], out=out);
 }
+
+// 00 = a
+// 01 = b
+// 10 = c
+// 11 = d
