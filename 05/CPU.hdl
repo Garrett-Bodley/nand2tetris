@@ -97,8 +97,6 @@ CHIP CPU {
     // if(a == 0) A value
     Mux16(a=aOut, b=inM, sel=instruction[12], out=aOrM);
 
-    And(a=cInstruc, b=instruction[12], out=out);
-
     // The cccccc bits of a C instruction map directly onto the ALU
     ALU(x=dOut, y=aOrM, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=aluOut, zr=outIsZero, ng=outIsNegative, out=outM);
 
