@@ -50,7 +50,9 @@ CHIP CPU {
     // Break CPU down into smaller parts:
 
     // Parse instructions
-    //   is A or C
+    //   is A or C?
+    //   if A
+    //     load instruction into A register
     //   if C
     //     Are we using A or M value? 
     //       (read 'a' bit)
@@ -64,17 +66,14 @@ CHIP CPU {
     //     Jump to location in A
     //     Update PC location
     //     reset PC
-      
-
 
     // Assume A instruction
     // Load A instruction into A register
 
     // Assume C instruction
-    // single 'a' (instruction) bit determines if using A or M value (a = 1 == M instruction)
+    // single 'a' (instruction) bit determines if using A or M value (a = 1 == M instruction == We are manipulating the memory address stored in the A register)
 
-    // d instruction parsing:
-
+    // d (destination) instruction parsing:
     // 000 = null
     // 001 = M
     // 010 = D
@@ -84,14 +83,14 @@ CHIP CPU {
     Not(in=instruction[15], out=aInstruc);
     Not(in=aInstruc, out=cInstruc);
 
-    //  A
-
+    //  A Register
     // load if A instruction OR if C instruction says load
 
     Mux16(a=aluOut, b=instruction, sel=aInstruc, out=aInput);
     Or(a=aInstruc, b=instruction[5], out=loadA);
     ARegister(in=aInput, load=loadA, out=aOut, out[0..14]=addressM);
 
+    // In the case of a C-instruction, the single a-bit determines whether the ALU will operate on the A register input or on the M input, and the six c-bits determine which function the ALU will compute. 
     
     // a = instruction[12]
     // if(a == 1) M value
@@ -100,22 +99,25 @@ CHIP CPU {
 
     And(a=cInstruc, b=instruction[12], out=out);
 
-
-    // In the case of a C-instruction, the single a-bit determines whether the ALU will operate on the A register input or on the M input, and the six c-bits determine which function the ALU will compute. 
+    // The cccccc bits of a C instruction map directly onto the ALU
     ALU(x=dOut, y=aOrM, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=aluOut, zr=outIsZero, ng=outIsNegative, out=outM);
 
 
     //  D Register
+    // ddd bits determine where ALU output is saved
+    // if((instruction[4] == 1) && C instruction) load ALU output into D
     And(a=instruction[4], b=cInstruc, out=loadD);
     DRegister(in=aluOut, load=loadD, out=dOut);
 
-    //  Jump instruction
+    //  Jump Instruction Handling
 
     Not(in=outIsZero, out=outIsNotZero);
     Not(in=outIsNegative, out=outIsNotNegative);
 
 
     // 000 = no jump
+    // No handling required
+
     // 001 = JGT
     // instruction[0] && !outIsZero & !outIsNegative
 
@@ -156,26 +158,25 @@ CHIP CPU {
 
     And(a=preJLE, b=instruction[0], out=JMP);
 
+    // OR all jump commands to check if we should jump
     Or(a=JGT, b=JEQ, out=a);
     Or(a=JGE, b=JLT, out=b);
     Or(a=JNE, b=JLE, out=c);
     Or(a=a, b=b, out=x);
     Or(a=c, b=JMP, out=y);
     Or(a=x, b=y, out=prejump);
+
+    // We only jump if CPU has received a C instruction
     And(a=prejump, b=cInstruc, out=jump);
 
+    // Only increment PC when we're not jumping
     Not(in=jump, out=notJump);
-
-
-
 
     PC(in=aOut, load=jump, inc=notJump, reset=reset, out[0..14]=pc);
 
     //  write to M?
-
-    //  instruction[3]
+    //  if C instruction && instruction[3]
 
      And(a=instruction[3], b=cInstruc, out=writeM);
 
-    //  if C instruction &&
 }
