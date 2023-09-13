@@ -40,4 +40,142 @@ CHIP CPU {
 
     PARTS:
     // Put your code here:
+
+    // Example instruction code:
+    // ixxaccccccdddjjj
+
+    // The i-bit (also known as opcode) codes the instruction type
+    //  - Either 0 for an A-instruction or 1 for a C-instruction. 
+
+    // Break CPU down into smaller parts:
+
+    // Parse instructions
+    //   is A or C
+    //   if C
+    //     Are we using A or M value? 
+    //       (read 'a' bit)
+    //     Pass C instructions to ALU
+    //   Where are we writing the output? (ddd bits)
+    //     d determines where output is being saved
+    //     We can save to ALL THREE locations at once
+    //     d = load?
+    //   Jump conditions?
+    //     Evaluate D register value
+    //     Jump to location in A
+    //     Update PC location
+    //     reset PC
+      
+
+
+    // Assume A instruction
+    // Load A instruction into A register
+
+    // Assume C instruction
+    // single 'a' (instruction) bit determines if using A or M value (a = 1 == M instruction)
+
+    // d instruction parsing:
+
+    // 000 = null
+    // 001 = M
+    // 010 = D
+    // 100 = A
+    
+
+    Not(in=instruction[15], out=aInstruc);
+    Not(in=aInstruc, out=cInstruc);
+
+    //  A
+
+    // load if A instruction OR if C instruction says load
+
+    Mux16(a=aluOut, b=instruction, sel=aInstruc, out=aInput);
+    Or(a=aInstruc, b=instruction[5], out=loadA);
+    ARegister(in=aInput, load=loadA, out=aOut, out[0..14]=addressM);
+
+    
+    // a = instruction[12]
+    // if(a == 1) M value
+    // if(a == 0) A value
+    Mux16(a=aOut, b=inM, sel=instruction[12], out=aOrM);
+
+    And(a=cInstruc, b=instruction[12], out=out);
+
+
+    // In the case of a C-instruction, the single a-bit determines whether the ALU will operate on the A register input or on the M input, and the six c-bits determine which function the ALU will compute. 
+    ALU(x=dOut, y=aOrM, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=aluOut, zr=outIsZero, ng=outIsNegative, out=outM);
+
+
+    //  D Register
+    And(a=instruction[4], b=cInstruc, out=loadD);
+    DRegister(in=aluOut, load=loadD, out=dOut);
+
+    //  Jump instruction
+
+    Not(in=outIsZero, out=outIsNotZero);
+    Not(in=outIsNegative, out=outIsNotNegative);
+
+
+    // 000 = no jump
+    // 001 = JGT
+    // instruction[0] && !outIsZero & !outIsNegative
+
+    And(a=instruction[0], b=outIsNotZero, out=preJGT);
+    And(a=preJGT, b=outIsNotNegative, out=JGT);
+
+    // 010 = JEQ
+    // instruction [1] && outIsZero
+
+    And(a=instruction[1], b=outIsZero, out=JEQ);
+
+    // 011 = JGE
+    // instruction[0] && instruction[1] && !outIsNegative
+
+    And(a=instruction[0], b=instruction[1], out=preJGE);
+    And(a=preJGE, b=outIsNotNegative, out=JGE);
+
+    // 100 = JLT
+    // instruction[2] && !outIsZero && outIsNegative
+
+    And(a=instruction[2], b=outIsNotZero, out=preJLT);
+    And(a=preJLT, b=outIsNegative, out=JLT);
+
+    // 101 = JNE
+    // instruction[2] && instruction[0] && !outIsZero
+    
+    And(a=instruction[0], b=instruction[2], out=preJNE);
+    And(a=preJNE, b=outIsNotZero, out=JNE);
+
+    // 110 = JLE
+    // instruction[2] && instruction[1] && outIsNegative
+
+    And(a=instruction[2], b=instruction[1], out=preJLE);
+    And(a=preJLE, b=outIsNegative, out=JLE);
+
+    // 111 = JMP
+    // instruction[2] && instruction [1] && instruction[0]
+
+    And(a=preJLE, b=instruction[0], out=JMP);
+
+    Or(a=JGT, b=JEQ, out=a);
+    Or(a=JGE, b=JLT, out=b);
+    Or(a=JNE, b=JLE, out=c);
+    Or(a=a, b=b, out=x);
+    Or(a=c, b=JMP, out=y);
+    Or(a=x, b=y, out=prejump);
+    And(a=prejump, b=cInstruc, out=jump);
+
+    Not(in=jump, out=notJump);
+
+
+
+
+    PC(in=aOut, load=jump, inc=notJump, reset=reset, out[0..14]=pc);
+
+    //  write to M?
+
+    //  instruction[3]
+
+     And(a=instruction[3], b=cInstruc, out=writeM);
+
+    //  if C instruction &&
 }
