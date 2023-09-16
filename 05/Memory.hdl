@@ -22,19 +22,20 @@
  * Screen and Keyboard chip specifications given in the book.
  */
  
- // function memory(in, load, addr){
- //   let res
- //   if(addr[14] == 0){
- //     res = ram(in, load, addr[0..14])
- //   }else{
- //     if(addr[13] == 0){
- //       res = screen(in, load, addr[0..11])
- //     }else{
- //       if(addr[13] == 1) res = keyIo()
- //     }
- //   }
- //   return res
- // }
+// function memory(in, load, addr){
+//   let res
+//   if(addr[14] == 0){
+//     res = ram(in, load, addr[0..13])
+//   }else{
+//     // io address
+//     if(addr[13] == 0){
+//       res = screen(in, load, addr[0..11])
+//     }else{
+//       if(addr[13] == 1) res = keyIo()
+//     }
+//   }
+//   return res
+// }
 
 
 CHIP Memory {
@@ -51,21 +52,21 @@ CHIP Memory {
     // } 
     DMux(in=load, sel=address[14], a=mem, b=io);
 
-
     // pass load signal and address to RAM
     RAM16K(in=in, load=mem, address=address[0..13], out=memOut);
 
-
     // notKbd = (address[13] == 0)
     Not(in=address[13], out=notKbd);
-
+    
     // useScreen = (address[14] == 1 && address[13] == 0)
     And(a=address[14], b=notKbd, out=useScreen);
+
     // if(useScreen == 1) scrnLoad = io
     Mux(a=false, b=io, sel=useScreen, out=scrnLoad);
-    
+
     Screen(in=in, load=scrnLoad, address=address[0..12], out=scrOut);
     Keyboard(out=kbdOut);
+    
 
     // 00 = a
     // 01 = b
