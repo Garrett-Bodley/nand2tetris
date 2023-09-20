@@ -56,21 +56,27 @@ const destDict = {
 };
 
 const jumpDict = {
-  JGT: "000",
+  JGT: "001",
   JEQ: "010",
   JGE: "011",
   JLT: "100",
   JNE: "101",
-  JLE: "111",
+  JLE: "110",
+  JMP: "111"
 };
 
 const dict = { ALUDict, destDict, jumpDict };
 
 function Assemble(relativePath) {
-  const rl = setupIO(relativePath);
+  const {rl, ws} = setupIO(relativePath);
   let lineNum = 1;
   rl.on("line", (input) => {
-    parseInstruction(input, lineNum);
+    let newLine = parseInstruction(input, lineNum);
+    debugger
+    if(newLine.length !== 0){
+      debugger
+      ws.write(`${lineNum > 1 ? '\n' : '\r'}${newLine}`)
+    }
     lineNum++;
   });
 
@@ -85,10 +91,9 @@ function Assemble(relativePath) {
 
     const rl = readline.createInterface({
       input: rs,
-      output: ws,
     });
 
-    return rl;
+    return {rl, ws};
   }
 
   function pathParse(relativePath) {
@@ -107,22 +112,22 @@ function Assemble(relativePath) {
     if (line.match(/(^\/\/)/)) {
       console.log(line);
       console.log("Skipping code comment");
-      return;
+      return '';
     }
     if (line.length == 0) {
-      return console.log("Skipping empty line!");
+      console.log("Skipping empty line!");
+      return ''
     }
     if (line.match(/@/)) {
-      aInstruction(line, lineNum);
+      return aInstruction(line, lineNum);
     } else {
-      cInstruction(line, lineNum);
+      return cInstruction(line, lineNum);
     }
   };
 
   function aInstruction(line, lineNum) {
     const val = Number(line.replace(/@/, ""));
-    const binaryInstruction = "1" + twosCompliment(val, 15);
-    debugger;
+    const binaryInstruction = "0" + twosCompliment(val, 15);
     console.log(
       `A instruction:\n${line}\nTranslated to 16 bit Binary: \n${binaryInstruction}\n-------------------------------`
     );
@@ -156,6 +161,7 @@ function Assemble(relativePath) {
       destBinary = dict.destDict[destination];
       compBinary = dict.ALUDict[computation];
     } else if (line.match(/;/)) {
+      debugger
       const [computation, jump] = line.split(";");
 
       if (!dict.ALUDict[computation] || !dict.jumpDict[jump])
@@ -166,7 +172,7 @@ function Assemble(relativePath) {
     } else {
       throwInvalidInput(lineNum);
     }
-    let binaryInstruction = `100${compBinary}${destBinary}${jumpBinary}`;
+    let binaryInstruction = `111${compBinary}${destBinary}${jumpBinary}`;
     console.log(
       `C instruction:\n${line}\nTranslated to 16 bit Binary: \n${binaryInstruction}\n-------------------------------`
     );
@@ -203,7 +209,7 @@ try {
   debugger;
   // const inputPath = path.join(__dirname, PATH)
   // read(inputPath)
-  Assemble("add/Add.asm");
+  Assemble(PATH);
 } catch (e) {
   console.log(e);
 }
