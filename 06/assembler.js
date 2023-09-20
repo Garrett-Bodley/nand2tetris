@@ -1,9 +1,9 @@
 #! /usr/bin/env node
 const PATH = "pong/PongL.asm";
 
-const fs = require("node:fs");
-const path = require("node:path");
-const readline = require("node:readline");
+const fs = require("fs");
+const path = require("path");
+const readline = require("readline");
 // const rlPromise = require("node:readline/promises")
 // const util = require("node:util")
 
@@ -69,18 +69,15 @@ const jumpDict = {
 
 const dict = { ALUDict, destDict, jumpDict };
 
- function Assemble(relativePath) {
+function Assemble(relativePath) {
   const { rl_1, rl_2, ws } = setupIO(relativePath);
 
   let lineNum = 1;
   // const rl_1_Promised = util.promisify(rl_1)
 
 
-  rl_1.on("line", (input) => {
-    // if(lineNum == 11608) debugger
-    // debugger
-    // console.log(`Line Num: ${lineNum}`);
-    let newLine = parseInstruction(input, lineNum);
+  rl_1.on("line", (line) => {
+    let newLine = parseInstruction(line, lineNum);
     if (newLine.length !== 0) {
       // ${lineNum > 1 ? "\n" : "\r"}
       ws.write(`${newLine}\n`);
@@ -123,7 +120,8 @@ const dict = { ALUDict, destDict, jumpDict };
     return [inPath, outPath];
   }
 
-  const parseInstruction = (line, lineNum) => {
+  function parseInstruction(line, lineNum){
+    // line = line.replace(/\s/, '')
     if (line.match(/(^\/\/)/)) {
       console.log(line);
       console.log("Skipping code comment");
