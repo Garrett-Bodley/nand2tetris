@@ -1,9 +1,11 @@
 #! /usr/bin/env node
-const PATH = "add/Add.asm";
+const PATH = "pong/PongL.asm";
 
 const fs = require("node:fs");
 const path = require("node:path");
 const readline = require("node:readline");
+// const rlPromise = require("node:readline/promises")
+// const util = require("node:util")
 
 const ALUDict = {
   0: "0101010",
@@ -62,20 +64,26 @@ const jumpDict = {
   JLT: "100",
   JNE: "101",
   JLE: "110",
-  JMP: "111"
+  JMP: "111",
 };
 
 const dict = { ALUDict, destDict, jumpDict };
 
-function Assemble(relativePath) {
-  const {rl, ws} = setupIO(relativePath);
+ function Assemble(relativePath) {
+  const { rl_1, rl_2, ws } = setupIO(relativePath);
+
   let lineNum = 1;
-  rl.on("line", (input) => {
+  // const rl_1_Promised = util.promisify(rl_1)
+
+
+  rl_1.on("line", (input) => {
+    // if(lineNum == 11608) debugger
+    // debugger
+    // console.log(`Line Num: ${lineNum}`);
     let newLine = parseInstruction(input, lineNum);
-    debugger
-    if(newLine.length !== 0){
-      debugger
-      ws.write(`${lineNum > 1 ? '\n' : '\r'}${newLine}`)
+    if (newLine.length !== 0) {
+      // ${lineNum > 1 ? "\n" : "\r"}
+      ws.write(`${newLine}\n`);
     }
     lineNum++;
   });
@@ -83,17 +91,24 @@ function Assemble(relativePath) {
   function setupIO(relativePath) {
     const [inPath, outPath] = pathParse(relativePath);
 
-    const rs = fs.createReadStream(inPath, { encoding: "utf-8" });
-    rs.on("error", (e) => console.log(`Error: ${e.message}`));
+    const rs_1 = fs.createReadStream(inPath, { encoding: "utf-8" });
+    rs_1.on("error", (e) => console.log(`Error: ${e.message}`));
+
+    const rs_2 = fs.createReadStream(inPath, { encoding: "utf-8" });
+    rs_2.on("error", (e) => console.log(`Error: ${e.message}`));
 
     const ws = fs.createWriteStream(outPath);
     ws.on("error", (e) => console.log(`Error: ${e.message}`));
 
-    const rl = readline.createInterface({
-      input: rs,
-    });
+    // Promise version:
+    // const rl_1 = rlPromise.createInterface({ input: rs_1 })
 
-    return {rl, ws};
+    // callback version:
+    const rl_1 = readline.createInterface({ input: rs_1 });
+
+    const rl_2 = readline.createInterface({ input: rs_2 });
+
+    return { rl_1, rl_2, ws };
   }
 
   function pathParse(relativePath) {
@@ -112,11 +127,11 @@ function Assemble(relativePath) {
     if (line.match(/(^\/\/)/)) {
       console.log(line);
       console.log("Skipping code comment");
-      return '';
+      return "";
     }
     if (line.length == 0) {
       console.log("Skipping empty line!");
-      return ''
+      return "";
     }
     if (line.match(/@/)) {
       return aInstruction(line, lineNum);
@@ -128,16 +143,19 @@ function Assemble(relativePath) {
   function aInstruction(line, lineNum) {
     const val = Number(line.replace(/@/, ""));
     const binaryInstruction = "0" + twosCompliment(val, 15);
+    // if(lineNum > 11590 && lineNum < 11620){
+    // }
     console.log(
-      `A instruction:\n${line}\nTranslated to 16 bit Binary: \n${binaryInstruction}\n-------------------------------`
+      `LineNum: ${lineNum}\nA instruction:\n${line}\nTranslated to 16 bit Binary: \n${binaryInstruction}\n-------------------------------`
     );
-    return binaryInstruction
+    return binaryInstruction;
   }
 
   function cInstruction(line, lineNum) {
     // Example instruction code:
     // ixxaccccccdddjjj
     // syntax: Destination = Computation
+    // alt syntax: Computation; Jump Condition
     //
     // if line.includes(';')
     //   Jump instructions
@@ -146,9 +164,15 @@ function Assemble(relativePath) {
     // else if line.includes('=')
     //   Computation
 
-    // Split on "="
-    // Program destination component = Computation/ALU instructions
-    debugger;
+    // // Split on "="
+    // // Program destination component = Computation/ALU instructions
+
+    // OR
+
+    // Split on ';'
+
+    // ALU instruction ; Jump instruction
+
     let compBinary;
     let destBinary = "000";
     let jumpBinary = "000";
@@ -161,7 +185,6 @@ function Assemble(relativePath) {
       destBinary = dict.destDict[destination];
       compBinary = dict.ALUDict[computation];
     } else if (line.match(/;/)) {
-      debugger
       const [computation, jump] = line.split(";");
 
       if (!dict.ALUDict[computation] || !dict.jumpDict[jump])
@@ -173,14 +196,18 @@ function Assemble(relativePath) {
       throwInvalidInput(lineNum);
     }
     let binaryInstruction = `111${compBinary}${destBinary}${jumpBinary}`;
+    // if(lineNum > 11590 && lineNum < 11620){
+    // }
     console.log(
-      `C instruction:\n${line}\nTranslated to 16 bit Binary: \n${binaryInstruction}\n-------------------------------`
+      `LineNum: ${lineNum}\nC instruction:\n${line}\nTranslated to 16 bit Binary: \n${binaryInstruction}\n-------------------------------`
     );
-    return binaryInstruction
+    return binaryInstruction;
   }
 
-  function throwInvalidInput(lineNum){
-    throw Error(`Invalid instruction ${lineNum !== null ? `on line ${lineNum}` : ''}`);
+  function throwInvalidInput(lineNum) {
+    throw Error(
+      `Invalid instruction ${lineNum !== null ? `on line ${lineNum}` : ""}`
+    );
   }
 
   function twosCompliment(value, bitCount) {
@@ -214,12 +241,12 @@ try {
   console.log(e);
 }
 
-function read(filePath) {
-  const rs = fs.createReadStream(filePath);
-  debugger;
-  rs.on("error", (e) => console.log(`Error: ${e.message}`));
-  rs.on("data", (chunk) => {
-    debugger;
-    console.log(chunk);
-  });
-}
+// function read(filePath) {
+//   const rs = fs.createReadStream(filePath);
+//   debugger;
+//   rs.on("error", (e) => console.log(`Error: ${e.message}`));
+//   rs.on("data", (chunk) => {
+//     debugger;
+//     console.log(chunk);
+//   });
+// }
