@@ -37,6 +37,11 @@ const readline = require("node:readline");
 // - Is there a way to wrap that in a Promise as well?
 // - Why the heck do I have to do so much work just to get synchronous, blocking, imperative code??
 
+// SIDEQUEST TWO: ELECTRIC BOOGALOO
+// - At some point I was getting segfaults while trying to step through the program using the debugger?
+// - How the heck am I causing a segfault when I'm just trying to read a file?
+// - What is going on lol
+
 
 class SymbolTable {
   static variableStartAddress = 16;
