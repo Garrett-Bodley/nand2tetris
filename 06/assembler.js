@@ -31,6 +31,12 @@ const readline = require("node:readline");
 //   a. If there is content remaining, why is the callback not being called?
 // 3. What is happening between intialization and the second pass that is invalidating the second Interface object?
 
+// SIDEQUEST
+// - Before wrapping the callback declaration in a promise I also tried using an async interator 
+//    Ex: for await (const line of readlineInterface)){ doThings(line) }
+// - Is there a way to wrap that in a Promise as well?
+// - Why the heck do I have to do so much work just to get synchronous, blocking, imperative code??
+
 
 class SymbolTable {
   static variableStartAddress = 16;
