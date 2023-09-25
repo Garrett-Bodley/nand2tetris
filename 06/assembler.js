@@ -5,7 +5,32 @@ const fs = require("node:fs");
 const path = require("node:path");
 const readline = require("node:readline");
 
-let flag = false
+// ARCHITECTURE OF PROBLEM
+// - Reading an assembly file and translating it to machine code
+// - I must read the file twice. Parsing the labels used for jumps requires a preprocessing step before final translation
+// - I am using the readlines module to read through the file line by line
+// - ** I am creating a readlines Interface object by feeding readline.creatInterface a readStream object **
+// - At first, I initialized both two Interface objects at the same time, one for each pass over the file.
+//   - I then assigned a callback to the second Interface instance after awaiting the "close" event of the first Interface's stream
+//   - This did not work
+//   - If I didn't await the "close" event of the first Interface, then both processing steps would happen at the same time, which is not the desired functionality
+
+// PROBLEM
+// 1. Something is getting messed up with the second readline Interface instance
+// 2. I was handing the interface a callback for its onLine event handler, but that callback was never getting called
+// 3. If I check the stream associated with the InterfaceObject, it says there is content left to read
+// 4. Nonetheless, the callback function for the "line" event is not getting called during the second pass
+
+// CURRENT SOLUTION
+// - Instantiate BOTH the stream and second interface upon the first stream closing
+//   - This is done inside the interfaces onClose event handler
+
+// QUESTIONS
+// 1. Why can't I initialize the second stream in the class constructor?
+// 2. Using the broken solution, when I check the readableStream associated with the second Interface object it says that there is content to read
+//   a. If there is content remaining, why is the callback not being called?
+// 3. What is happening between intialization and the second pass that is invalidating the second Interface object?
+
 
 class SymbolTable {
   static variableStartAddress = 16;
@@ -41,6 +66,7 @@ class SymbolTable {
   }
 
   addLabel(string, address) {
+    // I hardcoded this debugger bc the program was failing on this label prior to adding an await statement
     if(string == "memory.peek") debugger
     if (this.contains(string))
       throw Error(`Error: Provided label name has already been used\nAttempted Add String: ${string}`);
@@ -49,6 +75,7 @@ class SymbolTable {
   }
 
   addVariable(string) {
+    // I hardcoded this debugger bc the program was failing on this label prior to adding an await statement
     if(string == "memory.peek") debugger
     if (this.contains(string))
       throw Error(`Error: Provided variable name has already been used\nAttempted Add String: ${string}`);
@@ -161,6 +188,7 @@ class CodeTable {
 
 class Parser {
   constructor(relativePath) {
+    this.relativePath = relativePath
     const {
       symbolProcessingRLInterface,
       finalAssemblyRLInterface,
@@ -176,58 +204,96 @@ class Parser {
   async firstPass() {
     console.log("STARTING FIRST PASS");
 
-    let lineNum = 1;
-    let machineCodeLineNum = 0;
+    
+    return new Promise((resolve, reject) => {
+      let lineNum = 1;
+      let machineCodeLineNum = 0;
+      this.symbolProcessingRLInterface.on("line", (line) => {
+        const trimmedLine = this.removeTrailingComments(line).trim();
+        const [commandType, commandString] = this.caseLine(trimmedLine);
+  
+        switch (commandType) {
+          case "COMMENT":
+            console.log(
+              `Line Num: ${lineNum}\nMachine Code Line Num: ${machineCodeLineNum}\nCommand Type: ${commandType}\n\nSkipping Code Comment on Line ${lineNum}\n\nLine Contents:\n${commandString}\n\n--------------------------------`
+            );
+            break;
+          case "EMPTY":
+            console.log(
+              `Line Num: ${lineNum}\nCommand Type: ${commandType}\n\nSkipping Empty Line\n\n--------------------------------`
+            );
+            break;
+          case "A_COMMAND":
+            console.log(
+              `LineNum: ${lineNum}\nMachine Code Line Num: ${machineCodeLineNum}\nCommand Type: ${commandType}\n\nLine Contents:\n${commandString}\nIGNORED ON FIRST PASS\n\n-------------------------------`
+            );
+            machineCodeLineNum++;
+            break;
+          case "C_COMMAND":
+            console.log(
+              `LineNum: ${lineNum}\nMachine Code Line Num: ${machineCodeLineNum}\nCommand Type: ${commandType}\n\nLine Contents:\n${commandString}\nIGNORED ON FIRST PASS\n\n-------------------------------`
+            );
+            machineCodeLineNum++;
+            break;
+          case "L_COMMAND":
+            // This debugger never gets triggered. Why? Is it because it's inside a Promise?
+            if(commandString == "memory.peek") debugger
+            this.symbolTable.addLabel(
+              this.removeParenthesis(commandString),
+              machineCodeLineNum
+            );
+            console.log(
+              `LineNum: ${lineNum}\nMachine Code Line Num: ${machineCodeLineNum}\nCommand Type: ${commandType}\n\nLine Contents:\n${commandString}\nADDED TO SYMBOL TABLE\nSymbolTable Key: ${this.removeParenthesis(commandString)}\nSymbolTable Value: ${this.symbolTable.getAddress(this.removeParenthesis(commandString))}\n-------------------------------`
+            );
+            break;
+        }
+        lineNum++
+      });
 
-    this.symbolProcessingRLInterface.on("line", (line) => {
-      const trimmedLine = this.removeTrailingComments(line).trim();
-      const [commandType, commandString] = this.caseLine(trimmedLine);
-
-      switch (commandType) {
-        case "COMMENT":
-          console.log(
-            `Line Num: ${lineNum}\nMachine Code Line Num: ${machineCodeLineNum}\nCommand Type: ${commandType}\n\nSkipping Code Comment on Line ${lineNum}\n\nLine Contents:\n${commandString}\n\n--------------------------------`
-          );
-          break;
-        case "EMPTY":
-          console.log(
-            `Line Num: ${lineNum}\nCommand Type: ${commandType}\n\nSkipping Empty Line\n\n--------------------------------`
-          );
-          break;
-        case "A_COMMAND":
-          console.log(
-            `LineNum: ${lineNum}\nMachine Code Line Num: ${machineCodeLineNum}\nCommand Type: ${commandType}\n\nLine Contents:\n${commandString}\nIGNORED ON FIRST PASS\n\n-------------------------------`
-          );
-          machineCodeLineNum++;
-          break;
-        case "C_COMMAND":
-          console.log(
-            `LineNum: ${lineNum}\nMachine Code Line Num: ${machineCodeLineNum}\nCommand Type: ${commandType}\n\nLine Contents:\n${commandString}\nIGNORED ON FIRST PASS\n\n-------------------------------`
-          );
-          machineCodeLineNum++;
-          break;
-        case "L_COMMAND":
-          if(commandString == "memory.peek") debugger
-          this.symbolTable.addLabel(
-            this.removeParenthesis(commandString),
-            machineCodeLineNum
-          );
-          console.log(
-            `LineNum: ${lineNum}\nMachine Code Line Num: ${machineCodeLineNum}\nCommand Type: ${commandType}\n\nLine Contents:\n${commandString}\nADDED TO SYMBOL TABLE\nSymbolTable Key: ${this.removeParenthesis(commandString)}\nSymbolTable Value: ${this.symbolTable.getAddress(this.removeParenthesis(commandString))}\n-------------------------------`
-          );
-          break;
-      }
-      lineNum++
-    });
+      this.symbolProcessingRLInterface.on("close", _ => {
+        // Why do I have to reinitialize the stream here?
+        const inPath = this.#pathParse(this.relativePath)[0]
+        this.finalAssemblyRLInterface = readline.createInterface({
+          input: this.#createReadStream(inPath)
+        });
+        resolve()
+      })
+    })
   }
 
   async parse() {
     await this.firstPass()
+    debugger
     console.log("STARTING SECOND PASS")
+
+    // ▼▼ Turns out I can do this in the onClose event handler. Still don't know why I can't initialize the stream upon object construction ▼▼
+
+    // Hacky Interface reinitialization. It's ugly but it works. I have no idea why tho
+    // const [inPath, _] = this.#pathParse(this.relativePath);
+    // const secondStream = this.#createReadStream(inPath)
+
+    // const secondInterface = readline.createInterface({
+    //   input: secondStream,
+    // });
+
     let lineNum = 1;
     let machineCodeLineNum = 0;
+
+    // Switched from secondInterface.on("line", doStuff(line))
+
+    // The above line works. It seems that initializing both streams at the same time is causing issues. Awaiting the first stream causes the second stream to be invalid?
+    // I have no idea what's going on lol
+
+    // ▼▼ PROBLEM THAT EXISTS WHEN I DON'T REINITIALIZE THE STREAM IN THE .on("close", ...) FUNCTION ▼▼
+    // What's really weird is if I check the readable stream associated with the finalAssemblyRLInterface it says that it has not closed
+
+    // Ex:
+    // this.finalAssemblyReadStream.readable
+    // > true
+
+    // Doesn't this imply that there is content that can be read in the stream? If so, why isn't the interface's onLine event handler not being called?
+    
     this.finalAssemblyRLInterface.on("line", (line) => {
-      if(flag == true) debugger
       const trimmedLine = this.removeTrailingComments(line).trim();
       const [commandType, commandString] = this.caseLine(trimmedLine);
       let machineCode;
@@ -243,6 +309,7 @@ class Parser {
           );
           break;
         case "A_COMMAND":
+          // This debugger DOES triggered. Why?
           if(commandString == "@memory.peek") debugger
           machineCode = `0${this.translateACommand(commandString)}`;
 
@@ -361,6 +428,9 @@ class Parser {
 
     const symbolProcessingReadStream = this.#createReadStream(inPath);
     const finalAssemblyReadStream = this.#createReadStream(inPath);
+
+    this.symbolProcessingReadStream = symbolProcessingReadStream
+    this.finalAssemblyReadStream = finalAssemblyReadStream
 
     const writeStream = this.#createWriteStream(outPath);
 
