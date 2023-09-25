@@ -1,12 +1,14 @@
 #! /usr/bin/env node
-const PATH = "pong/PongL.asm";
+const PATH = "pong/Pong.asm";
 
 const fs = require("node:fs");
 const path = require("node:path");
 const readline = require("node:readline");
 
+let flag = false
+
 class SymbolTable {
-  static varMemoryStart = 1024;
+  static variableStartAddress = 16;
 
   constructor() {
     this.dict = {
@@ -34,12 +36,27 @@ class SymbolTable {
       SCREEN: 16384,
       KBD: 24576,
     };
-    this.labelCount = 0;
-    this.varCount = 0;
+    this.usedAddresses = this.#initUsedAddresses(this.dict);
+    this.addedVariableCount = 0;
   }
 
-  addEntry(string, address) {
-    this.dict[string] = address;
+  addLabel(string, address) {
+    if(string == "memory.peek") debugger
+    if (this.contains(string))
+      throw Error(`Error: Provided label name has already been used\nAttempted Add String: ${string}`);
+    this.dict[string] = parseInt(address);
+    return this.getAddress(string);
+  }
+
+  addVariable(string) {
+    if(string == "memory.peek") debugger
+    if (this.contains(string))
+      throw Error(`Error: Provided variable name has already been used\nAttempted Add String: ${string}`);
+    this.dict[string] =
+      SymbolTable.variableStartAddress + this.addedVariableCount;
+    this.addedVariableCount++;
+
+    return this.getAddress(string);
   }
 
   contains(string) {
@@ -50,6 +67,14 @@ class SymbolTable {
     if (this.contains(string)) return this.dict[string];
     throw Error("Provided string was not found in the SymbolTable");
   }
+
+  #initUsedAddresses = (dict) => {
+    let used = new Set();
+    for (const key in dict) {
+      used.add(dict[key]);
+    }
+    return used;
+  };
 }
 
 class CodeTable {
@@ -148,13 +173,63 @@ class Parser {
     this.codeTable = new CodeTable();
   }
 
-  parse() {
+  async firstPass() {
+    console.log("STARTING FIRST PASS");
+
     let lineNum = 1;
-    this.finalAssemblyRLInterface.on("line", (line) => {
+    let machineCodeLineNum = 0;
+
+    this.symbolProcessingRLInterface.on("line", (line) => {
       const trimmedLine = this.removeTrailingComments(line).trim();
       const [commandType, commandString] = this.caseLine(trimmedLine);
 
-      let trimmedCommandString;
+      switch (commandType) {
+        case "COMMENT":
+          console.log(
+            `Line Num: ${lineNum}\nMachine Code Line Num: ${machineCodeLineNum}\nCommand Type: ${commandType}\n\nSkipping Code Comment on Line ${lineNum}\n\nLine Contents:\n${commandString}\n\n--------------------------------`
+          );
+          break;
+        case "EMPTY":
+          console.log(
+            `Line Num: ${lineNum}\nCommand Type: ${commandType}\n\nSkipping Empty Line\n\n--------------------------------`
+          );
+          break;
+        case "A_COMMAND":
+          console.log(
+            `LineNum: ${lineNum}\nMachine Code Line Num: ${machineCodeLineNum}\nCommand Type: ${commandType}\n\nLine Contents:\n${commandString}\nIGNORED ON FIRST PASS\n\n-------------------------------`
+          );
+          machineCodeLineNum++;
+          break;
+        case "C_COMMAND":
+          console.log(
+            `LineNum: ${lineNum}\nMachine Code Line Num: ${machineCodeLineNum}\nCommand Type: ${commandType}\n\nLine Contents:\n${commandString}\nIGNORED ON FIRST PASS\n\n-------------------------------`
+          );
+          machineCodeLineNum++;
+          break;
+        case "L_COMMAND":
+          if(commandString == "memory.peek") debugger
+          this.symbolTable.addLabel(
+            this.removeParenthesis(commandString),
+            machineCodeLineNum
+          );
+          console.log(
+            `LineNum: ${lineNum}\nMachine Code Line Num: ${machineCodeLineNum}\nCommand Type: ${commandType}\n\nLine Contents:\n${commandString}\nADDED TO SYMBOL TABLE\nSymbolTable Key: ${this.removeParenthesis(commandString)}\nSymbolTable Value: ${this.symbolTable.getAddress(this.removeParenthesis(commandString))}\n-------------------------------`
+          );
+          break;
+      }
+      lineNum++
+    });
+  }
+
+  async parse() {
+    await this.firstPass()
+    console.log("STARTING SECOND PASS")
+    let lineNum = 1;
+    let machineCodeLineNum = 0;
+    this.finalAssemblyRLInterface.on("line", (line) => {
+      if(flag == true) debugger
+      const trimmedLine = this.removeTrailingComments(line).trim();
+      const [commandType, commandString] = this.caseLine(trimmedLine);
       let machineCode;
       switch (commandType) {
         case "COMMENT":
@@ -164,23 +239,23 @@ class Parser {
           break;
         case "EMPTY":
           console.log(
-            `Line Num: ${lineNum}\nCommand Type:${commandType}\n\nSkipping Empty Line\n\n--------------------------------`
+            `Line Num: ${lineNum}\nCommand Type: ${commandType}\n\nSkipping Empty Line\n\n--------------------------------`
           );
           break;
         case "A_COMMAND":
-          trimmedCommandString = this.removeAllWhiteSpace(commandString);
-          machineCode = `0${this.translateACommand(trimmedCommandString)}`;
+          if(commandString == "@memory.peek") debugger
+          machineCode = `0${this.translateACommand(commandString)}`;
 
           console.log(
-            `LineNum: ${lineNum}\nCommand Type: ${commandType}\n\nLine Contents:\n${trimmedCommandString}\nTranslated to 16 bit Binary:\n${machineCode}\n\n-------------------------------`
+            `LineNum: ${lineNum}\nCommand Type: ${commandType}\n\nLine Contents:\n${commandString}\nTranslated to 16 bit Binary:\n${machineCode}\n\n-------------------------------`
           );
           this.writeStream.write(`${machineCode}\n`);
+          machineCodeLineNum++;
           break;
         case "C_COMMAND":
           // Example instruction code:
           // ixxaccccccdddjjj
 
-          trimmedCommandString = this.removeAllWhiteSpace(commandString);
           const CommandTokens = this.tokenizeCCommand(commandString);
 
           let compMachineCode = this.codeTable.comp(CommandTokens.comp);
@@ -189,9 +264,15 @@ class Parser {
 
           machineCode = `111${compMachineCode}${destMachineCode}${jumpMachineCode}`;
           console.log(
-            `LineNum: ${lineNum}\nCommand Type: ${commandType}\n\nLine Contents:\n${trimmedCommandString}\nTranslated to 16 bit Binary:\n${machineCode}\n\n-------------------------------`
+            `LineNum: ${lineNum}\nCommand Type: ${commandType}\n\nLine Contents:\n${commandString}\nTranslated to 16 bit Binary:\n${machineCode}\n\n-------------------------------`
           );
           this.writeStream.write(`${machineCode}\n`);
+          machineCodeLineNum++;
+          break;
+        case "L_COMMAND":
+          console.log(
+            `LineNum: ${lineNum}\nCommand Type: ${commandType}\n\nLine Contents:\n${commandString}\nIGNORED ON SECOND PASS\nSymbolTable Key: ${this.removeParenthesis(commandString)}\nSymbolTable Value: ${this.symbolTable.getAddress(this.removeParenthesis(commandString))}\n-------------------------------`
+          );
           break;
       }
 
@@ -211,15 +292,54 @@ class Parser {
   caseLine(line) {
     if (line.match(/(^\/\/)/)) return ["COMMENT", line];
     if (line.length == 0) return ["EMPTY", ""];
+
     if (line.includes("@"))
       return ["A_COMMAND", this.removeAllWhiteSpace(line)];
+
+    if (line.match(/^\([A-Za-z_.$:][A-Za-z0-9_.$:]*\)$/))
+      return ["L_COMMAND", this.removeAllWhiteSpace(line)];
+
     return ["C_COMMAND", this.removeAllWhiteSpace(line)];
+  }
+
+  removeParenthesis(string) {
+    return string.replace(/[\(\)]/g, "");
   }
 
   translateACommand(commandString) {
     commandString = commandString.replace("@", "");
-    let binaryVal = this.#twosCompliment(parseInt(commandString), 15);
+    let binaryVal;
+    let address
+    if (this.aCommandIsConstant(commandString)) {
+      binaryVal = this.#twosCompliment(parseInt(commandString), 15);
+    } else if (this.aCommandIsSymbol(commandString)) {
+      if (this.symbolTable.contains(commandString)) {
+        address = this.symbolTable.getAddress(commandString);
+        binaryVal = this.#twosCompliment(address, 15)
+      } else {
+        address = this.symbolTable.addVariable(commandString);
+        binaryVal = this.#twosCompliment(address, 15)
+      }
+    } else {
+      throw Error(
+        `Error: Invalid A_COMMAND provided\nProvided Command: ${commandString}\n\n-------------------------------`
+      );
+    }
     return binaryVal;
+  }
+
+  aCommandIsConstant(string) {
+    // Checks the provided string consists of only digits
+    return !!string.match(/^\d+$/);
+  }
+
+  aCommandIsSymbol(string) {
+    // Checks if the provided string only contains acceptable characters
+    //
+    // A user-defined symbol can be any sequence of letters, digits, underscore (_),
+    // dot (.), dollar sign ($), and colon (:) that does not begin with a digit
+
+    return !!string.match(/^[A-Za-z_.$:][A-Za-z0-9_.$:]*$/);
   }
 
   tokenizeCCommand(commandString) {
