@@ -10,7 +10,7 @@ const readline = require("node:readline");
 // - I must read the file twice. Parsing the labels used for jumps requires a preprocessing step before final translation
 // - I am using the readlines module to read through the file line by line
 // - ** I am creating a readlines Interface object by feeding readline.creatInterface a readStream object **
-// - At first, I initialized both two Interface objects at the same time, one for each pass over the file.
+// - At first, I initialized both Interface objects at the same time, one for each pass over the file.
 //   - I then assigned a callback to the second Interface instance after awaiting the "close" event of the first Interface's stream
 //   - This did not work
 //   - If I didn't await the "close" event of the first Interface, then both processing steps would happen at the same time, which is not the desired functionality
