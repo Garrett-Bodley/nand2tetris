@@ -70,9 +70,9 @@ class Parser
 
   def comp
     unless command_type == :c_command
-      return StandardError.new("current_line is of invalid instruction type  (expected :c_command, got #{command_type})")
+      return StandardError.new("current_line is of invalid instruction type  (expected :c_command, got #{command_type})") # rubocop:disable Layout/LineLength
     end
-    return current_line.split('=').last if(current_line.include?('='))
+    return current_line.split('=').last if current_line.include?('=')
     return current_line.split(';').first if current_line.include?(';')
   end
 

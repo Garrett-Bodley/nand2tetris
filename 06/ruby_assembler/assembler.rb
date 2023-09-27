@@ -33,16 +33,16 @@ while parser.more_commands?
 
     symbol = parser.symbol
     symbol_table.add_label(symbol, machine_code_line_num)
-    puts "LineNum: #{line_num}\nMachine Code Line Num: #{machine_code_line_num}\nCommand Type: #{command_type.to_s}\n\nLine Contents:\n#{current_line}\nADDED TO SYMBOL TABLE\nSymbolTable Key: #{symbol}\nSymbolTable Value: #{symbol_table.get_address(symbol)}\n-------------------------------" # rubocop:disable Layout/LineLength
+    puts "LineNum: #{line_num}\nMachine Code Line Num: #{machine_code_line_num}\nCommand Type: #{command_type}\n\nLine Contents:\n#{current_line}\nADDED TO SYMBOL TABLE\nSymbolTable Key: #{symbol}\nSymbolTable Value: #{symbol_table.get_address(symbol)}\n-------------------------------" # rubocop:disable Layout/LineLength
 
   when :a_command
 
-    puts "Line Num: #{line_num}\nMachine Code Line Num: #{machine_code_line_num}\nCommand Type: #{command_type.to_s}\n\nSkipping Code Comment on Line #{line_num}\n\nLine Contents:\n#{current_line}\n\n--------------------------------" # rubocop:disable Layout/LineLength
+    puts "Line Num: #{line_num}\nMachine Code Line Num: #{machine_code_line_num}\nCommand Type: #{command_type}\n\nSkipping Code Comment on Line #{line_num}\n\nLine Contents:\n#{current_line}\n\n--------------------------------" # rubocop:disable Layout/LineLength
     machine_code_line_num += 1
 
   when :c_command
 
-    puts "LineNum: #{line_num}\nMachine Code Line Num: #{machine_code_line_num}\nCommand Type: #{command_type.to_s}\n\nLine Contents:\n#{current_line}\nIGNORED ON FIRST PASS\n\n-------------------------------" # rubocop:disable Layout/LineLength
+    puts "LineNum: #{line_num}\nMachine Code Line Num: #{machine_code_line_num}\nCommand Type: #{command_type}\n\nLine Contents:\n#{current_line}\nIGNORED ON FIRST PASS\n\n-------------------------------" # rubocop:disable Layout/LineLength
     machine_code_line_num += 1
 
   when :empty
@@ -68,7 +68,7 @@ while parser.more_commands?
   when :l_command
 
     symbol = parser.symbol
-    puts "LineNum: #{line_num}\nCommand Type: #{command_type.to_s}\n\nLine Contents:\n#{current_line}\nSKIPPED ON SECOND PASS\nSymbolTable Key: #{symbol}\nSymbolTable Value: #{symbol_table.get_address(symbol)}\n-------------------------------" # rubocop:disable Layout/LineLength
+    puts "LineNum: #{line_num}\nCommand Type: #{command_type}\n\nLine Contents:\n#{current_line}\nSKIPPED ON SECOND PASS\nSymbolTable Key: #{symbol}\nSymbolTable Value: #{symbol_table.get_address(symbol)}\n-------------------------------" # rubocop:disable Layout/LineLength
 
   when :a_command
 
@@ -98,11 +98,11 @@ while parser.more_commands?
 
     output_file.puts(machine_code)
 
-    puts "LineNum: #{line_num}\nCommand Type: #{command_type.to_s}\n\nLine Contents:\n#{current_line}\nTranslated to 16 bit Binary:\n#{machine_code}\n\n-------------------------------" # rubocop:disable Layout/LineLength
+    puts "LineNum: #{line_num}\nCommand Type: #{command_type}\n\nLine Contents:\n#{current_line}\nTranslated to 16 bit Binary:\n#{machine_code}\n\n-------------------------------" # rubocop:disable Layout/LineLength
   when :empty
     puts "Line Num: #{line_num}\nCommand Type: #{command_type}\n\nSkipping Empty Line\n\n--------------------------------" # rubocop:disable Layout/LineLength
   when :comment
-    puts "LineNum: #{line_num}\nCommand Type: #{command_type.to_s}\n\nSkipping Code Comment on Line #{line_num}\n\nLine Contents:\n#{current_line}\n\n-------------------------------" # rubocop:disable Layout/LineLength
+    puts "LineNum: #{line_num}\nCommand Type: #{command_type}\n\nSkipping Code Comment on Line #{line_num}\n\nLine Contents:\n#{current_line}\n\n-------------------------------" # rubocop:disable Layout/LineLength
   end
   line_num += 1
 end
