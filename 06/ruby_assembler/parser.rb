@@ -8,16 +8,11 @@ class Parser
   end
 
   def command_type
-    self.parse_command_type(@current_line)
-  end
-
-
-  def parse_command_type(string)
-    return :comment if string.match?(/(^\/\/)/)
-    return :empty if string.length == 0
-    return :a_command if string.include?('@')
-    return :l_command if string.match?(/^\([A-Za-z_.$:][A-Za-z0-9_.$:]*\)$/)
-    return :c_command if string.match(/[=;]/)
+    return :comment if @current_line.match?(/(^\/\/)/)
+    return :empty if @current_line.length == 0
+    return :a_command if @current_line.include?('@')
+    return :l_command if @current_line.match?(/^\([A-Za-z_.$:][A-Za-z0-9_.$:]*\)$/)
+    return :c_command if @current_line.match(/[=;]/)
     return :unknown
   end
 
