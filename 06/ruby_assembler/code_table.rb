@@ -59,17 +59,20 @@ class CodeTable
     "JMP" => "111"
   }
 
-  def dest(str = "")
+  def dest(str="")
     return "000" if str.length == 0
+    raise ArgumentError.new("Provided string does not map to CodeTable's dest_dict(received: #{str})") if !@@dest_dict[str]
     @@dest_dict[str]
   end
 
   def comp(str)
-    return @@ALU_dict[str]
+    raise ArgumentError.new("Provided string does not map to CodeTable's ALU_dict(received: #{str})") if !@@ALU_dict[str]
+    @@ALU_dict[str]
   end
 
-  def jump(str = "")
+  def jump(str="")
     return "000" if str.length == 0
+    raise ArgumentError.new("Provided string does not map to CodeTable's jump_dict(received: #{str})") if !@@jump_dict[str]
     @@jump_dict[str]
   end
 

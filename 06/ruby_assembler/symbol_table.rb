@@ -31,15 +31,14 @@ class SymbolTable
 
   def add_variable(string)
     raise `Error: Provided variable name has already been used\nAttempted Add String: #{string}` if self.contains(string)
-    @dict[string] = @new_var_address
+    @dict[string] = Integer(@new_var_address)
     @new_var_address += 1
     self.get_address(string)
   end
 
   def add_label(string, address)
-    binding.pry
     raise `Error: Provided label name has already been used\nAttempted Add String: #{string}` if self.contains(string)
-    @dict[string] = address
+    @dict[string] = Integer(address)
     self.get_address(string)
   end
 
@@ -48,7 +47,12 @@ class SymbolTable
   end
 
   def get_address(string)
-    raise "Provided string was not found in the SymbolTable" unless self.contains(string)
+    raise "Provided string was not found in the SymbolTable (Provided string: #{string})" unless self.contains(string)
     @dict[string]
+  end
+
+  def get_binary_address(string)
+    address = self.get_address(string)
+    address.to_s(2).rjust(15, "0")
   end
 end

@@ -4,24 +4,32 @@ class Parser
 
   def initialize(path)
     @file = File.open(path, 'r')
-    @line_num = 1
-    @machine_code_line_num = 0
     @current_line = ''
   end
 
-  def command_type(string)
+  def command_type
+    self.parse_command_type(@current_line)
+  end
+
+
+  def parse_command_type(string)
     return :comment if string.match?(/(^\/\/)/)
     return :empty if string.length == 0
     return :a_command if string.include?('@')
     return :l_command if string.match?(/^\([A-Za-z_.$:][A-Za-z0-9_.$:]*\)$/)
     return :c_command if string.match(/[=;]/)
+    return :unknown
   end
 
-  def symbol(line)
-    command_type = self.command_type(line)
-    return line.sub(/@/, "") if command_type == :a_command
+  def extract_symbol(line)
+    command_type = self.command_type
+    return line.sub(/@/, "") if command_type == :a_command && !self.a_command_is_const?
     return line.gsub(/[\(\)]/, "") if command_type == :l_command
     return nil
+  end
+
+  def symbol
+    self.extract_symbol(@current_line)
   end
 
   def has_more_commands?
@@ -29,9 +37,9 @@ class Parser
   end
 
   def advance
-    @line_num += 1
     line = @file.readline(chomp: true)
     @current_line = self.sanitize_line(line)
+    self
   end
 
   def remove_trailing_comments(line)
@@ -43,12 +51,36 @@ class Parser
     self.remove_trailing_comments(line.strip)
   end
 
-  def line_num
-    @line_num
-  end
-
   def rewind
     @file.pos = 0
-    @line_num = 1
+  end
+
+  def a_command_to_b
+    binary_val = Integer(@current_line.sub(/@/, "")).to_s(2).rjust(15, "0")
+    return binary_val
+  end
+
+  def a_command_is_const?
+    return StandardError.new("current_line is an invalid instruction type (expected :a_command or :l_command, got #{self.command_type.to_s})") unless [:a_command, :l_command].include?(self.command_type)
+    !!self.current_line.match?(/^@\d+$/)
+  end
+
+  def comp
+    return StandardError.new("current_line is of invalid instruction type  (expected :c_command, got #{self.command_type})") unless self.command_type == :c_command
+    return self.current_line.split("=").last if(self.current_line.include?("="))
+    return self.current_line.split(";").first if self.current_line.include?(";")
+  end
+
+
+  def jump
+    return StandardError.new("current_line is an invalid instruction type (expected :c_command, got #{self.command_type})") unless self.command_type == :c_command
+    return self.current_line.split(";").last if self.current_line.include?(";")
+    return ""
+  end
+
+  def dest
+    return StandardError.new("current_line is an invalid instruction type (expected :c_command, got #{self.command_type})") unless self.command_type == :c_command
+    return self.current_line.split("=").first if self.current_line.include?("=")
+    return ""
   end
 end
