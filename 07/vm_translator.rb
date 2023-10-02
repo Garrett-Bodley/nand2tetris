@@ -24,7 +24,7 @@ while parser.more_lines?
   parser.advance
   command_type = parser.command_type
   case command_type
-  when :push
+  when :push, :pop
     writer.write_push_pop(command_type, parser.arg1, parser.arg2)
   when :arithmetic
     writer.write_arithmetic(parser.arg1)

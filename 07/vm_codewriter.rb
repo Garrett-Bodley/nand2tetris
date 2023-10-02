@@ -16,34 +16,121 @@ class VMCodeWriter
     not: '!'
   }.freeze
 
+  SEGMENT_TABLE = {
+    local: 'LCL',
+    argument: 'ARG',
+    this: 'THIS',
+    that: 'THAT',
+    pointer: 'THIS',
+    temp: 'TEMP'
+  }.freeze
+
   def initialize(path)
-    @output_file = File.open(path, 'w')
+    @file = File.open(path, 'w')
     @basename = path.basename('.*').to_s
     @label_count = 0
   end
 
   def write_push_pop(command_type, segment, index)
+    seg_sym = segment.to_sym
     write_push(segment.to_sym, index) if command_type == :push
-
+    write_pop_to_segment(SEGMENT_TABLE[seg_sym], index) if command_type == :pop
   end
 
   def write_push(segment, val)
-    write_constant(val) if segment == :constant
+    return push_constant(val) if segment == :constant
+
+    push_from_segment(SEGMENT_TABLE[segment], val)
   end
 
-  def write_constant(val)
+  def push_constant(val)
     # load new val into D
-    @output_file.puts "@#{val}"
-    @output_file.puts 'D=A'
+    @file.puts "@#{val}"
+    @file.puts 'D=A'
     # set A to SP
-    @output_file.puts '@SP'
+    @file.puts '@SP'
     # set A to RAM[SP] (ADDRESS SP POINTS TO) THIS IS AN AVAILABLE ADDRESS
-    @output_file.puts 'A=M'
+    @file.puts 'A=M'
     # WRITE VAL TO TOP OF STACK
-    @output_file.puts 'M=D'
+    @file.puts 'M=D'
     # INCREMENT SP
-    @output_file.puts '@SP'
-    @output_file.puts 'M=M+1'
+    @file.puts '@SP'
+    @file.puts 'M=M+1'
+  end
+
+  def push_from_segment(segment, val)
+    return push_from_temp(val) if segment == 'TEMP'
+
+    @file.puts '// PUSHING FROM SEGMENT'
+    [
+      "@#{segment}",
+      'A=M',
+      'D=A',
+      "@#{val}",
+      'A=D+A',
+      'D=M',
+      '@SP',
+      'A=M',
+      'M=D',
+      '@SP',
+      'M=M+1'
+    ].each do |instruction|
+      @file.puts instruction
+    end
+  end
+
+  def push_from_temp(val)
+    [
+      "@#{5 + val.to_i}",
+      'D=M',
+      '@SP',
+      'A=M',
+      'M=D',
+      '@SP',
+      'M=M+1'
+    ].each do |instruction|
+      @file.puts instruction
+    end
+  end
+
+  def write_pop_to_segment(segment, val)
+    return write_pop_to_temp(val) if segment == 'TEMP'
+
+    @file.puts "// POPPING TO SEGMENT: #{segment}"
+    [
+      "@#{segment}",
+      'D=M',
+      "@#{val}",
+      'D=D+A',
+      '@13',
+      'M=D',
+      '@SP',
+      'AM=M-1',
+      'D=M',
+      '@13',
+      'A=M',
+      'M=D'
+    ].each do |instruction|
+      @file.puts instruction
+    end
+  end
+
+  def write_pop_to_temp(val)
+    @file.puts '// POPPING TO TEMP'
+    [
+      "@#{5 + val.to_i}",
+      'D=A',
+      '@13',
+      'M=D',
+      '@SP',
+      'AM=M-1',
+      'D=M',
+      '@13',
+      'A=M',
+      'M=D'
+    ].each do |instruction|
+      @file.puts instruction
+    end
   end
 
   def write_arithmetic(string)
@@ -68,7 +155,7 @@ class VMCodeWriter
       'A=A-1',
       "M=M#{operator}D"
     ].each do |instruction|
-      @output_file.puts instruction
+      @file.puts instruction
     end
   end
 
@@ -94,7 +181,7 @@ class VMCodeWriter
       'A=M-1',
       'M=D'
     ].each do |command|
-      @output_file.puts command
+      @file.puts command
     end
     @label_count += 2
   end
@@ -107,42 +194,26 @@ class VMCodeWriter
       'A=A-1',
       "M=D#{operator}M"
     ].each do |command|
-      @output_file.puts command
+      @file.puts command
     end
   end
 
   def write_neg_not(operator)
-    @output_file.puts '// WRITING NEG'
+    @file.puts '// WRITING NEG'
     [
       '@SP',
       'A=M-1',
       "M=#{operator}M"
     ].each do |command|
-      @output_file.puts command
+      @file.puts command
     end
   end
 
   def write_infinite_loop
-    @output_file.puts '(INFINITE_LOOP)'
-    @output_file.puts '@INFINITE_LOOP'
-    @output_file.puts '0; JMP'
+    @file.puts '(INFINITE_LOOP)'
+    @file.puts '@INFINITE_LOOP'
+    @file.puts '0; JMP'
   end
 end
-
-
-
-# PUSH CONSTANT 7
-#
-# LOAD 3 INTO D REGISTER
-# @7
-# D = A
-# GET ADDRESS IN STACK POINTER
-# @STACK_POINTER
-# A = M
-# PUSH 3 ONTO STACK
-# M = D
-# INCREMENT SP
-# @STACK_POINTER
-# M = M + 1
 
 # rubocop:enable Metrics/MethodLength
