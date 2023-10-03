@@ -27,7 +27,7 @@ class VMCodeWriter # rubocop:disable Metrics/ClassLength
   def initialize(path)
     @file = File.open(path, 'w')
     @basename = path.basename('.*').to_s
-    @label_count = 0
+    @compare_count = 0
   end
 
   def write_push_pop(command_type, segment, index)
@@ -36,18 +36,46 @@ class VMCodeWriter # rubocop:disable Metrics/ClassLength
     write_pop(seg_sym, index) if command_type == :pop
   end
 
-  def write_push(segment, val)
-    return push_constant(val) if segment == :constant
-    return push_pointer(val) if segment == :pointer
+  def write_push(seg_sym, val)
+    return push_constant(val) if seg_sym == :constant
+    return push_pointer(val) if seg_sym == :pointer
+    return push_static(val) if seg_sym == :static
 
-    push_from_segment(SEGMENT_TABLE[segment], val)
+    push_from_segment(SEGMENT_TABLE[seg_sym], val)
   end
 
   def write_pop(seg_sym, val)
     return write_pop_to_temp(val) if seg_sym == :temp
     return write_pop_to_pointer(val) if seg_sym == :pointer
+    return pop_to_static(val) if seg_sym == :static
 
     write_pop_to_segment(SEGMENT_TABLE[seg_sym], val)
+  end
+
+  def push_static(val)
+    [
+      "@#{@basename}.#{val}",
+      'D=M',
+      '@SP',
+      'A=M',
+      'M=D',
+      '@SP',
+      'M=M+1'
+    ].each do |instruction|
+      @file.puts instruction
+    end
+  end
+
+  def pop_to_static(val)
+    [
+      '@SP',
+      'AM=M-1',
+      'D=M',
+      "@#{@basename}.#{val}",
+      'M=D'
+    ].each do |instruction|
+      @file.puts instruction
+    end
   end
 
   def write_pop_to_pointer(val)
@@ -206,24 +234,24 @@ class VMCodeWriter # rubocop:disable Metrics/ClassLength
       'D=M',
       'A=A-1',
       'D=M-D',
-      "@#{@basename}.#{@label_count}",
+      "@COMPARE.#{@compare_count}",
       "D;#{comp_type}",
       '@0',
       'D=A',
-      "@#{@basename}.#{@label_count + 1}",
+      "@COMPARE.#{@compare_count + 1}",
       '0;JMP',
-      "(#{@basename}.#{@label_count})",
+      "(COMPARE.#{@compare_count})",
       '@0',
       'A=A-1',
       'D=A',
-      "(#{@basename}.#{@label_count + 1})",
+      "(COMPARE.#{@compare_count + 1})",
       '@SP',
       'A=M-1',
       'M=D'
     ].each do |command|
       @file.puts command
     end
-    @label_count += 2
+    @compare_count += 2
   end
 
   def write_and_or(operator)
