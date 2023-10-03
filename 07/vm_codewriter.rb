@@ -45,15 +45,15 @@ class VMCodeWriter # rubocop:disable Metrics/ClassLength
   end
 
   def write_pop(seg_sym, val)
-    return write_pop_to_temp(val) if seg_sym == :temp
-    return write_pop_to_pointer(val) if seg_sym == :pointer
+    return pop_to_temp(val) if seg_sym == :temp
+    return pop_to_pointer(val) if seg_sym == :pointer
     return pop_to_static(val) if seg_sym == :static
 
-    write_pop_to_segment(SEGMENT_TABLE[seg_sym], val)
+    pop_to_segment(SEGMENT_TABLE[seg_sym], val)
   end
 
   def push_static(val)
-    [
+    instructions = [
       "@#{@basename}.#{val}",
       'D=M',
       '@SP',
@@ -61,35 +61,32 @@ class VMCodeWriter # rubocop:disable Metrics/ClassLength
       'M=D',
       '@SP',
       'M=M+1'
-    ].each do |instruction|
-      @file.puts instruction
-    end
+    ]
+    write_instructions(instructions)
   end
 
   def pop_to_static(val)
-    [
+    instructions = [
       '@SP',
       'AM=M-1',
       'D=M',
       "@#{@basename}.#{val}",
       'M=D'
-    ].each do |instruction|
-      @file.puts instruction
-    end
+    ]
+    write_instructions(instructions)
   end
 
-  def write_pop_to_pointer(val)
+  def pop_to_pointer(val)
     address = 'THIS' if val == '0'
     address = 'THAT' if val == '1'
-    [
+    instructions = [
       '@SP',
       'AM=M-1',
       'D=M',
       "@#{address}",
       'M=D'
-    ].each do |instruction|
-      @file.puts instruction
-    end
+    ]
+    write_instructions(instructions)
   end
 
   def push_pointer(val)
@@ -98,7 +95,7 @@ class VMCodeWriter # rubocop:disable Metrics/ClassLength
     # push pointer 1 should push onto the stack the current value of THAT
     load_address = 'THIS' if val == '0'
     load_address = 'THAT' if val == '1'
-    [
+    instructions = [
       "@#{load_address}",
       'D=M',
       '@SP',
@@ -106,31 +103,28 @@ class VMCodeWriter # rubocop:disable Metrics/ClassLength
       'M=D',
       '@SP',
       'M=M+1'
-    ].each do |instruction|
-      @file.puts instruction
-    end
+    ]
+    write_instructions(instructions)
   end
 
   def push_constant(val)
-    # load new val into D
-    @file.puts "@#{val}"
-    @file.puts 'D=A'
-    # set A to SP
-    @file.puts '@SP'
-    # set A to RAM[SP] (ADDRESS SP POINTS TO) THIS IS AN AVAILABLE ADDRESS
-    @file.puts 'A=M'
-    # WRITE VAL TO TOP OF STACK
-    @file.puts 'M=D'
-    # INCREMENT SP
-    @file.puts '@SP'
-    @file.puts 'M=M+1'
+    instructions = [
+      "@#{val}",
+      'D=A',
+      '@SP',
+      'A=M',
+      'M=D',
+      '@SP',
+      'M=M+1'
+    ]
+
+    write_instructions(instructions)
   end
 
   def push_from_segment(segment, val)
     return push_from_temp(val) if segment == 'TEMP'
 
-    @file.puts '// PUSHING FROM SEGMENT'
-    [
+    instructions = [
       "@#{segment}",
       'A=M',
       'D=A',
@@ -142,13 +136,12 @@ class VMCodeWriter # rubocop:disable Metrics/ClassLength
       'M=D',
       '@SP',
       'M=M+1'
-    ].each do |instruction|
-      @file.puts instruction
-    end
+    ]
+    write_instructions(instructions)
   end
 
   def push_from_temp(val)
-    [
+    instructions = [
       "@#{5 + val.to_i}",
       'D=M',
       '@SP',
@@ -156,16 +149,14 @@ class VMCodeWriter # rubocop:disable Metrics/ClassLength
       'M=D',
       '@SP',
       'M=M+1'
-    ].each do |instruction|
-      @file.puts instruction
-    end
+    ]
+    write_instructions(instructions)
   end
 
-  def write_pop_to_segment(segment, val)
-    return write_pop_to_temp(val) if segment == 'TEMP'
+  def pop_to_segment(segment, val)
+    return pop_to_temp(val) if segment == 'TEMP'
 
-    @file.puts "// POPPING TO SEGMENT: #{segment}"
-    [
+    instructions = [
       "@#{segment}",
       'D=M',
       "@#{val}",
@@ -178,14 +169,13 @@ class VMCodeWriter # rubocop:disable Metrics/ClassLength
       '@13',
       'A=M',
       'M=D'
-    ].each do |instruction|
-      @file.puts instruction
-    end
+    ]
+
+    write_instructions(instructions)
   end
 
-  def write_pop_to_temp(val)
-    @file.puts '// POPPING TO TEMP'
-    [
+  def pop_to_temp(val)
+    instructions = [
       "@#{5 + val.to_i}",
       'D=A',
       '@13',
@@ -196,9 +186,8 @@ class VMCodeWriter # rubocop:disable Metrics/ClassLength
       '@13',
       'A=M',
       'M=D'
-    ].each do |instruction|
-      @file.puts instruction
-    end
+    ]
+    write_instructions(instructions)
   end
 
   def write_arithmetic(string)
@@ -216,19 +205,18 @@ class VMCodeWriter # rubocop:disable Metrics/ClassLength
   end
 
   def write_add_subtract(operator)
-    [
+    instructions = [
       '@SP',
       'AM=M-1',
       'D=M',
       'A=A-1',
       "M=M#{operator}D"
-    ].each do |instruction|
-      @file.puts instruction
-    end
+    ]
+    write_instructions(instructions)
   end
 
   def write_arithmetic_comparison(comp_type)
-    [
+    instructions = [
       '@SP',
       'AM=M-1',
       'D=M',
@@ -248,32 +236,34 @@ class VMCodeWriter # rubocop:disable Metrics/ClassLength
       '@SP',
       'A=M-1',
       'M=D'
-    ].each do |command|
-      @file.puts command
-    end
+    ]
+    write_instructions(instructions)
     @compare_count += 2
   end
 
   def write_and_or(operator)
-    [
+    instructions = [
       '@SP',
       'AM=M-1',
       'D=M',
       'A=A-1',
       "M=D#{operator}M"
-    ].each do |command|
-      @file.puts command
-    end
+    ]
+    write_instructions(instructions)
   end
 
   def write_neg_not(operator)
-    @file.puts '// WRITING NEG'
-    [
+    instructions = [
       '@SP',
       'A=M-1',
       "M=#{operator}M"
-    ].each do |command|
-      @file.puts command
+    ]
+    write_instructions(instructions)
+  end
+
+  def write_instructions(instruction_arr)
+    instruction_arr.each do |instruction|
+      @file.puts instruction
     end
   end
 
