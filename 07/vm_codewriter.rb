@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 # Writes VM Code
-class VMCodeWriter
+class VMCodeWriter # rubocop:disable Metrics/ClassLength
   ARITHMETIC_OPTIONS = %w[add sub neg eq gt lt and or not].freeze
   SYMBOL_TABLE = {
     eq: 'JEQ',
@@ -21,7 +21,6 @@ class VMCodeWriter
     argument: 'ARG',
     this: 'THIS',
     that: 'THAT',
-    pointer: 'THIS',
     temp: 'TEMP'
   }.freeze
 
@@ -33,14 +32,55 @@ class VMCodeWriter
 
   def write_push_pop(command_type, segment, index)
     seg_sym = segment.to_sym
-    write_push(segment.to_sym, index) if command_type == :push
-    write_pop_to_segment(SEGMENT_TABLE[seg_sym], index) if command_type == :pop
+    write_push(seg_sym, index) if command_type == :push
+    write_pop(seg_sym, index) if command_type == :pop
   end
 
   def write_push(segment, val)
     return push_constant(val) if segment == :constant
+    return push_pointer(val) if segment == :pointer
 
     push_from_segment(SEGMENT_TABLE[segment], val)
+  end
+
+  def write_pop(seg_sym, val)
+    return write_pop_to_temp(val) if seg_sym == :temp
+    return write_pop_to_pointer(val) if seg_sym == :pointer
+
+    write_pop_to_segment(SEGMENT_TABLE[seg_sym], val)
+  end
+
+  def write_pop_to_pointer(val)
+    address = 'THIS' if val == '0'
+    address = 'THAT' if val == '1'
+    [
+      '@SP',
+      'AM=M-1',
+      'D=M',
+      "@#{address}",
+      'M=D'
+    ].each do |instruction|
+      @file.puts instruction
+    end
+  end
+
+  def push_pointer(val)
+    # Any access to pointer 0 should result in accessing the THIS pointer, and any access to pointer 1 should result in accessing the THAT pointer
+    # For example, pop pointer 0 should set THIS to the popped value
+    # push pointer 1 should push onto the stack the current value of THAT
+    load_address = 'THIS' if val == '0'
+    load_address = 'THAT' if val == '1'
+    [
+      "@#{load_address}",
+      'D=M',
+      '@SP',
+      'A=M',
+      'M=D',
+      '@SP',
+      'M=M+1'
+    ].each do |instruction|
+      @file.puts instruction
+    end
   end
 
   def push_constant(val)
