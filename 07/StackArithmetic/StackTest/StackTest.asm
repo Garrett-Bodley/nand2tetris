@@ -333,7 +333,6 @@ AM=M-1
 D=M
 A=A-1
 M=M-D
-// WRITING NEG
 @SP
 A=M-1
 M=-M
@@ -354,7 +353,6 @@ AM=M-1
 D=M
 A=A-1
 M=D|M
-// WRITING NEG
 @SP
 A=M-1
 M=!M

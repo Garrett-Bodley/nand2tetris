@@ -32,17 +32,3 @@ while parser.more_lines?
 end
 
 writer.write_infinite_loop
-
-# PUSH CONSTANT 7
-#
-# LOAD 3 INTO D REGISTER
-# @7
-# D = A
-# GET ADDRESS IN STACK POINTER
-# @STACK_POINTER
-# A = M
-# PUSH 3 ONTO STACK
-# M = D
-# INCREMENT SP
-# @STACK_POINTER
-# M = M + 1

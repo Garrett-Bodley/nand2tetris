@@ -20,7 +20,7 @@ class VMParser
   end
 
   def sanitize_line(line)
-    remove_trailing_comments(line.strip)
+    remove_trailing_comments(line).strip
   end
 
   def more_lines?
@@ -37,14 +37,16 @@ class VMParser
 
   def arg1
     raise StandardError, 'Cannot call #arg1 when command type is :return' if command_type == :return
-    return @current_line if command_type == :arithmetic
+    raise StandardError, 'Cannot call #arg1 when command type is :empty' if command_type == :empty
+    raise StandardError, 'Cannot call #arg1 when command type is :comment' if command_type == :comment
+    return @current_line.to_sym if command_type == :arithmetic
 
-    @current_line.split[1]
+    @current_line.split[1].to_sym
   end
 
   def arg2
     unless %i[pop push function call].include?(command_type)
-      raise StandardError "Cannot call #arg2 with current command type (Expected push, pop, function, or call. Received #{command_type})" # rubocop:disable Layout/LineLength
+      raise StandardError, "Cannot call #arg2 with current command type (Expected push, pop, function, or call. Received #{command_type})" # rubocop:disable Layout/LineLength
     end
 
     @current_line.split[2]
