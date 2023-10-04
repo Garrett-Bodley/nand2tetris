@@ -90,7 +90,7 @@ D=M
 A=M
 M=D
 // Label
-(MAIN_LOOP_START)
+(FibonacciSeries.MAIN_LOOP_START)
 // Push from segment: argument
 @ARG
 A=M
@@ -104,13 +104,13 @@ M=M+1
 @SP
 AM=M-1
 D=M
-@COMPUTE_ELEMENT
+@FibonacciSeries.COMPUTE_ELEMENT
 D;JNE
 // goto
-@END_PROGRAM
+@FibonacciSeries.END_PROGRAM
 0; JMP
 // Label
-(COMPUTE_ELEMENT)
+(FibonacciSeries.COMPUTE_ELEMENT)
 // Push from segment: that
 @THAT
 A=M
@@ -211,10 +211,10 @@ D=M
 A=M
 M=D
 // goto
-@MAIN_LOOP_START
+@FibonacciSeries.MAIN_LOOP_START
 0; JMP
 // Label
-(END_PROGRAM)
+(FibonacciSeries.END_PROGRAM)
 (INFINITE_LOOP)
 @INFINITE_LOOP
 0; JMP
