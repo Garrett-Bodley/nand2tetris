@@ -5,7 +5,8 @@ require 'pathname'
 
 require_relative 'vm_parser'
 require_relative 'vm_codewriter'
-require_relative 'vm_stack'
+require_relative 'vm_arithmetic_translator'
+require_relative 'vm_push_pop_translator'
 
 raise ArgumentError, "Wrong number of arguments (given #{ARGV.length}, expected 1)" if ARGV.length != 1
 
