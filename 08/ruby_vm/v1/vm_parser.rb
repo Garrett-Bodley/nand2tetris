@@ -33,15 +33,18 @@ class VMParser
     return :push if @current_line.include?('push')
     return :pop if @current_line.include?('pop')
     return :arithmetic if ARITHMETIC_OPTIONS.any? { |option| @current_line.include?(option) }
+    return :label if @current_line.match(/^label /)
+    return :if_goto if @current_line.match(/^if-goto /)
+    return :goto if @current_line.match(/^goto /)
   end
 
   def arg1
     raise StandardError, 'Cannot call #arg1 when command type is :return' if command_type == :return
     raise StandardError, 'Cannot call #arg1 when command type is :empty' if command_type == :empty
     raise StandardError, 'Cannot call #arg1 when command type is :comment' if command_type == :comment
-    return @current_line.to_sym if command_type == :arithmetic
+    return @current_line if command_type == :arithmetic
 
-    @current_line.split[1].to_sym
+    @current_line.split[1]
   end
 
   def arg2

@@ -29,6 +29,12 @@ while parser.more_lines?
     writer.write_push_pop(command_type, parser.arg1, parser.arg2)
   when :arithmetic
     writer.write_arithmetic(parser.arg1)
+  when :label
+    writer.write_label(parser.arg1)
+  when :if_goto
+    writer.write_if_goto(parser.arg1)
+  when :goto
+    writer.write_goto(parser.arg1)
   end
 end
 

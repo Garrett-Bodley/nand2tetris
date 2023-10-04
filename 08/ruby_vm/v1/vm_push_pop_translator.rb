@@ -46,6 +46,7 @@ class VMPushPopTranslator # rubocop:disable Metrics/ClassLength
 
   def push_constant(val)
     [
+      '// Push Constant',
       "@#{val}",
       'D=A',
       '@SP',
@@ -63,6 +64,7 @@ class VMPushPopTranslator # rubocop:disable Metrics/ClassLength
     # push pointer 1 should push onto the stack the current value of THAT
     load_address = val.to_i.zero? ? 'THIS' : 'THAT'
     [
+      '// Push Pointer',
       "@#{load_address}",
       'D=M',
       '@SP',
@@ -75,6 +77,7 @@ class VMPushPopTranslator # rubocop:disable Metrics/ClassLength
 
   def push_static(val)
     [
+      '// Push Static',
       "@#{@filename}.#{val}",
       'D=M',
       '@SP',
@@ -87,6 +90,7 @@ class VMPushPopTranslator # rubocop:disable Metrics/ClassLength
 
   def push_from_temp(val)
     [
+      '// Push from temp',
       "@#{5 + val.to_i}",
       'D=M',
       '@SP',
@@ -98,19 +102,35 @@ class VMPushPopTranslator # rubocop:disable Metrics/ClassLength
   end
 
   def push_from_segment(segment, val)
-    [
-      "@#{SEGMENT_TABLE[segment]}",
-      'A=M',
-      'D=A',
-      "@#{val}",
-      'A=D+A',
-      'D=M',
-      '@SP',
-      'A=M',
-      'M=D',
-      '@SP',
-      'M=M+1'
-    ]
+    if val == '0'
+      instructions = [
+        "// Push from segment: #{segment}",
+        "@#{SEGMENT_TABLE[segment]}",
+        'A=M',
+        'D=M',
+        '@SP',
+        'A=M',
+        'M=D',
+        '@SP',
+        'M=M+1'
+      ]
+    else
+      instructions = [
+        "// Push from segment: #{segment}",
+        "@#{SEGMENT_TABLE[segment]}",
+        'A=M',
+        'D=A',
+        "@#{val}",
+        'A=D+A',
+        'D=M',
+        '@SP',
+        'A=M',
+        'M=D',
+        '@SP',
+        'M=M+1'
+      ]
+    end
+    return instructions
   end
 
   def pop(seg_sym, val)
@@ -129,6 +149,7 @@ class VMPushPopTranslator # rubocop:disable Metrics/ClassLength
 
   def pop_to_temp(val)
     [
+      '// Pop to temp',
       "@#{5 + val.to_i}",
       'D=A',
       '@13',
@@ -145,6 +166,7 @@ class VMPushPopTranslator # rubocop:disable Metrics/ClassLength
   def pop_to_pointer(val)
     address = val.to_i.zero? ? 'THIS' : 'THAT'
     [
+      '// Pop to pointer',
       '@SP',
       'AM=M-1',
       'D=M',
@@ -155,6 +177,7 @@ class VMPushPopTranslator # rubocop:disable Metrics/ClassLength
 
   def pop_to_static(val)
     [
+      '// Pop to static',
       '@SP',
       'AM=M-1',
       'D=M',
@@ -164,20 +187,38 @@ class VMPushPopTranslator # rubocop:disable Metrics/ClassLength
   end
 
   def pop_to_segment(segment, val)
-    [
-      "@#{SEGMENT_TABLE[segment]}",
-      'D=M',
-      "@#{val}",
-      'D=D+A',
-      '@13',
-      'M=D',
-      '@SP',
-      'AM=M-1',
-      'D=M',
-      '@13',
-      'A=M',
-      'M=D'
-    ]
+    if val == '0'
+      instructions = [
+        "// Pop to segment: #{segment}",
+        "@#{SEGMENT_TABLE[segment]}",
+        'D=M',
+        '@13',
+        'M=D',
+        '@SP',
+        'AM=M-1',
+        'D=M',
+        '@13',
+        'A=M',
+        'M=D'
+      ]
+    else
+      instructions = [
+        "// Pop to segment: #{segment}",
+        "@#{SEGMENT_TABLE[segment]}",
+        'D=M',
+        "@#{val}",
+        'D=D+A',
+        '@13',
+        'M=D',
+        '@SP',
+        'AM=M-1',
+        'D=M',
+        '@13',
+        'A=M',
+        'M=D'
+      ]
+    end
+    return instructions
   end
 end
 
