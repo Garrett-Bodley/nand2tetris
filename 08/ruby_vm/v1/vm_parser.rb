@@ -36,6 +36,8 @@ class VMParser
     return :label if @current_line.match(/^label /)
     return :if_goto if @current_line.match(/^if-goto /)
     return :goto if @current_line.match(/^goto /)
+    return :function if @current_line.match(/^function /)
+    return :return if @current_line.match(/^return/)
   end
 
   def arg1

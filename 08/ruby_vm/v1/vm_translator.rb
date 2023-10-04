@@ -35,6 +35,10 @@ while parser.more_lines?
     writer.write_if_goto(parser.arg1)
   when :goto
     writer.write_goto(parser.arg1)
+  when :function
+    writer.write_function(parser.arg1, parser.arg2)
+  when :return
+    writer.write_return
   end
 end
 
