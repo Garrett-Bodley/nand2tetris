@@ -97,46 +97,36 @@ M=D
 0; JMP
 // Label
 (Sys.Sys.main)
-// Push Constant
 @0
 D=A
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
-// Push Constant
 @0
 D=A
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
-// Push Constant
 @0
 D=A
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
-// Push Constant
 @0
 D=A
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
-// Push Constant
 @0
 D=A
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
 // Push Constant
 @4001
 D=A
@@ -388,7 +378,6 @@ A=D-A
 D=M
 @15
 M=D
-// Pop to segment: argument
 @ARG
 D=M
 @13
@@ -500,7 +489,6 @@ A=D-A
 D=M
 @15
 M=D
-// Pop to segment: argument
 @ARG
 D=M
 @13
