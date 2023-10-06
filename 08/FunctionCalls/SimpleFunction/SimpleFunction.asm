@@ -76,6 +76,7 @@ AM=M-1
 D=M
 A=A-1
 M=M-D
+// Saving LCL to register 14!
 @LCL
 D=M
 @14
@@ -106,30 +107,34 @@ M=D
 @14
 D=M
 @1
-D=D-A
+A=D-A
+D=M
 @THAT
 M=D
 @14
 D=M
 @2
-D=D-A
+A=D-A
+D=M
 @THIS
 M=D
 @14
 D=M
 @3
-D=D-A
+A=D-A
+D=M
 @ARG
 M=D
 @14
 D=M
 @4
-D=D-A
+A=D-A
+D=M
 @LCL
 M=D
 // Going To the Return Address!
 @15
-D=M
+A=M
 0;JMP
 (INFINITE_LOOP)
 @INFINITE_LOOP

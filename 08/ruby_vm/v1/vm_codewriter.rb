@@ -8,13 +8,14 @@ class VMCodeWriter
     @file = File.open(path, 'w')
     @filename = path.basename('.*').to_s
     @push_pop_translator = VMPushPopTranslator.new(@filename)
-    @arithmetic_translator = VMArithmeticTranslator.new
-    @compare_count = 0
+    @arithmetic_translator = VMArithmeticTranslator.new(@filename)
+    @return_count = 0
   end
 
   def filename=(filename)
     @filename = filename
     @push_pop_translator.filename = filename
+    @arithmetic_translator.filename = filename
   end
 
   def write_label(label)
@@ -62,6 +63,7 @@ class VMCodeWriter
 
   def write_return
     save_frame_to_local_variables = %w[
+      //\ Saving\ LCL\ to\ register\ 14!
       @LCL
       D=M
       @14
@@ -78,24 +80,20 @@ class VMCodeWriter
       M=D
     ]
     pop_to_arg = @push_pop_translator.translate(:pop, :argument, '0')
-    # pop_to_arg = %w[
-    #   @SP
-    #   AM=M-1
-    #   D=M
-    #   @ARG
-    #   M=D
-    # ]
     sp_equals_arg_plus_one = %w[
       @ARG
       D=M+1
       @SP
       M=D
     ]
+    # restore that is broken
+    # NEED TO GRAB RAM[316]
     restore_that = %w[
       @14
       D=M
       @1
-      D=D-A
+      A=D-A
+      D=M
       @THAT
       M=D
     ]
@@ -103,7 +101,8 @@ class VMCodeWriter
       @14
       D=M
       @2
-      D=D-A
+      A=D-A
+      D=M
       @THIS
       M=D
     ]
@@ -111,7 +110,8 @@ class VMCodeWriter
       @14
       D=M
       @3
-      D=D-A
+      A=D-A
+      D=M
       @ARG
       M=D
     ]
@@ -119,18 +119,125 @@ class VMCodeWriter
       @14
       D=M
       @4
-      D=D-A
+      A=D-A
+      D=M
       @LCL
       M=D
     ]
     goto_return_addr = %w[
       //\ Going\ To\ the\ Return\ Address!
       @15
-      D=M
+      A=M
       0;JMP
     ]
     instructions = save_frame_to_local_variables + save_return_address_to_local_variable + pop_to_arg + sp_equals_arg_plus_one + restore_that + restore_this + restore_arg + restore_lcl + goto_return_addr
     write_instructions(instructions)
+  end
+
+  def write_call(function_name, arg_count)
+    # 1. Push return_address
+    #   a. generate label
+    #   b. push label value to stack
+    # 2. push LCL
+    # 3. push ARG
+    # 4. push THIS
+    # 5. push THAT
+    # 6. ARG = SP - 5 - nArgs
+    # 7. LCL = SP
+    # 8. goto function
+    # 9. (return_address) # inject return address into assembly code
+    return_label_s = make_return_label
+
+    # 1. Push return_address
+    #   a. generate label
+    #   b. push label value to stack
+    push_return = %W[
+      //\ Pushing\ Return\ Address!
+      @#{return_label_s}
+      D=A
+      @SP
+      A=M
+      M=D
+      @SP
+      M=M+1
+    ]
+    # 2. push LCL
+    push_lcl = %w[
+      @LCL
+      D=M
+      @SP
+      A=M
+      M=D
+      @SP
+      M=M+1
+    ]
+    # 3. push ARG
+    push_arg = %w[
+      @ARG
+      D=M
+      @SP
+      A=M
+      M=D
+      @SP
+      M=M+1
+    ]
+    # 4. push THIS
+    push_this = %w[
+      @THIS
+      D=M
+      @SP
+      A=M
+      M=D
+      @SP
+      M=M+1
+    ]
+    # 5. push THAT
+    push_that = %w[
+      @THAT
+      D=M
+      @SP
+      A=M
+      M=D
+      @SP
+      M=M+1
+    ]
+
+    # 6. ARG = SP - 5 - nArgs
+    set_arg = %W[
+      @SP
+      D=M
+      @5
+      D=D-A
+      @#{arg_count}
+      D=D-A
+      @ARG
+      M=D
+    ]
+
+    # 7. LCL = SP
+    set_lcl = %w[
+      @SP
+      D=M
+      @LCL
+      M=D
+    ]
+    # 8. goto function
+    goto_function = %W[
+      @#{@filename}.#{function_name}
+      0;JMP
+    ]
+    # 9. (return_address) # inject return address into assembly code
+    inject_return_label = %W[
+      (#{return_label_s})
+    ]
+    instructions = push_return + push_lcl + push_arg + push_this + push_that + set_arg + set_lcl + goto_function + inject_return_label
+    write_instructions(instructions)
+  end
+
+  def make_return_label
+    label = "#{@filename}.RETURN.#{@return_count}"
+    @return_count += 1
+    label
   end
 
   def write_push_pop(command_type, segment_string, index)
@@ -140,6 +247,7 @@ class VMCodeWriter
 
   def write_arithmetic(op_string)
     instructions = @arithmetic_translator.translate(op_string.to_sym)
+    binding.pry if !instructions
     write_instructions(instructions)
   end
 

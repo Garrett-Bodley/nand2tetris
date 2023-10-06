@@ -3,6 +3,7 @@
 
 # Class that translates arithmetic stack operations
 class VMArithmeticTranslator
+  attr_accessor :filename
   MATH_TABLE = {
     eq: 'JEQ',
     lt: 'JLT',
@@ -15,7 +16,8 @@ class VMArithmeticTranslator
     not: '!'
   }.freeze
 
-  def initialize
+  def initialize(filename)
+    @filename = filename
     @compare_count = 0
   end
 
@@ -68,17 +70,17 @@ class VMArithmeticTranslator
       'D=M',
       'A=A-1',
       'D=M-D',
-      "@COMPARE.#{@compare_count}",
+      "@#{@filename}.$COMPARE.#{@compare_count}",
       "D;#{comp_type}",
       '@0',
       'D=A',
-      "@COMPARE.#{@compare_count + 1}",
+      "@#{@filename}.$COMPARE.#{@compare_count + 1}",
       '0;JMP',
-      "(COMPARE.#{@compare_count})",
+      "(#{@filename}.$COMPARE.#{@compare_count})",
       '@0',
       'A=A-1',
       'D=A',
-      "(COMPARE.#{@compare_count + 1})",
+      "(#{@filename}.$COMPARE.#{@compare_count + 1})",
       '@SP',
       'A=M-1',
       'M=D'

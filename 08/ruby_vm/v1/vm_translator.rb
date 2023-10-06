@@ -39,6 +39,8 @@ while parser.more_lines?
     writer.write_function(parser.arg1, parser.arg2)
   when :return
     writer.write_return
+  when :call
+    writer.write_call(parser.arg1, parser.arg2)
   end
 end
 
