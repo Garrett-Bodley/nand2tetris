@@ -3,7 +3,6 @@
 
 # Class that translates arithmetic stack operations
 class VMArithmeticTranslator
-  attr_accessor :filename
   MATH_TABLE = {
     eq: 'JEQ',
     lt: 'JLT',
@@ -16,21 +15,21 @@ class VMArithmeticTranslator
     not: '!'
   }.freeze
 
-  def initialize(filename)
-    @filename = filename
+  def initialize
     @compare_count = 0
   end
 
-  def translate(operation_sym)
-    case operation_sym
+  def translate(op_string)
+    op_sym = op_string.to_sym
+    case op_sym
     when :add, :sub
-      instructions = add_subtract(MATH_TABLE[operation_sym])
+      instructions = add_subtract(MATH_TABLE[op_sym])
     when :neg, :not
-      instructions = neg_not(MATH_TABLE[operation_sym])
+      instructions = neg_not(MATH_TABLE[op_sym])
     when :and, :or
-      instructions = and_or(MATH_TABLE[operation_sym])
+      instructions = and_or(MATH_TABLE[op_sym])
     when :eq, :lt, :gt
-      instructions = arithmetic_comparison(MATH_TABLE[operation_sym])
+      instructions = arithmetic_comparison(MATH_TABLE[op_sym])
     end
     return instructions
   end
@@ -70,17 +69,17 @@ class VMArithmeticTranslator
       'D=M',
       'A=A-1',
       'D=M-D',
-      "@#{@filename}.$COMPARE.#{@compare_count}",
+      "@COMPARE.#{@compare_count}",
       "D;#{comp_type}",
       '@0',
       'D=A',
-      "@#{@filename}.$COMPARE.#{@compare_count + 1}",
+      "@COMPARE.#{@compare_count + 1}",
       '0;JMP',
-      "(#{@filename}.$COMPARE.#{@compare_count})",
+      "(COMPARE.#{@compare_count})",
       '@0',
       'A=A-1',
       'D=A',
-      "(#{@filename}.$COMPARE.#{@compare_count + 1})",
+      "(COMPARE.#{@compare_count + 1})",
       '@SP',
       'A=M-1',
       'M=D'

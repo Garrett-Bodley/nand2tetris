@@ -1,5 +1,4 @@
-// Label
-(Sys.Sys.init)
+(Sys.init)
 // Push Constant
 @4000
 D=A
@@ -29,7 +28,7 @@ D=M
 @THAT
 M=D
 // Pushing Return Address!
-@Sys.RETURN.0
+@RETURN_ADDRESS.0
 D=A
 @SP
 A=M
@@ -76,9 +75,9 @@ M=D
 D=M
 @LCL
 M=D
-@Sys.Sys.main
+@Sys.main
 0;JMP
-(Sys.RETURN.0)
+(RETURN_ADDRESS.0)
 // Pop to temp
 @6
 D=A
@@ -91,12 +90,11 @@ D=M
 A=M
 M=D
 // Label
-(Sys.LOOP)
+(Sys.init$LOOP)
 // goto
-@Sys.LOOP
+@Sys.init$LOOP
 0; JMP
-// Label
-(Sys.Sys.main)
+(Sys.main)
 @0
 D=A
 @SP
@@ -227,7 +225,7 @@ M=D
 @SP
 M=M+1
 // Pushing Return Address!
-@Sys.RETURN.1
+@RETURN_ADDRESS.1
 D=A
 @SP
 A=M
@@ -274,9 +272,9 @@ M=D
 D=M
 @LCL
 M=D
-@Sys.Sys.add12
+@Sys.add12
 0;JMP
-(Sys.RETURN.1)
+(RETURN_ADDRESS.1)
 // Pop to temp
 @5
 D=A
@@ -424,8 +422,7 @@ M=D
 @15
 A=M
 0;JMP
-// Label
-(Sys.Sys.add12)
+(Sys.add12)
 // Push Constant
 @4002
 D=A
@@ -537,4 +534,4 @@ A=M
 0;JMP
 (INFINITE_LOOP)
 @INFINITE_LOOP
-0; JMP
+0;JMP

@@ -13,16 +13,16 @@ class VMPushPopTranslator # rubocop:disable Metrics/ClassLength
     temp: 'TEMP'
   }.freeze
 
-  def initialize(filename)
-    @filename = filename
+  def initialize
+    @filename = ''
   end
 
-  def translate(command_type, seg_sym, index)
+  def translate(command_type, segment, index)
     case command_type
     when :push
-      instructions = push(seg_sym, index)
+      instructions = push(segment.to_sym, index)
     when :pop
-      instructions = pop(seg_sym, index)
+      instructions = pop(segment.to_sym, index)
     end
 
     return instructions

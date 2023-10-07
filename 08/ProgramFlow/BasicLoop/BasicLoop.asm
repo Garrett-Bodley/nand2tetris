@@ -18,7 +18,7 @@ D=M
 A=M
 M=D
 // Label
-(LOOP_START)
+($LOOP_START)
 // Push from segment: argument
 @ARG
 A=M
@@ -99,7 +99,7 @@ M=M+1
 @SP
 AM=M-1
 D=M
-@LOOP_START
+@$LOOP_START
 D;JNE
 // Push from segment: local
 @LCL
@@ -112,4 +112,4 @@ M=D
 M=M+1
 (INFINITE_LOOP)
 @INFINITE_LOOP
-0; JMP
+0;JMP

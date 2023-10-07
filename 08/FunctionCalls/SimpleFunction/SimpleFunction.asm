@@ -1,21 +1,16 @@
-// Label
-(SimpleFunction.SimpleFunction.test)
-// Push Constant
+(SimpleFunction.test)
 @0
 D=A
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
-// Push Constant
 @0
 D=A
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
 // Push from segment: local
 @LCL
 A=M
@@ -89,7 +84,6 @@ A=D-A
 D=M
 @15
 M=D
-// Pop to segment: argument
 @ARG
 D=M
 @13
@@ -138,4 +132,4 @@ A=M
 0;JMP
 (INFINITE_LOOP)
 @INFINITE_LOOP
-0; JMP
+0;JMP

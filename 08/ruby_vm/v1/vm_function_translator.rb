@@ -2,11 +2,21 @@
 
 # A class to translate function call and return commands into Assembly
 class VMFunctionTranslator
-  attr_accessor :filename
 
-  def initialize(filename)
-    @filename = filename
+  def initialize
     @return_count = 0
+  end
+
+  def translate_program_flow(command_type, label)
+    case command_type
+    when :label
+      instructions = label(label)
+    when :if_goto
+      instructions = if_goto(label)
+    when :goto
+      instructions = goto(label)
+    end
+    return instructions
   end
 
   def return
@@ -131,14 +141,14 @@ class VMFunctionTranslator
     end
     [
       '// Label',
-      "(#{@filename}.#{label})"
+      "(#{@function_name}$#{label})"
     ]
   end
 
   def goto(label)
     [
       '// goto',
-      "@#{@filename}.#{label}",
+      "@#{@function_name}$#{label}",
       '0; JMP'
     ]
   end
@@ -151,13 +161,16 @@ class VMFunctionTranslator
       '@SP',
       'AM=M-1',
       'D=M',
-      "@#{@filename}.#{label}",
+      "@#{@function_name}$#{label}",
       'D;JNE'
     ]
   end
 
   def declare_function(function_name, arg_count)
-    instructions = label(function_name)
+    @function_name = function_name
+    instructions = %W[
+      (#{@function_name})
+    ]
     count = 0
     while count < arg_count.to_i
       instructions += %w[
@@ -173,7 +186,7 @@ class VMFunctionTranslator
     return instructions
   end
 
-  def call(function_name, arg_count)
+  def call_function(function_name, arg_count)
     return_label = make_return_label
     instructions = push_return(return_label)
     instructions += push_lcl
@@ -187,7 +200,7 @@ class VMFunctionTranslator
   end
 
   def make_return_label
-    label = "#{@filename}.RETURN.#{@return_count}"
+    label = "RETURN_ADDRESS.#{@return_count}"
     @return_count += 1
     label
   end
@@ -277,7 +290,7 @@ class VMFunctionTranslator
 
   def goto_function(function_name)
     %W[
-      @#{@filename}.#{function_name}
+      @#{function_name}
       0;JMP
     ]
   end
@@ -288,4 +301,11 @@ class VMFunctionTranslator
     ]
   end
 
+  def infinite_loop
+    %w[
+      (INFINITE_LOOP)
+      @INFINITE_LOOP
+      0;JMP
+    ]
+  end
 end

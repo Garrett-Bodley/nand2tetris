@@ -18,21 +18,19 @@ class VMParser
     [:call, /^call /]
   ].freeze
 
-  # return :label if @current_line.match(/^label /)
-  # return :if_goto if @current_line.match(/^if-goto /)
-  # return :goto if @current_line.match(/^goto /)
-  # return :function if @current_line.match(/^function /)
-  # return :return if @current_line.match(/^return/)
-  # return :call if @current_line.match(/^call /)
   attr_reader :current_line, :command_type
 
-  def initialize(path)
-    @file = File.open(path, 'r')
+  def initialize
     @command_type = nil
   end
 
+  def read_new_file(path)
+    @file&.close
+    @file = File.open(path, 'r')
+  end
+
   def advance
-    @current_line = @file.readline(chomp: true)
+    @current_line = sanitize_line(@file.readline(chomp: true))
     @command_type = parse_command_type
     return @current_line
   end
