@@ -1,31 +1,6 @@
-(Sys.init)
-// Push Constant
-@4000
+@256
 D=A
 @SP
-A=M
-M=D
-@SP
-M=M+1
-// Pop to pointer
-@SP
-AM=M-1
-D=M
-@THIS
-M=D
-// Push Constant
-@5000
-D=A
-@SP
-A=M
-M=D
-@SP
-M=M+1
-// Pop to pointer
-@SP
-AM=M-1
-D=M
-@THAT
 M=D
 // Pushing Return Address!
 @RETURN_ADDRESS.0
@@ -75,9 +50,89 @@ M=D
 D=M
 @LCL
 M=D
-@Sys.main
+@Sys.init
 0;JMP
 (RETURN_ADDRESS.0)
+(Sys.init)
+// Push Constant
+@4000
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// Pop to pointer
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+// Push Constant
+@5000
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// Pop to pointer
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+// Pushing Return Address!
+@RETURN_ADDRESS.1
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+@LCL
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+@ARG
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+@THIS
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+@THAT
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+@SP
+D=M
+@5
+D=D-A
+@0
+D=D-A
+@ARG
+M=D
+@SP
+D=M
+@LCL
+M=D
+@Sys.main
+0;JMP
+(RETURN_ADDRESS.1)
 // Pop to temp
 @6
 D=A
@@ -225,7 +280,7 @@ M=D
 @SP
 M=M+1
 // Pushing Return Address!
-@RETURN_ADDRESS.1
+@RETURN_ADDRESS.2
 D=A
 @SP
 A=M
@@ -274,7 +329,7 @@ D=M
 M=D
 @Sys.add12
 0;JMP
-(RETURN_ADDRESS.1)
+(RETURN_ADDRESS.2)
 // Pop to temp
 @5
 D=A

@@ -1,20 +1,7 @@
-(Sys.init)
-// Push Constant
-@6
+@256
 D=A
 @SP
-A=M
 M=D
-@SP
-M=M+1
-// Push Constant
-@8
-D=A
-@SP
-A=M
-M=D
-@SP
-M=M+1
 // Pushing Return Address!
 @RETURN_ADDRESS.0
 D=A
@@ -55,7 +42,7 @@ M=M+1
 D=M
 @5
 D=D-A
-@2
+@0
 D=D-A
 @ARG
 M=D
@@ -63,22 +50,12 @@ M=D
 D=M
 @LCL
 M=D
-@Class1.set
+@Sys.init
 0;JMP
 (RETURN_ADDRESS.0)
-// Pop to temp
-@5
-D=A
-@13
-M=D
-@SP
-AM=M-1
-D=M
-@13
-A=M
-M=D
+(Sys.init)
 // Push Constant
-@23
+@6
 D=A
 @SP
 A=M
@@ -86,7 +63,7 @@ M=D
 @SP
 M=M+1
 // Push Constant
-@15
+@8
 D=A
 @SP
 A=M
@@ -141,7 +118,7 @@ M=D
 D=M
 @LCL
 M=D
-@Class2.set
+@Class1.set
 0;JMP
 (RETURN_ADDRESS.1)
 // Pop to temp
@@ -155,6 +132,22 @@ D=M
 @13
 A=M
 M=D
+// Push Constant
+@23
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// Push Constant
+@15
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
 // Pushing Return Address!
 @RETURN_ADDRESS.2
 D=A
@@ -195,7 +188,7 @@ M=M+1
 D=M
 @5
 D=D-A
-@0
+@2
 D=D-A
 @ARG
 M=D
@@ -203,9 +196,20 @@ M=D
 D=M
 @LCL
 M=D
-@Class1.get
+@Class2.set
 0;JMP
 (RETURN_ADDRESS.2)
+// Pop to temp
+@5
+D=A
+@13
+M=D
+@SP
+AM=M-1
+D=M
+@13
+A=M
+M=D
 // Pushing Return Address!
 @RETURN_ADDRESS.3
 D=A
@@ -254,9 +258,60 @@ M=D
 D=M
 @LCL
 M=D
-@Class2.get
+@Class1.get
 0;JMP
 (RETURN_ADDRESS.3)
+// Pushing Return Address!
+@RETURN_ADDRESS.4
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+@LCL
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+@ARG
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+@THIS
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+@THAT
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+@SP
+D=M
+@5
+D=D-A
+@0
+D=D-A
+@ARG
+M=D
+@SP
+D=M
+@LCL
+M=D
+@Class2.get
+0;JMP
+(RETURN_ADDRESS.4)
 // Label
 (Sys.init$WHILE)
 // goto
