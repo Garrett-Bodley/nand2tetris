@@ -1,0 +1,86 @@
+/** 
+
+updateHead(coordinates){
+  creates a new ListNode and enQ's that onto the snake Q
+  draws new head
+}
+
+DONE
+doesInhabit(x, y){
+  returns boolean value of whether snake inhabits the given coordinates
+}
+
+drawInit(){
+  draws snake for the first time
+}
+
+drawHead(direction){
+  head = snakeQ.getHead
+  draws new head and connects it to old head
+  need direction to know how to draw
+    should I organize by making discrete movement methods? moveUp moveDown etc? maybe?
+  maybe this function exists as a switch statement because this language doesn't have switch statements
+}
+
+
+
+*/
+
+class Snake {
+  field SnakeQ snakeQ;
+
+  constructor Snake new (int Ax, int Ay){
+    let x = Ax;
+    let y = Ay;
+    let size = 8;
+    do draw();
+    return this;
+  }
+
+  method void dispose() {
+    do Memory.deAlloc(this);
+    return;
+  }
+
+  method void draw(){
+    do Screen.setColor(true);
+    do Screen.drawRectangle(x, y, x + size, y + size);
+    return;
+  }
+
+  method void erase(){
+    do Screen.setColor(false);
+    do Screen.drawRectangle(x, y, x + size, y + size);
+    return;
+  }
+
+  method void moveUp() {
+    // We move by two pixels, so we can only move up if y >= 2 AKA y > 1
+    if (y > 1) {
+      do Screen.setColor(false);
+      do Screen.drawRectangle(x, (y + size) - 1, x + size); // paints bottom two pixels white
+      let y = y - 2;
+      do Screen.setColor(true);
+      do Screen.drawRectangle(x, y, x + size, y + 1); // paints top two pixels black
+
+    }
+  }
+
+  method void moveDown(){
+    // We move by two pixels so we can only move down if there are two pixels available
+    // below the current sprite
+    if ((y + size) < 254) {
+      do Screen.setColor(false);
+      do Screen.drawRectangle(x, y, x + size, y + 1)
+      let y = y + 2
+      do Screen.setColor(true);
+      do Screen.drawRectangle(x, (y + size) - 1, x + )
+    }
+  }
+
+
+
+  method boolean doesInhabit (int argX, int argY) {
+    return snakeQ.contains(argX, argY)
+  }
+}
