@@ -1,0 +1,61 @@
+/** Implementation of a Doubly linked list.
+
+  Each ListNode keeps track of next and prev
+  Nodes have data attributes of x and y (grid coordinates)
+
+  The dispose method destroys the current node
+  Dispose can be called unsafely, as you can dispose a node 
+  that is in the middle of a list, 
+  thereby breaking your linked list 
+
+  Try not to do that :)
+
+*/
+
+class ListNode {
+  field ListNode next;
+  field ListNode prev;
+  field int x;
+  field int y;
+
+  constructor ListNode new(int argX, int argY){
+    let x = argX;
+    let y = argY;
+    let next = null;
+    let prev = null;
+    return this;
+  }
+
+  // setter and getter methods for x
+  method void setX(int argX) { 
+    let x = argX;
+    return;
+  }
+  method int getX() { return x; }
+
+  // setter and getter methods for y
+  method void setY(int argY) {
+    let y = argY;
+    return;
+  }
+  method int getY() { return y; }
+
+  // setter and getter methods for next
+  method void setNext(ListNode argNext) {
+    let next = argNext;
+    return;
+  }
+  method ListNode getNext() { return next; }
+
+  // setter and getter methods for prev
+  method void setPrev(ListNode argPrev) {
+    let prev = argPrev;
+    return;
+  }
+  method ListNode getPrev() { return prev; }
+
+  method void dispose(){
+    do Memory.deAlloc(this);
+    return;
+  }
+}

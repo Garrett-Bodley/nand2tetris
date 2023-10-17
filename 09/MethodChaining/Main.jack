@@ -1,0 +1,14 @@
+class Main {
+  function void main(){
+    var SnakeQ q;
+    var int x;
+    var ListNode cur;
+    let q = SnakeQ.new();
+    let cur = q.getHead();
+    let cur = cur.getNext();
+    let x = cur.getX();
+    do Output.printInt(x);
+    do q.dispose();
+    return;
+  }
+}
