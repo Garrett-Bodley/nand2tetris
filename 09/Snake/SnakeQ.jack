@@ -1,0 +1,81 @@
+/** 
+
+SnakeQ represents the current location of the snake.
+
+The snake is initialized to be two nodes large.
+It is located the top left of the grid and is moving right.
+
+The length attribute is 1 indexed.
+
+*/
+
+class SnakeQ {
+  field ListNode head, tail;
+  field int length;
+
+  constructor SnakeQ new(){
+    let head = ListNode.new(1, 0);
+    let tail = ListNode.new(0, 0);
+    let length = 2;
+    do head.setNext(tail);
+    do tail.setPrev(head);
+    return this;
+  }
+
+  // Getter methods for length, head, and tail
+  method int getLength() { return length; }
+  method ListNode getHead() { return head; }
+  method ListNode getTail() { return tail; }
+
+  // Adds an element to the front of the queue
+  method void enQ(ListNode newNode) {
+    do head.setPrev(newNode);
+    do newNode.setNext(head);
+    let head = newNode;
+    let length = length + 1;
+    return;
+  }
+
+  // Removes the element from the end of the queue
+  method void deQ() {
+    var ListNode removed;
+    if(tail = null){ return; }
+    let removed = tail
+    // what happens if this returns null?
+    let tail = tail.getPrev();
+    // I'll be calling a function on a null object? That seems like it'd be bad
+    // I think that's a problem outside the bounds of this program?
+    // I'm only deQing when the snake moves forward, this is never used to "shrink the snake"
+    // Therefore I will never be calling a function on a null object
+    do tail.setNext(null);
+    do removed.dispose();
+    let length = length - 1;
+    return;
+  }
+
+  // Checks if Q contains a node with the provided x, y coordinates
+  method boolean contains(int argX, int argY) {
+    var ListNode current;
+    let current = head;
+    while(~(current = null)){
+      if((argX = current.getX()) & (argY = current.getY())){
+        return true;
+      }
+      let current = current.getNext();
+    }
+    return false;
+  }
+
+  // Disposes the Queue and all associated nodes
+  method void dispose() {
+    var ListNode temp
+    while(~(head = null)){
+      let temp = head
+      do head = head.getNext()
+      do temp.dispose()
+    }
+    do Memory.deAlloc(this);
+    return;
+  }
+
+}
