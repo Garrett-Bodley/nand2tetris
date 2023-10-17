@@ -1,0 +1,33 @@
+class Main {
+  function void main(){
+    var SnakeQ q;
+    var boolean contains;
+    var ListNode current;
+    var ListNode appendNode;
+    var String string;
+
+    let q = SnakeQ.new();
+    let appendNode = ListNode.new(4,4);
+    do q.enQ(appendNode);
+    let appendNode = ListNode.new(2,2);
+    do q.enQ(appendNode);
+    let appendNode = ListNode.new(3,3);
+    do q.enQ(appendNode);
+    let appendNode = ListNode.new(1,1);
+    do q.enQ(appendNode);
+    let appendNode = ListNode.new(6,7);
+    do q.enQ(appendNode);
+    
+    while(q.getLength() > 0){
+      let current = q.getTail();
+      do Output.printInt(current.getX());
+      do Output.printChar(44);
+      do Output.printChar(32);
+      do Output.printInt(current.getY());
+      do Output.println();
+      do q.deQ();
+    }
+    do q.dispose();
+    return;
+  }
+}

@@ -42,12 +42,16 @@ class SnakeQ {
     if(tail = null){ return; }
     let removed = tail;
     // what happens if this returns null?
-    let tail = tail.getPrev();
+    if(~(tail.getPrev() = null)){
+      let tail = tail.getPrev();
+      do tail.setNext(null);
+    }else{
+      let tail = null;
+    }
     // I'll be calling a function on a null object? That seems like it'd be bad
     // I think that's a problem outside the bounds of this program?
     // I'm only deQing when the snake moves forward, this is never used to "shrink the snake"
     // Therefore I will never be calling a function on a null object
-    do tail.setNext(null);
     do removed.dispose();
     let length = length - 1;
     return;
@@ -57,6 +61,7 @@ class SnakeQ {
   method boolean contains(ListNode coordinates) {
     var ListNode current;
     let current = head;
+
     while(~(current = null)){
       if((coordinates.getX() = current.getX()) & (coordinates.getY() = current.getY())){
         return true;
