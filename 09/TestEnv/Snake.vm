@@ -1,0 +1,54 @@
+function Snake.new 0
+push constant 1
+call Memory.alloc 1
+pop pointer 0
+call SnakeQ.new 0
+pop this 0
+push pointer 0
+return
+function Snake.addNode 2
+push argument 0
+pop pointer 0
+push argument 1
+call ListNode.getX 1
+pop local 0
+push argument 1
+call ListNode.getY 1
+pop local 1
+push this 0
+push argument 1
+call SnakeQ.enQ 2
+pop temp 0
+push constant 0
+return
+function Snake.getTail 0
+push argument 0
+pop pointer 0
+push this 0
+call SnakeQ.getTail 1
+return
+function Snake.chopTail 0
+push argument 0
+pop pointer 0
+push this 0
+call SnakeQ.deQ 1
+pop temp 0
+push constant 0
+return
+function Snake.length 0
+push argument 0
+pop pointer 0
+push this 0
+call SnakeQ.getLength 1
+return
+function Snake.dispose 0
+push argument 0
+pop pointer 0
+push this 0
+call SnakeQ.dispose 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return

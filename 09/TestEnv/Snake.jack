@@ -1,0 +1,36 @@
+class Snake {
+  field SnakeQ q;
+
+  constructor Snake new(){
+    let q = SnakeQ.new();
+    return this;
+  }
+
+  method void addNode(ListNode newNode){
+    var int x;
+    var int y;
+    let x = newNode.getX();
+    let y = newNode.getY();
+    do q.enQ(newNode);
+    return;
+  }
+
+  method ListNode getTail(){
+    return q.getTail();
+  }
+
+  method void chopTail(){
+    do q.deQ();
+    return;
+  }
+
+  method int length(){
+    return q.getLength();
+  }
+
+  method void dispose(){
+    do q.dispose();
+    do Memory.deAlloc(this);
+    return;
+  }
+}

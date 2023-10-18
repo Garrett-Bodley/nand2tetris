@@ -1,5 +1,5 @@
 function Main.main 5
-call SnakeQ.new 0
+call Snake.new 0
 pop local 0
 push constant 4
 push constant 4
@@ -7,7 +7,7 @@ call ListNode.new 2
 pop local 3
 push local 0
 push local 3
-call SnakeQ.enQ 2
+call Snake.addNode 2
 pop temp 0
 push constant 2
 push constant 2
@@ -15,7 +15,7 @@ call ListNode.new 2
 pop local 3
 push local 0
 push local 3
-call SnakeQ.enQ 2
+call Snake.addNode 2
 pop temp 0
 push constant 3
 push constant 3
@@ -23,7 +23,7 @@ call ListNode.new 2
 pop local 3
 push local 0
 push local 3
-call SnakeQ.enQ 2
+call Snake.addNode 2
 pop temp 0
 push constant 1
 push constant 1
@@ -31,7 +31,7 @@ call ListNode.new 2
 pop local 3
 push local 0
 push local 3
-call SnakeQ.enQ 2
+call Snake.addNode 2
 pop temp 0
 push constant 6
 push constant 7
@@ -39,17 +39,17 @@ call ListNode.new 2
 pop local 3
 push local 0
 push local 3
-call SnakeQ.enQ 2
+call Snake.addNode 2
 pop temp 0
 label WHILE_EXP0
 push local 0
-call SnakeQ.getLength 1
+call Snake.length 1
 push constant 0
 gt
 not
 if-goto WHILE_END0
 push local 0
-call SnakeQ.getTail 1
+call Snake.getTail 1
 pop local 2
 push local 2
 call ListNode.getX 1
@@ -68,12 +68,12 @@ pop temp 0
 call Output.println 0
 pop temp 0
 push local 0
-call SnakeQ.deQ 1
+call Snake.chopTail 1
 pop temp 0
 goto WHILE_EXP0
 label WHILE_END0
 push local 0
-call SnakeQ.dispose 1
+call Snake.dispose 1
 pop temp 0
 push constant 0
 return

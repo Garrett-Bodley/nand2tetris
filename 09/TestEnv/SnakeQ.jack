@@ -36,22 +36,18 @@ class SnakeQ {
     return;
   }
 
-  // Removes the element from the end of the queue
+  // Removes the element from the end of the queue and returns it.
   method void deQ() {
     var ListNode removed;
     if(tail = null){ return; }
     let removed = tail;
-    // what happens if this returns null?
+    // sets tail to null if only two nodes are in the Q
     if(~(tail.getPrev() = null)){
       let tail = tail.getPrev();
       do tail.setNext(null);
     }else{
       let tail = null;
     }
-    // I'll be calling a function on a null object? That seems like it'd be bad
-    // I think that's a problem outside the bounds of this program?
-    // I'm only deQing when the snake moves forward, this is never used to "shrink the snake"
-    // Therefore I will never be calling a function on a null object
     do removed.dispose();
     let length = length - 1;
     return;
@@ -74,7 +70,7 @@ class SnakeQ {
   // Disposes the Queue and all associated nodes
   method void dispose() {
     var ListNode temp;
-    while( ~(head = null) ){
+    while(~(head = null)){
       let temp = head;
       let head = head.getNext();
       do temp.dispose();
