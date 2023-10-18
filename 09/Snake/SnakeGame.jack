@@ -78,7 +78,7 @@ class SnakeGame {
     let pixelSize = 16;
     let padding = 1;
     let snake = Snake.new(pixelSize, padding);
-    let direction = 0;
+    let direction = 4;
     return this;
   }
 
@@ -105,9 +105,10 @@ class SnakeGame {
       // 3 = exit
     var int gameState;
     // initialize snake to be moving right
-    let direction = 4;
+    do growSnake();
     while(gameState = 0){
-
+      
+      do Sys.wait(500);
       let key = Keyboard.keyPressed();
       if (key = 81) { let gameState = 3; }    // q key
       if (key = 131) { let direction = 1; }    // up arrow
@@ -172,6 +173,50 @@ class SnakeGame {
     if(~status.ate()){ do snake.chopTail(); }
     do status.dispose();
     return 0;
+  }
+
+  method void growSnake(){
+    var ListNode newNode;
+    let newNode = ListNode.new(2, 0);
+    // Move right, don't delete tail
+    do snake.updateHead(4, newNode);
+    do Sys.wait(500);
+    // Move right, don't delete tail
+    let newNode = ListNode.new(3, 0);
+    do snake.updateHead(4, newNode);
+    do Sys.wait(500);
+    // Move down, don't delete tail
+    let newNode = ListNode.new(3, 1);
+    do snake.updateHead(2, newNode);
+    do Sys.wait(500);
+    // Move left, don't delete tail
+    let newNode = ListNode.new(2, 1);
+    do snake.updateHead(3, newNode);
+    do Sys.wait(500);
+    // Move down, don't delete tail
+    let newNode = ListNode.new(2, 2);
+    do snake.updateHead(2, newNode);
+    do Sys.wait(500);
+    // Move right, don't delete tail
+    let newNode = ListNode.new(3, 2);
+    do snake.updateHead(4, newNode);
+    do Sys.wait(500);
+    // Move right, don't delete tail
+    let newNode = ListNode.new(4, 2);
+    do snake.updateHead(4, newNode);
+    do Sys.wait(500);
+    // Move up, don't delete tail
+    let newNode = ListNode.new(4, 1);
+    do snake.updateHead(1, newNode);
+    do Sys.wait(500);
+    // Move up, don't delete tail
+    let newNode = ListNode.new(4, 0);
+    do snake.updateHead(1, newNode);
+    do Sys.wait(500);
+    // Move right, delete tail
+    let newNode = ListNode.new(5,0);
+    do snake.updateHead(4, newNode);
+    return;
   }
 
   method ListNode getCoordinates(int direction, ListNode headCoordinates){

@@ -1,0 +1,531 @@
+function Snake.new 0
+push constant 3
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 1
+push argument 1
+pop this 2
+call SnakeQ.new 0
+pop this 0
+push pointer 0
+call Snake.drawInit 1
+pop temp 0
+push pointer 0
+return
+function Snake.drawInit 4
+push argument 0
+pop pointer 0
+push this 2
+pop local 0
+push this 2
+pop local 2
+push this 1
+push constant 2
+call Math.multiply 2
+push this 2
+sub
+pop local 1
+push this 1
+push this 2
+sub
+pop local 3
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push local 0
+push local 2
+push local 1
+push local 3
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Snake.updateHead 7
+push argument 0
+pop pointer 0
+push argument 2
+call ListNode.getX 1
+pop local 0
+push argument 2
+call ListNode.getY 1
+pop local 1
+push this 0
+push argument 2
+call SnakeQ.enQ 2
+pop temp 0
+push argument 1
+push constant 1
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+push this 1
+call Math.multiply 2
+push this 2
+add
+pop local 2
+push local 1
+push this 1
+call Math.multiply 2
+push this 2
+add
+pop local 4
+push local 0
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+sub
+pop local 3
+push local 1
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+add
+pop local 5
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push local 2
+push local 4
+push local 3
+push local 5
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+label IF_FALSE0
+push argument 1
+push constant 2
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 0
+push this 1
+call Math.multiply 2
+push this 2
+add
+pop local 2
+push local 1
+push this 1
+call Math.multiply 2
+push this 2
+sub
+pop local 4
+push local 0
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+sub
+pop local 3
+push local 1
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+sub
+pop local 5
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push local 2
+push local 4
+push local 3
+push local 5
+call Screen.drawRectangle 4
+pop temp 0
+label IF_FALSE1
+push argument 1
+push constant 3
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 0
+push this 1
+call Math.multiply 2
+push this 2
+add
+pop local 2
+push local 1
+push this 1
+call Math.multiply 2
+push this 2
+add
+pop local 4
+push local 0
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+add
+pop local 3
+push local 1
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+sub
+pop local 5
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push local 2
+push local 4
+push local 3
+push local 5
+call Screen.drawRectangle 4
+pop temp 0
+label IF_FALSE2
+push argument 1
+push constant 4
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push local 0
+push this 1
+call Math.multiply 2
+push this 2
+sub
+pop local 2
+push local 1
+push this 1
+call Math.multiply 2
+push this 2
+add
+pop local 4
+push local 0
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+sub
+pop local 3
+push local 1
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+sub
+pop local 5
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push local 2
+push local 4
+push local 3
+push local 5
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+label IF_FALSE3
+push constant 0
+return
+function Snake.chopTail 9
+push argument 0
+pop pointer 0
+push this 0
+call SnakeQ.getTail 1
+pop local 0
+push local 0
+call ListNode.getPrev 1
+pop local 1
+push local 0
+call ListNode.getX 1
+pop local 6
+push local 0
+call ListNode.getY 1
+pop local 7
+push local 0
+call ListNode.getY 1
+push local 1
+call ListNode.getY 1
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 1
+pop local 8
+label IF_FALSE0
+push local 0
+call ListNode.getY 1
+push local 1
+call ListNode.getY 1
+lt
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 2
+pop local 8
+label IF_FALSE1
+push local 0
+call ListNode.getX 1
+push local 1
+call ListNode.getX 1
+gt
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 3
+pop local 8
+label IF_FALSE2
+push local 0
+call ListNode.getX 1
+push local 1
+call ListNode.getX 1
+lt
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 4
+pop local 8
+label IF_FALSE3
+push this 0
+call SnakeQ.deQ 1
+pop temp 0
+push local 8
+push constant 1
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push local 6
+push this 1
+call Math.multiply 2
+push this 2
+add
+pop local 2
+push local 7
+push this 1
+call Math.multiply 2
+push this 2
+sub
+push constant 1
+add
+pop local 4
+push local 6
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+sub
+pop local 3
+push local 7
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+sub
+pop local 5
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push local 2
+push local 4
+push local 3
+push local 5
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+label IF_FALSE4
+push local 8
+push constant 2
+eq
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push local 6
+push this 1
+call Math.multiply 2
+push this 2
+add
+pop local 2
+push local 7
+push this 1
+call Math.multiply 2
+push this 2
+add
+pop local 4
+push local 6
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+sub
+pop local 3
+push local 7
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+add
+push constant 1
+sub
+pop local 5
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push local 2
+push local 4
+push local 3
+push local 5
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+label IF_FALSE5
+push local 8
+push constant 3
+eq
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push local 6
+push this 1
+call Math.multiply 2
+push this 2
+sub
+push constant 1
+add
+pop local 2
+push local 7
+push this 1
+call Math.multiply 2
+push this 2
+add
+pop local 4
+push local 6
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+sub
+pop local 3
+push local 7
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+sub
+pop local 5
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push local 2
+push local 4
+push local 3
+push local 5
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+label IF_FALSE6
+push local 8
+push constant 4
+eq
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push local 6
+push this 1
+call Math.multiply 2
+push this 2
+add
+pop local 2
+push local 7
+push this 1
+call Math.multiply 2
+push this 2
+add
+pop local 4
+push local 6
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+add
+push constant 1
+sub
+pop local 3
+push local 7
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+sub
+pop local 5
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push local 2
+push local 4
+push local 3
+push local 5
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+label IF_FALSE7
+push constant 0
+return
+function Snake.dispose 0
+push argument 0
+pop pointer 0
+push this 0
+call SnakeQ.dispose 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function Snake.doesInhabit 0
+push argument 0
+pop pointer 0
+push this 0
+push argument 1
+call SnakeQ.contains 2
+return
+function Snake.headCoordinates 2
+push argument 0
+pop pointer 0
+push this 0
+call SnakeQ.getHead 1
+pop local 1
+push local 1
+call ListNode.getX 1
+push local 1
+call ListNode.getY 1
+call ListNode.new 2
+pop local 0
+push local 0
+return

@@ -1,62 +1,8 @@
 class Main{
   function void main() {
-    var Snake snake;
-    var ListNode newNode;
-    let newNode = ListNode.new(2, 0);
-    let snake = Snake.new(16, 1);
-    do snake.drawInit();
-    do Sys.wait(500);
-    // Move right, don't delete tail
-    do snake.updateHead(4, newNode);
-    do Sys.wait(500);
-    // Move right, don't delete tail
-    let newNode = ListNode.new(3, 0);
-    do snake.updateHead(4, newNode);
-    do Sys.wait(500);
-    // Move down, don't delete tail
-    let newNode = ListNode.new(3, 1);
-    do snake.updateHead(2, newNode);
-    do snake.chopTail();
-    do Sys.wait(500);
-    // Move left, don't delete tail
-    let newNode = ListNode.new(2, 1);
-    do snake.updateHead(3, newNode);
-    do snake.chopTail();
-    do Sys.wait(500);
-    // Move down, don't delete tail
-    let newNode = ListNode.new(2, 2);
-    do snake.updateHead(2, newNode);
-    do snake.chopTail();
-    do Sys.wait(500);
-    // Move right, don't delete tail
-    let newNode = ListNode.new(3, 2);
-    do snake.updateHead(4, newNode);
-    do snake.chopTail();
-    do Sys.wait(500);
-    // Move right, don't delete tail
-    let newNode = ListNode.new(4, 2);
-    do snake.updateHead(4, newNode);
-    do snake.chopTail();
-    do Sys.wait(500);
-    // Move up, don't delete tail
-    let newNode = ListNode.new(4, 1);
-    do snake.updateHead(1, newNode);
-    do snake.chopTail();
-    do Sys.wait(500);
-    // Move up, don't delete tail
-    let newNode = ListNode.new(4, 0);
-    do snake.updateHead(1, newNode);
-    do snake.chopTail();
-    do Sys.wait(500);
-    // Move right, delete tail
-    let newNode = ListNode.new(5,0);
-    do snake.updateHead(4, newNode);
-    do snake.chopTail();
-    do Sys.wait(500);
-    do snake.chopTail();
-    do Sys.wait(500);
-    do snake.chopTail();
-    do Sys.wait(500);
+    var SnakeGame game;
+    let game = SnakeGame.new();
+    do game.run();
     return;
   }
 }
