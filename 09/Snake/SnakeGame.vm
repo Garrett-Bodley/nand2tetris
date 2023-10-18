@@ -109,48 +109,20 @@ push local 0
 call SnakeGame.moveStatusCheck 2
 pop local 1
 push local 1
-call MoveStatus.wallCrash 1
+call MoveStatus.ate 1
+not
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-push constant 5
-call Sys.error 1
+push this 0
+call Snake.chopTail 1
 pop temp 0
-push local 0
-call ListNode.dispose 1
-pop temp 0
-push constant 2
-return
 label IF_FALSE0
-push local 1
-call MoveStatus.snakeCrash 1
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push constant 5
-call Sys.error 1
-pop temp 0
-push local 0
-call ListNode.dispose 1
-pop temp 0
-push constant 2
-return
-label IF_FALSE1
 push this 0
 push argument 1
 push local 0
 call Snake.updateHead 3
 pop temp 0
-push local 1
-call MoveStatus.ate 1
-not
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push this 0
-call Snake.chopTail 1
-pop temp 0
-label IF_FALSE2
 push local 1
 call MoveStatus.dispose 1
 pop temp 0

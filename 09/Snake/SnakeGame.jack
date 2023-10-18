@@ -157,20 +157,20 @@ class SnakeGame {
 
     let newCoordinates = getCoordinates(direction, snake.headCoordinates());
     let status = moveStatusCheck(newCoordinates);
-    if(status.wallCrash()) { 
-      // do snake.wallCrash(direction);
-      do Sys.error(5);
-      do newCoordinates.dispose();
-      return 2;
-    }
-    if(status.snakeCrash()) { 
-      // do snake.snakeCrash(direction);
-      do Sys.error(5);
-      do newCoordinates.dispose();
-      return 2;
-    }
-    do snake.updateHead(direction, newCoordinates);
+    // if(status.wallCrash()) { 
+    //   // do snake.wallCrash(direction);
+    //   do Sys.error(5);
+    //   do newCoordinates.dispose();
+    //   return 2;
+    // }
+    // if(status.snakeCrash()) { 
+    //   // do snake.snakeCrash(direction);
+    //   do Sys.error(5);
+    //   do newCoordinates.dispose();
+    //   return 2;
+    // }
     if(~status.ate()){ do snake.chopTail(); }
+    do snake.updateHead(direction, newCoordinates);
     do status.dispose();
     return 0;
   }
