@@ -27,19 +27,31 @@ class ListNode {
   }
 
   // setter and getter methods for x
-  method void setX(int argX) { x = argX; }
+  method void setX(int argX) { 
+    let x = argX;
+    return;
+  }
   method int getX() { return x; }
 
   // setter and getter methods for y
-  method void setY(int argY) { y = argY; }
+  method void setY(int argY) {
+    let y = argY;
+    return;
+  }
   method int getY() { return y; }
 
   // setter and getter methods for next
-  method void setNext(ListNode argNext) { next = argNext; }
+  method void setNext(ListNode argNext) {
+    let next = argNext;
+    return;
+  }
   method ListNode getNext() { return next; }
 
   // setter and getter methods for prev
-  method void setPrev(ListNode argPrev) { prev = argPrev; }
+  method void setPrev(ListNode argPrev) {
+    let prev = argPrev;
+    return;
+  }
   method ListNode getPrev() { return prev; }
 
   method void dispose(){

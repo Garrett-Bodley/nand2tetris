@@ -1,77 +1,83 @@
-/** 
+// /** 
 
-Suggested API
+// SCREEN SIZE => 512 X 256
+
+// Suggested API
 
 
-run(){
-  while( ~(exit) & ~(victory) & ~(death)){
-    let key = getInput()
-    if (key = q ){ quit() }
-    let direction = parseDirection(key)
-    // int gameState
-      // 0 = keep playing
-      // 1 = victory
-      // 2 = death
-    let gameState = move(direction)
+// run(){
+//   while( ~(exit) & ~(victory) & ~(death)){
+//     let key = getInput()
+//     if (key = q ){ quit() }
+//     let direction = parseDirection(key)
+//     // int gameState
+//       // 0 = keep playing
+//       // 1 = victory
+//       // 2 = death
+//     let gameState = move(direction)
 
-    let gameOver = move(direction)
-  }
-}
+//     let gameOver = move(direction)
+//   }
+// }
 
-move(direction){
-  coordinates = getCoordinates()
-  status = moveStatus(coordinates)
-  // I need to draw it crashing into itself, but if it crashes into a wall then the draw function is different.
-  // Create a status struct?
+// move(direction){
+//   coordinates = getCoordinates()
+//   status = moveStatus(coordinates)
+//   // I need to draw it crashing into itself, but if it crashes into a wall then the draw function is different.
+//   // Create a status struct?
   
-  if(wallCollision){
-    snake.wallCollide(direction)
-    return deathCondition
-  }else{
-    if(snakeCollision){ 
-      snake.collideSelf(direction)
-      return deathCondition;
-    }
-    snake.updateHead()
-  }
+//   if(wallCollision){
+//     snake.wallCollide(direction)
+//     return deathCondition
+//   }else{
+//     if(snakeCollision){ 
+//       snake.collideSelf(direction)
+//       return deathCondition;
+//     }
+//     snake.updateHead()
+//   }
 
-  snake.updateHead(coordinates)
-  if(status.invalid) return deathCondition
-  if(!status.ate){
-    snake.chopTail()
-  }
-}
+//   snake.updateHead(coordinates)
+//   if(status.invalid) return deathCondition
+//   if(!status.ate){
+//     snake.chopTail()
+//   }
+// }
 
-getCoordinates(direction){
-  returns new x/y coordinates based on current direction
-}
+// getCoordinates(direction){
+//   returns new x/y coordinates based on current direction
+// }
 
-moveStatus(x, y){
-  checks if snake is occupying the provided coordinates
-  checks if coordinates are within bounds of screen
-  checks if there is food in the current coordinates
+// moveStatus(coordinates){
+//   checks if snake is occupying the provided coordinates
+//   checks if coordinates are within bounds of screen
+//   checks if there is food in the current coordinates
 
-  Maybe use an integer flag for this? 0 = valid, 1 = food, 2 = death ?
-    more optimized but also involves magic numbers so idk
-  returns 
-    isValid boolean 
-    hasFood boolean
-}
+//   Maybe use an integer flag for this? 0 = valid, 1 = food, 2 = death ?
+//     more optimized but also involves magic numbers so idk
+//   returns 
+//     isValid boolean 
+//     hasFood boolean
+// }
 
-makeFood(){
-  generate random x
-  generate random y
-  check if snake.doesInhabit(x, y)
-}
+// makeFood(){
+//   generate random x
+//   generate random y
+//   check if snake.doesInhabit(x, y)
+// }
 
-*/
+// */
 
 class SnakeGame {
   field Snake snake;
   field int direction;
+  field int pixelSize;
+  field int padding;
 
   constructor SnakeGame new(){
-    let snake = Snake.new();
+    let pixelSize = 16;
+    let padding = 1;
+    let snake = Snake.new(pixelSize, padding);
     let direction = 0;
     return this;
   }
@@ -79,34 +85,131 @@ class SnakeGame {
   method void dispose(){
     do snake.dispose();
     do Memory.deAlloc(this);
+    return;
   }
 
-  method void moveSnake(){
-    if (direction = 1) { do snake.moveUp(); }
-    if (direction = 2) { do snake.moveDown(); }
-    if (direction = 3) { do snake.moveLeft(); }
-    if (direction = 4) { do snake.moveRight(); }
-  }
+  // method void moveSnake(){
+  //   if (direction = 1) { do snake.moveUp(); }
+  //   if (direction = 2) { do snake.moveDown(); }
+  //   if (direction = 3) { do snake.moveLeft(); }
+  //   if (direction = 4) { do snake.moveRight(); }
+  // }
 
   method void run(){
     var char key;
-    var boolean exit;
+    // magic numbers okay because of system constraints???
+    // int gameState
+      // 0 = keep playing
+      // 1 = victory
+      // 2 = death
+      // 3 = exit
+    var int gameState;
+    // initialize snake to be moving right
+    let direction = 4;
+    while(gameState = 0){
 
-    while(~exit){
-      while(key = 0){
-        let key = Keyboard.keyPressed();
-        do moveSnake();
-      }
-      if (key = 81) { let exit = true; }      // q key
-      if (key = 131) { let direction = 1 }    // up arrow
+      let key = Keyboard.keyPressed();
+      if (key = 81) { let gameState = 3; }    // q key
+      if (key = 131) { let direction = 1; }    // up arrow
       if (key = 133) { let direction = 2; }   // down arrow
       if (key = 130) { let direction = 3; }   // left arrow
       if (key = 132) { let direction = 4; }   // right arrow
 
-      while(~(key = 0)) {
-        let key = Keyboard.keyPressed();
-        do moveSnake()
-      }
+      let gameState = move(direction);
     }
+
+    // if (gameState = 1){ do showVictory(); }
+    // if(gameState = 2){ do showDeath(); }
+    // if(gameState = 3){ do thanksForPlaying(); }
+    return;
+  }
+
+  // move(direction){
+  //   coordinates = getCoordinates()
+  //   status = moveStatus(coordinates)
+  //   // I need to draw it crashing into itself, but if it crashes into a wall then the draw function is different.
+  //   // Create a status struct?
+    
+  //   if(wallCollision){
+  //     snake.wallCollide(direction)
+  //     coordinates.dispose()
+  //     return deathCondition
+  //   }else{
+  //     if(snakeCollision){ 
+  //       snake.collideSelf(direction)
+  //       coordinates.dispose()
+  //       return deathCondition;
+  //     }
+  //     snake.updateHead(coordinates)
+  //   }
+  
+  //   snake.updateHead(coordinates)
+  //   if(status.invalid) return deathCondition
+  //   if(!status.ate){
+  //     snake.chopTail()
+  //   }
+  // }
+
+  method int move(int direction){
+    var ListNode newCoordinates;
+    var MoveStatus status;
+
+    let newCoordinates = getCoordinates(direction, snake.headCoordinates());
+    let status = moveStatusCheck(newCoordinates);
+    if(status.wallCrash()) { 
+      // do snake.wallCrash(direction);
+      do Sys.error(5);
+      do newCoordinates.dispose();
+      return 2;
+    }
+    if(status.snakeCrash()) { 
+      // do snake.snakeCrash(direction);
+      do Sys.error(5);
+      do newCoordinates.dispose();
+      return 2;
+    }
+    do snake.updateHead(direction, newCoordinates);
+    if(~status.ate()){ do snake.chopTail(); }
+    do status.dispose();
+    return 0;
+  }
+
+  method ListNode getCoordinates(int direction, ListNode headCoordinates){
+    // UP
+    if(direction = 1){
+      do headCoordinates.setY(headCoordinates.getY() - 1);
+    }
+    // DOWN
+    if(direction = 2){
+      do headCoordinates.setY(headCoordinates.getY() + 1);
+    }
+    // LEFT
+    if(direction = 3){
+      do headCoordinates.setX(headCoordinates.getX() - 1);
+    }
+    // RIGHT
+    if(direction = 4){
+      do headCoordinates.setX(headCoordinates.getX() + 1);
+    }
+    return headCoordinates;
+  }
+
+  method MoveStatus moveStatusCheck(ListNode coordinates){
+    var boolean snakeCrash;
+    var boolean wallCrash;
+    var boolean ate;
+
+    let snakeCrash = snake.doesInhabit(coordinates);
+    let wallCrash = coordsOutOfBounds(coordinates);
+    // TODO: Implement food generation
+    // let ate = containsFood();
+
+    return MoveStatus.new(snakeCrash, wallCrash, false);
+  }
+
+  method boolean coordsOutOfBounds(ListNode coordinates){
+    if(coordinates.getX() > ((512/pixelSize) - 1)){ return true; }
+    if(coordinates.getY() > ((256/pixelSize) - 1)){ return true; }
+    return false;
   }
 }

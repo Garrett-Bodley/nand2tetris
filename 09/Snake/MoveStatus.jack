@@ -1,0 +1,35 @@
+// /** 
+
+// Status.new(snakeCollision, wallCollision, hasFood)
+
+// */
+
+class MoveStatus {
+  field boolean snakeCrash;
+  field boolean wallCrash;
+  field boolean ate;
+
+  constructor MoveStatus new(boolean argSnakeCrash, boolean argWallCrash, boolean argAte){
+    let snakeCrash = argSnakeCrash;
+    let wallCrash = argWallCrash;
+    let ate = argAte;
+    return this;
+  }
+
+  method boolean ate(){
+    return ate;
+  }
+
+  method boolean snakeCrash(){
+    return snakeCrash;
+  }
+
+  method boolean wallCrash(){
+    return wallCrash;
+  }
+
+  method void dispose(){
+    do Memory.deAlloc(this);
+    return;
+  }
+}

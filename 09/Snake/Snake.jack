@@ -22,65 +22,190 @@ drawHead(direction){
   maybe this function exists as a switch statement because this language doesn't have switch statements
 }
 
-
+headLocation(){
+  returns new ListNode with x/y coordinates of head
+}
 
 */
 
 class Snake {
   field SnakeQ snakeQ;
+  field int size;
+  field int padding;
 
-  constructor Snake new (int Ax, int Ay){
-    let x = Ax;
-    let y = Ay;
-    let size = 8;
-    do draw();
+  constructor Snake new (int argSize, int argPadding){
+    let size = argSize;
+    let padding = argPadding;
+    let snakeQ = SnakeQ.new();
+    do drawInit();
     return this;
   }
 
+  method void drawInit(){
+    // Snake is initially two nodes long
+    var int x1;
+    var int x2;
+    var int y1;
+    var int y2;
+
+    let x1 = padding;
+    let y1 = padding;
+    let x2 = (size * 2) - padding;
+    let y2 = size - padding;
+    do Screen.setColor(true);
+    do Screen.drawRectangle(x1, y1, x2, y2);
+    return;
+  }
+
+  method void updateHead(int direction, ListNode newCoordinates){
+    // Draw from top left corner to bottom right corner
+    var int coordX;
+    var int coordY;
+    var int x1;
+    var int x2;
+    var int y1;
+    var int y2;
+    var ListNode newNode;
+    
+    let coordX = newCoordinates.getX();
+    let coordY = newCoordinates.getY();
+
+    do snakeQ.enQ(newCoordinates);
+    // UP
+    if(direction = 1){
+      let x1 = (coordX * size) + padding;
+      let y1 = (coordY * size) + padding;
+      let x2 = ((coordX + 1) * size) - padding;
+      let y2 = ((coordY + 1) * size) + padding;
+      do Screen.setColor(true);
+      do Screen.drawRectangle(x1, y1, x2, y2);
+      return;
+    }
+
+    // // DOWN
+    if(direction = 2){
+      let x1 = (coordX * size) + padding;
+      let y1 = (coordY * size) - padding;
+      let x2 = ((coordX + 1) * size) - padding;
+      let y2 = ((coordY + 1) * size) - padding;
+      do Screen.setColor(true);
+      do Screen.drawRectangle(x1, y1, x2, y2);
+    }
+
+    // LEFT
+    if(direction = 3){
+      let x1 = (coordX * size) + padding;
+      let y1 = (coordY * size) + padding;
+      let x2 = ((coordX + 1) * size) + padding;
+      let y2 = ((coordY + 1) * size) - padding;
+      do Screen.setColor(true);
+      do Screen.drawRectangle(x1, y1, x2, y2);
+    }
+
+    // RIGHT
+    if(direction = 4){
+      let x1 = (coordX * size) - padding;
+      let y1 = (coordY * size) + padding;
+      let x2 = ((coordX + 1) * size) - padding;
+      let y2 = ((coordY + 1) * size) - padding;
+      do Screen.setColor(true);
+      do Screen.drawRectangle(x1, y1, x2, y2);
+      return;
+    }
+    return;
+  }
+
+  // [1, 2, 3, 4] = [up, down, left, right]
+  method void chopTail(){
+    var ListNode toRemove;
+    var ListNode newTail;
+    var int x1;
+    var int x2;
+    var int y1;
+    var int y2;
+    var int removeX;
+    var int removeY;
+    var int direction;
+
+
+    let toRemove = snakeQ.getTail();
+    let newTail = toRemove.getPrev();
+
+    let removeX = toRemove.getX();
+    let removeY = toRemove.getY();
+
+    // direction = up
+    if(toRemove.getY() > newTail.getY()){let direction = 1;}
+    // direction = down
+    if(toRemove.getY() < newTail.getY()){let direction = 2;}
+    // direction = left
+    if(toRemove.getX() > newTail.getX()){ let direction = 3;}
+    // direction = right
+    if(toRemove.getX() < newTail.getX()){ let direction = 4;}
+
+    // deQ and dispose of tail node after extraxting x/y coords
+    do snakeQ.deQ();
+    // UP
+    if(direction = 1){
+      let x1 = (removeX * size) + padding;
+      let y1 = (removeY * size) - padding + 1;
+      let x2 = ((removeX + 1) * size) - padding;
+      let y2 = ((removeY + 1) * size) - padding;
+      do Screen.setColor(false);
+      do Screen.drawRectangle(x1, y1, x2, y2);
+      return;
+    }
+
+    // DOWN
+    if(direction = 2){
+      let x1 = (removeX * size) + padding;
+      let y1 = (removeY * size) + padding;
+      let x2 = ((removeX + 1) * size) - padding;
+      let y2 = ((removeY + 1) * size)  + padding - 1;
+      do Screen.setColor(false);
+      do Screen.drawRectangle(x1, y1, x2, y2);
+      return;
+    }
+
+    // LEFT
+    if(direction = 3){
+      let x1 = (removeX * size) - padding;
+      let y1 = (removeY * size) + padding;
+      let x2 = ((removeX + 1) * size) - padding + 1;
+      let y2 = ((removeY + 1) * size) - padding;
+      do Screen.setColor(false);
+      do Screen.drawRectangle(x1, y1, x2, y2);
+      return;
+    }
+
+    // RIGHT
+    if(direction = 4){
+      let x1 = (removeX * size) + padding;
+      let y1 = (removeY * size) + padding;
+      let x2 = ((removeX + 1) * size) + padding - 1;
+      let y2 = ((removeY + 1) * size) - padding;
+      do Screen.setColor(false);
+      do Screen.drawRectangle(x1, y1, x2, y2);
+      return;
+    }
+    return;
+  }
+
   method void dispose() {
+    do snakeQ.dispose();
     do Memory.deAlloc(this);
     return;
   }
 
-  method void draw(){
-    do Screen.setColor(true);
-    do Screen.drawRectangle(x, y, x + size, y + size);
-    return;
+  method boolean doesInhabit (ListNode coordinates) {
+    return snakeQ.contains(coordinates);
   }
 
-  method void erase(){
-    do Screen.setColor(false);
-    do Screen.drawRectangle(x, y, x + size, y + size);
-    return;
-  }
-
-  method void moveUp() {
-    // We move by two pixels, so we can only move up if y >= 2 AKA y > 1
-    if (y > 1) {
-      do Screen.setColor(false);
-      do Screen.drawRectangle(x, (y + size) - 1, x + size); // paints bottom two pixels white
-      let y = y - 2;
-      do Screen.setColor(true);
-      do Screen.drawRectangle(x, y, x + size, y + 1); // paints top two pixels black
-
-    }
-  }
-
-  method void moveDown(){
-    // We move by two pixels so we can only move down if there are two pixels available
-    // below the current sprite
-    if ((y + size) < 254) {
-      do Screen.setColor(false);
-      do Screen.drawRectangle(x, y, x + size, y + 1)
-      let y = y + 2
-      do Screen.setColor(true);
-      do Screen.drawRectangle(x, (y + size) - 1, x + )
-    }
-  }
-
-
-
-  method boolean doesInhabit (int argX, int argY) {
-    return snakeQ.contains(argX, argY)
+  method ListNode headCoordinates(){
+    var ListNode res;
+    var ListNode temp;
+    let temp = snakeQ.getHead();
+    let res = ListNode.new(temp.getX(), temp.getY());
+    return res;
   }
 }
