@@ -91,29 +91,50 @@ class Main {
     // do Output.printInt(res);
     // do Output.println();
 
-    var int a;
-    var int b;
-    var int res;
+    // Testing software logic gate implementations
+    // var int a;
+    // var int b;
+    // var int res;
 
-    let a = 0;
-    let b = 1;
-    let res = Gates.xor(a, b);
-    do Output.printInt(res);
+    // let a = 0;
+    // let b = 1;
+    // let res = Gates.xor(a, b);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let a = 1;
+    // let b = 0;
+    // let res = Gates.xor(a, b);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let a = 1;
+    // let b = 1;
+    // let res = Gates.xor(a, b);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let a = 110;
+    // let b = -32;
+    // let res = Gates.xor(a, b);
+    // do Output.printInt(res);
+    // do Output.println();
+
+    // Testing LSFR
+    var LSFR lsfr;
+    let lsfr = LSFR.new();
+    do Output.printInt(lsfr.nextRNG());
     do Output.println();
-    let a = 1;
-    let b = 0;
-    let res = Gates.xor(a, b);
-    do Output.printInt(res);
+    do Output.printInt(lsfr.nextRNG());
     do Output.println();
-    let a = 1;
-    let b = 1;
-    let res = Gates.xor(a, b);
-    do Output.printInt(res);
+    do Output.printInt(lsfr.nextRNG());
     do Output.println();
-    let a = 110;
-    let b = -32;
-    let res = Gates.xor(a, b);
-    do Output.printInt(res);
+    do Output.printInt(lsfr.nextRNG());
+    do Output.println();
+    do Output.printInt(lsfr.nextRNG());
+    do Output.println();
+    do Output.printInt(lsfr.nextRNG());
+    do Output.println();
+    do Output.printInt(lsfr.nextRNG());
+    do Output.println();
+    do Output.printInt(lsfr.nextRNG());
     do Output.println();
 
     return;
