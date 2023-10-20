@@ -27,44 +27,40 @@ goto WHILE_EXP0
 label WHILE_END0
 push local 1
 return
-function Shift.logicalRight 4
+function Shift.logicalRight 3
 push constant 0
 pop local 0
 push constant 32767
-pop local 2
-push argument 0
 pop local 1
-push argument 1
-pop local 3
+push argument 0
+pop local 2
 label WHILE_EXP0
 push local 0
 push argument 1
 lt
 not
 if-goto WHILE_END0
-push local 1
+push local 2
 push constant 2
 call Shift.shiftDivision 2
-pop local 1
-push local 1
+pop local 2
+push local 2
 push constant 32767
 and
-pop local 1
+pop local 2
 push local 0
 push constant 1
 add
 pop local 0
 goto WHILE_EXP0
 label WHILE_END0
-push local 1
+push local 2
 return
-function Shift.arithmeticRight 3
+function Shift.arithmeticRight 2
 push constant 0
 pop local 0
 push argument 0
 pop local 1
-push argument 1
-pop local 2
 label WHILE_EXP0
 push local 0
 push argument 1
@@ -85,7 +81,7 @@ push local 1
 return
 function Shift.shiftDivision 3
 push constant 1
-pop local 0
+pop local 2
 push argument 0
 push constant 0
 gt
@@ -107,11 +103,11 @@ lt
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
-push local 0
+push local 2
 not
 push constant 1
 add
-pop local 0
+pop local 2
 push argument 0
 not
 push constant 1
@@ -124,11 +120,11 @@ lt
 if-goto IF_TRUE2
 goto IF_FALSE2
 label IF_TRUE2
-push local 0
+push local 2
 not
 push constant 1
 add
-pop local 0
+pop local 2
 push argument 1
 not
 push constant 1
@@ -138,17 +134,17 @@ label IF_FALSE2
 push constant 0
 pop local 1
 push constant 0
-pop local 2
+pop local 0
 label WHILE_EXP0
-push local 2
+push local 0
 push argument 0
 lt
 not
 if-goto WHILE_END0
-push local 2
+push local 0
 push argument 1
 add
-pop local 2
+pop local 0
 push local 1
 push constant 1
 add
@@ -156,6 +152,6 @@ pop local 1
 goto WHILE_EXP0
 label WHILE_END0
 push local 1
-push local 0
+push local 2
 call Math.multiply 2
 return

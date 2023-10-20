@@ -5,8 +5,7 @@ class Shift{
   }
   
   function int left(int shiftNum, int shiftCount){
-    var int i;
-    var int res;
+    var int i, res;
     let i = 0;
     let res = shiftNum;
     while(i < shiftCount){
@@ -17,15 +16,12 @@ class Shift{
   }
 
   function int logicalRight(int shiftNum, int shiftCount){
-    var int i;
-    var int res;
-    var int mask;
-    var int count;
+    var int i, mask, res;
     
     let i = 0;
     let mask = 32767;
     let res = shiftNum;
-    let count = shiftCount;
+
     while(i < shiftCount){
       let res = Shift.shiftDivision(res, 2);
       let res = res & 32767;
@@ -35,13 +31,10 @@ class Shift{
   }
 
   function int arithmeticRight(int shiftNum, int shiftCount){
-    var int i;
-    var int res;
-    var int count;
+    var int i, res;
 
     let i = 0;
     let res = shiftNum;
-    let count = shiftCount;
     while(i < shiftCount){
       let res = Shift.shiftDivision(res, 2);
       let i = i + 1;
@@ -50,9 +43,8 @@ class Shift{
   }
 
   function int shiftDivision(int numerator, int denominator){
-    var int sign;
-    var int count;
-    var int accum;
+    var int accum, count, sign;
+    
     let sign = 1;
     if((numerator > 0) & (denominator > 0)){ return numerator/denominator; }
     if(numerator < 0){
