@@ -13,9 +13,4 @@ class Direction {
     return current;
   }
 
-  // function void update(){
-    
-  // }
-
-  
 }
