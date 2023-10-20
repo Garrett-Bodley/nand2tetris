@@ -1,0 +1,20 @@
+class Gates {
+  constructor Gates new(){
+    return this;
+  }
+
+  function int xor(int a, int b){
+    var int nandAB;
+    var int x;
+    var int y;
+
+    let nandAB = Gates.nand(a, b);
+    let x = Gates.nand(nandAB, a);
+    let y = Gates.nand(nandAB, b);
+    return Gates.nand(x, y);
+  }
+
+  function int nand(int a, int b){
+    return ~(a & b);
+  }
+}

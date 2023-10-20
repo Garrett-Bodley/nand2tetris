@@ -89,15 +89,15 @@ call Math.multiply 2
 push this 2
 add
 pop local 5
-push constant 0
-not
-call Screen.setColor 1
-pop temp 0
+push pointer 0
 push local 2
 push local 4
 push local 3
 push local 5
-call Screen.drawRectangle 4
+push argument 1
+push constant 0
+not
+call Snake.drawInterpolation 7
 pop temp 0
 push constant 0
 return
@@ -136,15 +136,15 @@ call Math.multiply 2
 push this 2
 sub
 pop local 5
-push constant 0
-not
-call Screen.setColor 1
-pop temp 0
+push pointer 0
 push local 2
 push local 4
 push local 3
 push local 5
-call Screen.drawRectangle 4
+push argument 1
+push constant 0
+not
+call Snake.drawInterpolation 7
 pop temp 0
 label IF_FALSE1
 push argument 1
@@ -181,15 +181,15 @@ call Math.multiply 2
 push this 2
 sub
 pop local 5
-push constant 0
-not
-call Screen.setColor 1
-pop temp 0
+push pointer 0
 push local 2
 push local 4
 push local 3
 push local 5
-call Screen.drawRectangle 4
+push argument 1
+push constant 0
+not
+call Snake.drawInterpolation 7
 pop temp 0
 label IF_FALSE2
 push argument 1
@@ -226,15 +226,15 @@ call Math.multiply 2
 push this 2
 sub
 pop local 5
-push constant 0
-not
-call Screen.setColor 1
-pop temp 0
+push pointer 0
 push local 2
 push local 4
 push local 3
 push local 5
-call Screen.drawRectangle 4
+push argument 1
+push constant 0
+not
+call Snake.drawInterpolation 7
 pop temp 0
 push constant 0
 return
@@ -339,14 +339,14 @@ call Math.multiply 2
 push this 2
 sub
 pop local 5
-push constant 0
-call Screen.setColor 1
-pop temp 0
+push pointer 0
 push local 2
 push local 4
 push local 3
 push local 5
-call Screen.drawRectangle 4
+push local 8
+push constant 0
+call Snake.drawInterpolation 7
 pop temp 0
 push constant 0
 return
@@ -387,14 +387,14 @@ add
 push constant 1
 sub
 pop local 5
-push constant 0
-call Screen.setColor 1
-pop temp 0
+push pointer 0
 push local 2
 push local 4
 push local 3
 push local 5
-call Screen.drawRectangle 4
+push local 8
+push constant 0
+call Snake.drawInterpolation 7
 pop temp 0
 push constant 0
 return
@@ -435,14 +435,14 @@ call Math.multiply 2
 push this 2
 sub
 pop local 5
-push constant 0
-call Screen.setColor 1
-pop temp 0
+push pointer 0
 push local 2
 push local 4
 push local 3
 push local 5
-call Screen.drawRectangle 4
+push local 8
+push constant 0
+call Snake.drawInterpolation 7
 pop temp 0
 push constant 0
 return
@@ -483,14 +483,14 @@ call Math.multiply 2
 push this 2
 sub
 pop local 5
-push constant 0
-call Screen.setColor 1
-pop temp 0
+push pointer 0
 push local 2
 push local 4
 push local 3
 push local 5
-call Screen.drawRectangle 4
+push local 8
+push constant 0
+call Snake.drawInterpolation 7
 pop temp 0
 push constant 0
 return
@@ -508,6 +508,198 @@ call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
+function Snake.drawInterpolation 5
+push argument 0
+pop pointer 0
+push constant 14
+pop local 1
+push constant 1
+pop local 0
+push argument 6
+call Screen.setColor 1
+pop temp 0
+push argument 5
+push constant 1
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push argument 4
+push argument 2
+sub
+push local 1
+call Math.divide 2
+pop local 3
+push argument 4
+pop local 4
+label WHILE_EXP0
+push local 0
+push local 1
+lt
+not
+if-goto WHILE_END0
+push argument 1
+push local 4
+push local 3
+sub
+push argument 3
+push local 4
+call Screen.drawRectangle 4
+pop temp 0
+push local 4
+push local 3
+sub
+pop local 4
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push argument 1
+push argument 2
+push argument 3
+push local 4
+call Screen.drawRectangle 4
+pop temp 0
+label IF_FALSE0
+push argument 5
+push constant 2
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push argument 4
+push argument 2
+sub
+push local 1
+call Math.divide 2
+pop local 3
+push argument 2
+pop local 4
+label WHILE_EXP1
+push local 0
+push local 1
+lt
+not
+if-goto WHILE_END1
+push argument 1
+push local 4
+push argument 3
+push local 4
+push local 3
+add
+call Screen.drawRectangle 4
+pop temp 0
+push local 4
+push local 3
+add
+pop local 4
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP1
+label WHILE_END1
+push argument 1
+push local 4
+push argument 3
+push argument 4
+call Screen.drawRectangle 4
+pop temp 0
+label IF_FALSE1
+push argument 5
+push constant 3
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push argument 3
+push argument 1
+sub
+push local 1
+call Math.divide 2
+pop local 2
+push argument 3
+pop local 4
+label WHILE_EXP2
+push local 0
+push local 1
+lt
+not
+if-goto WHILE_END2
+push local 4
+push local 2
+sub
+push argument 2
+push local 4
+push argument 4
+call Screen.drawRectangle 4
+pop temp 0
+push local 4
+push local 2
+sub
+pop local 4
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP2
+label WHILE_END2
+push argument 1
+push argument 2
+push local 4
+push argument 4
+call Screen.drawRectangle 4
+pop temp 0
+label IF_FALSE2
+push argument 5
+push constant 4
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push argument 3
+push argument 1
+sub
+push local 1
+call Math.divide 2
+pop local 2
+push argument 1
+pop local 4
+label WHILE_EXP3
+push local 0
+push local 1
+lt
+not
+if-goto WHILE_END3
+push local 4
+push argument 2
+push local 4
+push local 2
+add
+push argument 4
+call Screen.drawRectangle 4
+pop temp 0
+push local 4
+push local 2
+add
+pop local 4
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP3
+label WHILE_END3
+push local 4
+push argument 2
+push argument 3
+push argument 4
+call Screen.drawRectangle 4
+pop temp 0
+label IF_FALSE3
+push constant 0
+return
 function Snake.doesInhabit 0
 push argument 0
 pop pointer 0
@@ -515,17 +707,15 @@ push this 0
 push argument 1
 call SnakeQ.contains 2
 return
-function Snake.headCoordinates 2
+function Snake.getHead 0
 push argument 0
 pop pointer 0
 push this 0
 call SnakeQ.getHead 1
-pop local 1
-push local 1
-call ListNode.getX 1
-push local 1
-call ListNode.getY 1
-call ListNode.new 2
-pop local 0
-push local 0
+return
+function Snake.getLength 0
+push argument 0
+pop pointer 0
+push this 0
+call SnakeQ.getLength 1
 return

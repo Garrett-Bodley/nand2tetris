@@ -69,17 +69,33 @@
 // */
 
 class SnakeGame {
+  field int foodCount;
   field Snake snake;
-  field int direction;
+  field LSFR lsfr;
+  field int counter;
   field int pixelSize;
   field int padding;
+  field ListNode food;
 
   constructor SnakeGame new(){
+    let foodCount = 0;
+    let lsfr = LSFR.new(21257);
+    let counter = 0;
     let pixelSize = 16;
     let padding = 1;
     let snake = Snake.new(pixelSize, padding);
-    let direction = 4;
     return this;
+  }
+
+  function void getKeyboardInput(){
+    var char key;
+    let key = Keyboard.keyPressed();
+    if (key = 81) { do GameState.setQuit(true); }    // q key
+    if ((key = 131) & ~(Direction.get() = 2)) { do Direction.set(1); }    // up arrow
+    if ((key = 133) & ~(Direction.get() = 1)) { do Direction.set(2); }   // down arrow
+    if ((key = 130) & ~(Direction.get() = 4)) { do Direction.set(3); }   // left arrow
+    if ((key = 132) & ~(Direction.get() = 3)) { do Direction.set(4); }   // right arrow
+    return;
   }
 
   method void dispose(){
@@ -88,35 +104,23 @@ class SnakeGame {
     return;
   }
 
-  // method void moveSnake(){
-  //   if (direction = 1) { do snake.moveUp(); }
-  //   if (direction = 2) { do snake.moveDown(); }
-  //   if (direction = 3) { do snake.moveLeft(); }
-  //   if (direction = 4) { do snake.moveRight(); }
-  // }
-
   method void run(){
     var char key;
-    // magic numbers okay because of system constraints???
-    // int gameState
-      // 0 = keep playing
-      // 1 = victory
-      // 2 = death
-      // 3 = exit
-    var int gameState;
+    do Direction.set(4);
+    do GameState.setVictory(false);
+    do GameState.setDeath(false);
+    do GameState.setQuit(false);
+    do makeFood();
     // initialize snake to be moving right
-    do growSnake();
-    while(gameState = 0){
+    // do growSnake();
+    while((~GameState.victory()) & (~GameState.death()) & (~GameState.quit())){
       
-      do Sys.wait(500);
-      let key = Keyboard.keyPressed();
-      if (key = 81) { let gameState = 3; }    // q key
-      if (key = 131) { let direction = 1; }    // up arrow
-      if (key = 133) { let direction = 2; }   // down arrow
-      if (key = 130) { let direction = 3; }   // left arrow
-      if (key = 132) { let direction = 4; }   // right arrow
+      do SnakeGame.getKeyboardInput();
 
-      let gameState = move(direction);
+      if(Utils.mod(counter, 5000) = 0){
+        do move(Direction.get());
+      }
+      let counter = counter + 1;
     }
 
     // if (gameState = 1){ do showVictory(); }
@@ -151,11 +155,11 @@ class SnakeGame {
   //   }
   // }
 
-  method int move(int direction){
+  method void move(int direction){
     var ListNode newCoordinates;
     var MoveStatus status;
 
-    let newCoordinates = getCoordinates(direction, snake.headCoordinates());
+    let newCoordinates = getNewCoordinates(direction);
     let status = moveStatusCheck(newCoordinates);
     // if(status.wallCrash()) { 
     //   // do snake.wallCrash(direction);
@@ -169,10 +173,14 @@ class SnakeGame {
     //   do newCoordinates.dispose();
     //   return 2;
     // }
-    if(~status.ate()){ do snake.chopTail(); }
+    if(~status.ate()){ 
+      do snake.chopTail();
+    }else{
+      do makeFood();
+    }
     do snake.updateHead(direction, newCoordinates);
     do status.dispose();
-    return 0;
+    return;
   }
 
   method void growSnake(){
@@ -219,24 +227,32 @@ class SnakeGame {
     return;
   }
 
-  method ListNode getCoordinates(int direction, ListNode headCoordinates){
+  method ListNode getNewCoordinates(int direction){
+    var ListNode res;
+    var ListNode head;
+
+    let head = snake.getHead();
+    // Init res as a new Node with the same x/y values as head
+    let res = ListNode.new(head.getX(), head.getY());
+
+    // Adjust x/y values according to direction
     // UP
     if(direction = 1){
-      do headCoordinates.setY(headCoordinates.getY() - 1);
+      do res.setY(res.getY() - 1);
     }
     // DOWN
     if(direction = 2){
-      do headCoordinates.setY(headCoordinates.getY() + 1);
+      do res.setY(res.getY() + 1);
     }
     // LEFT
     if(direction = 3){
-      do headCoordinates.setX(headCoordinates.getX() - 1);
+      do res.setX(res.getX() - 1);
     }
     // RIGHT
     if(direction = 4){
-      do headCoordinates.setX(headCoordinates.getX() + 1);
+      do res.setX(res.getX() + 1);
     }
-    return headCoordinates;
+    return res;
   }
 
   method MoveStatus moveStatusCheck(ListNode coordinates){
@@ -247,9 +263,58 @@ class SnakeGame {
     let snakeCrash = snake.doesInhabit(coordinates);
     let wallCrash = coordsOutOfBounds(coordinates);
     // TODO: Implement food generation
-    // let ate = containsFood();
+    let ate = containsFood(coordinates);
 
-    return MoveStatus.new(snakeCrash, wallCrash, false);
+    return MoveStatus.new(snakeCrash, wallCrash, ate);
+  }
+
+  method boolean containsFood(ListNode coordinates){
+    if((coordinates.getX() = food.getX()) & (coordinates.getY() = food.getY())){ return true; }
+    return false;
+  }
+
+  method void makeFood(){
+    let food = makeFoodCoords();
+    while(snake.doesInhabit(food)){
+      let food = makeFoodCoords();
+    }
+    do drawFood();
+    return;
+  }
+
+  method ListNode makeFoodCoords(){
+    var int x;
+    var int y;
+    var ListNode head;
+    var ListNode foodCoords;
+    
+    let head = snake.getHead();
+    let x = Utils.mod((lsfr.nextRNG() + foodCount - head.getX()), (512/pixelSize) - 1);
+    if(x < 0){ let x = x * -1; }
+    let y = Utils.mod((lsfr.nextRNG() + head.getY() - snake.getLength()), (256/pixelSize - 1));
+    if(y < 0){ let y = y * -1; }
+    let foodCoords = ListNode.new(x, y);
+    
+    if(snake.doesInhabit(foodCoords)){
+      let x = Utils.mod((lsfr.nextRNG() & counter), (512/pixelSize) - 1);
+      if(x < 0){ let x = x * -1; }
+      let y = Utils.mod((lsfr.nextRNG() | ((snake.getLength() * foodCount) + head.getX() - head.getY())), (256/pixelSize) - 1);
+      if(y < 0){ let y = y * -1; }
+      do foodCoords.setX(x);
+      do foodCoords.setY(y);
+    }
+    return foodCoords;
+  }
+
+  method void drawFood(){
+    var int x1, y1, x2, y2;
+    
+    let x1 = (food.getX() * pixelSize) + padding;
+    let y1 = (food.getY() * pixelSize) + padding;
+    let x2 = ((food.getX() + 1) * pixelSize) - padding;
+    let y2 = ((food.getY() + 1) * pixelSize) - padding;
+    do Screen.drawRectangle(x1, y1, x2, y2);
+    return;
   }
 
   method boolean coordsOutOfBounds(ListNode coordinates){

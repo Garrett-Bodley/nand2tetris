@@ -1,0 +1,21 @@
+class Direction {
+  static int current;
+  constructor Direction new(){
+    return this;
+  }
+
+  function void set(int newDirection){
+    let current = newDirection;
+    return;
+  }
+
+  function int get(){
+    return current;
+  }
+
+  // function void update(){
+    
+  // }
+
+  
+}

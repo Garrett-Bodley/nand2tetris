@@ -1,0 +1,29 @@
+function Gates.new 0
+push constant 0
+call Memory.alloc 1
+pop pointer 0
+push pointer 0
+return
+function Gates.xor 3
+push argument 0
+push argument 1
+call Gates.nand 2
+pop local 0
+push local 0
+push argument 0
+call Gates.nand 2
+pop local 1
+push local 0
+push argument 1
+call Gates.nand 2
+pop local 2
+push local 1
+push local 2
+call Gates.nand 2
+return
+function Gates.nand 0
+push argument 0
+push argument 1
+and
+not
+return

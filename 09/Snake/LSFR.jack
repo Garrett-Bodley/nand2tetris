@@ -1,0 +1,19 @@
+class LSFR {
+  field int state;
+  constructor LSFR new(int seed){
+    let state = seed;
+    return this;
+  }
+
+  method void setState(int newState){
+    let state = newState;
+    return;
+  }
+
+  method int nextRNG(){
+    var int carry;
+    let carry = Gates.xor(Shift.logicalRight(state, 9), Shift.logicalRight(state, 1)) & 1;
+    let state = Shift.logicalRight(state, 1) | Shift.left(carry, 15);
+    return state;
+  }
+}

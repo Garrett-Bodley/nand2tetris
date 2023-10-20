@@ -1,0 +1,42 @@
+function GameState.new 0
+push constant 0
+call Memory.alloc 1
+pop pointer 0
+push pointer 0
+return
+function GameState.victory 0
+push static 0
+return
+function GameState.setVictory 0
+push argument 0
+pop static 0
+push constant 0
+return
+function GameState.death 0
+push static 1
+return
+function GameState.setDeath 0
+push argument 0
+pop static 1
+push constant 0
+return
+function GameState.quit 0
+push static 2
+return
+function GameState.setQuit 0
+push argument 0
+pop static 2
+push constant 0
+return
+function GameState.dispose 0
+push static 0
+call Memory.deAlloc 1
+pop temp 0
+push static 1
+call Memory.deAlloc 1
+pop temp 0
+push static 2
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return

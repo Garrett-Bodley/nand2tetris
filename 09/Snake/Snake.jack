@@ -77,8 +77,9 @@ class Snake {
       let y1 = (coordY * size) + padding;
       let x2 = ((coordX + 1) * size) - padding;
       let y2 = ((coordY + 1) * size) + padding;
-      do Screen.setColor(true);
-      do Screen.drawRectangle(x1, y1, x2, y2);
+      // do Screen.setColor(true);
+      // do Screen.drawRectangle(x1, y1, x2, y2);
+      do drawInterpolation(x1, y1, x2, y2, direction, true);
       return;
     }
 
@@ -88,8 +89,9 @@ class Snake {
       let y1 = (coordY * size) - padding;
       let x2 = ((coordX + 1) * size) - padding;
       let y2 = ((coordY + 1) * size) - padding;
-      do Screen.setColor(true);
-      do Screen.drawRectangle(x1, y1, x2, y2);
+      // do Screen.setColor(true);
+      // do Screen.drawRectangle(x1, y1, x2, y2);
+      do drawInterpolation(x1, y1, x2, y2, direction, true);
     }
 
     // LEFT
@@ -98,8 +100,9 @@ class Snake {
       let y1 = (coordY * size) + padding;
       let x2 = ((coordX + 1) * size) + padding;
       let y2 = ((coordY + 1) * size) - padding;
-      do Screen.setColor(true);
-      do Screen.drawRectangle(x1, y1, x2, y2);
+      // do Screen.setColor(true);
+      // do Screen.drawRectangle(x1, y1, x2, y2);
+      do drawInterpolation(x1, y1, x2, y2, direction, true);
     }
 
     // RIGHT
@@ -108,8 +111,9 @@ class Snake {
       let y1 = (coordY * size) + padding;
       let x2 = ((coordX + 1) * size) - padding;
       let y2 = ((coordY + 1) * size) - padding;
-      do Screen.setColor(true);
-      do Screen.drawRectangle(x1, y1, x2, y2);
+      // do Screen.setColor(true);
+      // do Screen.drawRectangle(x1, y1, x2, y2);
+      do drawInterpolation(x1, y1, x2, y2, direction, true);
       return;
     }
     return;
@@ -151,8 +155,9 @@ class Snake {
       let y1 = (removeY * size) - padding + 1;
       let x2 = ((removeX + 1) * size) - padding;
       let y2 = ((removeY + 1) * size) - padding;
-      do Screen.setColor(false);
-      do Screen.drawRectangle(x1, y1, x2, y2);
+      // do Screen.setColor(false);
+      // do Screen.drawRectangle(x1, y1, x2, y2);
+      do drawInterpolation(x1, y1, x2, y2, direction, false);
       return;
     }
 
@@ -162,8 +167,9 @@ class Snake {
       let y1 = (removeY * size) + padding;
       let x2 = ((removeX + 1) * size) - padding;
       let y2 = ((removeY + 1) * size)  + padding - 1;
-      do Screen.setColor(false);
-      do Screen.drawRectangle(x1, y1, x2, y2);
+      // do Screen.setColor(false);
+      // do Screen.drawRectangle(x1, y1, x2, y2);
+      do drawInterpolation(x1, y1, x2, y2, direction, false);
       return;
     }
 
@@ -173,8 +179,9 @@ class Snake {
       let y1 = (removeY * size) + padding;
       let x2 = ((removeX + 1) * size) - padding;
       let y2 = ((removeY + 1) * size) - padding;
-      do Screen.setColor(false);
-      do Screen.drawRectangle(x1, y1, x2, y2);
+      // do Screen.setColor(false);
+      // do Screen.drawRectangle(x1, y1, x2, y2);
+      do drawInterpolation(x1, y1, x2, y2, direction, false);
       return;
     }
 
@@ -184,8 +191,9 @@ class Snake {
       let y1 = (removeY * size) + padding;
       let x2 = ((removeX + 1) * size) + padding - 1;
       let y2 = ((removeY + 1) * size) - padding;
-      do Screen.setColor(false);
-      do Screen.drawRectangle(x1, y1, x2, y2);
+      // do Screen.setColor(false);
+      // do Screen.drawRectangle(x1, y1, x2, y2);
+      do drawInterpolation(x1, y1, x2, y2, direction, false);
       return;
     }
     return;
@@ -197,15 +205,70 @@ class Snake {
     return;
   }
 
+  method void drawInterpolation(int x1, int y1, int x2, int y2, int direction, boolean color){
+    var int i, frameCount, xChunk, yChunk, last;
+    let frameCount = 14;
+    let i = 1;
+    do Screen.setColor(color);
+
+    // UP
+    if(direction = 1){
+      let yChunk = (y2-y1)/frameCount;
+      let last = y2;
+      while(i < frameCount){
+        do Screen.drawRectangle(x1, last - yChunk, x2, last);
+        let last = last - yChunk;
+        let i = i + 1;
+      }
+      do Screen.drawRectangle(x1, y1, x2, last);
+    }
+
+    // DOWN
+    if(direction = 2){
+      let yChunk = (y2 - y1)/frameCount;
+      let last = y1;
+      while(i < frameCount){
+        do Screen.drawRectangle(x1, last, x2, last + yChunk);
+        let last = last + yChunk;
+        let i = i + 1;
+      }
+      do Screen.drawRectangle(x1, last, x2, y2);
+    }
+
+    // LEFT
+    if(direction = 3){
+      let xChunk = (x2 - x1)/frameCount;
+      let last = x2;
+      while(i < frameCount){
+        do Screen.drawRectangle(last - xChunk, y1, last, y2);
+        let last = last - xChunk;
+        let i = i + 1;
+      }
+      do Screen.drawRectangle(x1, y1, last, y2);
+    }
+    // RIGHT
+    if(direction = 4){
+      let xChunk = (x2 - x1)/frameCount;
+      let last = x1;
+      while(i < frameCount){
+        do Screen.drawRectangle(last, y1, last + xChunk, y2);
+        let last = last + xChunk;
+        let i = i + 1;
+      }
+      do Screen.drawRectangle(last, y1, x2, y2);
+    }
+    return;
+  }
+
   method boolean doesInhabit (ListNode coordinates) {
     return snakeQ.contains(coordinates);
   }
 
-  method ListNode headCoordinates(){
-    var ListNode res;
-    var ListNode temp;
-    let temp = snakeQ.getHead();
-    let res = ListNode.new(temp.getX(), temp.getY());
-    return res;
+  method ListNode getHead(){
+    return snakeQ.getHead();
+  }
+
+  method int getLength(){
+    return snakeQ.getLength();
   }
 }

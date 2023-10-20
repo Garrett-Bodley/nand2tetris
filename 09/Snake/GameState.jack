@@ -1,0 +1,49 @@
+    // int gameState
+      // 0 = keep playing
+      // 1 = victory
+      // 2 = death
+      // 3 = exit
+
+class GameState {
+  static boolean victory;
+  static boolean death;
+  static boolean quit;
+
+  constructor GameState new(){
+    return this;
+  }
+
+  function boolean victory(){
+    return victory;
+  }
+
+  function void setVictory(boolean newState){
+    let victory = newState;
+    return;
+  }
+
+  function boolean death(){
+    return death;
+  }
+
+  function void setDeath(boolean newState){
+    let death = newState;
+    return;
+  }
+
+  function boolean quit(){
+    return quit;
+  }
+
+  function void setQuit(boolean newState){
+    let quit = newState;
+    return;
+  }
+
+  function void dispose(){
+    do Memory.deAlloc(victory);
+    do Memory.deAlloc(death);
+    do Memory.deAlloc(quit);
+    return;
+  }
+}

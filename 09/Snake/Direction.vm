@@ -1,0 +1,14 @@
+function Direction.new 0
+push constant 0
+call Memory.alloc 1
+pop pointer 0
+push pointer 0
+return
+function Direction.set 0
+push argument 0
+pop static 0
+push constant 0
+return
+function Direction.get 0
+push static 0
+return
