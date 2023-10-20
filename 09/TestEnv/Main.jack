@@ -1,35 +1,121 @@
 class Main {
   function void main(){
     // var SnakeQ q;
-    var Snake snake;
-    var boolean contains;
-    var ListNode current;
-    var ListNode appendNode;
-    var String string;
+    // var Snake snake;
+    // var boolean contains;
+    // var ListNode current;
+    // var ListNode appendNode;
+    // var String string;
 
-    // let q = SnakeQ.new();
-    let snake = Snake.new();
-    let appendNode = ListNode.new(4,4);
-    do snake.addNode(appendNode);
-    let appendNode = ListNode.new(2,2);
-    do snake.addNode(appendNode);
-    let appendNode = ListNode.new(3,3);
-    do snake.addNode(appendNode);
-    let appendNode = ListNode.new(1,1);
-    do snake.addNode(appendNode);
-    let appendNode = ListNode.new(6,7);
-    do snake.addNode(appendNode);
+    // // let q = SnakeQ.new();
+    // let snake = Snake.new();
+    // let appendNode = ListNode.new(4,4);
+    // do snake.addNode(appendNode);
+    // let appendNode = ListNode.new(2,2);
+    // do snake.addNode(appendNode);
+    // let appendNode = ListNode.new(3,3);
+    // do snake.addNode(appendNode);
+    // let appendNode = ListNode.new(1,1);
+    // do snake.addNode(appendNode);
+    // let appendNode = ListNode.new(6,7);
+    // do snake.addNode(appendNode);
     
-    while(snake.length() > 0){
-      let current = snake.getTail();
-      do Output.printInt(current.getX());
-      do Output.printChar(44);
-      do Output.printChar(32);
-      do Output.printInt(current.getY());
-      do Output.println();
-      do snake.chopTail();
-    }
-    do snake.dispose();
+    // while(snake.length() > 0){
+    //   let current = snake.getTail();
+    //   do Output.printInt(current.getX());
+    //   do Output.printChar(44);
+    //   do Output.printChar(32);
+    //   do Output.printInt(current.getY());
+    //   do Output.println();
+    //   do snake.chopTail();
+    // }
+    // do snake.dispose();
+
+    // Testing bit shifting
+    // var int res;
+    // let res = Shift.logicalRight(-1, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+    // let res = Shift.logicalRight(res, 1);
+    // do Output.printInt(res);
+    // do Output.println();
+
+    var int a;
+    var int b;
+    var int res;
+
+    let a = 0;
+    let b = 1;
+    let res = Gates.xor(a, b);
+    do Output.printInt(res);
+    do Output.println();
+    let a = 1;
+    let b = 0;
+    let res = Gates.xor(a, b);
+    do Output.printInt(res);
+    do Output.println();
+    let a = 1;
+    let b = 1;
+    let res = Gates.xor(a, b);
+    do Output.printInt(res);
+    do Output.println();
+    let a = 110;
+    let b = -32;
+    let res = Gates.xor(a, b);
+    do Output.printInt(res);
+    do Output.println();
+
     return;
   }
 }
