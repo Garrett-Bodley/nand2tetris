@@ -1,13 +1,5 @@
-    // int gameState
-      // 0 = keep playing
-      // 1 = victory
-      // 2 = death
-      // 3 = exit
-
 class GameState {
-  static boolean victory;
-  static boolean death;
-  static boolean quit;
+  static boolean victory, death, quit;
 
   constructor GameState new(){
     return this;
