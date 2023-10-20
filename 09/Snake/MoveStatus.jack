@@ -5,9 +5,7 @@
 // */
 
 class MoveStatus {
-  field boolean snakeCrash;
-  field boolean wallCrash;
-  field boolean ate;
+  field boolean ate, snakeCrash, wallCrash;
 
   constructor MoveStatus new(boolean argSnakeCrash, boolean argWallCrash, boolean argAte){
     let snakeCrash = argSnakeCrash;
