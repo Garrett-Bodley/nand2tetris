@@ -30,8 +30,7 @@ headLocation(){
 
 class Snake {
   field SnakeQ snakeQ;
-  field int size;
-  field int padding;
+  field int size, padding;
 
   constructor Snake new (int argSize, int argPadding){
     let size = argSize;
@@ -43,10 +42,7 @@ class Snake {
 
   method void drawInit(){
     // Snake is initially two nodes long
-    var int x1;
-    var int x2;
-    var int y1;
-    var int y2;
+    var int x1, x2, y1, y2;
 
     let x1 = padding;
     let y1 = padding;
@@ -59,13 +55,7 @@ class Snake {
 
   method void updateHead(int direction, ListNode newCoordinates){
     // Draw from top left corner to bottom right corner
-    var int coordX;
-    var int coordY;
-    var int x1;
-    var int x2;
-    var int y1;
-    var int y2;
-    var ListNode newNode;
+    var int x1, x2, y1, y2, coordX, coordY;
     
     let coordX = newCoordinates.getX();
     let coordY = newCoordinates.getY();
@@ -121,14 +111,9 @@ class Snake {
 
   // [1, 2, 3, 4] = [up, down, left, right]
   method void chopTail(){
-    var ListNode toRemove;
-    var ListNode newTail;
-    var int x1;
-    var int x2;
-    var int y1;
-    var int y2;
-    var int removeX;
-    var int removeY;
+    var ListNode toRemove, newTail;
+    var int x1, x2, y1, y2;
+    var int removeX, removeY;
     var int direction;
 
 
@@ -206,7 +191,9 @@ class Snake {
   }
 
   method void drawInterpolation(int x1, int y1, int x2, int y2, int direction, boolean color){
+    // I made this hoping it would make the movement look smoother but tbh idk if it makes a difference.
     var int i, frameCount, xChunk, yChunk, last;
+
     let frameCount = 14;
     let i = 1;
     do Screen.setColor(color);

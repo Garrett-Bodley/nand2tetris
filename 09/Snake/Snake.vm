@@ -42,15 +42,15 @@ call Screen.drawRectangle 4
 pop temp 0
 push constant 0
 return
-function Snake.updateHead 7
+function Snake.updateHead 6
 push argument 0
 pop pointer 0
 push argument 2
 call ListNode.getX 1
-pop local 0
+pop local 4
 push argument 2
 call ListNode.getY 1
-pop local 1
+pop local 5
 push this 0
 push argument 2
 call SnakeQ.enQ 2
@@ -61,39 +61,39 @@ eq
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-push local 0
+push local 4
+push this 1
+call Math.multiply 2
+push this 2
+add
+pop local 0
+push local 5
 push this 1
 call Math.multiply 2
 push this 2
 add
 pop local 2
-push local 1
-push this 1
-call Math.multiply 2
-push this 2
-add
-pop local 4
-push local 0
+push local 4
 push constant 1
 add
 push this 1
 call Math.multiply 2
 push this 2
 sub
-pop local 3
-push local 1
+pop local 1
+push local 5
 push constant 1
 add
 push this 1
 call Math.multiply 2
 push this 2
 add
-pop local 5
+pop local 3
 push pointer 0
+push local 0
 push local 2
-push local 4
+push local 1
 push local 3
-push local 5
 push argument 1
 push constant 0
 not
@@ -108,19 +108,27 @@ eq
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
-push local 0
+push local 4
 push this 1
 call Math.multiply 2
 push this 2
 add
-pop local 2
-push local 1
+pop local 0
+push local 5
 push this 1
 call Math.multiply 2
 push this 2
 sub
-pop local 4
-push local 0
+pop local 2
+push local 4
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+sub
+pop local 1
+push local 5
 push constant 1
 add
 push this 1
@@ -128,19 +136,11 @@ call Math.multiply 2
 push this 2
 sub
 pop local 3
-push local 1
-push constant 1
-add
-push this 1
-call Math.multiply 2
-push this 2
-sub
-pop local 5
 push pointer 0
+push local 0
 push local 2
-push local 4
+push local 1
 push local 3
-push local 5
 push argument 1
 push constant 0
 not
@@ -153,39 +153,39 @@ eq
 if-goto IF_TRUE2
 goto IF_FALSE2
 label IF_TRUE2
-push local 0
+push local 4
+push this 1
+call Math.multiply 2
+push this 2
+add
+pop local 0
+push local 5
 push this 1
 call Math.multiply 2
 push this 2
 add
 pop local 2
-push local 1
-push this 1
-call Math.multiply 2
-push this 2
-add
-pop local 4
-push local 0
+push local 4
 push constant 1
 add
 push this 1
 call Math.multiply 2
 push this 2
 add
-pop local 3
-push local 1
+pop local 1
+push local 5
 push constant 1
 add
 push this 1
 call Math.multiply 2
 push this 2
 sub
-pop local 5
+pop local 3
 push pointer 0
+push local 0
 push local 2
-push local 4
+push local 1
 push local 3
-push local 5
 push argument 1
 push constant 0
 not
@@ -198,19 +198,27 @@ eq
 if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3
-push local 0
+push local 4
 push this 1
 call Math.multiply 2
 push this 2
 sub
-pop local 2
-push local 1
+pop local 0
+push local 5
 push this 1
 call Math.multiply 2
 push this 2
 add
-pop local 4
-push local 0
+pop local 2
+push local 4
+push constant 1
+add
+push this 1
+call Math.multiply 2
+push this 2
+sub
+pop local 1
+push local 5
 push constant 1
 add
 push this 1
@@ -218,19 +226,11 @@ call Math.multiply 2
 push this 2
 sub
 pop local 3
-push local 1
-push constant 1
-add
-push this 1
-call Math.multiply 2
-push this 2
-sub
-pop local 5
 push pointer 0
+push local 0
 push local 2
-push local 4
+push local 1
 push local 3
-push local 5
 push argument 1
 push constant 0
 not
