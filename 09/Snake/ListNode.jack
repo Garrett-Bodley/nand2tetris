@@ -13,10 +13,8 @@
 */
 
 class ListNode {
-  field ListNode next;
-  field ListNode prev;
-  field int x;
-  field int y;
+  field ListNode next, prev;
+  field int x, y;
 
   constructor ListNode new(int argX, int argY){
     let x = argX;
