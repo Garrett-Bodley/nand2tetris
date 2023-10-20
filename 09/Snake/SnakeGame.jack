@@ -69,13 +69,10 @@
 // */
 
 class SnakeGame {
-  field int foodCount;
-  field Snake snake;
-  field LSFR lsfr;
-  field int counter;
-  field int pixelSize;
-  field int padding;
+  field int counter, foodCount, padding, pixelSize;
   field ListNode food;
+  field LSFR lsfr;
+  field Snake snake;
 
   constructor SnakeGame new(){
     let foodCount = 0;
@@ -228,8 +225,7 @@ class SnakeGame {
   }
 
   method ListNode getNewCoordinates(int direction){
-    var ListNode res;
-    var ListNode head;
+    var ListNode res, head;
 
     let head = snake.getHead();
     // Init res as a new Node with the same x/y values as head
@@ -256,9 +252,7 @@ class SnakeGame {
   }
 
   method MoveStatus moveStatusCheck(ListNode coordinates){
-    var boolean snakeCrash;
-    var boolean wallCrash;
-    var boolean ate;
+    var boolean snakeCrash, wallCrash, ate;
 
     let snakeCrash = snake.doesInhabit(coordinates);
     let wallCrash = coordsOutOfBounds(coordinates);
@@ -283,10 +277,8 @@ class SnakeGame {
   }
 
   method ListNode makeFoodCoords(){
-    var int x;
-    var int y;
-    var ListNode head;
-    var ListNode foodCoords;
+    var int x, y;
+    var ListNode head, foodCoords;
     
     let head = snake.getHead();
     let x = Utils.mod((lsfr.nextRNG() + foodCount - head.getX()), (512/pixelSize) - 1);
