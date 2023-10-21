@@ -137,9 +137,9 @@ class Main {
     // do Output.printInt(lsfr.nextRNG());
     // do Output.println();
 
-    do ScreenCharWidthTest.testWidth();
+    // do ScreenCharWidthTest.testWidth();
 
-    // do DrawSnake.draw();
+    do DrawSnake.draw();
 
     return;
   }

@@ -1,5 +1,5 @@
 function Main.main 0
-call ScreenCharWidthTest.testWidth 0
+call DrawSnake.draw 0
 pop temp 0
 push constant 0
 return
