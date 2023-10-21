@@ -78,7 +78,7 @@ class SnakeGame {
     let foodCount = 0;
     let lsfr = LSFR.new(21257);
     let counter = 0;
-    let pixelSize = 16;
+    let pixelSize = 32;
     let padding = 1;
     let snake = Snake.new(pixelSize, padding);
     return this;

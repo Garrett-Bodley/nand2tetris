@@ -9,7 +9,7 @@ call LSFR.new 1
 pop this 5
 push constant 0
 pop this 0
-push constant 16
+push constant 32
 pop this 3
 push constant 1
 pop this 2
