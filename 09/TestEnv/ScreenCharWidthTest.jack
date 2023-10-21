@@ -1,0 +1,16 @@
+class ScreenCharWidthTest{
+  constructor ScreenCharWidthTest new(){
+    return this;
+  }
+
+  function void testWidth(){
+    var int i, target;
+    let i = 0;
+    let target = 64;
+    while(i < target){
+      do Output.printChar(71);
+      let i = i + 1;
+    }
+    return;
+  }
+}

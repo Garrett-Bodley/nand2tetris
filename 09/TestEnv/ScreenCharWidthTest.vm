@@ -1,0 +1,28 @@
+function ScreenCharWidthTest.new 0
+push constant 0
+call Memory.alloc 1
+pop pointer 0
+push pointer 0
+return
+function ScreenCharWidthTest.testWidth 2
+push constant 0
+pop local 0
+push constant 64
+pop local 1
+label WHILE_EXP0
+push local 0
+push local 1
+lt
+not
+if-goto WHILE_END0
+push constant 71
+call Output.printChar 1
+pop temp 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
