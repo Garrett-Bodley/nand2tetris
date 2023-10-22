@@ -36,7 +36,6 @@ class Snake {
     let size = argSize;
     let padding = argPadding;
     let snakeQ = SnakeQ.new();
-    do drawInit();
     return this;
   }
 
