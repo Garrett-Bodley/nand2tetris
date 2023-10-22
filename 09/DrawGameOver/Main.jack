@@ -1,6 +1,7 @@
 class Main {
   function void main(){
     do DrawGameOver.draw();
+    while(true){}
     return;
   }
 }
