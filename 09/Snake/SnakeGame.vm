@@ -4,12 +4,9 @@ call Memory.alloc 1
 pop pointer 0
 push constant 0
 pop this 1
-push constant 21257
-call LSFR.new 1
-pop this 5
 push constant 0
 pop this 0
-push constant 32
+push constant 16
 pop this 3
 push constant 1
 pop this 2
@@ -19,7 +16,14 @@ call Snake.new 2
 pop this 6
 push pointer 0
 return
-function SnakeGame.getKeyboardInput 1
+function SnakeGame.getKeyboardInput 3
+push argument 0
+pop pointer 0
+call Direction.get 0
+pop local 1
+push this 6
+call Snake.getLastDirection 1
+pop local 2
 call Keyboard.keyPressed 0
 pop local 0
 push local 0
@@ -32,11 +36,14 @@ push constant 0
 not
 call GameState.setQuit 1
 pop temp 0
+push pointer 0
+call SnakeGame.quit 1
+pop temp 0
 label IF_FALSE0
 push local 0
 push constant 131
 eq
-call Direction.get 0
+push local 2
 push constant 2
 eq
 not
@@ -45,13 +52,12 @@ if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
 push constant 1
-call Direction.set 1
-pop temp 0
+pop local 1
 label IF_FALSE1
 push local 0
 push constant 133
 eq
-call Direction.get 0
+push local 2
 push constant 1
 eq
 not
@@ -60,13 +66,12 @@ if-goto IF_TRUE2
 goto IF_FALSE2
 label IF_TRUE2
 push constant 2
-call Direction.set 1
-pop temp 0
+pop local 1
 label IF_FALSE2
 push local 0
 push constant 130
 eq
-call Direction.get 0
+push local 2
 push constant 4
 eq
 not
@@ -75,13 +80,12 @@ if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3
 push constant 3
-call Direction.set 1
-pop temp 0
+pop local 1
 label IF_FALSE3
 push local 0
 push constant 132
 eq
-call Direction.get 0
+push local 2
 push constant 3
 eq
 not
@@ -90,9 +94,20 @@ if-goto IF_TRUE4
 goto IF_FALSE4
 label IF_TRUE4
 push constant 4
+pop local 1
+label IF_FALSE4
+push this 6
+call Snake.getLastDirection 1
+push local 1
+eq
+not
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push local 1
 call Direction.set 1
 pop temp 0
-label IF_FALSE4
+label IF_FALSE5
 push constant 0
 return
 function SnakeGame.dispose 0
@@ -109,6 +124,38 @@ return
 function SnakeGame.run 1
 push argument 0
 pop pointer 0
+call WelcomeScreen.draw 0
+pop temp 0
+label WHILE_EXP0
+push local 0
+push constant 32
+eq
+not
+not
+if-goto WHILE_END0
+call Keyboard.keyPressed 0
+pop local 0
+push this 0
+push constant 1
+add
+pop this 0
+goto WHILE_EXP0
+label WHILE_END0
+push this 0
+call LSFR.new 1
+pop this 5
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push constant 0
+push constant 0
+push constant 511
+push constant 255
+call Screen.drawRectangle 4
+pop temp 0
+push this 6
+call Snake.drawInit 1
+pop temp 0
 push constant 4
 call Direction.set 1
 pop temp 0
@@ -124,7 +171,7 @@ pop temp 0
 push pointer 0
 call SnakeGame.makeFood 1
 pop temp 0
-label WHILE_EXP0
+label WHILE_EXP1
 call GameState.victory 0
 not
 call GameState.death 0
@@ -134,11 +181,12 @@ call GameState.quit 0
 not
 and
 not
-if-goto WHILE_END0
-call SnakeGame.getKeyboardInput 0
+if-goto WHILE_END1
+push pointer 0
+call SnakeGame.getKeyboardInput 1
 pop temp 0
 push this 0
-push constant 5000
+push constant 1000
 call Utils.mod 2
 push constant 0
 eq
@@ -154,8 +202,174 @@ push this 0
 push constant 1
 add
 pop this 0
-goto WHILE_EXP0
-label WHILE_END0
+push this 0
+push constant 32767
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+pop this 0
+label IF_FALSE1
+goto WHILE_EXP1
+label WHILE_END1
+push constant 0
+return
+function SnakeGame.gameWon 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call GameState.setVictory 1
+pop temp 0
+push constant 16
+call String.new 1
+push constant 67
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 78
+call String.appendChar 2
+push constant 71
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 85
+call String.appendChar 2
+push constant 76
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 73
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 78
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+call Output.println 0
+pop temp 0
+push constant 0
+return
+function SnakeGame.gameOver 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call GameState.setDeath 1
+pop temp 0
+push constant 9
+call String.new 1
+push constant 71
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 77
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 86
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+call Output.println 0
+pop temp 0
+push constant 7
+call String.new 1
+push constant 83
+call String.appendChar 2
+push constant 67
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 6
+call Snake.getLength 1
+call Output.printInt 1
+pop temp 0
+call Output.println 0
+pop temp 0
+push constant 0
+return
+function SnakeGame.quit 0
+push argument 0
+pop pointer 0
+push constant 22
+call String.new 1
+push constant 84
+call String.appendChar 2
+push constant 72
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 78
+call String.appendChar 2
+push constant 75
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 70
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 80
+call String.appendChar 2
+push constant 76
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 89
+call String.appendChar 2
+push constant 73
+call String.appendChar 2
+push constant 78
+call String.appendChar 2
+push constant 71
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+push constant 41
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
 push constant 0
 return
 function SnakeGame.move 2
@@ -170,20 +384,55 @@ push local 0
 call SnakeGame.moveStatusCheck 2
 pop local 1
 push local 1
-call MoveStatus.ate 1
-not
+call MoveStatus.wallCrash 1
+push local 1
+call MoveStatus.snakeCrash 1
+or
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
+push pointer 0
+call SnakeGame.gameOver 1
+pop temp 0
+push constant 0
+return
+label IF_FALSE0
+push local 1
+call MoveStatus.ate 1
+not
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
 push this 6
 call Snake.chopTail 1
 pop temp 0
-goto IF_END0
-label IF_FALSE0
+goto IF_END1
+label IF_FALSE1
+push this 6
+call Snake.getLength 1
+push constant 512
+push this 3
+call Math.divide 2
+push constant 1
+sub
+eq
+push constant 256
+push this 3
+call Math.divide 2
+push constant 1
+sub
+call Math.multiply 2
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push pointer 0
+call SnakeGame.gameWon 1
+pop temp 0
+label IF_FALSE2
 push pointer 0
 call SnakeGame.makeFood 1
 pop temp 0
-label IF_END0
+label IF_END1
 push this 6
 push argument 1
 push local 0
@@ -432,6 +681,17 @@ return
 function SnakeGame.makeFood 0
 push argument 0
 pop pointer 0
+push this 4
+push constant 0
+eq
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 4
+call ListNode.dispose 1
+pop temp 0
+label IF_FALSE0
 push pointer 0
 call SnakeGame.makeFoodCoords 1
 pop this 4
@@ -451,24 +711,32 @@ call SnakeGame.drawFood 1
 pop temp 0
 push constant 0
 return
-function SnakeGame.makeFoodCoords 4
+function SnakeGame.makeFoodCoords 6
 push argument 0
 pop pointer 0
 push this 6
 call Snake.getHead 1
-pop local 2
-push this 5
-call LSFR.nextRNG 1
-push this 1
-add
-push local 2
-call ListNode.getX 1
-sub
+pop local 4
 push constant 512
 push this 3
 call Math.divide 2
 push constant 1
 sub
+pop local 2
+push constant 256
+push this 3
+call Math.divide 2
+push constant 1
+sub
+pop local 3
+push this 5
+call LSFR.nextRNG 1
+push this 1
+add
+push local 4
+call ListNode.getX 1
+sub
+push local 2
 call Utils.mod 2
 pop local 0
 push local 0
@@ -485,17 +753,13 @@ pop local 0
 label IF_FALSE0
 push this 5
 call LSFR.nextRNG 1
-push local 2
+push local 4
 call ListNode.getY 1
 add
 push this 6
 call Snake.getLength 1
 sub
-push constant 256
-push this 3
-call Math.divide 2
-push constant 1
-sub
+push local 3
 call Utils.mod 2
 pop local 1
 push local 1
@@ -513,9 +777,9 @@ label IF_FALSE1
 push local 0
 push local 1
 call ListNode.new 2
-pop local 3
+pop local 5
 push this 6
-push local 3
+push local 5
 call Snake.doesInhabit 2
 if-goto IF_TRUE2
 goto IF_FALSE2
@@ -524,11 +788,7 @@ push this 5
 call LSFR.nextRNG 1
 push this 0
 and
-push constant 512
-push this 3
-call Math.divide 2
-push constant 1
-sub
+push local 2
 call Utils.mod 2
 pop local 0
 push local 0
@@ -549,18 +809,14 @@ push this 6
 call Snake.getLength 1
 push this 1
 call Math.multiply 2
-push local 2
+push local 4
 call ListNode.getX 1
 add
-push local 2
+push local 4
 call ListNode.getY 1
 sub
 or
-push constant 256
-push this 3
-call Math.divide 2
-push constant 1
-sub
+push local 3
 call Utils.mod 2
 pop local 1
 push local 1
@@ -575,34 +831,34 @@ neg
 call Math.multiply 2
 pop local 1
 label IF_FALSE4
-push local 3
+push local 5
 push local 0
 call ListNode.setX 2
 pop temp 0
-push local 3
+push local 5
 push local 1
 call ListNode.setY 2
 pop temp 0
 label IF_FALSE2
-push local 3
+push local 5
 return
-function SnakeGame.drawFood 4
+function SnakeGame.drawFood 5
 push argument 0
 pop pointer 0
 push this 4
 call ListNode.getX 1
 push this 3
 call Math.multiply 2
-push this 2
-add
 pop local 0
 push this 4
 call ListNode.getY 1
 push this 3
 call Math.multiply 2
-push this 2
-add
 pop local 1
+push this 3
+push constant 2
+call Math.divide 2
+pop local 4
 push this 4
 call ListNode.getX 1
 push constant 1
@@ -622,10 +878,17 @@ push this 2
 sub
 pop local 3
 push local 0
+push local 4
+add
 push local 1
-push local 2
-push local 3
-call Screen.drawRectangle 4
+push local 4
+add
+push local 4
+push this 2
+push constant 2
+call Math.multiply 2
+sub
+call Screen.drawCircle 3
 pop temp 0
 push constant 0
 return
@@ -640,6 +903,11 @@ call Math.divide 2
 push constant 1
 sub
 gt
+push argument 1
+call ListNode.getX 1
+or
+push constant 0
+lt
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
@@ -655,6 +923,11 @@ call Math.divide 2
 push constant 1
 sub
 gt
+push argument 1
+call ListNode.getY 1
+or
+push constant 0
+lt
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1

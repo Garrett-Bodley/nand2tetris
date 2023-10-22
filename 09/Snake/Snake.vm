@@ -9,9 +9,6 @@ pop this 2
 call SnakeQ.new 0
 pop this 0
 push pointer 0
-call Snake.drawInit 1
-pop temp 0
-push pointer 0
 return
 function Snake.drawInit 4
 push argument 0
@@ -497,17 +494,6 @@ return
 label IF_FALSE7
 push constant 0
 return
-function Snake.dispose 0
-push argument 0
-pop pointer 0
-push this 0
-call SnakeQ.dispose 1
-pop temp 0
-push pointer 0
-call Memory.deAlloc 1
-pop temp 0
-push constant 0
-return
 function Snake.drawInterpolation 5
 push argument 0
 pop pointer 0
@@ -713,9 +699,84 @@ pop pointer 0
 push this 0
 call SnakeQ.getHead 1
 return
+function Snake.getLastDirection 2
+push argument 0
+pop pointer 0
+push this 0
+call SnakeQ.getHead 1
+pop local 0
+push local 0
+call ListNode.getNext 1
+pop local 1
+push local 0
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+call Sys.halt 0
+pop temp 0
+label IF_FALSE0
+push local 0
+call ListNode.getY 1
+push local 1
+call ListNode.getY 1
+lt
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 1
+return
+label IF_FALSE1
+push local 0
+call ListNode.getY 1
+push local 1
+call ListNode.getY 1
+gt
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 2
+return
+label IF_FALSE2
+push local 0
+call ListNode.getX 1
+push local 1
+call ListNode.getX 1
+lt
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 3
+return
+label IF_FALSE3
+push local 0
+call ListNode.getX 1
+push local 1
+call ListNode.getX 1
+gt
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 4
+return
+label IF_FALSE4
+push constant 4
+return
 function Snake.getLength 0
 push argument 0
 pop pointer 0
 push this 0
 call SnakeQ.getLength 1
+return
+function Snake.dispose 0
+push argument 0
+pop pointer 0
+push this 0
+call SnakeQ.dispose 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
 return
