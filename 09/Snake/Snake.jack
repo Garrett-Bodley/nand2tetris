@@ -183,20 +183,15 @@ class Snake {
     return;
   }
 
-  method void dispose() {
-    do snakeQ.dispose();
-    do Memory.deAlloc(this);
-    return;
-  }
-
+  
   method void drawInterpolation(int x1, int y1, int x2, int y2, int direction, boolean color){
     // I made this hoping it would make the movement look smoother but tbh idk if it makes a difference.
     var int i, frameCount, xChunk, yChunk, last;
-
+    
     let frameCount = 14;
     let i = 1;
     do Screen.setColor(color);
-
+    
     // UP
     if(direction = 1){
       let yChunk = (y2-y1)/frameCount;
@@ -208,7 +203,7 @@ class Snake {
       }
       do Screen.drawRectangle(x1, y1, x2, last);
     }
-
+    
     // DOWN
     if(direction = 2){
       let yChunk = (y2 - y1)/frameCount;
@@ -220,7 +215,7 @@ class Snake {
       }
       do Screen.drawRectangle(x1, last, x2, y2);
     }
-
+    
     // LEFT
     if(direction = 3){
       let xChunk = (x2 - x1)/frameCount;
@@ -245,16 +240,35 @@ class Snake {
     }
     return;
   }
-
+  
   method boolean doesInhabit (ListNode coordinates) {
     return snakeQ.contains(coordinates);
   }
-
+  
   method ListNode getHead(){
     return snakeQ.getHead();
   }
 
+  method int getLastDirection(){
+    var ListNode head, next;
+    let head = snakeQ.getHead();
+    let next = head.getNext();
+    if(head = null){ do Sys.halt(); }
+    if(head.getY() < next.getY()){ return 1; }
+    if(head.getY() > next.getY()){ return 2; }
+    if(head.getX() < next.getX()){ return 3; }
+    if(head.getX() > next.getX()){ return 4; }
+    return 4;
+  }
+  
   method int getLength(){
     return snakeQ.getLength();
+  }
+
+
+  method void dispose() {
+    do snakeQ.dispose();
+    do Memory.deAlloc(this);
+    return;
   }
 }
