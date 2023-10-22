@@ -1,0 +1,4227 @@
+
+
+class WelcomeScreen{
+  constructor WelcomeScreen new(){
+    return this;
+  }
+
+  function void draw(){
+    var int i, memAddr;
+    let memAddr = 16384;
+    do Memory.poke(memAddr + 64, -4);
+    let i = 65;
+    while(i < 95){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 95, 16383);
+    do Memory.poke(memAddr + 96, -4);
+    let i = 97;
+    while(i < 127){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 127, 16383);
+    do Memory.poke(memAddr + 128, -4);
+    let i = 129;
+    while(i < 159){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 159, 16383);
+    do Memory.poke(memAddr + 160, 28);
+    do Memory.poke(memAddr + 191, 14336);
+    do Memory.poke(memAddr + 192, -36);
+    let i = 193;
+    while(i < 223){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 223, 15359);
+    do Memory.poke(memAddr + 224, 92);
+    do Memory.poke(memAddr + 255, 14848);
+    do Memory.poke(memAddr + 256, 92);
+    do Memory.poke(memAddr + 287, 14848);
+    do Memory.poke(memAddr + 288, 92);
+    do Memory.poke(memAddr + 319, 14848);
+    do Memory.poke(memAddr + 320, 92);
+    do Memory.poke(memAddr + 351, 14848);
+    do Memory.poke(memAddr + 352, 92);
+    do Memory.poke(memAddr + 383, 14848);
+    do Memory.poke(memAddr + 384, 92);
+    do Memory.poke(memAddr + 415, 14848);
+    do Memory.poke(memAddr + 416, 92);
+    do Memory.poke(memAddr + 447, 14848);
+    do Memory.poke(memAddr + 448, 92);
+    do Memory.poke(memAddr + 479, 14848);
+    do Memory.poke(memAddr + 480, 92);
+    do Memory.poke(memAddr + 511, 14848);
+    do Memory.poke(memAddr + 512, 92);
+    do Memory.poke(memAddr + 543, 14848);
+    do Memory.poke(memAddr + 544, 92);
+    do Memory.poke(memAddr + 575, 14848);
+    do Memory.poke(memAddr + 576, 92);
+    do Memory.poke(memAddr + 607, 14848);
+    do Memory.poke(memAddr + 608, 92);
+    do Memory.poke(memAddr + 639, 14848);
+    do Memory.poke(memAddr + 640, 92);
+    do Memory.poke(memAddr + 671, 14848);
+    do Memory.poke(memAddr + 672, 92);
+    do Memory.poke(memAddr + 703, 14848);
+    do Memory.poke(memAddr + 704, 92);
+    do Memory.poke(memAddr + 735, 14848);
+    do Memory.poke(memAddr + 736, 92);
+    do Memory.poke(memAddr + 767, 14848);
+    do Memory.poke(memAddr + 768, 92);
+    do Memory.poke(memAddr + 799, 14848);
+    do Memory.poke(memAddr + 800, 92);
+    do Memory.poke(memAddr + 831, 14848);
+    do Memory.poke(memAddr + 832, 92);
+    do Memory.poke(memAddr + 863, 14848);
+    do Memory.poke(memAddr + 864, 92);
+    do Memory.poke(memAddr + 895, 14848);
+    do Memory.poke(memAddr + 896, 92);
+    do Memory.poke(memAddr + 927, 14848);
+    do Memory.poke(memAddr + 928, 92);
+    do Memory.poke(memAddr + 959, 14848);
+    do Memory.poke(memAddr + 960, 92);
+    do Memory.poke(memAddr + 991, 14848);
+    do Memory.poke(memAddr + 992, 92);
+    do Memory.poke(memAddr + 1023, 14848);
+    do Memory.poke(memAddr + 1024, 92);
+    do Memory.poke(memAddr + 1055, 14848);
+    do Memory.poke(memAddr + 1056, 92);
+    do Memory.poke(memAddr + 1087, 14848);
+    do Memory.poke(memAddr + 1088, 92);
+    do Memory.poke(memAddr + 1119, 14848);
+    do Memory.poke(memAddr + 1120, 92);
+    do Memory.poke(memAddr + 1151, 14848);
+    do Memory.poke(memAddr + 1152, 92);
+    do Memory.poke(memAddr + 1183, 14848);
+    do Memory.poke(memAddr + 1184, 92);
+    do Memory.poke(memAddr + 1215, 14848);
+    do Memory.poke(memAddr + 1216, 92);
+    do Memory.poke(memAddr + 1241, 3072);
+    do Memory.poke(memAddr + 1242, 12);
+    do Memory.poke(memAddr + 1247, 14848);
+    do Memory.poke(memAddr + 1248, 92);
+    do Memory.poke(memAddr + 1273, 4096);
+    do Memory.poke(memAddr + 1274, 2);
+    do Memory.poke(memAddr + 1279, 14848);
+    do Memory.poke(memAddr + 1280, 92);
+    do Memory.poke(memAddr + 1305, 8192);
+    do Memory.poke(memAddr + 1306, 1);
+    do Memory.poke(memAddr + 1311, 14848);
+    do Memory.poke(memAddr + 1312, 92);
+    do Memory.poke(memAddr + 1337, -16384);
+    do Memory.poke(memAddr + 1343, 14848);
+    do Memory.poke(memAddr + 1344, 92);
+    do Memory.poke(memAddr + 1369, -16384);
+    do Memory.poke(memAddr + 1375, 14848);
+    do Memory.poke(memAddr + 1376, 92);
+    do Memory.poke(memAddr + 1401, -16384);
+    do Memory.poke(memAddr + 1407, 14848);
+    do Memory.poke(memAddr + 1408, 92);
+    do Memory.poke(memAddr + 1433, -16384);
+    do Memory.poke(memAddr + 1439, 14848);
+    do Memory.poke(memAddr + 1440, 92);
+    do Memory.poke(memAddr + 1445, -128);
+    do Memory.poke(memAddr + 1446, 127);
+    do Memory.poke(memAddr + 1465, -128);
+    do Memory.poke(memAddr + 1466, 127);
+    do Memory.poke(memAddr + 1471, 14848);
+    do Memory.poke(memAddr + 1472, 92);
+    do Memory.poke(memAddr + 1477, -128);
+    do Memory.poke(memAddr + 1478, 127);
+    do Memory.poke(memAddr + 1497, -128);
+    do Memory.poke(memAddr + 1498, 127);
+    do Memory.poke(memAddr + 1503, 14848);
+    do Memory.poke(memAddr + 1504, 92);
+    do Memory.poke(memAddr + 1509, -128);
+    do Memory.poke(memAddr + 1510, 127);
+    do Memory.poke(memAddr + 1511, -1024);
+    let i = 1512;
+    while(i < 1514){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1514, -505);
+    do Memory.poke(memAddr + 1515, -1);
+    do Memory.poke(memAddr + 1516, -64);
+    do Memory.poke(memAddr + 1517, 16383);
+    do Memory.poke(memAddr + 1518, -16);
+    do Memory.poke(memAddr + 1519, -1);
+    do Memory.poke(memAddr + 1520, 8191);
+    do Memory.poke(memAddr + 1521, -8);
+    do Memory.poke(memAddr + 1522, 1023);
+    let i = 1523;
+    while(i < 1527){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1527, 8191);
+    do Memory.poke(memAddr + 1529, -128);
+    do Memory.poke(memAddr + 1530, 127);
+    do Memory.poke(memAddr + 1535, 14848);
+    do Memory.poke(memAddr + 1536, 92);
+    do Memory.poke(memAddr + 1541, -128);
+    do Memory.poke(memAddr + 1542, 127);
+    do Memory.poke(memAddr + 1543, -1024);
+    let i = 1544;
+    while(i < 1546){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1546, -505);
+    do Memory.poke(memAddr + 1547, -1);
+    do Memory.poke(memAddr + 1548, -64);
+    do Memory.poke(memAddr + 1549, 16383);
+    do Memory.poke(memAddr + 1550, -16);
+    do Memory.poke(memAddr + 1551, -1);
+    do Memory.poke(memAddr + 1552, 8191);
+    do Memory.poke(memAddr + 1553, -8);
+    do Memory.poke(memAddr + 1554, 1023);
+    let i = 1555;
+    while(i < 1559){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1559, 8191);
+    do Memory.poke(memAddr + 1561, -128);
+    do Memory.poke(memAddr + 1562, 127);
+    do Memory.poke(memAddr + 1567, 14848);
+    do Memory.poke(memAddr + 1568, 92);
+    do Memory.poke(memAddr + 1573, -128);
+    do Memory.poke(memAddr + 1574, 127);
+    do Memory.poke(memAddr + 1575, -1024);
+    let i = 1576;
+    while(i < 1578){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1578, -505);
+    do Memory.poke(memAddr + 1579, -1);
+    do Memory.poke(memAddr + 1580, -64);
+    do Memory.poke(memAddr + 1581, 16383);
+    do Memory.poke(memAddr + 1582, -16);
+    do Memory.poke(memAddr + 1583, -1);
+    do Memory.poke(memAddr + 1584, 8191);
+    do Memory.poke(memAddr + 1585, -8);
+    do Memory.poke(memAddr + 1586, 1023);
+    let i = 1587;
+    while(i < 1591){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1591, 8191);
+    do Memory.poke(memAddr + 1593, -128);
+    do Memory.poke(memAddr + 1594, 127);
+    do Memory.poke(memAddr + 1599, 14848);
+    do Memory.poke(memAddr + 1600, 92);
+    do Memory.poke(memAddr + 1605, -128);
+    do Memory.poke(memAddr + 1606, 127);
+    do Memory.poke(memAddr + 1607, -1024);
+    let i = 1608;
+    while(i < 1610){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1610, -505);
+    do Memory.poke(memAddr + 1611, -1);
+    do Memory.poke(memAddr + 1612, -64);
+    do Memory.poke(memAddr + 1613, 16383);
+    do Memory.poke(memAddr + 1614, -16);
+    do Memory.poke(memAddr + 1615, -1);
+    do Memory.poke(memAddr + 1616, 8191);
+    do Memory.poke(memAddr + 1617, -8);
+    do Memory.poke(memAddr + 1618, 1023);
+    let i = 1619;
+    while(i < 1623){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1623, 8191);
+    do Memory.poke(memAddr + 1625, -128);
+    do Memory.poke(memAddr + 1626, 127);
+    do Memory.poke(memAddr + 1631, 14848);
+    do Memory.poke(memAddr + 1632, 92);
+    do Memory.poke(memAddr + 1637, -128);
+    do Memory.poke(memAddr + 1638, 127);
+    do Memory.poke(memAddr + 1639, -1024);
+    let i = 1640;
+    while(i < 1642){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1642, -505);
+    do Memory.poke(memAddr + 1643, -1);
+    do Memory.poke(memAddr + 1644, -64);
+    do Memory.poke(memAddr + 1645, 16383);
+    do Memory.poke(memAddr + 1646, -16);
+    do Memory.poke(memAddr + 1647, -1);
+    do Memory.poke(memAddr + 1648, 8191);
+    do Memory.poke(memAddr + 1649, -8);
+    do Memory.poke(memAddr + 1650, 1023);
+    let i = 1651;
+    while(i < 1655){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1655, 8191);
+    do Memory.poke(memAddr + 1657, -128);
+    do Memory.poke(memAddr + 1658, 127);
+    do Memory.poke(memAddr + 1663, 14848);
+    do Memory.poke(memAddr + 1664, 92);
+    do Memory.poke(memAddr + 1669, -128);
+    do Memory.poke(memAddr + 1670, 127);
+    do Memory.poke(memAddr + 1671, -1024);
+    let i = 1672;
+    while(i < 1674){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1674, -505);
+    do Memory.poke(memAddr + 1675, -1);
+    do Memory.poke(memAddr + 1676, -64);
+    do Memory.poke(memAddr + 1677, 16383);
+    do Memory.poke(memAddr + 1678, -16);
+    do Memory.poke(memAddr + 1679, -1);
+    do Memory.poke(memAddr + 1680, 8191);
+    do Memory.poke(memAddr + 1681, -8);
+    do Memory.poke(memAddr + 1682, 1023);
+    let i = 1683;
+    while(i < 1687){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1687, 8191);
+    do Memory.poke(memAddr + 1689, -128);
+    do Memory.poke(memAddr + 1690, 127);
+    do Memory.poke(memAddr + 1695, 14848);
+    do Memory.poke(memAddr + 1696, 92);
+    let i = 1701;
+    while(i < 1703){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1703, -16);
+    do Memory.poke(memAddr + 1705, -8192);
+    do Memory.poke(memAddr + 1706, 32767);
+    do Memory.poke(memAddr + 1707, -2048);
+    do Memory.poke(memAddr + 1708, 4095);
+    do Memory.poke(memAddr + 1709, -256);
+    do Memory.poke(memAddr + 1710, 1023);
+    do Memory.poke(memAddr + 1712, -128);
+    do Memory.poke(memAddr + 1713, 511);
+    do Memory.poke(memAddr + 1714, -32);
+    do Memory.poke(memAddr + 1715, 63);
+    do Memory.poke(memAddr + 1716, 16380);
+    do Memory.poke(memAddr + 1719, -128);
+    do Memory.poke(memAddr + 1720, -32761);
+    do Memory.poke(memAddr + 1721, 127);
+    do Memory.poke(memAddr + 1722, 32640);
+    do Memory.poke(memAddr + 1727, 14848);
+    do Memory.poke(memAddr + 1728, 92);
+    let i = 1733;
+    while(i < 1735){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1735, -16);
+    do Memory.poke(memAddr + 1737, -8192);
+    do Memory.poke(memAddr + 1738, 32767);
+    do Memory.poke(memAddr + 1739, -2048);
+    do Memory.poke(memAddr + 1740, 4095);
+    do Memory.poke(memAddr + 1741, -256);
+    do Memory.poke(memAddr + 1742, 1023);
+    do Memory.poke(memAddr + 1744, -128);
+    do Memory.poke(memAddr + 1745, 511);
+    do Memory.poke(memAddr + 1746, -32);
+    do Memory.poke(memAddr + 1747, 63);
+    do Memory.poke(memAddr + 1748, 16380);
+    do Memory.poke(memAddr + 1751, -128);
+    do Memory.poke(memAddr + 1752, -32761);
+    do Memory.poke(memAddr + 1753, 127);
+    do Memory.poke(memAddr + 1754, 32640);
+    do Memory.poke(memAddr + 1759, 14848);
+    do Memory.poke(memAddr + 1760, 92);
+    let i = 1765;
+    while(i < 1767){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1767, -16);
+    do Memory.poke(memAddr + 1769, -8192);
+    do Memory.poke(memAddr + 1770, 32767);
+    do Memory.poke(memAddr + 1771, -2048);
+    do Memory.poke(memAddr + 1772, 4095);
+    do Memory.poke(memAddr + 1773, -256);
+    do Memory.poke(memAddr + 1774, 1023);
+    do Memory.poke(memAddr + 1776, -128);
+    do Memory.poke(memAddr + 1777, 511);
+    do Memory.poke(memAddr + 1778, -32);
+    do Memory.poke(memAddr + 1779, 63);
+    do Memory.poke(memAddr + 1780, 16380);
+    do Memory.poke(memAddr + 1783, -128);
+    do Memory.poke(memAddr + 1784, -32761);
+    do Memory.poke(memAddr + 1785, 127);
+    do Memory.poke(memAddr + 1786, 32640);
+    do Memory.poke(memAddr + 1791, 14848);
+    do Memory.poke(memAddr + 1792, 92);
+    let i = 1797;
+    while(i < 1799){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1799, -16);
+    do Memory.poke(memAddr + 1801, -8192);
+    do Memory.poke(memAddr + 1802, 32767);
+    do Memory.poke(memAddr + 1803, -2048);
+    do Memory.poke(memAddr + 1804, 4095);
+    do Memory.poke(memAddr + 1805, -256);
+    do Memory.poke(memAddr + 1806, 1023);
+    do Memory.poke(memAddr + 1808, -128);
+    do Memory.poke(memAddr + 1809, 511);
+    do Memory.poke(memAddr + 1810, -32);
+    do Memory.poke(memAddr + 1811, 63);
+    do Memory.poke(memAddr + 1812, 16380);
+    do Memory.poke(memAddr + 1815, -128);
+    do Memory.poke(memAddr + 1816, -32761);
+    do Memory.poke(memAddr + 1817, 127);
+    do Memory.poke(memAddr + 1818, 32640);
+    do Memory.poke(memAddr + 1823, 14848);
+    do Memory.poke(memAddr + 1824, 92);
+    let i = 1829;
+    while(i < 1831){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1831, -16);
+    do Memory.poke(memAddr + 1833, -8192);
+    do Memory.poke(memAddr + 1834, 32767);
+    do Memory.poke(memAddr + 1835, -2048);
+    do Memory.poke(memAddr + 1836, 4095);
+    do Memory.poke(memAddr + 1837, -256);
+    do Memory.poke(memAddr + 1838, 1023);
+    do Memory.poke(memAddr + 1840, -128);
+    do Memory.poke(memAddr + 1841, 511);
+    do Memory.poke(memAddr + 1842, -32);
+    do Memory.poke(memAddr + 1843, 63);
+    do Memory.poke(memAddr + 1844, 16380);
+    do Memory.poke(memAddr + 1847, -128);
+    do Memory.poke(memAddr + 1848, -32761);
+    do Memory.poke(memAddr + 1849, 127);
+    do Memory.poke(memAddr + 1850, 32640);
+    do Memory.poke(memAddr + 1855, 14848);
+    do Memory.poke(memAddr + 1856, 92);
+    let i = 1861;
+    while(i < 1863){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1863, -16);
+    do Memory.poke(memAddr + 1865, -8192);
+    do Memory.poke(memAddr + 1866, 32767);
+    do Memory.poke(memAddr + 1867, -2048);
+    do Memory.poke(memAddr + 1868, 4095);
+    do Memory.poke(memAddr + 1869, -256);
+    do Memory.poke(memAddr + 1870, 1023);
+    do Memory.poke(memAddr + 1872, -128);
+    do Memory.poke(memAddr + 1873, 511);
+    do Memory.poke(memAddr + 1874, -32);
+    do Memory.poke(memAddr + 1875, 63);
+    do Memory.poke(memAddr + 1876, 16380);
+    do Memory.poke(memAddr + 1879, -128);
+    do Memory.poke(memAddr + 1880, -32761);
+    do Memory.poke(memAddr + 1881, 127);
+    do Memory.poke(memAddr + 1882, 32640);
+    do Memory.poke(memAddr + 1887, 14848);
+    do Memory.poke(memAddr + 1888, 92);
+    let i = 1893;
+    while(i < 1895){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1895, 1008);
+    do Memory.poke(memAddr + 1896, -64);
+    do Memory.poke(memAddr + 1897, 127);
+    do Memory.poke(memAddr + 1898, 32760);
+    do Memory.poke(memAddr + 1900, 4095);
+    do Memory.poke(memAddr + 1901, -256);
+    do Memory.poke(memAddr + 1902, 15);
+    do Memory.poke(memAddr + 1903, -1);
+    do Memory.poke(memAddr + 1904, -8191);
+    do Memory.poke(memAddr + 1905, 511);
+    do Memory.poke(memAddr + 1906, -32);
+    do Memory.poke(memAddr + 1907, -4096);
+    do Memory.poke(memAddr + 1908, 16383);
+    do Memory.poke(memAddr + 1909, -1024);
+    let i = 1910;
+    while(i < 1912){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1912, -32761);
+    do Memory.poke(memAddr + 1913, 127);
+    do Memory.poke(memAddr + 1914, 32640);
+    do Memory.poke(memAddr + 1919, 14848);
+    do Memory.poke(memAddr + 1920, 92);
+    let i = 1925;
+    while(i < 1927){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1927, 1008);
+    do Memory.poke(memAddr + 1928, -64);
+    do Memory.poke(memAddr + 1929, 127);
+    do Memory.poke(memAddr + 1930, 32760);
+    do Memory.poke(memAddr + 1932, 4095);
+    do Memory.poke(memAddr + 1933, -256);
+    do Memory.poke(memAddr + 1934, 15);
+    do Memory.poke(memAddr + 1935, -1);
+    do Memory.poke(memAddr + 1936, -8191);
+    do Memory.poke(memAddr + 1937, 511);
+    do Memory.poke(memAddr + 1938, -32);
+    do Memory.poke(memAddr + 1939, -4096);
+    do Memory.poke(memAddr + 1940, 16383);
+    do Memory.poke(memAddr + 1941, -1024);
+    let i = 1942;
+    while(i < 1944){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1944, -32761);
+    do Memory.poke(memAddr + 1945, 127);
+    do Memory.poke(memAddr + 1946, 32640);
+    do Memory.poke(memAddr + 1951, 14848);
+    do Memory.poke(memAddr + 1952, 92);
+    let i = 1957;
+    while(i < 1959){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1959, 1008);
+    do Memory.poke(memAddr + 1960, -64);
+    do Memory.poke(memAddr + 1961, 127);
+    do Memory.poke(memAddr + 1962, 32760);
+    do Memory.poke(memAddr + 1964, 4095);
+    do Memory.poke(memAddr + 1965, -256);
+    do Memory.poke(memAddr + 1966, 15);
+    do Memory.poke(memAddr + 1967, -1);
+    do Memory.poke(memAddr + 1968, -8191);
+    do Memory.poke(memAddr + 1969, 511);
+    do Memory.poke(memAddr + 1970, -32);
+    do Memory.poke(memAddr + 1971, -4096);
+    do Memory.poke(memAddr + 1972, 16383);
+    do Memory.poke(memAddr + 1973, -1024);
+    let i = 1974;
+    while(i < 1976){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1976, -2041);
+    do Memory.poke(memAddr + 1977, 2047);
+    do Memory.poke(memAddr + 1978, -8);
+    do Memory.poke(memAddr + 1979, 7);
+    do Memory.poke(memAddr + 1983, 14848);
+    do Memory.poke(memAddr + 1984, 92);
+    let i = 1989;
+    while(i < 1991){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 1991, 1008);
+    do Memory.poke(memAddr + 1992, -64);
+    do Memory.poke(memAddr + 1993, 127);
+    do Memory.poke(memAddr + 1994, 32760);
+    do Memory.poke(memAddr + 1996, 4095);
+    do Memory.poke(memAddr + 1997, -256);
+    do Memory.poke(memAddr + 1998, 15);
+    do Memory.poke(memAddr + 1999, -1);
+    do Memory.poke(memAddr + 2000, -8191);
+    do Memory.poke(memAddr + 2001, 511);
+    do Memory.poke(memAddr + 2002, -32);
+    do Memory.poke(memAddr + 2003, -4096);
+    do Memory.poke(memAddr + 2004, 16383);
+    do Memory.poke(memAddr + 2005, -1024);
+    let i = 2006;
+    while(i < 2008){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2008, -2041);
+    do Memory.poke(memAddr + 2009, 2047);
+    do Memory.poke(memAddr + 2010, -8);
+    do Memory.poke(memAddr + 2011, 7);
+    do Memory.poke(memAddr + 2015, 14848);
+    do Memory.poke(memAddr + 2016, 92);
+    let i = 2021;
+    while(i < 2023){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2023, 1008);
+    do Memory.poke(memAddr + 2024, -64);
+    do Memory.poke(memAddr + 2025, 127);
+    do Memory.poke(memAddr + 2026, 32760);
+    do Memory.poke(memAddr + 2028, 4095);
+    do Memory.poke(memAddr + 2029, -256);
+    do Memory.poke(memAddr + 2030, 15);
+    do Memory.poke(memAddr + 2031, -1);
+    do Memory.poke(memAddr + 2032, -8191);
+    do Memory.poke(memAddr + 2033, 511);
+    do Memory.poke(memAddr + 2034, -32);
+    do Memory.poke(memAddr + 2035, -4096);
+    do Memory.poke(memAddr + 2036, 16383);
+    do Memory.poke(memAddr + 2037, -1024);
+    let i = 2038;
+    while(i < 2040){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2040, -2041);
+    do Memory.poke(memAddr + 2041, 2047);
+    do Memory.poke(memAddr + 2042, -8);
+    do Memory.poke(memAddr + 2043, 7);
+    do Memory.poke(memAddr + 2047, 14848);
+    do Memory.poke(memAddr + 2048, 92);
+    let i = 2053;
+    while(i < 2055){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2055, 1008);
+    do Memory.poke(memAddr + 2056, -64);
+    do Memory.poke(memAddr + 2057, 127);
+    do Memory.poke(memAddr + 2058, 32760);
+    do Memory.poke(memAddr + 2060, 4095);
+    do Memory.poke(memAddr + 2061, -256);
+    do Memory.poke(memAddr + 2062, 15);
+    do Memory.poke(memAddr + 2063, -1);
+    do Memory.poke(memAddr + 2064, -8191);
+    do Memory.poke(memAddr + 2065, 511);
+    do Memory.poke(memAddr + 2066, -32);
+    do Memory.poke(memAddr + 2067, -4096);
+    do Memory.poke(memAddr + 2068, 16383);
+    do Memory.poke(memAddr + 2069, -1024);
+    let i = 2070;
+    while(i < 2072){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2072, -2041);
+    do Memory.poke(memAddr + 2073, 1799);
+    do Memory.poke(memAddr + 2074, -1992);
+    do Memory.poke(memAddr + 2075, 7);
+    do Memory.poke(memAddr + 2079, 14848);
+    do Memory.poke(memAddr + 2080, 92);
+    let i = 2085;
+    while(i < 2087){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2087, 1008);
+    do Memory.poke(memAddr + 2088, -64);
+    do Memory.poke(memAddr + 2089, -1);
+    do Memory.poke(memAddr + 2090, 32767);
+    do Memory.poke(memAddr + 2092, 4032);
+    do Memory.poke(memAddr + 2093, -256);
+    do Memory.poke(memAddr + 2094, 15);
+    do Memory.poke(memAddr + 2095, -1);
+    do Memory.poke(memAddr + 2096, -8191);
+    do Memory.poke(memAddr + 2097, 511);
+    do Memory.poke(memAddr + 2098, 992);
+    do Memory.poke(memAddr + 2099, -64);
+    do Memory.poke(memAddr + 2100, 16383);
+    do Memory.poke(memAddr + 2101, -1024);
+    let i = 2102;
+    while(i < 2104){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2104, -2041);
+    do Memory.poke(memAddr + 2105, 1799);
+    do Memory.poke(memAddr + 2106, -1992);
+    do Memory.poke(memAddr + 2107, 7);
+    do Memory.poke(memAddr + 2111, 14848);
+    do Memory.poke(memAddr + 2112, 92);
+    let i = 2117;
+    while(i < 2119){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2119, 1008);
+    do Memory.poke(memAddr + 2120, -64);
+    do Memory.poke(memAddr + 2121, -1);
+    do Memory.poke(memAddr + 2122, 32767);
+    do Memory.poke(memAddr + 2124, 4032);
+    do Memory.poke(memAddr + 2125, -256);
+    do Memory.poke(memAddr + 2126, 15);
+    do Memory.poke(memAddr + 2127, -1);
+    do Memory.poke(memAddr + 2128, -8191);
+    do Memory.poke(memAddr + 2129, 511);
+    do Memory.poke(memAddr + 2130, 992);
+    do Memory.poke(memAddr + 2131, -64);
+    do Memory.poke(memAddr + 2132, 16383);
+    do Memory.poke(memAddr + 2133, -1024);
+    let i = 2134;
+    while(i < 2136){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2136, -2041);
+    do Memory.poke(memAddr + 2137, 2047);
+    do Memory.poke(memAddr + 2138, -8);
+    do Memory.poke(memAddr + 2139, 7);
+    do Memory.poke(memAddr + 2143, 14848);
+    do Memory.poke(memAddr + 2144, 92);
+    let i = 2149;
+    while(i < 2151){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2151, 1008);
+    do Memory.poke(memAddr + 2152, -64);
+    do Memory.poke(memAddr + 2153, -1);
+    do Memory.poke(memAddr + 2154, 32767);
+    do Memory.poke(memAddr + 2156, 4032);
+    do Memory.poke(memAddr + 2157, -256);
+    do Memory.poke(memAddr + 2158, 15);
+    do Memory.poke(memAddr + 2159, -1);
+    do Memory.poke(memAddr + 2160, -8191);
+    do Memory.poke(memAddr + 2161, 511);
+    do Memory.poke(memAddr + 2162, 992);
+    do Memory.poke(memAddr + 2163, -64);
+    do Memory.poke(memAddr + 2164, 16383);
+    do Memory.poke(memAddr + 2165, -1024);
+    let i = 2166;
+    while(i < 2168){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2168, -2041);
+    do Memory.poke(memAddr + 2169, 2047);
+    do Memory.poke(memAddr + 2170, -8);
+    do Memory.poke(memAddr + 2171, 7);
+    do Memory.poke(memAddr + 2175, 14848);
+    do Memory.poke(memAddr + 2176, 92);
+    let i = 2181;
+    while(i < 2183){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2183, 1008);
+    do Memory.poke(memAddr + 2184, -64);
+    do Memory.poke(memAddr + 2185, -1);
+    do Memory.poke(memAddr + 2186, 32767);
+    do Memory.poke(memAddr + 2188, 4032);
+    do Memory.poke(memAddr + 2189, -256);
+    do Memory.poke(memAddr + 2190, 15);
+    do Memory.poke(memAddr + 2191, -1);
+    do Memory.poke(memAddr + 2192, -8191);
+    do Memory.poke(memAddr + 2193, 511);
+    do Memory.poke(memAddr + 2194, 992);
+    do Memory.poke(memAddr + 2195, -64);
+    do Memory.poke(memAddr + 2196, 16383);
+    do Memory.poke(memAddr + 2197, -1024);
+    let i = 2198;
+    while(i < 2200){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2200, -2041);
+    do Memory.poke(memAddr + 2201, 2047);
+    do Memory.poke(memAddr + 2202, -8);
+    do Memory.poke(memAddr + 2203, 7);
+    do Memory.poke(memAddr + 2207, 14848);
+    do Memory.poke(memAddr + 2208, 92);
+    let i = 2213;
+    while(i < 2215){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2215, 1008);
+    do Memory.poke(memAddr + 2216, -64);
+    do Memory.poke(memAddr + 2217, -1);
+    do Memory.poke(memAddr + 2218, 32767);
+    do Memory.poke(memAddr + 2220, 4032);
+    do Memory.poke(memAddr + 2221, -256);
+    do Memory.poke(memAddr + 2222, 15);
+    do Memory.poke(memAddr + 2223, -1);
+    do Memory.poke(memAddr + 2224, -8191);
+    do Memory.poke(memAddr + 2225, 511);
+    do Memory.poke(memAddr + 2226, 992);
+    do Memory.poke(memAddr + 2227, -64);
+    do Memory.poke(memAddr + 2228, 16383);
+    do Memory.poke(memAddr + 2229, -1024);
+    let i = 2230;
+    while(i < 2232){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2232, -2041);
+    do Memory.poke(memAddr + 2233, 7);
+    do Memory.poke(memAddr + 2234, -2048);
+    do Memory.poke(memAddr + 2235, 7);
+    do Memory.poke(memAddr + 2239, 14848);
+    do Memory.poke(memAddr + 2240, 92);
+    let i = 2245;
+    while(i < 2247){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2247, 1008);
+    do Memory.poke(memAddr + 2248, -64);
+    do Memory.poke(memAddr + 2249, -1);
+    do Memory.poke(memAddr + 2250, 32767);
+    do Memory.poke(memAddr + 2252, 4032);
+    do Memory.poke(memAddr + 2253, -256);
+    do Memory.poke(memAddr + 2254, 15);
+    do Memory.poke(memAddr + 2255, -1);
+    do Memory.poke(memAddr + 2256, -8191);
+    do Memory.poke(memAddr + 2257, 511);
+    do Memory.poke(memAddr + 2258, 992);
+    do Memory.poke(memAddr + 2259, -64);
+    do Memory.poke(memAddr + 2260, 16383);
+    do Memory.poke(memAddr + 2261, -1024);
+    let i = 2262;
+    while(i < 2264){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2264, -2041);
+    do Memory.poke(memAddr + 2265, 7);
+    do Memory.poke(memAddr + 2266, -2048);
+    do Memory.poke(memAddr + 2267, 7);
+    do Memory.poke(memAddr + 2271, 14848);
+    do Memory.poke(memAddr + 2272, 92);
+    let i = 2277;
+    while(i < 2279){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2279, -16);
+    do Memory.poke(memAddr + 2281, -8192);
+    do Memory.poke(memAddr + 2282, 32767);
+    do Memory.poke(memAddr + 2283, -2048);
+    do Memory.poke(memAddr + 2285, -256);
+    do Memory.poke(memAddr + 2286, 15);
+    do Memory.poke(memAddr + 2287, -1);
+    do Memory.poke(memAddr + 2288, -8191);
+    do Memory.poke(memAddr + 2289, 511);
+    do Memory.poke(memAddr + 2291, -1);
+    do Memory.poke(memAddr + 2292, 16383);
+    do Memory.poke(memAddr + 2295, 8190);
+    do Memory.poke(memAddr + 2296, -2048);
+    do Memory.poke(memAddr + 2297, 7);
+    do Memory.poke(memAddr + 2298, -2048);
+    do Memory.poke(memAddr + 2299, 7);
+    do Memory.poke(memAddr + 2303, 14848);
+    do Memory.poke(memAddr + 2304, 92);
+    let i = 2309;
+    while(i < 2311){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2311, -16);
+    do Memory.poke(memAddr + 2313, -8192);
+    do Memory.poke(memAddr + 2314, 32767);
+    do Memory.poke(memAddr + 2315, -2048);
+    do Memory.poke(memAddr + 2317, -256);
+    do Memory.poke(memAddr + 2318, 15);
+    do Memory.poke(memAddr + 2319, -1);
+    do Memory.poke(memAddr + 2320, -8191);
+    do Memory.poke(memAddr + 2321, 511);
+    do Memory.poke(memAddr + 2323, -1);
+    do Memory.poke(memAddr + 2324, 16383);
+    do Memory.poke(memAddr + 2327, 8190);
+    do Memory.poke(memAddr + 2328, -2048);
+    do Memory.poke(memAddr + 2329, 7);
+    do Memory.poke(memAddr + 2330, -2048);
+    do Memory.poke(memAddr + 2331, 7);
+    do Memory.poke(memAddr + 2335, 14848);
+    do Memory.poke(memAddr + 2336, 92);
+    let i = 2341;
+    while(i < 2343){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2343, -16);
+    do Memory.poke(memAddr + 2345, -8192);
+    do Memory.poke(memAddr + 2346, 32767);
+    do Memory.poke(memAddr + 2347, -2048);
+    do Memory.poke(memAddr + 2349, -256);
+    do Memory.poke(memAddr + 2350, 15);
+    do Memory.poke(memAddr + 2351, -1);
+    do Memory.poke(memAddr + 2352, -8191);
+    do Memory.poke(memAddr + 2353, 511);
+    do Memory.poke(memAddr + 2355, -1);
+    do Memory.poke(memAddr + 2356, 16383);
+    do Memory.poke(memAddr + 2359, 8190);
+    do Memory.poke(memAddr + 2360, -2048);
+    do Memory.poke(memAddr + 2361, 7);
+    do Memory.poke(memAddr + 2362, -2048);
+    do Memory.poke(memAddr + 2363, 7);
+    do Memory.poke(memAddr + 2367, 14848);
+    do Memory.poke(memAddr + 2368, 92);
+    let i = 2373;
+    while(i < 2375){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2375, -16);
+    do Memory.poke(memAddr + 2377, -8192);
+    do Memory.poke(memAddr + 2378, 32767);
+    do Memory.poke(memAddr + 2379, -2048);
+    do Memory.poke(memAddr + 2381, -256);
+    do Memory.poke(memAddr + 2382, 15);
+    do Memory.poke(memAddr + 2383, -1);
+    do Memory.poke(memAddr + 2384, -8191);
+    do Memory.poke(memAddr + 2385, 511);
+    do Memory.poke(memAddr + 2387, -1);
+    do Memory.poke(memAddr + 2388, 16383);
+    do Memory.poke(memAddr + 2391, 8190);
+    do Memory.poke(memAddr + 2392, -2048);
+    do Memory.poke(memAddr + 2393, 7);
+    do Memory.poke(memAddr + 2394, -2048);
+    do Memory.poke(memAddr + 2395, 7);
+    do Memory.poke(memAddr + 2399, 14848);
+    do Memory.poke(memAddr + 2400, 92);
+    let i = 2405;
+    while(i < 2407){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2407, -16);
+    do Memory.poke(memAddr + 2409, -8192);
+    do Memory.poke(memAddr + 2410, 32767);
+    do Memory.poke(memAddr + 2411, -2048);
+    do Memory.poke(memAddr + 2413, -256);
+    do Memory.poke(memAddr + 2414, 15);
+    do Memory.poke(memAddr + 2415, -1);
+    do Memory.poke(memAddr + 2416, -8191);
+    do Memory.poke(memAddr + 2417, 511);
+    do Memory.poke(memAddr + 2419, -1);
+    do Memory.poke(memAddr + 2420, 16383);
+    do Memory.poke(memAddr + 2423, 8190);
+    do Memory.poke(memAddr + 2424, -2048);
+    do Memory.poke(memAddr + 2425, 7);
+    do Memory.poke(memAddr + 2426, -2048);
+    do Memory.poke(memAddr + 2427, 7);
+    do Memory.poke(memAddr + 2431, 14848);
+    do Memory.poke(memAddr + 2432, 92);
+    let i = 2437;
+    while(i < 2439){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2439, -16);
+    do Memory.poke(memAddr + 2441, -8192);
+    do Memory.poke(memAddr + 2442, 32767);
+    do Memory.poke(memAddr + 2443, -2048);
+    do Memory.poke(memAddr + 2445, -256);
+    do Memory.poke(memAddr + 2446, 15);
+    do Memory.poke(memAddr + 2447, -1);
+    do Memory.poke(memAddr + 2448, -8191);
+    do Memory.poke(memAddr + 2449, 511);
+    do Memory.poke(memAddr + 2451, -1);
+    do Memory.poke(memAddr + 2452, 16383);
+    do Memory.poke(memAddr + 2455, 8190);
+    do Memory.poke(memAddr + 2456, -2048);
+    do Memory.poke(memAddr + 2457, 7);
+    do Memory.poke(memAddr + 2458, -2048);
+    do Memory.poke(memAddr + 2459, 7);
+    do Memory.poke(memAddr + 2463, 14848);
+    do Memory.poke(memAddr + 2464, 92);
+    let i = 2469;
+    while(i < 2471){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2471, -16);
+    do Memory.poke(memAddr + 2472, -1);
+    do Memory.poke(memAddr + 2473, 127);
+    do Memory.poke(memAddr + 2474, 32760);
+    do Memory.poke(memAddr + 2475, -2048);
+    do Memory.poke(memAddr + 2476, 63);
+    do Memory.poke(memAddr + 2477, -256);
+    do Memory.poke(memAddr + 2478, 15);
+    do Memory.poke(memAddr + 2480, -8192);
+    do Memory.poke(memAddr + 2481, 511);
+    do Memory.poke(memAddr + 2482, 992);
+    do Memory.poke(memAddr + 2483, -64);
+    do Memory.poke(memAddr + 2484, 16131);
+    do Memory.poke(memAddr + 2485, -1024);
+    do Memory.poke(memAddr + 2486, -1);
+    do Memory.poke(memAddr + 2487, 8191);
+    do Memory.poke(memAddr + 2488, 32767 + 1);
+    do Memory.poke(memAddr + 2489, 127);
+    do Memory.poke(memAddr + 2490, 32640);
+    do Memory.poke(memAddr + 2495, 14848);
+    do Memory.poke(memAddr + 2496, 92);
+    let i = 2501;
+    while(i < 2503){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2503, -16);
+    do Memory.poke(memAddr + 2504, -1);
+    do Memory.poke(memAddr + 2505, 127);
+    do Memory.poke(memAddr + 2506, 32760);
+    do Memory.poke(memAddr + 2507, -2048);
+    do Memory.poke(memAddr + 2508, 63);
+    do Memory.poke(memAddr + 2509, -256);
+    do Memory.poke(memAddr + 2510, 15);
+    do Memory.poke(memAddr + 2512, -8192);
+    do Memory.poke(memAddr + 2513, 511);
+    do Memory.poke(memAddr + 2514, 992);
+    do Memory.poke(memAddr + 2515, -64);
+    do Memory.poke(memAddr + 2516, 16131);
+    do Memory.poke(memAddr + 2517, -1024);
+    do Memory.poke(memAddr + 2518, -1);
+    do Memory.poke(memAddr + 2519, 8191);
+    do Memory.poke(memAddr + 2520, 32767 + 1);
+    do Memory.poke(memAddr + 2521, 127);
+    do Memory.poke(memAddr + 2522, 32640);
+    do Memory.poke(memAddr + 2527, 14848);
+    do Memory.poke(memAddr + 2528, 92);
+    let i = 2533;
+    while(i < 2535){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2535, -16);
+    do Memory.poke(memAddr + 2536, -1);
+    do Memory.poke(memAddr + 2537, 127);
+    do Memory.poke(memAddr + 2538, 32760);
+    do Memory.poke(memAddr + 2539, -2048);
+    do Memory.poke(memAddr + 2540, 63);
+    do Memory.poke(memAddr + 2541, -256);
+    do Memory.poke(memAddr + 2542, 15);
+    do Memory.poke(memAddr + 2544, -8192);
+    do Memory.poke(memAddr + 2545, 511);
+    do Memory.poke(memAddr + 2546, 992);
+    do Memory.poke(memAddr + 2547, -64);
+    do Memory.poke(memAddr + 2548, 16131);
+    do Memory.poke(memAddr + 2549, -1024);
+    do Memory.poke(memAddr + 2550, -1);
+    do Memory.poke(memAddr + 2551, 8191);
+    do Memory.poke(memAddr + 2552, 32767 + 1);
+    do Memory.poke(memAddr + 2553, 127);
+    do Memory.poke(memAddr + 2554, 32640);
+    do Memory.poke(memAddr + 2559, 14848);
+    do Memory.poke(memAddr + 2560, 92);
+    let i = 2565;
+    while(i < 2567){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2567, -16);
+    do Memory.poke(memAddr + 2568, -1);
+    do Memory.poke(memAddr + 2569, 127);
+    do Memory.poke(memAddr + 2570, 32760);
+    do Memory.poke(memAddr + 2571, -2048);
+    do Memory.poke(memAddr + 2572, 63);
+    do Memory.poke(memAddr + 2573, -256);
+    do Memory.poke(memAddr + 2574, 15);
+    do Memory.poke(memAddr + 2576, -8192);
+    do Memory.poke(memAddr + 2577, 511);
+    do Memory.poke(memAddr + 2578, 992);
+    do Memory.poke(memAddr + 2579, -64);
+    do Memory.poke(memAddr + 2580, 16131);
+    do Memory.poke(memAddr + 2581, -1024);
+    do Memory.poke(memAddr + 2582, -1);
+    do Memory.poke(memAddr + 2583, 8191);
+    do Memory.poke(memAddr + 2584, 32767 + 1);
+    do Memory.poke(memAddr + 2585, 127);
+    do Memory.poke(memAddr + 2586, 32640);
+    do Memory.poke(memAddr + 2591, 14848);
+    do Memory.poke(memAddr + 2592, 92);
+    let i = 2597;
+    while(i < 2599){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2599, -16);
+    do Memory.poke(memAddr + 2600, -1);
+    do Memory.poke(memAddr + 2601, 127);
+    do Memory.poke(memAddr + 2602, 32760);
+    do Memory.poke(memAddr + 2603, -2048);
+    do Memory.poke(memAddr + 2604, 63);
+    do Memory.poke(memAddr + 2605, -256);
+    do Memory.poke(memAddr + 2606, 15);
+    do Memory.poke(memAddr + 2608, -8192);
+    do Memory.poke(memAddr + 2609, 511);
+    do Memory.poke(memAddr + 2610, 992);
+    do Memory.poke(memAddr + 2611, -64);
+    do Memory.poke(memAddr + 2612, 16131);
+    do Memory.poke(memAddr + 2613, -1024);
+    do Memory.poke(memAddr + 2614, -1);
+    do Memory.poke(memAddr + 2615, 8191);
+    do Memory.poke(memAddr + 2616, 32767 + 1);
+    do Memory.poke(memAddr + 2617, 127);
+    do Memory.poke(memAddr + 2618, 32640);
+    do Memory.poke(memAddr + 2623, 14848);
+    do Memory.poke(memAddr + 2624, 92);
+    let i = 2629;
+    while(i < 2631){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2631, -16);
+    do Memory.poke(memAddr + 2632, -1);
+    do Memory.poke(memAddr + 2633, 127);
+    do Memory.poke(memAddr + 2634, 32760);
+    do Memory.poke(memAddr + 2635, -2048);
+    do Memory.poke(memAddr + 2636, 63);
+    do Memory.poke(memAddr + 2637, -256);
+    do Memory.poke(memAddr + 2638, 15);
+    do Memory.poke(memAddr + 2640, -8192);
+    do Memory.poke(memAddr + 2641, 511);
+    do Memory.poke(memAddr + 2642, 992);
+    do Memory.poke(memAddr + 2643, -64);
+    do Memory.poke(memAddr + 2644, 16131);
+    do Memory.poke(memAddr + 2645, -1024);
+    do Memory.poke(memAddr + 2646, -1);
+    do Memory.poke(memAddr + 2647, 8191);
+    do Memory.poke(memAddr + 2648, 32767 + 1);
+    do Memory.poke(memAddr + 2649, 127);
+    do Memory.poke(memAddr + 2650, 32640);
+    do Memory.poke(memAddr + 2655, 14848);
+    do Memory.poke(memAddr + 2656, 92);
+    let i = 2661;
+    while(i < 2663){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2663, 1008);
+    do Memory.poke(memAddr + 2664, -64);
+    do Memory.poke(memAddr + 2665, 127);
+    do Memory.poke(memAddr + 2666, 32760);
+    do Memory.poke(memAddr + 2667, -2048);
+    do Memory.poke(memAddr + 2668, 4095);
+    do Memory.poke(memAddr + 2669, -256);
+    do Memory.poke(memAddr + 2670, 15);
+    do Memory.poke(memAddr + 2671, -1);
+    do Memory.poke(memAddr + 2672, -8191);
+    do Memory.poke(memAddr + 2673, 511);
+    do Memory.poke(memAddr + 2674, -32);
+    do Memory.poke(memAddr + 2675, -4096);
+    do Memory.poke(memAddr + 2676, 16383);
+    do Memory.poke(memAddr + 2677, -1024);
+    do Memory.poke(memAddr + 2678, -1);
+    do Memory.poke(memAddr + 2679, 8191);
+    do Memory.poke(memAddr + 2680, 32767 + 1);
+    do Memory.poke(memAddr + 2681, 127);
+    do Memory.poke(memAddr + 2682, 32640);
+    do Memory.poke(memAddr + 2687, 14848);
+    do Memory.poke(memAddr + 2688, 92);
+    let i = 2693;
+    while(i < 2695){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2695, 1008);
+    do Memory.poke(memAddr + 2696, -64);
+    do Memory.poke(memAddr + 2697, 127);
+    do Memory.poke(memAddr + 2698, 32760);
+    do Memory.poke(memAddr + 2699, -2048);
+    do Memory.poke(memAddr + 2700, 4095);
+    do Memory.poke(memAddr + 2701, -256);
+    do Memory.poke(memAddr + 2702, 15);
+    do Memory.poke(memAddr + 2703, -1);
+    do Memory.poke(memAddr + 2704, -8191);
+    do Memory.poke(memAddr + 2705, 511);
+    do Memory.poke(memAddr + 2706, -32);
+    do Memory.poke(memAddr + 2707, -4096);
+    do Memory.poke(memAddr + 2708, 16383);
+    do Memory.poke(memAddr + 2709, -1024);
+    do Memory.poke(memAddr + 2710, -1);
+    do Memory.poke(memAddr + 2711, 8191);
+    do Memory.poke(memAddr + 2712, 32767 + 1);
+    do Memory.poke(memAddr + 2713, 127);
+    do Memory.poke(memAddr + 2714, 32640);
+    do Memory.poke(memAddr + 2719, 14848);
+    do Memory.poke(memAddr + 2720, 92);
+    let i = 2725;
+    while(i < 2727){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2727, 1008);
+    do Memory.poke(memAddr + 2728, -64);
+    do Memory.poke(memAddr + 2729, 127);
+    do Memory.poke(memAddr + 2730, 32760);
+    do Memory.poke(memAddr + 2731, -2048);
+    do Memory.poke(memAddr + 2732, 4095);
+    do Memory.poke(memAddr + 2733, -256);
+    do Memory.poke(memAddr + 2734, 15);
+    do Memory.poke(memAddr + 2735, -1);
+    do Memory.poke(memAddr + 2736, -8191);
+    do Memory.poke(memAddr + 2737, 511);
+    do Memory.poke(memAddr + 2738, -32);
+    do Memory.poke(memAddr + 2739, -4096);
+    do Memory.poke(memAddr + 2740, 16383);
+    do Memory.poke(memAddr + 2741, -1024);
+    do Memory.poke(memAddr + 2742, -1);
+    do Memory.poke(memAddr + 2743, 8191);
+    let i = 2745;
+    while(i < 2747){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2751, 14848);
+    do Memory.poke(memAddr + 2752, 92);
+    let i = 2757;
+    while(i < 2759){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2759, 1008);
+    do Memory.poke(memAddr + 2760, -64);
+    do Memory.poke(memAddr + 2761, 127);
+    do Memory.poke(memAddr + 2762, 32760);
+    do Memory.poke(memAddr + 2763, -2048);
+    do Memory.poke(memAddr + 2764, 4095);
+    do Memory.poke(memAddr + 2765, -256);
+    do Memory.poke(memAddr + 2766, 15);
+    do Memory.poke(memAddr + 2767, -1);
+    do Memory.poke(memAddr + 2768, -8191);
+    do Memory.poke(memAddr + 2769, 511);
+    do Memory.poke(memAddr + 2770, -32);
+    do Memory.poke(memAddr + 2771, -4096);
+    do Memory.poke(memAddr + 2772, 16383);
+    do Memory.poke(memAddr + 2773, -1024);
+    do Memory.poke(memAddr + 2774, -1);
+    do Memory.poke(memAddr + 2775, 8191);
+    let i = 2777;
+    while(i < 2779){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2783, 14848);
+    do Memory.poke(memAddr + 2784, 92);
+    let i = 2789;
+    while(i < 2791){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2791, 1008);
+    do Memory.poke(memAddr + 2792, -64);
+    do Memory.poke(memAddr + 2793, 127);
+    do Memory.poke(memAddr + 2794, 32760);
+    do Memory.poke(memAddr + 2795, -2048);
+    do Memory.poke(memAddr + 2796, 4095);
+    do Memory.poke(memAddr + 2797, -256);
+    do Memory.poke(memAddr + 2798, 15);
+    do Memory.poke(memAddr + 2799, -1);
+    do Memory.poke(memAddr + 2800, -8191);
+    do Memory.poke(memAddr + 2801, 511);
+    do Memory.poke(memAddr + 2802, -32);
+    do Memory.poke(memAddr + 2803, -4096);
+    do Memory.poke(memAddr + 2804, 16383);
+    do Memory.poke(memAddr + 2805, -1024);
+    do Memory.poke(memAddr + 2806, -1);
+    do Memory.poke(memAddr + 2807, 8191);
+    let i = 2809;
+    while(i < 2811){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2815, 14848);
+    do Memory.poke(memAddr + 2816, 92);
+    let i = 2821;
+    while(i < 2823){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2823, -16);
+    do Memory.poke(memAddr + 2825, -8192);
+    do Memory.poke(memAddr + 2826, 32767);
+    do Memory.poke(memAddr + 2827, -2048);
+    do Memory.poke(memAddr + 2828, 4095);
+    do Memory.poke(memAddr + 2829, -256);
+    do Memory.poke(memAddr + 2830, 15);
+    do Memory.poke(memAddr + 2831, -1);
+    do Memory.poke(memAddr + 2832, -8191);
+    do Memory.poke(memAddr + 2833, 511);
+    do Memory.poke(memAddr + 2834, -32);
+    do Memory.poke(memAddr + 2835, 63);
+    do Memory.poke(memAddr + 2836, 16380);
+    do Memory.poke(memAddr + 2839, -128);
+    do Memory.poke(memAddr + 2840, 7);
+    let i = 2841;
+    while(i < 2843){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2847, 14848);
+    do Memory.poke(memAddr + 2848, 92);
+    let i = 2853;
+    while(i < 2855){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2855, -16);
+    do Memory.poke(memAddr + 2857, -8192);
+    do Memory.poke(memAddr + 2858, 32767);
+    do Memory.poke(memAddr + 2859, -2048);
+    do Memory.poke(memAddr + 2860, 4095);
+    do Memory.poke(memAddr + 2861, -256);
+    do Memory.poke(memAddr + 2862, 15);
+    do Memory.poke(memAddr + 2863, -1);
+    do Memory.poke(memAddr + 2864, -8191);
+    do Memory.poke(memAddr + 2865, 511);
+    do Memory.poke(memAddr + 2866, -32);
+    do Memory.poke(memAddr + 2867, 63);
+    do Memory.poke(memAddr + 2868, 16380);
+    do Memory.poke(memAddr + 2871, -128);
+    do Memory.poke(memAddr + 2872, 7);
+    let i = 2873;
+    while(i < 2875){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2879, 14848);
+    do Memory.poke(memAddr + 2880, 92);
+    let i = 2885;
+    while(i < 2887){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2887, -16);
+    do Memory.poke(memAddr + 2889, -8192);
+    do Memory.poke(memAddr + 2890, 32767);
+    do Memory.poke(memAddr + 2891, -2048);
+    do Memory.poke(memAddr + 2892, 4095);
+    do Memory.poke(memAddr + 2893, -256);
+    do Memory.poke(memAddr + 2894, 15);
+    do Memory.poke(memAddr + 2895, -1);
+    do Memory.poke(memAddr + 2896, -8191);
+    do Memory.poke(memAddr + 2897, 511);
+    do Memory.poke(memAddr + 2898, -32);
+    do Memory.poke(memAddr + 2899, 63);
+    do Memory.poke(memAddr + 2900, 16380);
+    do Memory.poke(memAddr + 2903, -128);
+    do Memory.poke(memAddr + 2904, 7);
+    let i = 2905;
+    while(i < 2907){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2911, 14848);
+    do Memory.poke(memAddr + 2912, 92);
+    let i = 2917;
+    while(i < 2919){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2919, -16);
+    do Memory.poke(memAddr + 2921, -8192);
+    do Memory.poke(memAddr + 2922, 32767);
+    do Memory.poke(memAddr + 2923, -2048);
+    do Memory.poke(memAddr + 2924, 4095);
+    do Memory.poke(memAddr + 2925, -256);
+    do Memory.poke(memAddr + 2926, 15);
+    do Memory.poke(memAddr + 2927, -1);
+    do Memory.poke(memAddr + 2928, -8191);
+    do Memory.poke(memAddr + 2929, 511);
+    do Memory.poke(memAddr + 2930, -32);
+    do Memory.poke(memAddr + 2931, 63);
+    do Memory.poke(memAddr + 2932, 16380);
+    do Memory.poke(memAddr + 2935, -128);
+    do Memory.poke(memAddr + 2936, 7);
+    let i = 2937;
+    while(i < 2939){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2943, 14848);
+    do Memory.poke(memAddr + 2944, 92);
+    let i = 2949;
+    while(i < 2951){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2951, -16);
+    do Memory.poke(memAddr + 2953, -8192);
+    do Memory.poke(memAddr + 2954, 32767);
+    do Memory.poke(memAddr + 2955, -2048);
+    do Memory.poke(memAddr + 2956, 4095);
+    do Memory.poke(memAddr + 2957, -256);
+    do Memory.poke(memAddr + 2958, 15);
+    do Memory.poke(memAddr + 2959, -1);
+    do Memory.poke(memAddr + 2960, -8191);
+    do Memory.poke(memAddr + 2961, 511);
+    do Memory.poke(memAddr + 2962, -32);
+    do Memory.poke(memAddr + 2963, 63);
+    do Memory.poke(memAddr + 2964, 16380);
+    do Memory.poke(memAddr + 2967, -128);
+    do Memory.poke(memAddr + 2968, 7);
+    let i = 2969;
+    while(i < 2971){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2975, 14848);
+    do Memory.poke(memAddr + 2976, 92);
+    let i = 2981;
+    while(i < 2983){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 2983, -16);
+    do Memory.poke(memAddr + 2985, -8192);
+    do Memory.poke(memAddr + 2986, 32767);
+    do Memory.poke(memAddr + 2987, -2048);
+    do Memory.poke(memAddr + 2988, 4095);
+    do Memory.poke(memAddr + 2989, -256);
+    do Memory.poke(memAddr + 2990, 15);
+    do Memory.poke(memAddr + 2991, -1);
+    do Memory.poke(memAddr + 2992, -8191);
+    do Memory.poke(memAddr + 2993, 511);
+    do Memory.poke(memAddr + 2994, -32);
+    do Memory.poke(memAddr + 2995, 63);
+    do Memory.poke(memAddr + 2996, 16380);
+    do Memory.poke(memAddr + 2999, -128);
+    do Memory.poke(memAddr + 3000, 7);
+    let i = 3001;
+    while(i < 3003){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3007, 14848);
+    do Memory.poke(memAddr + 3008, 92);
+    let i = 3013;
+    while(i < 3015){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3015, -1024);
+    let i = 3016;
+    while(i < 3032){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3032, 7);
+    let i = 3033;
+    while(i < 3035){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3039, 14848);
+    do Memory.poke(memAddr + 3040, 92);
+    do Memory.poke(memAddr + 3043, -2048);
+    do Memory.poke(memAddr + 3044, -1);
+    do Memory.poke(memAddr + 3045, 2047);
+    do Memory.poke(memAddr + 3046, 2040);
+    do Memory.poke(memAddr + 3047, -1024);
+    let i = 3048;
+    while(i < 3064){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3064, 7);
+    let i = 3065;
+    while(i < 3067){
+      do Memory.poke(memAddr + i, 2040);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3071, 14848);
+    do Memory.poke(memAddr + 3072, 92);
+    do Memory.poke(memAddr + 3075, -2048);
+    do Memory.poke(memAddr + 3076, -1);
+    do Memory.poke(memAddr + 3077, 2047);
+    do Memory.poke(memAddr + 3078, 2040);
+    do Memory.poke(memAddr + 3079, -1024);
+    let i = 3080;
+    while(i < 3096){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3096, 7);
+    do Memory.poke(memAddr + 3097, 2040);
+    do Memory.poke(memAddr + 3098, -8);
+    do Memory.poke(memAddr + 3099, -1);
+    do Memory.poke(memAddr + 3100, 127);
+    do Memory.poke(memAddr + 3103, 14848);
+    do Memory.poke(memAddr + 3104, 92);
+    do Memory.poke(memAddr + 3107, -2048);
+    do Memory.poke(memAddr + 3108, -1);
+    do Memory.poke(memAddr + 3109, 2047);
+    do Memory.poke(memAddr + 3110, 2040);
+    do Memory.poke(memAddr + 3111, -1024);
+    let i = 3112;
+    while(i < 3128){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3128, 7);
+    do Memory.poke(memAddr + 3129, 2040);
+    do Memory.poke(memAddr + 3130, -8);
+    do Memory.poke(memAddr + 3131, -1);
+    do Memory.poke(memAddr + 3132, 127);
+    do Memory.poke(memAddr + 3135, 14848);
+    do Memory.poke(memAddr + 3136, 92);
+    do Memory.poke(memAddr + 3139, -2048);
+    do Memory.poke(memAddr + 3140, -1);
+    do Memory.poke(memAddr + 3141, 2047);
+    do Memory.poke(memAddr + 3142, 2040);
+    do Memory.poke(memAddr + 3143, -1024);
+    let i = 3144;
+    while(i < 3160){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3160, 7);
+    do Memory.poke(memAddr + 3161, 2040);
+    do Memory.poke(memAddr + 3162, -8);
+    do Memory.poke(memAddr + 3163, -1);
+    do Memory.poke(memAddr + 3164, 127);
+    do Memory.poke(memAddr + 3167, 14848);
+    do Memory.poke(memAddr + 3168, 92);
+    do Memory.poke(memAddr + 3171, -2048);
+    do Memory.poke(memAddr + 3172, -1);
+    do Memory.poke(memAddr + 3173, 2047);
+    do Memory.poke(memAddr + 3174, 2040);
+    do Memory.poke(memAddr + 3175, -1024);
+    let i = 3176;
+    while(i < 3192){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3192, 7);
+    do Memory.poke(memAddr + 3193, 2040);
+    do Memory.poke(memAddr + 3194, -8);
+    do Memory.poke(memAddr + 3195, -1);
+    do Memory.poke(memAddr + 3196, 127);
+    do Memory.poke(memAddr + 3199, 14848);
+    do Memory.poke(memAddr + 3200, 92);
+    do Memory.poke(memAddr + 3203, -2048);
+    do Memory.poke(memAddr + 3204, -1);
+    do Memory.poke(memAddr + 3205, 2047);
+    do Memory.poke(memAddr + 3206, 2040);
+    let i = 3208;
+    while(i < 3210){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3210, -32257);
+    do Memory.poke(memAddr + 3211, -1);
+    do Memory.poke(memAddr + 3212, -4033);
+    let i = 3213;
+    while(i < 3215){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3215, 2047);
+    do Memory.poke(memAddr + 3216, -2);
+    let i = 3217;
+    while(i < 3219){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3219, -64);
+    let i = 3220;
+    while(i < 3224){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3224, 7);
+    do Memory.poke(memAddr + 3225, 2040);
+    do Memory.poke(memAddr + 3226, -8);
+    do Memory.poke(memAddr + 3227, -1);
+    do Memory.poke(memAddr + 3228, 127);
+    do Memory.poke(memAddr + 3231, 14848);
+    do Memory.poke(memAddr + 3232, 92);
+    do Memory.poke(memAddr + 3235, -2048);
+    do Memory.poke(memAddr + 3236, -1);
+    do Memory.poke(memAddr + 3237, 2047);
+    do Memory.poke(memAddr + 3238, 2040);
+    let i = 3240;
+    while(i < 3242){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3242, -32257);
+    do Memory.poke(memAddr + 3243, -1);
+    do Memory.poke(memAddr + 3244, -4033);
+    let i = 3245;
+    while(i < 3247){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3247, 2047);
+    do Memory.poke(memAddr + 3248, -2);
+    let i = 3249;
+    while(i < 3251){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3251, -64);
+    let i = 3252;
+    while(i < 3256){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3256, 7);
+    do Memory.poke(memAddr + 3257, 2040);
+    do Memory.poke(memAddr + 3258, -8);
+    do Memory.poke(memAddr + 3259, -1);
+    do Memory.poke(memAddr + 3260, 127);
+    do Memory.poke(memAddr + 3263, 14848);
+    do Memory.poke(memAddr + 3264, 92);
+    do Memory.poke(memAddr + 3267, -2048);
+    do Memory.poke(memAddr + 3268, -1);
+    do Memory.poke(memAddr + 3269, 2047);
+    do Memory.poke(memAddr + 3270, 2040);
+    let i = 3272;
+    while(i < 3274){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3274, -32257);
+    do Memory.poke(memAddr + 3275, -1);
+    do Memory.poke(memAddr + 3276, -4033);
+    let i = 3277;
+    while(i < 3279){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3279, 2047);
+    do Memory.poke(memAddr + 3280, -2);
+    let i = 3281;
+    while(i < 3283){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3283, -64);
+    let i = 3284;
+    while(i < 3288){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3288, 7);
+    do Memory.poke(memAddr + 3289, 2040);
+    do Memory.poke(memAddr + 3290, -8);
+    do Memory.poke(memAddr + 3291, -1);
+    do Memory.poke(memAddr + 3292, 127);
+    do Memory.poke(memAddr + 3295, 14848);
+    do Memory.poke(memAddr + 3296, 92);
+    do Memory.poke(memAddr + 3299, -2048);
+    do Memory.poke(memAddr + 3300, 7);
+    do Memory.poke(memAddr + 3302, 2040);
+    let i = 3304;
+    while(i < 3306){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3306, -32257);
+    do Memory.poke(memAddr + 3307, -1);
+    do Memory.poke(memAddr + 3308, -4033);
+    let i = 3309;
+    while(i < 3311){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3311, 2047);
+    do Memory.poke(memAddr + 3312, -2);
+    let i = 3313;
+    while(i < 3315){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3315, -64);
+    let i = 3316;
+    while(i < 3320){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3320, 7);
+    do Memory.poke(memAddr + 3321, 2040);
+    do Memory.poke(memAddr + 3322, -8);
+    do Memory.poke(memAddr + 3323, -1);
+    do Memory.poke(memAddr + 3324, 127);
+    do Memory.poke(memAddr + 3327, 14848);
+    do Memory.poke(memAddr + 3328, 92);
+    do Memory.poke(memAddr + 3331, -2048);
+    do Memory.poke(memAddr + 3332, 7);
+    do Memory.poke(memAddr + 3334, 2040);
+    let i = 3336;
+    while(i < 3338){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3338, -32257);
+    do Memory.poke(memAddr + 3339, -1);
+    do Memory.poke(memAddr + 3340, -4033);
+    let i = 3341;
+    while(i < 3343){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3343, 2047);
+    do Memory.poke(memAddr + 3344, -2);
+    let i = 3345;
+    while(i < 3347){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3347, -64);
+    let i = 3348;
+    while(i < 3352){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3352, 7);
+    do Memory.poke(memAddr + 3353, 2040);
+    do Memory.poke(memAddr + 3355, 32767 + 1);
+    do Memory.poke(memAddr + 3356, 127);
+    do Memory.poke(memAddr + 3359, 14848);
+    do Memory.poke(memAddr + 3360, 92);
+    do Memory.poke(memAddr + 3363, -2048);
+    do Memory.poke(memAddr + 3364, 7);
+    do Memory.poke(memAddr + 3366, 2040);
+    let i = 3368;
+    while(i < 3370){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3370, -32257);
+    do Memory.poke(memAddr + 3371, -1);
+    do Memory.poke(memAddr + 3372, -4033);
+    let i = 3373;
+    while(i < 3375){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3375, 2047);
+    do Memory.poke(memAddr + 3376, -2);
+    let i = 3377;
+    while(i < 3379){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3379, -64);
+    let i = 3380;
+    while(i < 3384){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3384, 7);
+    do Memory.poke(memAddr + 3385, 2040);
+    do Memory.poke(memAddr + 3387, 32767 + 1);
+    do Memory.poke(memAddr + 3388, 127);
+    do Memory.poke(memAddr + 3391, 14848);
+    do Memory.poke(memAddr + 3392, 92);
+    do Memory.poke(memAddr + 3395, -2048);
+    do Memory.poke(memAddr + 3396, 7);
+    do Memory.poke(memAddr + 3398, 2040);
+    do Memory.poke(memAddr + 3417, 2040);
+    do Memory.poke(memAddr + 3419, 32767 + 1);
+    do Memory.poke(memAddr + 3420, 127);
+    do Memory.poke(memAddr + 3423, 14848);
+    do Memory.poke(memAddr + 3424, 92);
+    do Memory.poke(memAddr + 3427, -2048);
+    do Memory.poke(memAddr + 3428, 7);
+    do Memory.poke(memAddr + 3430, 2040);
+    do Memory.poke(memAddr + 3449, 2040);
+    do Memory.poke(memAddr + 3451, 32767 + 1);
+    do Memory.poke(memAddr + 3452, 127);
+    do Memory.poke(memAddr + 3455, 14848);
+    do Memory.poke(memAddr + 3456, 92);
+    do Memory.poke(memAddr + 3459, -2048);
+    do Memory.poke(memAddr + 3460, 7);
+    do Memory.poke(memAddr + 3462, 2040);
+    do Memory.poke(memAddr + 3481, 2040);
+    do Memory.poke(memAddr + 3483, 32767 + 1);
+    do Memory.poke(memAddr + 3484, 127);
+    do Memory.poke(memAddr + 3487, 14848);
+    do Memory.poke(memAddr + 3488, 92);
+    do Memory.poke(memAddr + 3491, -2048);
+    do Memory.poke(memAddr + 3492, 7);
+    do Memory.poke(memAddr + 3494, 2040);
+    do Memory.poke(memAddr + 3513, 2040);
+    do Memory.poke(memAddr + 3515, 32767 + 1);
+    do Memory.poke(memAddr + 3516, 127);
+    do Memory.poke(memAddr + 3519, 14848);
+    do Memory.poke(memAddr + 3520, 92);
+    do Memory.poke(memAddr + 3523, -2048);
+    do Memory.poke(memAddr + 3524, 7);
+    do Memory.poke(memAddr + 3526, 2040);
+    do Memory.poke(memAddr + 3545, 2040);
+    do Memory.poke(memAddr + 3547, 32767 + 1);
+    do Memory.poke(memAddr + 3548, 127);
+    do Memory.poke(memAddr + 3551, 14848);
+    do Memory.poke(memAddr + 3552, 92);
+    do Memory.poke(memAddr + 3555, -2048);
+    do Memory.poke(memAddr + 3556, -2041);
+    do Memory.poke(memAddr + 3557, -1);
+    do Memory.poke(memAddr + 3558, 2047);
+    do Memory.poke(memAddr + 3577, 2040);
+    do Memory.poke(memAddr + 3579, 32767 + 1);
+    do Memory.poke(memAddr + 3580, 127);
+    do Memory.poke(memAddr + 3583, 14848);
+    do Memory.poke(memAddr + 3584, 92);
+    do Memory.poke(memAddr + 3587, -2048);
+    do Memory.poke(memAddr + 3588, -2041);
+    do Memory.poke(memAddr + 3589, -1);
+    do Memory.poke(memAddr + 3590, 2047);
+    do Memory.poke(memAddr + 3609, -8);
+    do Memory.poke(memAddr + 3610, -1);
+    do Memory.poke(memAddr + 3611, -32641);
+    do Memory.poke(memAddr + 3612, 127);
+    do Memory.poke(memAddr + 3615, 14848);
+    do Memory.poke(memAddr + 3616, 92);
+    do Memory.poke(memAddr + 3619, -2048);
+    do Memory.poke(memAddr + 3620, -2041);
+    do Memory.poke(memAddr + 3621, -1);
+    do Memory.poke(memAddr + 3622, 2047);
+    do Memory.poke(memAddr + 3641, -8);
+    do Memory.poke(memAddr + 3642, -1);
+    do Memory.poke(memAddr + 3643, -32641);
+    do Memory.poke(memAddr + 3644, 127);
+    do Memory.poke(memAddr + 3647, 14848);
+    do Memory.poke(memAddr + 3648, 92);
+    do Memory.poke(memAddr + 3651, -2048);
+    do Memory.poke(memAddr + 3652, -2041);
+    do Memory.poke(memAddr + 3653, -1);
+    do Memory.poke(memAddr + 3654, 2047);
+    do Memory.poke(memAddr + 3673, -8);
+    do Memory.poke(memAddr + 3674, -1);
+    do Memory.poke(memAddr + 3675, -32641);
+    do Memory.poke(memAddr + 3676, 127);
+    do Memory.poke(memAddr + 3679, 14848);
+    do Memory.poke(memAddr + 3680, 92);
+    do Memory.poke(memAddr + 3683, -2048);
+    do Memory.poke(memAddr + 3684, -2041);
+    do Memory.poke(memAddr + 3685, -1);
+    do Memory.poke(memAddr + 3686, 2047);
+    do Memory.poke(memAddr + 3705, -8);
+    do Memory.poke(memAddr + 3706, -1);
+    do Memory.poke(memAddr + 3707, -32641);
+    do Memory.poke(memAddr + 3708, 127);
+    do Memory.poke(memAddr + 3711, 14848);
+    do Memory.poke(memAddr + 3712, 92);
+    do Memory.poke(memAddr + 3715, -2048);
+    do Memory.poke(memAddr + 3716, -2041);
+    do Memory.poke(memAddr + 3717, -1);
+    do Memory.poke(memAddr + 3718, 2047);
+    do Memory.poke(memAddr + 3737, -8);
+    do Memory.poke(memAddr + 3738, -1);
+    do Memory.poke(memAddr + 3739, -32641);
+    do Memory.poke(memAddr + 3740, 127);
+    do Memory.poke(memAddr + 3743, 14848);
+    do Memory.poke(memAddr + 3744, 92);
+    do Memory.poke(memAddr + 3747, -2048);
+    do Memory.poke(memAddr + 3748, -2041);
+    do Memory.poke(memAddr + 3749, -1);
+    do Memory.poke(memAddr + 3750, 2047);
+    do Memory.poke(memAddr + 3769, -8);
+    do Memory.poke(memAddr + 3770, -1);
+    do Memory.poke(memAddr + 3771, -32641);
+    do Memory.poke(memAddr + 3772, 127);
+    do Memory.poke(memAddr + 3775, 14848);
+    do Memory.poke(memAddr + 3776, 92);
+    do Memory.poke(memAddr + 3779, -2048);
+    do Memory.poke(memAddr + 3780, -2041);
+    do Memory.poke(memAddr + 3781, -1);
+    do Memory.poke(memAddr + 3782, 2047);
+    do Memory.poke(memAddr + 3801, -8);
+    do Memory.poke(memAddr + 3802, -1);
+    do Memory.poke(memAddr + 3803, -32641);
+    do Memory.poke(memAddr + 3804, 127);
+    do Memory.poke(memAddr + 3807, 14848);
+    do Memory.poke(memAddr + 3808, 92);
+    do Memory.poke(memAddr + 3811, -2048);
+    do Memory.poke(memAddr + 3812, -2041);
+    do Memory.poke(memAddr + 3813, 7);
+    do Memory.poke(memAddr + 3834, 32767 + 1);
+    do Memory.poke(memAddr + 3835, -32641);
+    do Memory.poke(memAddr + 3836, 127);
+    do Memory.poke(memAddr + 3839, 14848);
+    do Memory.poke(memAddr + 3840, 92);
+    do Memory.poke(memAddr + 3843, -2048);
+    do Memory.poke(memAddr + 3844, -2041);
+    do Memory.poke(memAddr + 3845, 7);
+    do Memory.poke(memAddr + 3866, 32767 + 1);
+    do Memory.poke(memAddr + 3867, -32641);
+    do Memory.poke(memAddr + 3868, 127);
+    do Memory.poke(memAddr + 3871, 14848);
+    do Memory.poke(memAddr + 3872, 92);
+    do Memory.poke(memAddr + 3875, -2048);
+    do Memory.poke(memAddr + 3876, -2041);
+    do Memory.poke(memAddr + 3877, 7);
+    do Memory.poke(memAddr + 3898, 32767 + 1);
+    do Memory.poke(memAddr + 3899, -32641);
+    do Memory.poke(memAddr + 3900, 127);
+    do Memory.poke(memAddr + 3903, 14848);
+    do Memory.poke(memAddr + 3904, 92);
+    do Memory.poke(memAddr + 3907, -2048);
+    do Memory.poke(memAddr + 3908, -2041);
+    do Memory.poke(memAddr + 3909, 7);
+    do Memory.poke(memAddr + 3930, 32767 + 1);
+    do Memory.poke(memAddr + 3931, -32641);
+    do Memory.poke(memAddr + 3932, 127);
+    do Memory.poke(memAddr + 3935, 14848);
+    do Memory.poke(memAddr + 3936, 92);
+    do Memory.poke(memAddr + 3939, -2048);
+    do Memory.poke(memAddr + 3940, -2041);
+    let i = 3941;
+    while(i < 3951){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3951, 32767);
+    do Memory.poke(memAddr + 3952, -8);
+    let i = 3953;
+    while(i < 3955){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3955, -1921);
+    let i = 3956;
+    while(i < 3958){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3958, 32767);
+    do Memory.poke(memAddr + 3959, -128);
+    let i = 3960;
+    while(i < 3962){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3962, -30721);
+    do Memory.poke(memAddr + 3963, -32641);
+    do Memory.poke(memAddr + 3964, 127);
+    do Memory.poke(memAddr + 3967, 14848);
+    do Memory.poke(memAddr + 3968, 92);
+    do Memory.poke(memAddr + 3971, -2048);
+    do Memory.poke(memAddr + 3972, -2041);
+    let i = 3973;
+    while(i < 3983){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3983, 32767);
+    do Memory.poke(memAddr + 3984, -8);
+    let i = 3985;
+    while(i < 3987){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3987, -1921);
+    let i = 3988;
+    while(i < 3990){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3990, 32767);
+    do Memory.poke(memAddr + 3991, -128);
+    let i = 3992;
+    while(i < 3994){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 3994, -30721);
+    do Memory.poke(memAddr + 3995, -32641);
+    do Memory.poke(memAddr + 3996, 127);
+    do Memory.poke(memAddr + 3999, 14848);
+    do Memory.poke(memAddr + 4000, 92);
+    do Memory.poke(memAddr + 4003, -2048);
+    do Memory.poke(memAddr + 4004, -2041);
+    let i = 4005;
+    while(i < 4015){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4015, 32767);
+    do Memory.poke(memAddr + 4016, -8);
+    let i = 4017;
+    while(i < 4019){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4019, -1921);
+    let i = 4020;
+    while(i < 4022){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4022, 32767);
+    do Memory.poke(memAddr + 4023, -128);
+    let i = 4024;
+    while(i < 4026){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4026, -30721);
+    do Memory.poke(memAddr + 4027, -32641);
+    do Memory.poke(memAddr + 4028, 127);
+    do Memory.poke(memAddr + 4031, 14848);
+    do Memory.poke(memAddr + 4032, 92);
+    do Memory.poke(memAddr + 4035, -2048);
+    do Memory.poke(memAddr + 4036, -2041);
+    let i = 4037;
+    while(i < 4047){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4047, 32767);
+    do Memory.poke(memAddr + 4048, -8);
+    let i = 4049;
+    while(i < 4051){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4051, -1921);
+    let i = 4052;
+    while(i < 4054){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4054, 32767);
+    do Memory.poke(memAddr + 4055, -128);
+    let i = 4056;
+    while(i < 4058){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4058, -30721);
+    do Memory.poke(memAddr + 4059, -32641);
+    do Memory.poke(memAddr + 4060, 127);
+    do Memory.poke(memAddr + 4063, 14848);
+    do Memory.poke(memAddr + 4064, 92);
+    do Memory.poke(memAddr + 4067, -2048);
+    do Memory.poke(memAddr + 4068, -2041);
+    let i = 4069;
+    while(i < 4079){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4079, 32767);
+    do Memory.poke(memAddr + 4080, -8);
+    let i = 4081;
+    while(i < 4083){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4083, -1921);
+    let i = 4084;
+    while(i < 4086){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4086, 32767);
+    do Memory.poke(memAddr + 4087, -128);
+    let i = 4088;
+    while(i < 4090){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4090, -30721);
+    do Memory.poke(memAddr + 4091, -32641);
+    do Memory.poke(memAddr + 4092, 127);
+    do Memory.poke(memAddr + 4095, 14848);
+    do Memory.poke(memAddr + 4096, 92);
+    do Memory.poke(memAddr + 4099, -2048);
+    do Memory.poke(memAddr + 4100, -2041);
+    let i = 4101;
+    while(i < 4111){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4111, 32767);
+    do Memory.poke(memAddr + 4112, -8);
+    let i = 4113;
+    while(i < 4115){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4115, -1921);
+    let i = 4116;
+    while(i < 4118){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4118, 32767);
+    do Memory.poke(memAddr + 4119, -128);
+    let i = 4120;
+    while(i < 4122){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4122, -30721);
+    do Memory.poke(memAddr + 4123, -32641);
+    do Memory.poke(memAddr + 4124, 127);
+    do Memory.poke(memAddr + 4127, 14848);
+    do Memory.poke(memAddr + 4128, 92);
+    do Memory.poke(memAddr + 4131, -2048);
+    do Memory.poke(memAddr + 4132, -2041);
+    let i = 4133;
+    while(i < 4143){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4143, 32767);
+    do Memory.poke(memAddr + 4144, -8);
+    let i = 4145;
+    while(i < 4147){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4147, -1921);
+    let i = 4148;
+    while(i < 4150){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4150, 32767);
+    do Memory.poke(memAddr + 4151, -128);
+    let i = 4152;
+    while(i < 4154){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4154, -30721);
+    do Memory.poke(memAddr + 4155, -32641);
+    do Memory.poke(memAddr + 4156, 127);
+    do Memory.poke(memAddr + 4159, 14848);
+    do Memory.poke(memAddr + 4160, 92);
+    do Memory.poke(memAddr + 4163, -2048);
+    do Memory.poke(memAddr + 4164, -2041);
+    let i = 4165;
+    while(i < 4175){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4175, 32767);
+    do Memory.poke(memAddr + 4176, -8);
+    let i = 4177;
+    while(i < 4179){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4179, -1921);
+    let i = 4180;
+    while(i < 4182){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4182, 32767);
+    do Memory.poke(memAddr + 4183, -128);
+    let i = 4184;
+    while(i < 4186){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4186, -30721);
+    do Memory.poke(memAddr + 4187, -32641);
+    do Memory.poke(memAddr + 4188, 127);
+    do Memory.poke(memAddr + 4191, 14848);
+    do Memory.poke(memAddr + 4192, 92);
+    do Memory.poke(memAddr + 4195, -2048);
+    do Memory.poke(memAddr + 4196, 7);
+    do Memory.poke(memAddr + 4207, 32640);
+    do Memory.poke(memAddr + 4208, 2040);
+    do Memory.poke(memAddr + 4210, 32767 + 1);
+    do Memory.poke(memAddr + 4211, -1921);
+    do Memory.poke(memAddr + 4212, 7);
+    let i = 4214;
+    while(i < 4216){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4218, -30728);
+    do Memory.poke(memAddr + 4219, -32641);
+    do Memory.poke(memAddr + 4220, 127);
+    do Memory.poke(memAddr + 4223, 14848);
+    do Memory.poke(memAddr + 4224, 92);
+    do Memory.poke(memAddr + 4227, -2048);
+    do Memory.poke(memAddr + 4228, 7);
+    do Memory.poke(memAddr + 4239, 32640);
+    do Memory.poke(memAddr + 4240, 2040);
+    do Memory.poke(memAddr + 4242, 32767 + 1);
+    do Memory.poke(memAddr + 4243, -1921);
+    do Memory.poke(memAddr + 4244, 7);
+    let i = 4246;
+    while(i < 4248){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4250, -30728);
+    do Memory.poke(memAddr + 4251, -32641);
+    do Memory.poke(memAddr + 4252, 127);
+    do Memory.poke(memAddr + 4255, 14848);
+    do Memory.poke(memAddr + 4256, 92);
+    do Memory.poke(memAddr + 4259, -2048);
+    do Memory.poke(memAddr + 4260, 7);
+    do Memory.poke(memAddr + 4271, 32640);
+    do Memory.poke(memAddr + 4272, 2040);
+    do Memory.poke(memAddr + 4274, 32767 + 1);
+    do Memory.poke(memAddr + 4275, -1921);
+    do Memory.poke(memAddr + 4276, 7);
+    let i = 4278;
+    while(i < 4280){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4282, -30728);
+    do Memory.poke(memAddr + 4283, -32641);
+    do Memory.poke(memAddr + 4284, 127);
+    do Memory.poke(memAddr + 4287, 14848);
+    do Memory.poke(memAddr + 4288, 92);
+    do Memory.poke(memAddr + 4291, -2048);
+    do Memory.poke(memAddr + 4292, 7);
+    do Memory.poke(memAddr + 4303, 32640);
+    do Memory.poke(memAddr + 4304, 2040);
+    do Memory.poke(memAddr + 4306, 32767 + 1);
+    do Memory.poke(memAddr + 4307, -1921);
+    do Memory.poke(memAddr + 4308, 7);
+    let i = 4310;
+    while(i < 4312){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4314, -30728);
+    do Memory.poke(memAddr + 4315, -32641);
+    do Memory.poke(memAddr + 4316, 127);
+    do Memory.poke(memAddr + 4319, 14848);
+    do Memory.poke(memAddr + 4320, 92);
+    do Memory.poke(memAddr + 4323, -2048);
+    do Memory.poke(memAddr + 4324, 7);
+    do Memory.poke(memAddr + 4335, 32640);
+    do Memory.poke(memAddr + 4336, 2040);
+    do Memory.poke(memAddr + 4338, 32767 + 1);
+    do Memory.poke(memAddr + 4339, -1921);
+    do Memory.poke(memAddr + 4340, 7);
+    let i = 4342;
+    while(i < 4344){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4346, -30728);
+    do Memory.poke(memAddr + 4347, -32641);
+    do Memory.poke(memAddr + 4348, 127);
+    do Memory.poke(memAddr + 4351, 14848);
+    do Memory.poke(memAddr + 4352, 92);
+    do Memory.poke(memAddr + 4355, -2048);
+    do Memory.poke(memAddr + 4356, 7);
+    do Memory.poke(memAddr + 4367, 32640);
+    do Memory.poke(memAddr + 4368, 2040);
+    do Memory.poke(memAddr + 4370, 32767 + 1);
+    do Memory.poke(memAddr + 4371, -1921);
+    do Memory.poke(memAddr + 4372, 7);
+    let i = 4374;
+    while(i < 4376){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4378, -30728);
+    do Memory.poke(memAddr + 4379, -32641);
+    do Memory.poke(memAddr + 4380, 127);
+    do Memory.poke(memAddr + 4383, 14848);
+    do Memory.poke(memAddr + 4384, 92);
+    do Memory.poke(memAddr + 4387, -2048);
+    do Memory.poke(memAddr + 4388, 7);
+    do Memory.poke(memAddr + 4399, 32640);
+    do Memory.poke(memAddr + 4400, 2040);
+    do Memory.poke(memAddr + 4402, 32767 + 1);
+    do Memory.poke(memAddr + 4403, -1921);
+    do Memory.poke(memAddr + 4404, 7);
+    let i = 4406;
+    while(i < 4408){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4410, -30728);
+    do Memory.poke(memAddr + 4411, -32641);
+    do Memory.poke(memAddr + 4412, 127);
+    do Memory.poke(memAddr + 4415, 14848);
+    do Memory.poke(memAddr + 4416, 92);
+    do Memory.poke(memAddr + 4419, -2048);
+    do Memory.poke(memAddr + 4420, 7);
+    do Memory.poke(memAddr + 4431, 32640);
+    do Memory.poke(memAddr + 4432, 2040);
+    do Memory.poke(memAddr + 4434, 32767 + 1);
+    do Memory.poke(memAddr + 4435, -1921);
+    do Memory.poke(memAddr + 4436, 7);
+    let i = 4438;
+    while(i < 4440){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4442, -30728);
+    do Memory.poke(memAddr + 4443, -32641);
+    do Memory.poke(memAddr + 4444, 127);
+    do Memory.poke(memAddr + 4447, 14848);
+    do Memory.poke(memAddr + 4448, 92);
+    do Memory.poke(memAddr + 4451, -2048);
+    let i = 4452;
+    while(i < 4462){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4462, 32767);
+    do Memory.poke(memAddr + 4463, 32640);
+    do Memory.poke(memAddr + 4464, 2040);
+    do Memory.poke(memAddr + 4465, -8);
+    do Memory.poke(memAddr + 4466, -32641);
+    do Memory.poke(memAddr + 4467, -1921);
+    do Memory.poke(memAddr + 4468, -2041);
+    do Memory.poke(memAddr + 4469, 32767);
+    let i = 4470;
+    while(i < 4472){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4472, -128);
+    do Memory.poke(memAddr + 4473, 2047);
+    do Memory.poke(memAddr + 4474, -30728);
+    do Memory.poke(memAddr + 4475, -32641);
+    do Memory.poke(memAddr + 4476, 127);
+    do Memory.poke(memAddr + 4479, 14848);
+    do Memory.poke(memAddr + 4480, 92);
+    do Memory.poke(memAddr + 4483, -2048);
+    let i = 4484;
+    while(i < 4494){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4494, 32767);
+    do Memory.poke(memAddr + 4495, 32640);
+    do Memory.poke(memAddr + 4496, 2040);
+    do Memory.poke(memAddr + 4497, -8);
+    do Memory.poke(memAddr + 4498, -32641);
+    do Memory.poke(memAddr + 4499, -1921);
+    do Memory.poke(memAddr + 4500, -2041);
+    do Memory.poke(memAddr + 4501, 32767);
+    let i = 4502;
+    while(i < 4504){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4504, -128);
+    do Memory.poke(memAddr + 4505, 2047);
+    do Memory.poke(memAddr + 4506, -30728);
+    do Memory.poke(memAddr + 4507, -32641);
+    do Memory.poke(memAddr + 4508, 127);
+    do Memory.poke(memAddr + 4511, 14848);
+    do Memory.poke(memAddr + 4512, 92);
+    do Memory.poke(memAddr + 4515, -2048);
+    let i = 4516;
+    while(i < 4526){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4526, 32767);
+    do Memory.poke(memAddr + 4527, 32640);
+    do Memory.poke(memAddr + 4528, 2040);
+    do Memory.poke(memAddr + 4529, -8);
+    do Memory.poke(memAddr + 4530, -32641);
+    do Memory.poke(memAddr + 4531, -1921);
+    do Memory.poke(memAddr + 4532, -2041);
+    do Memory.poke(memAddr + 4533, 32767);
+    let i = 4534;
+    while(i < 4536){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4536, -128);
+    do Memory.poke(memAddr + 4537, 2047);
+    do Memory.poke(memAddr + 4538, -30728);
+    do Memory.poke(memAddr + 4539, -32641);
+    do Memory.poke(memAddr + 4540, 127);
+    do Memory.poke(memAddr + 4543, 14848);
+    do Memory.poke(memAddr + 4544, 92);
+    do Memory.poke(memAddr + 4547, -2048);
+    let i = 4548;
+    while(i < 4558){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4558, 32767);
+    do Memory.poke(memAddr + 4559, 32640);
+    do Memory.poke(memAddr + 4560, 2040);
+    do Memory.poke(memAddr + 4561, -8);
+    do Memory.poke(memAddr + 4562, -32641);
+    do Memory.poke(memAddr + 4563, -1921);
+    do Memory.poke(memAddr + 4564, -2041);
+    do Memory.poke(memAddr + 4565, 32767);
+    let i = 4566;
+    while(i < 4568){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4568, -128);
+    do Memory.poke(memAddr + 4569, 2047);
+    do Memory.poke(memAddr + 4570, -30728);
+    do Memory.poke(memAddr + 4571, -32641);
+    do Memory.poke(memAddr + 4572, 127);
+    do Memory.poke(memAddr + 4575, 14848);
+    do Memory.poke(memAddr + 4576, 92);
+    do Memory.poke(memAddr + 4579, -2048);
+    let i = 4580;
+    while(i < 4590){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4590, 32767);
+    do Memory.poke(memAddr + 4591, 32640);
+    do Memory.poke(memAddr + 4592, 2040);
+    do Memory.poke(memAddr + 4593, -8);
+    do Memory.poke(memAddr + 4594, -32641);
+    do Memory.poke(memAddr + 4595, -1921);
+    do Memory.poke(memAddr + 4596, -2041);
+    do Memory.poke(memAddr + 4597, 32767);
+    let i = 4598;
+    while(i < 4600){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4600, -128);
+    do Memory.poke(memAddr + 4601, 2047);
+    do Memory.poke(memAddr + 4602, -30728);
+    do Memory.poke(memAddr + 4603, -32641);
+    do Memory.poke(memAddr + 4604, 127);
+    do Memory.poke(memAddr + 4607, 14848);
+    do Memory.poke(memAddr + 4608, 92);
+    do Memory.poke(memAddr + 4611, -2048);
+    let i = 4612;
+    while(i < 4622){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4622, 32767);
+    do Memory.poke(memAddr + 4623, 32640);
+    do Memory.poke(memAddr + 4624, 2040);
+    do Memory.poke(memAddr + 4625, -8);
+    do Memory.poke(memAddr + 4626, -32641);
+    do Memory.poke(memAddr + 4627, -1921);
+    do Memory.poke(memAddr + 4628, -2041);
+    do Memory.poke(memAddr + 4629, 32767);
+    let i = 4630;
+    while(i < 4632){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4632, -128);
+    do Memory.poke(memAddr + 4633, 2047);
+    do Memory.poke(memAddr + 4634, -30728);
+    do Memory.poke(memAddr + 4635, -32641);
+    do Memory.poke(memAddr + 4636, 127);
+    do Memory.poke(memAddr + 4639, 14848);
+    do Memory.poke(memAddr + 4640, 92);
+    do Memory.poke(memAddr + 4643, -2048);
+    let i = 4644;
+    while(i < 4654){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4654, 32767);
+    do Memory.poke(memAddr + 4655, 32640);
+    do Memory.poke(memAddr + 4656, 2040);
+    do Memory.poke(memAddr + 4657, -8);
+    do Memory.poke(memAddr + 4658, -32641);
+    do Memory.poke(memAddr + 4659, -1921);
+    do Memory.poke(memAddr + 4660, -2041);
+    do Memory.poke(memAddr + 4661, 32767);
+    let i = 4662;
+    while(i < 4664){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4664, -128);
+    do Memory.poke(memAddr + 4665, 2047);
+    do Memory.poke(memAddr + 4666, -30728);
+    do Memory.poke(memAddr + 4667, -32641);
+    do Memory.poke(memAddr + 4668, 127);
+    do Memory.poke(memAddr + 4671, 14848);
+    do Memory.poke(memAddr + 4672, 92);
+    do Memory.poke(memAddr + 4675, -2048);
+    let i = 4676;
+    while(i < 4686){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4686, 32767);
+    do Memory.poke(memAddr + 4687, 32640);
+    do Memory.poke(memAddr + 4688, 2040);
+    do Memory.poke(memAddr + 4689, -8);
+    do Memory.poke(memAddr + 4690, -32641);
+    do Memory.poke(memAddr + 4691, -1921);
+    do Memory.poke(memAddr + 4692, -2041);
+    do Memory.poke(memAddr + 4693, 32767);
+    let i = 4694;
+    while(i < 4696){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4696, -128);
+    do Memory.poke(memAddr + 4697, 2047);
+    do Memory.poke(memAddr + 4698, -30728);
+    do Memory.poke(memAddr + 4699, -32641);
+    do Memory.poke(memAddr + 4700, 127);
+    do Memory.poke(memAddr + 4703, 14848);
+    do Memory.poke(memAddr + 4704, 92);
+    let i = 4718;
+    while(i < 4720){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4720, 2040);
+    do Memory.poke(memAddr + 4721, -30728);
+    do Memory.poke(memAddr + 4722, -32641);
+    do Memory.poke(memAddr + 4723, -1921);
+    do Memory.poke(memAddr + 4724, -2041);
+    do Memory.poke(memAddr + 4725, 32647);
+    let i = 4726;
+    while(i < 4729){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4729, 2040);
+    do Memory.poke(memAddr + 4730, -30728);
+    do Memory.poke(memAddr + 4731, -32641);
+    do Memory.poke(memAddr + 4732, 127);
+    do Memory.poke(memAddr + 4735, 14848);
+    do Memory.poke(memAddr + 4736, 92);
+    let i = 4750;
+    while(i < 4752){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4752, 2040);
+    do Memory.poke(memAddr + 4753, -30728);
+    do Memory.poke(memAddr + 4754, -32641);
+    do Memory.poke(memAddr + 4755, -1921);
+    do Memory.poke(memAddr + 4756, -2041);
+    do Memory.poke(memAddr + 4757, 32647);
+    let i = 4758;
+    while(i < 4761){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4761, 2040);
+    do Memory.poke(memAddr + 4762, -30728);
+    do Memory.poke(memAddr + 4763, -32641);
+    do Memory.poke(memAddr + 4764, 127);
+    do Memory.poke(memAddr + 4767, 14848);
+    do Memory.poke(memAddr + 4768, 92);
+    let i = 4782;
+    while(i < 4784){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4784, 2040);
+    do Memory.poke(memAddr + 4785, -30728);
+    do Memory.poke(memAddr + 4786, -32641);
+    do Memory.poke(memAddr + 4787, -1921);
+    do Memory.poke(memAddr + 4788, -2041);
+    do Memory.poke(memAddr + 4789, 32647);
+    let i = 4790;
+    while(i < 4793){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4793, 2040);
+    do Memory.poke(memAddr + 4794, -30728);
+    do Memory.poke(memAddr + 4795, -32641);
+    do Memory.poke(memAddr + 4796, 127);
+    do Memory.poke(memAddr + 4799, 14848);
+    do Memory.poke(memAddr + 4800, 92);
+    let i = 4814;
+    while(i < 4816){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4816, 2040);
+    do Memory.poke(memAddr + 4817, -30728);
+    do Memory.poke(memAddr + 4818, -32641);
+    do Memory.poke(memAddr + 4819, -1921);
+    do Memory.poke(memAddr + 4820, -2041);
+    do Memory.poke(memAddr + 4821, 32647);
+    let i = 4822;
+    while(i < 4825){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4825, 2040);
+    do Memory.poke(memAddr + 4826, -30728);
+    do Memory.poke(memAddr + 4827, -32641);
+    do Memory.poke(memAddr + 4828, 127);
+    do Memory.poke(memAddr + 4831, 14848);
+    do Memory.poke(memAddr + 4832, 92);
+    do Memory.poke(memAddr + 4835, -2048);
+    let i = 4836;
+    while(i < 4846){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4846, 32767);
+    do Memory.poke(memAddr + 4847, 32640);
+    do Memory.poke(memAddr + 4848, 2040);
+    do Memory.poke(memAddr + 4849, -30728);
+    do Memory.poke(memAddr + 4850, -32641);
+    do Memory.poke(memAddr + 4851, -1921);
+    do Memory.poke(memAddr + 4852, -2041);
+    do Memory.poke(memAddr + 4853, 32647);
+    let i = 4854;
+    while(i < 4857){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4857, 2040);
+    do Memory.poke(memAddr + 4858, -30728);
+    do Memory.poke(memAddr + 4859, -32641);
+    do Memory.poke(memAddr + 4860, 127);
+    do Memory.poke(memAddr + 4863, 14848);
+    do Memory.poke(memAddr + 4864, 92);
+    do Memory.poke(memAddr + 4867, -2048);
+    let i = 4868;
+    while(i < 4878){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4878, 32767);
+    do Memory.poke(memAddr + 4879, 32640);
+    do Memory.poke(memAddr + 4880, 2040);
+    do Memory.poke(memAddr + 4881, -30728);
+    do Memory.poke(memAddr + 4882, -32641);
+    do Memory.poke(memAddr + 4883, -1921);
+    do Memory.poke(memAddr + 4884, -2041);
+    do Memory.poke(memAddr + 4885, 32647);
+    let i = 4886;
+    while(i < 4889){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4889, 2040);
+    do Memory.poke(memAddr + 4890, -30728);
+    do Memory.poke(memAddr + 4891, -32641);
+    do Memory.poke(memAddr + 4892, 127);
+    do Memory.poke(memAddr + 4895, 14848);
+    do Memory.poke(memAddr + 4896, 92);
+    do Memory.poke(memAddr + 4899, -2048);
+    let i = 4900;
+    while(i < 4910){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4910, 32767);
+    do Memory.poke(memAddr + 4911, 32640);
+    do Memory.poke(memAddr + 4912, 2040);
+    do Memory.poke(memAddr + 4913, -30728);
+    do Memory.poke(memAddr + 4914, -32641);
+    do Memory.poke(memAddr + 4915, -1921);
+    do Memory.poke(memAddr + 4916, -2041);
+    do Memory.poke(memAddr + 4917, 32647);
+    let i = 4918;
+    while(i < 4921){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4921, 2040);
+    do Memory.poke(memAddr + 4922, -30728);
+    do Memory.poke(memAddr + 4923, -32641);
+    do Memory.poke(memAddr + 4924, 127);
+    do Memory.poke(memAddr + 4927, 14848);
+    do Memory.poke(memAddr + 4928, 92);
+    do Memory.poke(memAddr + 4931, -2048);
+    let i = 4932;
+    while(i < 4942){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4942, 32767);
+    do Memory.poke(memAddr + 4943, 32640);
+    do Memory.poke(memAddr + 4944, 2040);
+    do Memory.poke(memAddr + 4945, -30728);
+    do Memory.poke(memAddr + 4946, -32641);
+    do Memory.poke(memAddr + 4947, -1921);
+    do Memory.poke(memAddr + 4948, -2041);
+    do Memory.poke(memAddr + 4949, 32647);
+    let i = 4950;
+    while(i < 4953){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4953, 2040);
+    do Memory.poke(memAddr + 4954, -30728);
+    do Memory.poke(memAddr + 4955, -32641);
+    do Memory.poke(memAddr + 4956, 127);
+    do Memory.poke(memAddr + 4959, 14848);
+    do Memory.poke(memAddr + 4960, 92);
+    do Memory.poke(memAddr + 4963, -2048);
+    let i = 4964;
+    while(i < 4974){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4974, 32767);
+    do Memory.poke(memAddr + 4975, 32640);
+    do Memory.poke(memAddr + 4976, 2040);
+    do Memory.poke(memAddr + 4977, -30728);
+    do Memory.poke(memAddr + 4978, -32641);
+    do Memory.poke(memAddr + 4979, -1921);
+    do Memory.poke(memAddr + 4980, -2041);
+    do Memory.poke(memAddr + 4981, 32647);
+    let i = 4982;
+    while(i < 4985){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 4985, 2040);
+    do Memory.poke(memAddr + 4986, -30728);
+    do Memory.poke(memAddr + 4987, -32641);
+    do Memory.poke(memAddr + 4988, 127);
+    do Memory.poke(memAddr + 4991, 14848);
+    do Memory.poke(memAddr + 4992, 92);
+    do Memory.poke(memAddr + 4995, -2048);
+    let i = 4996;
+    while(i < 5006){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5006, 32767);
+    do Memory.poke(memAddr + 5007, 32640);
+    do Memory.poke(memAddr + 5008, 2040);
+    do Memory.poke(memAddr + 5009, -30728);
+    do Memory.poke(memAddr + 5010, -32641);
+    do Memory.poke(memAddr + 5011, -1921);
+    do Memory.poke(memAddr + 5012, -2041);
+    do Memory.poke(memAddr + 5013, 32647);
+    let i = 5014;
+    while(i < 5017){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5017, 2040);
+    do Memory.poke(memAddr + 5018, -30728);
+    do Memory.poke(memAddr + 5019, -32641);
+    do Memory.poke(memAddr + 5020, 127);
+    do Memory.poke(memAddr + 5023, 14848);
+    do Memory.poke(memAddr + 5024, 92);
+    do Memory.poke(memAddr + 5027, -2048);
+    let i = 5028;
+    while(i < 5038){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5038, 32767);
+    do Memory.poke(memAddr + 5039, 32640);
+    do Memory.poke(memAddr + 5040, 2040);
+    do Memory.poke(memAddr + 5041, -30728);
+    do Memory.poke(memAddr + 5042, -32641);
+    do Memory.poke(memAddr + 5043, -1921);
+    do Memory.poke(memAddr + 5044, -2041);
+    do Memory.poke(memAddr + 5045, 32647);
+    let i = 5046;
+    while(i < 5049){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5049, 2040);
+    do Memory.poke(memAddr + 5050, -30728);
+    do Memory.poke(memAddr + 5051, -32641);
+    do Memory.poke(memAddr + 5052, 127);
+    do Memory.poke(memAddr + 5055, 14848);
+    do Memory.poke(memAddr + 5056, 92);
+    do Memory.poke(memAddr + 5059, -2048);
+    let i = 5060;
+    while(i < 5070){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5070, 32767);
+    do Memory.poke(memAddr + 5071, 32640);
+    do Memory.poke(memAddr + 5072, 2040);
+    do Memory.poke(memAddr + 5073, -30728);
+    do Memory.poke(memAddr + 5074, -32641);
+    do Memory.poke(memAddr + 5075, -1921);
+    do Memory.poke(memAddr + 5076, -2041);
+    do Memory.poke(memAddr + 5077, 32647);
+    let i = 5078;
+    while(i < 5081){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5081, 2040);
+    do Memory.poke(memAddr + 5082, -30728);
+    do Memory.poke(memAddr + 5083, -32641);
+    do Memory.poke(memAddr + 5084, 127);
+    do Memory.poke(memAddr + 5087, 14848);
+    do Memory.poke(memAddr + 5088, 92);
+    do Memory.poke(memAddr + 5091, -2048);
+    do Memory.poke(memAddr + 5092, 7);
+    do Memory.poke(memAddr + 5103, 32640);
+    do Memory.poke(memAddr + 5104, 2040);
+    do Memory.poke(memAddr + 5105, -30728);
+    do Memory.poke(memAddr + 5106, -32641);
+    do Memory.poke(memAddr + 5107, -1921);
+    do Memory.poke(memAddr + 5108, -2041);
+    do Memory.poke(memAddr + 5109, 32647);
+    let i = 5110;
+    while(i < 5113){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5113, 2040);
+    do Memory.poke(memAddr + 5114, -30728);
+    do Memory.poke(memAddr + 5115, -32641);
+    do Memory.poke(memAddr + 5116, 127);
+    do Memory.poke(memAddr + 5119, 14848);
+    do Memory.poke(memAddr + 5120, 92);
+    do Memory.poke(memAddr + 5123, -2048);
+    do Memory.poke(memAddr + 5124, 7);
+    do Memory.poke(memAddr + 5135, 32640);
+    do Memory.poke(memAddr + 5136, 2040);
+    do Memory.poke(memAddr + 5137, -30728);
+    do Memory.poke(memAddr + 5138, -32641);
+    do Memory.poke(memAddr + 5139, -1921);
+    do Memory.poke(memAddr + 5140, -2041);
+    do Memory.poke(memAddr + 5141, 32647);
+    let i = 5142;
+    while(i < 5145){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5145, 2040);
+    do Memory.poke(memAddr + 5146, -30728);
+    do Memory.poke(memAddr + 5147, -32641);
+    do Memory.poke(memAddr + 5148, 127);
+    do Memory.poke(memAddr + 5151, 14848);
+    do Memory.poke(memAddr + 5152, 92);
+    do Memory.poke(memAddr + 5155, -2048);
+    do Memory.poke(memAddr + 5156, 7);
+    do Memory.poke(memAddr + 5167, 32640);
+    do Memory.poke(memAddr + 5168, 2040);
+    do Memory.poke(memAddr + 5169, -30728);
+    do Memory.poke(memAddr + 5170, -32641);
+    do Memory.poke(memAddr + 5171, -1921);
+    do Memory.poke(memAddr + 5172, -2041);
+    do Memory.poke(memAddr + 5173, 32647);
+    let i = 5174;
+    while(i < 5177){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5177, 2040);
+    do Memory.poke(memAddr + 5178, -30728);
+    do Memory.poke(memAddr + 5179, -32641);
+    do Memory.poke(memAddr + 5180, 127);
+    do Memory.poke(memAddr + 5183, 14848);
+    do Memory.poke(memAddr + 5184, 92);
+    do Memory.poke(memAddr + 5187, -2048);
+    do Memory.poke(memAddr + 5188, 7);
+    do Memory.poke(memAddr + 5199, 32640);
+    do Memory.poke(memAddr + 5200, 2040);
+    do Memory.poke(memAddr + 5201, -30728);
+    do Memory.poke(memAddr + 5202, -32641);
+    do Memory.poke(memAddr + 5203, -1921);
+    do Memory.poke(memAddr + 5204, -2041);
+    do Memory.poke(memAddr + 5205, 32647);
+    let i = 5206;
+    while(i < 5209){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5209, 2040);
+    do Memory.poke(memAddr + 5210, -30728);
+    do Memory.poke(memAddr + 5211, -32641);
+    do Memory.poke(memAddr + 5212, 127);
+    do Memory.poke(memAddr + 5215, 14848);
+    do Memory.poke(memAddr + 5216, 92);
+    do Memory.poke(memAddr + 5219, -2048);
+    do Memory.poke(memAddr + 5220, 7);
+    do Memory.poke(memAddr + 5231, 32640);
+    do Memory.poke(memAddr + 5232, 2040);
+    do Memory.poke(memAddr + 5233, -30728);
+    do Memory.poke(memAddr + 5234, -32641);
+    do Memory.poke(memAddr + 5235, -1921);
+    do Memory.poke(memAddr + 5236, -2041);
+    do Memory.poke(memAddr + 5237, 32647);
+    let i = 5238;
+    while(i < 5241){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5241, 2040);
+    do Memory.poke(memAddr + 5242, -30728);
+    do Memory.poke(memAddr + 5243, -32641);
+    do Memory.poke(memAddr + 5244, 127);
+    do Memory.poke(memAddr + 5247, 14848);
+    do Memory.poke(memAddr + 5248, 92);
+    do Memory.poke(memAddr + 5251, -2048);
+    do Memory.poke(memAddr + 5252, 7);
+    do Memory.poke(memAddr + 5263, 32640);
+    do Memory.poke(memAddr + 5264, 2040);
+    do Memory.poke(memAddr + 5265, -30728);
+    do Memory.poke(memAddr + 5266, -32641);
+    do Memory.poke(memAddr + 5267, -1921);
+    do Memory.poke(memAddr + 5268, -2041);
+    do Memory.poke(memAddr + 5269, 32647);
+    let i = 5270;
+    while(i < 5273){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5273, 2040);
+    do Memory.poke(memAddr + 5274, -30728);
+    do Memory.poke(memAddr + 5275, -32641);
+    do Memory.poke(memAddr + 5276, 127);
+    do Memory.poke(memAddr + 5279, 14848);
+    do Memory.poke(memAddr + 5280, 92);
+    do Memory.poke(memAddr + 5283, -2048);
+    do Memory.poke(memAddr + 5284, 7);
+    do Memory.poke(memAddr + 5295, 32640);
+    do Memory.poke(memAddr + 5296, 2040);
+    do Memory.poke(memAddr + 5297, -30728);
+    do Memory.poke(memAddr + 5298, -32641);
+    do Memory.poke(memAddr + 5299, -1921);
+    do Memory.poke(memAddr + 5300, -2041);
+    do Memory.poke(memAddr + 5301, 32647);
+    let i = 5302;
+    while(i < 5305){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5305, 2040);
+    do Memory.poke(memAddr + 5306, -30728);
+    do Memory.poke(memAddr + 5307, -32641);
+    do Memory.poke(memAddr + 5308, 127);
+    do Memory.poke(memAddr + 5311, 14848);
+    do Memory.poke(memAddr + 5312, 92);
+    do Memory.poke(memAddr + 5315, -2048);
+    do Memory.poke(memAddr + 5316, 7);
+    do Memory.poke(memAddr + 5327, 32640);
+    do Memory.poke(memAddr + 5328, 2040);
+    do Memory.poke(memAddr + 5329, -30728);
+    do Memory.poke(memAddr + 5330, -32641);
+    do Memory.poke(memAddr + 5331, -1921);
+    do Memory.poke(memAddr + 5332, -2041);
+    do Memory.poke(memAddr + 5333, 32647);
+    let i = 5334;
+    while(i < 5337){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5337, 2040);
+    do Memory.poke(memAddr + 5338, -30728);
+    do Memory.poke(memAddr + 5339, -32641);
+    do Memory.poke(memAddr + 5340, 127);
+    do Memory.poke(memAddr + 5343, 14848);
+    do Memory.poke(memAddr + 5344, 92);
+    do Memory.poke(memAddr + 5347, -2048);
+    do Memory.poke(memAddr + 5348, -2041);
+    let i = 5349;
+    while(i < 5359){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5359, 32767);
+    do Memory.poke(memAddr + 5360, 2040);
+    do Memory.poke(memAddr + 5361, -30728);
+    do Memory.poke(memAddr + 5362, -32641);
+    do Memory.poke(memAddr + 5363, -1921);
+    do Memory.poke(memAddr + 5364, -2041);
+    do Memory.poke(memAddr + 5365, 32647);
+    let i = 5366;
+    while(i < 5369){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5369, 2040);
+    do Memory.poke(memAddr + 5370, -30728);
+    do Memory.poke(memAddr + 5371, -32641);
+    do Memory.poke(memAddr + 5372, 127);
+    do Memory.poke(memAddr + 5375, 14848);
+    do Memory.poke(memAddr + 5376, 92);
+    do Memory.poke(memAddr + 5379, -2048);
+    do Memory.poke(memAddr + 5380, -2041);
+    let i = 5381;
+    while(i < 5391){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5391, 32767);
+    do Memory.poke(memAddr + 5392, 2040);
+    do Memory.poke(memAddr + 5393, -30728);
+    do Memory.poke(memAddr + 5394, -32641);
+    do Memory.poke(memAddr + 5395, -1921);
+    do Memory.poke(memAddr + 5396, -2041);
+    do Memory.poke(memAddr + 5397, 32647);
+    let i = 5398;
+    while(i < 5401){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5401, 2040);
+    do Memory.poke(memAddr + 5402, -30728);
+    do Memory.poke(memAddr + 5403, -32641);
+    do Memory.poke(memAddr + 5404, 127);
+    do Memory.poke(memAddr + 5407, 14848);
+    do Memory.poke(memAddr + 5408, 92);
+    do Memory.poke(memAddr + 5411, -2048);
+    do Memory.poke(memAddr + 5412, -2041);
+    let i = 5413;
+    while(i < 5423){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5423, 32767);
+    do Memory.poke(memAddr + 5424, 2040);
+    do Memory.poke(memAddr + 5425, -30728);
+    do Memory.poke(memAddr + 5426, -32641);
+    do Memory.poke(memAddr + 5427, -1921);
+    do Memory.poke(memAddr + 5428, -2041);
+    do Memory.poke(memAddr + 5429, 32647);
+    let i = 5430;
+    while(i < 5433){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5433, 2040);
+    do Memory.poke(memAddr + 5434, -30728);
+    do Memory.poke(memAddr + 5435, -32641);
+    do Memory.poke(memAddr + 5436, 127);
+    do Memory.poke(memAddr + 5439, 14848);
+    do Memory.poke(memAddr + 5440, 92);
+    do Memory.poke(memAddr + 5443, -2048);
+    do Memory.poke(memAddr + 5444, -2041);
+    let i = 5445;
+    while(i < 5455){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5455, 32767);
+    do Memory.poke(memAddr + 5456, 2040);
+    do Memory.poke(memAddr + 5457, -30728);
+    do Memory.poke(memAddr + 5458, -32641);
+    do Memory.poke(memAddr + 5459, -1921);
+    do Memory.poke(memAddr + 5460, -2041);
+    do Memory.poke(memAddr + 5461, 32647);
+    let i = 5462;
+    while(i < 5465){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5465, 2040);
+    do Memory.poke(memAddr + 5466, -30728);
+    do Memory.poke(memAddr + 5467, -32641);
+    do Memory.poke(memAddr + 5468, 127);
+    do Memory.poke(memAddr + 5471, 14848);
+    do Memory.poke(memAddr + 5472, 92);
+    do Memory.poke(memAddr + 5475, -2048);
+    do Memory.poke(memAddr + 5476, -2041);
+    let i = 5477;
+    while(i < 5487){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5487, 32767);
+    do Memory.poke(memAddr + 5488, 2040);
+    do Memory.poke(memAddr + 5489, -30728);
+    do Memory.poke(memAddr + 5490, -32641);
+    do Memory.poke(memAddr + 5491, -1921);
+    do Memory.poke(memAddr + 5492, -2041);
+    do Memory.poke(memAddr + 5493, 32647);
+    let i = 5494;
+    while(i < 5497){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5497, 2040);
+    do Memory.poke(memAddr + 5498, -30728);
+    do Memory.poke(memAddr + 5499, -32641);
+    do Memory.poke(memAddr + 5500, 127);
+    do Memory.poke(memAddr + 5503, 14848);
+    do Memory.poke(memAddr + 5504, 92);
+    do Memory.poke(memAddr + 5507, -2048);
+    do Memory.poke(memAddr + 5508, -2041);
+    let i = 5509;
+    while(i < 5519){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5519, 32767);
+    do Memory.poke(memAddr + 5520, 2040);
+    do Memory.poke(memAddr + 5521, -30728);
+    do Memory.poke(memAddr + 5522, -32641);
+    do Memory.poke(memAddr + 5523, -1921);
+    do Memory.poke(memAddr + 5524, -2041);
+    do Memory.poke(memAddr + 5525, 32647);
+    let i = 5526;
+    while(i < 5529){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5529, 2040);
+    do Memory.poke(memAddr + 5530, -30728);
+    do Memory.poke(memAddr + 5531, -32641);
+    do Memory.poke(memAddr + 5532, 127);
+    do Memory.poke(memAddr + 5535, 14848);
+    do Memory.poke(memAddr + 5536, 92);
+    do Memory.poke(memAddr + 5539, -2048);
+    do Memory.poke(memAddr + 5540, -2041);
+    let i = 5541;
+    while(i < 5551){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5551, 32767);
+    do Memory.poke(memAddr + 5552, 2040);
+    do Memory.poke(memAddr + 5553, -30728);
+    do Memory.poke(memAddr + 5554, -32641);
+    do Memory.poke(memAddr + 5555, -1921);
+    do Memory.poke(memAddr + 5556, -2041);
+    do Memory.poke(memAddr + 5557, 32647);
+    let i = 5558;
+    while(i < 5561){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5561, 2040);
+    do Memory.poke(memAddr + 5562, -30728);
+    do Memory.poke(memAddr + 5563, -32641);
+    do Memory.poke(memAddr + 5564, 127);
+    do Memory.poke(memAddr + 5567, 14848);
+    do Memory.poke(memAddr + 5568, 92);
+    do Memory.poke(memAddr + 5571, -2048);
+    do Memory.poke(memAddr + 5572, -2041);
+    let i = 5573;
+    while(i < 5583){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5583, 32767);
+    do Memory.poke(memAddr + 5584, 2040);
+    do Memory.poke(memAddr + 5585, -30728);
+    do Memory.poke(memAddr + 5586, -32641);
+    do Memory.poke(memAddr + 5587, -1921);
+    do Memory.poke(memAddr + 5588, -2041);
+    do Memory.poke(memAddr + 5589, 32647);
+    let i = 5590;
+    while(i < 5593){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5593, 2040);
+    do Memory.poke(memAddr + 5594, -30728);
+    do Memory.poke(memAddr + 5595, -32641);
+    do Memory.poke(memAddr + 5596, 127);
+    do Memory.poke(memAddr + 5599, 14848);
+    do Memory.poke(memAddr + 5600, 92);
+    do Memory.poke(memAddr + 5603, -2048);
+    do Memory.poke(memAddr + 5604, -2041);
+    do Memory.poke(memAddr + 5605, 7);
+    do Memory.poke(memAddr + 5616, 2040);
+    do Memory.poke(memAddr + 5617, -30728);
+    do Memory.poke(memAddr + 5618, -32641);
+    do Memory.poke(memAddr + 5619, -1921);
+    do Memory.poke(memAddr + 5620, -2041);
+    do Memory.poke(memAddr + 5621, 32647);
+    let i = 5622;
+    while(i < 5625){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5625, 2040);
+    do Memory.poke(memAddr + 5626, -30728);
+    do Memory.poke(memAddr + 5627, -32641);
+    do Memory.poke(memAddr + 5628, 127);
+    do Memory.poke(memAddr + 5631, 14848);
+    do Memory.poke(memAddr + 5632, 92);
+    do Memory.poke(memAddr + 5635, -2048);
+    do Memory.poke(memAddr + 5636, -2041);
+    do Memory.poke(memAddr + 5637, 7);
+    do Memory.poke(memAddr + 5648, 2040);
+    do Memory.poke(memAddr + 5649, -30728);
+    do Memory.poke(memAddr + 5650, -32641);
+    do Memory.poke(memAddr + 5651, -1921);
+    do Memory.poke(memAddr + 5652, -2041);
+    do Memory.poke(memAddr + 5653, 32647);
+    let i = 5654;
+    while(i < 5657){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5657, 2040);
+    do Memory.poke(memAddr + 5658, -30728);
+    do Memory.poke(memAddr + 5659, -32641);
+    do Memory.poke(memAddr + 5660, 127);
+    do Memory.poke(memAddr + 5663, 14848);
+    do Memory.poke(memAddr + 5664, 92);
+    do Memory.poke(memAddr + 5667, -2048);
+    do Memory.poke(memAddr + 5668, -2041);
+    do Memory.poke(memAddr + 5669, 7);
+    do Memory.poke(memAddr + 5680, 2040);
+    do Memory.poke(memAddr + 5681, -30728);
+    do Memory.poke(memAddr + 5682, -32641);
+    do Memory.poke(memAddr + 5683, -1921);
+    do Memory.poke(memAddr + 5684, -2041);
+    do Memory.poke(memAddr + 5685, 32647);
+    let i = 5686;
+    while(i < 5689){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5689, 2040);
+    do Memory.poke(memAddr + 5690, -30728);
+    do Memory.poke(memAddr + 5691, -32641);
+    do Memory.poke(memAddr + 5692, 127);
+    do Memory.poke(memAddr + 5695, 14848);
+    do Memory.poke(memAddr + 5696, 92);
+    do Memory.poke(memAddr + 5699, -2048);
+    do Memory.poke(memAddr + 5700, -2041);
+    do Memory.poke(memAddr + 5701, 7);
+    do Memory.poke(memAddr + 5712, 2040);
+    do Memory.poke(memAddr + 5713, -30728);
+    do Memory.poke(memAddr + 5714, -32641);
+    do Memory.poke(memAddr + 5715, -1921);
+    do Memory.poke(memAddr + 5716, -2041);
+    do Memory.poke(memAddr + 5717, 32647);
+    let i = 5718;
+    while(i < 5721){
+      do Memory.poke(memAddr + i, 32640);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5721, 2040);
+    do Memory.poke(memAddr + 5722, -30728);
+    do Memory.poke(memAddr + 5723, -32641);
+    do Memory.poke(memAddr + 5724, 127);
+    do Memory.poke(memAddr + 5727, 14848);
+    do Memory.poke(memAddr + 5728, 92);
+    do Memory.poke(memAddr + 5731, -2048);
+    do Memory.poke(memAddr + 5732, -2041);
+    let i = 5733;
+    while(i < 5744){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5744, 2047);
+    do Memory.poke(memAddr + 5745, -30728);
+    do Memory.poke(memAddr + 5746, -32641);
+    do Memory.poke(memAddr + 5747, -1);
+    do Memory.poke(memAddr + 5748, -2041);
+    do Memory.poke(memAddr + 5749, 32647);
+    do Memory.poke(memAddr + 5750, -128);
+    do Memory.poke(memAddr + 5751, 32767);
+    do Memory.poke(memAddr + 5752, 32640);
+    do Memory.poke(memAddr + 5753, 2040);
+    do Memory.poke(memAddr + 5754, -8);
+    do Memory.poke(memAddr + 5755, -32641);
+    do Memory.poke(memAddr + 5756, 127);
+    do Memory.poke(memAddr + 5759, 14848);
+    do Memory.poke(memAddr + 5760, 92);
+    do Memory.poke(memAddr + 5763, -2048);
+    do Memory.poke(memAddr + 5764, -2041);
+    let i = 5765;
+    while(i < 5776){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5776, 2047);
+    do Memory.poke(memAddr + 5777, -30728);
+    do Memory.poke(memAddr + 5778, -32641);
+    do Memory.poke(memAddr + 5779, -1);
+    do Memory.poke(memAddr + 5780, -2041);
+    do Memory.poke(memAddr + 5781, 32647);
+    do Memory.poke(memAddr + 5782, -128);
+    do Memory.poke(memAddr + 5783, 32767);
+    do Memory.poke(memAddr + 5784, 32640);
+    do Memory.poke(memAddr + 5785, 2040);
+    do Memory.poke(memAddr + 5786, -8);
+    do Memory.poke(memAddr + 5787, -32641);
+    do Memory.poke(memAddr + 5788, 127);
+    do Memory.poke(memAddr + 5791, 14848);
+    do Memory.poke(memAddr + 5792, 92);
+    do Memory.poke(memAddr + 5795, -2048);
+    do Memory.poke(memAddr + 5796, -2041);
+    let i = 5797;
+    while(i < 5808){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5808, 2047);
+    do Memory.poke(memAddr + 5809, -30728);
+    do Memory.poke(memAddr + 5810, -32641);
+    do Memory.poke(memAddr + 5811, -1);
+    do Memory.poke(memAddr + 5812, -2041);
+    do Memory.poke(memAddr + 5813, 32647);
+    do Memory.poke(memAddr + 5814, -128);
+    do Memory.poke(memAddr + 5815, 32767);
+    do Memory.poke(memAddr + 5816, 32640);
+    do Memory.poke(memAddr + 5817, 2040);
+    do Memory.poke(memAddr + 5818, -8);
+    do Memory.poke(memAddr + 5819, -32641);
+    do Memory.poke(memAddr + 5820, 127);
+    do Memory.poke(memAddr + 5823, 14848);
+    do Memory.poke(memAddr + 5824, 92);
+    do Memory.poke(memAddr + 5827, -2048);
+    do Memory.poke(memAddr + 5828, -2041);
+    let i = 5829;
+    while(i < 5840){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5840, 2047);
+    do Memory.poke(memAddr + 5841, -30728);
+    do Memory.poke(memAddr + 5842, -32641);
+    do Memory.poke(memAddr + 5843, -1);
+    do Memory.poke(memAddr + 5844, -2041);
+    do Memory.poke(memAddr + 5845, 32647);
+    do Memory.poke(memAddr + 5846, -128);
+    do Memory.poke(memAddr + 5847, 32767);
+    do Memory.poke(memAddr + 5848, 32640);
+    do Memory.poke(memAddr + 5849, 2040);
+    do Memory.poke(memAddr + 5850, -8);
+    do Memory.poke(memAddr + 5851, -32641);
+    do Memory.poke(memAddr + 5852, 127);
+    do Memory.poke(memAddr + 5855, 14848);
+    do Memory.poke(memAddr + 5856, 92);
+    do Memory.poke(memAddr + 5859, -2048);
+    do Memory.poke(memAddr + 5860, -2041);
+    let i = 5861;
+    while(i < 5872){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5872, 2047);
+    do Memory.poke(memAddr + 5873, -30728);
+    do Memory.poke(memAddr + 5874, -32641);
+    do Memory.poke(memAddr + 5875, -1);
+    do Memory.poke(memAddr + 5876, -2041);
+    do Memory.poke(memAddr + 5877, 32647);
+    do Memory.poke(memAddr + 5878, -128);
+    do Memory.poke(memAddr + 5879, 32767);
+    do Memory.poke(memAddr + 5880, 32640);
+    do Memory.poke(memAddr + 5881, 2040);
+    do Memory.poke(memAddr + 5882, -8);
+    do Memory.poke(memAddr + 5883, -32641);
+    do Memory.poke(memAddr + 5884, 127);
+    do Memory.poke(memAddr + 5887, 14848);
+    do Memory.poke(memAddr + 5888, 92);
+    do Memory.poke(memAddr + 5891, -2048);
+    do Memory.poke(memAddr + 5892, -2041);
+    let i = 5893;
+    while(i < 5904){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5904, 2047);
+    do Memory.poke(memAddr + 5905, -30728);
+    do Memory.poke(memAddr + 5906, -32641);
+    do Memory.poke(memAddr + 5907, -1);
+    do Memory.poke(memAddr + 5908, -2041);
+    do Memory.poke(memAddr + 5909, 32647);
+    do Memory.poke(memAddr + 5910, -128);
+    do Memory.poke(memAddr + 5911, 32767);
+    do Memory.poke(memAddr + 5912, 32640);
+    do Memory.poke(memAddr + 5913, 2040);
+    do Memory.poke(memAddr + 5914, -8);
+    do Memory.poke(memAddr + 5915, -32641);
+    do Memory.poke(memAddr + 5916, 127);
+    do Memory.poke(memAddr + 5919, 14848);
+    do Memory.poke(memAddr + 5920, 92);
+    do Memory.poke(memAddr + 5923, -2048);
+    do Memory.poke(memAddr + 5924, -2041);
+    let i = 5925;
+    while(i < 5936){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5936, 2047);
+    do Memory.poke(memAddr + 5937, -30728);
+    do Memory.poke(memAddr + 5938, -32641);
+    do Memory.poke(memAddr + 5939, -1);
+    do Memory.poke(memAddr + 5940, -2041);
+    do Memory.poke(memAddr + 5941, 32647);
+    do Memory.poke(memAddr + 5942, -128);
+    do Memory.poke(memAddr + 5943, 32767);
+    do Memory.poke(memAddr + 5944, 32640);
+    do Memory.poke(memAddr + 5945, 2040);
+    do Memory.poke(memAddr + 5946, -8);
+    do Memory.poke(memAddr + 5947, -32641);
+    do Memory.poke(memAddr + 5948, 127);
+    do Memory.poke(memAddr + 5951, 14848);
+    do Memory.poke(memAddr + 5952, 92);
+    do Memory.poke(memAddr + 5955, -2048);
+    do Memory.poke(memAddr + 5956, -2041);
+    let i = 5957;
+    while(i < 5968){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 5968, 2047);
+    do Memory.poke(memAddr + 5969, -30728);
+    do Memory.poke(memAddr + 5970, -32641);
+    do Memory.poke(memAddr + 5971, -1);
+    do Memory.poke(memAddr + 5972, -2041);
+    do Memory.poke(memAddr + 5973, 32647);
+    do Memory.poke(memAddr + 5974, -128);
+    do Memory.poke(memAddr + 5975, 32767);
+    do Memory.poke(memAddr + 5976, 32640);
+    do Memory.poke(memAddr + 5977, 2040);
+    do Memory.poke(memAddr + 5978, -8);
+    do Memory.poke(memAddr + 5979, -32641);
+    do Memory.poke(memAddr + 5980, 127);
+    do Memory.poke(memAddr + 5983, 14848);
+    do Memory.poke(memAddr + 5984, 92);
+    do Memory.poke(memAddr + 5987, -2048);
+    do Memory.poke(memAddr + 5988, 7);
+    do Memory.poke(memAddr + 6001, -30728);
+    do Memory.poke(memAddr + 6002, 127);
+    do Memory.poke(memAddr + 6004, -2048);
+    do Memory.poke(memAddr + 6005, 32647);
+    do Memory.poke(memAddr + 6008, 32640);
+    do Memory.poke(memAddr + 6009, 2040);
+    do Memory.poke(memAddr + 6011, 32767 + 1);
+    do Memory.poke(memAddr + 6012, 127);
+    do Memory.poke(memAddr + 6015, 14848);
+    do Memory.poke(memAddr + 6016, 92);
+    do Memory.poke(memAddr + 6019, -2048);
+    do Memory.poke(memAddr + 6020, 7);
+    do Memory.poke(memAddr + 6033, -30728);
+    do Memory.poke(memAddr + 6034, 127);
+    do Memory.poke(memAddr + 6036, -2048);
+    do Memory.poke(memAddr + 6037, 32647);
+    do Memory.poke(memAddr + 6040, 32640);
+    do Memory.poke(memAddr + 6041, 2040);
+    do Memory.poke(memAddr + 6043, 32767 + 1);
+    do Memory.poke(memAddr + 6044, 127);
+    do Memory.poke(memAddr + 6047, 14848);
+    do Memory.poke(memAddr + 6048, 92);
+    do Memory.poke(memAddr + 6051, -2048);
+    do Memory.poke(memAddr + 6052, 7);
+    do Memory.poke(memAddr + 6065, -30728);
+    do Memory.poke(memAddr + 6066, 127);
+    do Memory.poke(memAddr + 6068, -2048);
+    do Memory.poke(memAddr + 6069, 32647);
+    do Memory.poke(memAddr + 6072, 32640);
+    do Memory.poke(memAddr + 6073, 2040);
+    do Memory.poke(memAddr + 6075, 32767 + 1);
+    do Memory.poke(memAddr + 6076, 127);
+    do Memory.poke(memAddr + 6079, 14848);
+    do Memory.poke(memAddr + 6080, 92);
+    do Memory.poke(memAddr + 6083, -2048);
+    do Memory.poke(memAddr + 6084, 7);
+    do Memory.poke(memAddr + 6097, -30728);
+    do Memory.poke(memAddr + 6098, 127);
+    do Memory.poke(memAddr + 6100, -2048);
+    do Memory.poke(memAddr + 6101, 32647);
+    do Memory.poke(memAddr + 6104, 32640);
+    do Memory.poke(memAddr + 6105, 2040);
+    do Memory.poke(memAddr + 6107, 32767 + 1);
+    do Memory.poke(memAddr + 6108, 127);
+    do Memory.poke(memAddr + 6111, 14848);
+    do Memory.poke(memAddr + 6112, 92);
+    do Memory.poke(memAddr + 6115, -2048);
+    do Memory.poke(memAddr + 6116, 7);
+    do Memory.poke(memAddr + 6129, -30728);
+    do Memory.poke(memAddr + 6130, 127);
+    do Memory.poke(memAddr + 6132, -2048);
+    do Memory.poke(memAddr + 6133, 32647);
+    do Memory.poke(memAddr + 6136, 32640);
+    do Memory.poke(memAddr + 6137, 2040);
+    do Memory.poke(memAddr + 6139, 32767 + 1);
+    do Memory.poke(memAddr + 6140, 127);
+    do Memory.poke(memAddr + 6143, 14848);
+    do Memory.poke(memAddr + 6144, 92);
+    do Memory.poke(memAddr + 6147, -2048);
+    do Memory.poke(memAddr + 6148, 7);
+    do Memory.poke(memAddr + 6161, -30728);
+    do Memory.poke(memAddr + 6162, 127);
+    do Memory.poke(memAddr + 6164, -2048);
+    do Memory.poke(memAddr + 6165, 32647);
+    do Memory.poke(memAddr + 6168, 32640);
+    do Memory.poke(memAddr + 6169, 2040);
+    do Memory.poke(memAddr + 6171, 32767 + 1);
+    do Memory.poke(memAddr + 6172, 127);
+    do Memory.poke(memAddr + 6175, 14848);
+    do Memory.poke(memAddr + 6176, 92);
+    do Memory.poke(memAddr + 6179, -2048);
+    do Memory.poke(memAddr + 6180, 7);
+    do Memory.poke(memAddr + 6193, -30728);
+    do Memory.poke(memAddr + 6194, 127);
+    do Memory.poke(memAddr + 6196, -2048);
+    do Memory.poke(memAddr + 6197, 32647);
+    do Memory.poke(memAddr + 6200, 32640);
+    do Memory.poke(memAddr + 6201, 2040);
+    do Memory.poke(memAddr + 6203, 32767 + 1);
+    do Memory.poke(memAddr + 6204, 127);
+    do Memory.poke(memAddr + 6207, 14848);
+    do Memory.poke(memAddr + 6208, 92);
+    do Memory.poke(memAddr + 6211, -2048);
+    do Memory.poke(memAddr + 6212, 7);
+    do Memory.poke(memAddr + 6225, -30728);
+    do Memory.poke(memAddr + 6226, 127);
+    do Memory.poke(memAddr + 6228, -2048);
+    do Memory.poke(memAddr + 6229, 32647);
+    do Memory.poke(memAddr + 6232, 32640);
+    do Memory.poke(memAddr + 6233, 2040);
+    do Memory.poke(memAddr + 6235, 32767 + 1);
+    do Memory.poke(memAddr + 6236, 127);
+    do Memory.poke(memAddr + 6239, 14848);
+    do Memory.poke(memAddr + 6240, 92);
+    do Memory.poke(memAddr + 6243, -2048);
+    let i = 6244;
+    while(i < 6257){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6257, -30721);
+    let i = 6258;
+    while(i < 6261){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6261, -121);
+    let i = 6262;
+    while(i < 6264){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6264, 32767);
+    do Memory.poke(memAddr + 6265, -8);
+    let i = 6266;
+    while(i < 6268){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6268, 127);
+    do Memory.poke(memAddr + 6271, 14848);
+    do Memory.poke(memAddr + 6272, 92);
+    do Memory.poke(memAddr + 6275, -2048);
+    let i = 6276;
+    while(i < 6289){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6289, -30721);
+    let i = 6290;
+    while(i < 6293){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6293, -121);
+    let i = 6294;
+    while(i < 6296){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6296, 32767);
+    do Memory.poke(memAddr + 6297, -8);
+    let i = 6298;
+    while(i < 6300){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6300, 127);
+    do Memory.poke(memAddr + 6303, 14848);
+    do Memory.poke(memAddr + 6304, 92);
+    do Memory.poke(memAddr + 6307, -2048);
+    let i = 6308;
+    while(i < 6321){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6321, -30721);
+    let i = 6322;
+    while(i < 6325){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6325, -121);
+    let i = 6326;
+    while(i < 6328){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6328, 32767);
+    do Memory.poke(memAddr + 6329, -8);
+    let i = 6330;
+    while(i < 6332){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6332, 127);
+    do Memory.poke(memAddr + 6335, 14848);
+    do Memory.poke(memAddr + 6336, 92);
+    do Memory.poke(memAddr + 6339, -2048);
+    let i = 6340;
+    while(i < 6353){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6353, -30721);
+    let i = 6354;
+    while(i < 6357){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6357, -121);
+    let i = 6358;
+    while(i < 6360){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6360, 32767);
+    do Memory.poke(memAddr + 6361, -8);
+    let i = 6362;
+    while(i < 6364){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6364, 127);
+    do Memory.poke(memAddr + 6367, 14848);
+    do Memory.poke(memAddr + 6368, 92);
+    do Memory.poke(memAddr + 6371, -2048);
+    let i = 6372;
+    while(i < 6385){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6385, -30721);
+    let i = 6386;
+    while(i < 6389){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6389, -121);
+    let i = 6390;
+    while(i < 6392){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6392, 32767);
+    do Memory.poke(memAddr + 6393, -8);
+    let i = 6394;
+    while(i < 6396){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6396, 127);
+    do Memory.poke(memAddr + 6399, 14848);
+    do Memory.poke(memAddr + 6400, 92);
+    do Memory.poke(memAddr + 6403, -2048);
+    let i = 6404;
+    while(i < 6417){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6417, -30721);
+    let i = 6418;
+    while(i < 6421){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6421, -121);
+    let i = 6422;
+    while(i < 6424){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6424, 32767);
+    do Memory.poke(memAddr + 6425, -8);
+    let i = 6426;
+    while(i < 6428){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6428, 127);
+    do Memory.poke(memAddr + 6431, 14848);
+    do Memory.poke(memAddr + 6432, 92);
+    do Memory.poke(memAddr + 6435, -2048);
+    let i = 6436;
+    while(i < 6449){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6449, -30721);
+    let i = 6450;
+    while(i < 6453){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6453, -121);
+    let i = 6454;
+    while(i < 6456){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6456, 32767);
+    do Memory.poke(memAddr + 6457, -8);
+    let i = 6458;
+    while(i < 6460){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6460, 127);
+    do Memory.poke(memAddr + 6463, 14848);
+    do Memory.poke(memAddr + 6464, 92);
+    do Memory.poke(memAddr + 6467, -2048);
+    let i = 6468;
+    while(i < 6481){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6481, -30721);
+    let i = 6482;
+    while(i < 6485){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6485, -121);
+    let i = 6486;
+    while(i < 6488){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6488, 32767);
+    do Memory.poke(memAddr + 6489, -8);
+    let i = 6490;
+    while(i < 6492){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 6492, 127);
+    do Memory.poke(memAddr + 6495, 14848);
+    do Memory.poke(memAddr + 6496, 92);
+    do Memory.poke(memAddr + 6527, 14848);
+    do Memory.poke(memAddr + 6528, 92);
+    do Memory.poke(memAddr + 6559, 14848);
+    do Memory.poke(memAddr + 6560, 92);
+    do Memory.poke(memAddr + 6591, 14848);
+    do Memory.poke(memAddr + 6592, 92);
+    do Memory.poke(memAddr + 6623, 14848);
+    do Memory.poke(memAddr + 6624, 92);
+    do Memory.poke(memAddr + 6655, 14848);
+    do Memory.poke(memAddr + 6656, 92);
+    do Memory.poke(memAddr + 6687, 14848);
+    do Memory.poke(memAddr + 6688, 92);
+    do Memory.poke(memAddr + 6719, 14848);
+    do Memory.poke(memAddr + 6720, 92);
+    do Memory.poke(memAddr + 6751, 14848);
+    do Memory.poke(memAddr + 6752, 92);
+    do Memory.poke(memAddr + 6783, 14848);
+    do Memory.poke(memAddr + 6784, 92);
+    do Memory.poke(memAddr + 6815, 14848);
+    do Memory.poke(memAddr + 6816, 92);
+    do Memory.poke(memAddr + 6847, 14848);
+    do Memory.poke(memAddr + 6848, 92);
+    do Memory.poke(memAddr + 6854, -512);
+    do Memory.poke(memAddr + 6855, -1537);
+    do Memory.poke(memAddr + 6856, -6145);
+    do Memory.poke(memAddr + 6857, 32767);
+    do Memory.poke(memAddr + 6858, 32766);
+    do Memory.poke(memAddr + 6859, -8);
+    do Memory.poke(memAddr + 6860, -2047);
+    do Memory.poke(memAddr + 6861, -1537);
+    do Memory.poke(memAddr + 6862, -30721);
+    do Memory.poke(memAddr + 6863, 8191);
+    do Memory.poke(memAddr + 6864, 32766);
+    do Memory.poke(memAddr + 6865, -2);
+    do Memory.poke(memAddr + 6866, -505);
+    do Memory.poke(memAddr + 6867, -1537);
+    do Memory.poke(memAddr + 6868, 511);
+    do Memory.poke(memAddr + 6869, -2);
+    do Memory.poke(memAddr + 6870, 2041);
+    do Memory.poke(memAddr + 6871, -32);
+    do Memory.poke(memAddr + 6872, -25);
+    do Memory.poke(memAddr + 6873, 31);
+    do Memory.poke(memAddr + 6879, 14848);
+    do Memory.poke(memAddr + 6880, 92);
+    do Memory.poke(memAddr + 6886, -512);
+    do Memory.poke(memAddr + 6887, -1537);
+    do Memory.poke(memAddr + 6888, -6145);
+    do Memory.poke(memAddr + 6889, 32767);
+    do Memory.poke(memAddr + 6890, 32766);
+    do Memory.poke(memAddr + 6891, -8);
+    do Memory.poke(memAddr + 6892, -2047);
+    do Memory.poke(memAddr + 6893, -1537);
+    do Memory.poke(memAddr + 6894, -30721);
+    do Memory.poke(memAddr + 6895, 8191);
+    do Memory.poke(memAddr + 6896, 32766);
+    do Memory.poke(memAddr + 6897, -2);
+    do Memory.poke(memAddr + 6898, -505);
+    do Memory.poke(memAddr + 6899, -1537);
+    do Memory.poke(memAddr + 6900, 511);
+    do Memory.poke(memAddr + 6901, -2);
+    do Memory.poke(memAddr + 6902, 2041);
+    do Memory.poke(memAddr + 6903, -32);
+    do Memory.poke(memAddr + 6904, -25);
+    do Memory.poke(memAddr + 6905, 31);
+    do Memory.poke(memAddr + 6911, 14848);
+    do Memory.poke(memAddr + 6912, 92);
+    do Memory.poke(memAddr + 6918, 1536);
+    do Memory.poke(memAddr + 6919, 8064);
+    do Memory.poke(memAddr + 6920, 32256);
+    do Memory.poke(memAddr + 6921, -8192);
+    do Memory.poke(memAddr + 6922, -8185);
+    do Memory.poke(memAddr + 6923, -32737);
+    do Memory.poke(memAddr + 6924, 7687);
+    do Memory.poke(memAddr + 6925, 8064);
+    do Memory.poke(memAddr + 6926, -512);
+    do Memory.poke(memAddr + 6927, -2047);
+    do Memory.poke(memAddr + 6928, -8185);
+    do Memory.poke(memAddr + 6929, 7);
+    do Memory.poke(memAddr + 6930, 1566);
+    do Memory.poke(memAddr + 6931, 8064);
+    do Memory.poke(memAddr + 6932, 1920);
+    do Memory.poke(memAddr + 6933, -32762);
+    do Memory.poke(memAddr + 6934, 7711);
+    do Memory.poke(memAddr + 6935, 120);
+    do Memory.poke(memAddr + 6936, 30846);
+    do Memory.poke(memAddr + 6937, 120);
+    do Memory.poke(memAddr + 6943, 14848);
+    do Memory.poke(memAddr + 6944, 92);
+    do Memory.poke(memAddr + 6950, 1536);
+    do Memory.poke(memAddr + 6951, 8064);
+    do Memory.poke(memAddr + 6952, 32256);
+    do Memory.poke(memAddr + 6953, -8192);
+    do Memory.poke(memAddr + 6954, -8185);
+    do Memory.poke(memAddr + 6955, -32737);
+    do Memory.poke(memAddr + 6956, 7687);
+    do Memory.poke(memAddr + 6957, 8064);
+    do Memory.poke(memAddr + 6958, -512);
+    do Memory.poke(memAddr + 6959, -2047);
+    do Memory.poke(memAddr + 6960, -8185);
+    do Memory.poke(memAddr + 6961, 7);
+    do Memory.poke(memAddr + 6962, 1566);
+    do Memory.poke(memAddr + 6963, 8064);
+    do Memory.poke(memAddr + 6964, 1920);
+    do Memory.poke(memAddr + 6965, -32762);
+    do Memory.poke(memAddr + 6966, 7711);
+    do Memory.poke(memAddr + 6967, 120);
+    do Memory.poke(memAddr + 6968, 30846);
+    do Memory.poke(memAddr + 6969, 120);
+    do Memory.poke(memAddr + 6975, 14848);
+    do Memory.poke(memAddr + 6976, 92);
+    do Memory.poke(memAddr + 6982, -31232);
+    do Memory.poke(memAddr + 6983, 7711);
+    do Memory.poke(memAddr + 6984, 30846);
+    do Memory.poke(memAddr + 6985, -8);
+    do Memory.poke(memAddr + 6986, -30751);
+    do Memory.poke(memAddr + 6987, 8071);
+    do Memory.poke(memAddr + 6988, -31202);
+    do Memory.poke(memAddr + 6989, 7711);
+    do Memory.poke(memAddr + 6990, 30846);
+    do Memory.poke(memAddr + 6991, -7688);
+    do Memory.poke(memAddr + 6992, -30751);
+    do Memory.poke(memAddr + 6993, -121);
+    do Memory.poke(memAddr + 6994, 32287);
+    do Memory.poke(memAddr + 6995, -30728);
+    do Memory.poke(memAddr + 6996, 7711);
+    do Memory.poke(memAddr + 6997, 8070);
+    do Memory.poke(memAddr + 6998, 7710);
+    do Memory.poke(memAddr + 6999, 32280);
+    do Memory.poke(memAddr + 7000, 30840);
+    do Memory.poke(memAddr + 7001, 120);
+    do Memory.poke(memAddr + 7007, 14848);
+    do Memory.poke(memAddr + 7008, 92);
+    do Memory.poke(memAddr + 7014, -31232);
+    do Memory.poke(memAddr + 7015, 7711);
+    do Memory.poke(memAddr + 7016, 30846);
+    do Memory.poke(memAddr + 7017, -8);
+    do Memory.poke(memAddr + 7018, -30751);
+    do Memory.poke(memAddr + 7019, 8071);
+    do Memory.poke(memAddr + 7020, -31202);
+    do Memory.poke(memAddr + 7021, 7711);
+    do Memory.poke(memAddr + 7022, 30846);
+    do Memory.poke(memAddr + 7023, -7688);
+    do Memory.poke(memAddr + 7024, -30751);
+    do Memory.poke(memAddr + 7025, -121);
+    do Memory.poke(memAddr + 7026, 32287);
+    do Memory.poke(memAddr + 7027, -30728);
+    do Memory.poke(memAddr + 7028, 7711);
+    do Memory.poke(memAddr + 7029, 8070);
+    do Memory.poke(memAddr + 7030, 7710);
+    do Memory.poke(memAddr + 7031, 32280);
+    do Memory.poke(memAddr + 7032, 30840);
+    do Memory.poke(memAddr + 7033, 120);
+    do Memory.poke(memAddr + 7039, 14848);
+    do Memory.poke(memAddr + 7040, 92);
+    do Memory.poke(memAddr + 7046, -31232);
+    do Memory.poke(memAddr + 7047, 7711);
+    do Memory.poke(memAddr + 7048, 30846);
+    do Memory.poke(memAddr + 7049, -8);
+    do Memory.poke(memAddr + 7050, -31);
+    do Memory.poke(memAddr + 7051, -121);
+    do Memory.poke(memAddr + 7052, -31201);
+    do Memory.poke(memAddr + 7053, 8191);
+    do Memory.poke(memAddr + 7054, 30846);
+    do Memory.poke(memAddr + 7055, -7688);
+    do Memory.poke(memAddr + 7056, -31);
+    do Memory.poke(memAddr + 7057, -121);
+    do Memory.poke(memAddr + 7058, 24607);
+    do Memory.poke(memAddr + 7059, -30728);
+    do Memory.poke(memAddr + 7060, 7711);
+    do Memory.poke(memAddr + 7061, 8070);
+    do Memory.poke(memAddr + 7062, 7710);
+    do Memory.poke(memAddr + 7063, 32280);
+    do Memory.poke(memAddr + 7064, 30840);
+    do Memory.poke(memAddr + 7065, 120);
+    do Memory.poke(memAddr + 7071, 14848);
+    do Memory.poke(memAddr + 7072, 92);
+    do Memory.poke(memAddr + 7078, -31232);
+    do Memory.poke(memAddr + 7079, 7711);
+    do Memory.poke(memAddr + 7080, 30846);
+    do Memory.poke(memAddr + 7081, -8);
+    do Memory.poke(memAddr + 7082, -31);
+    do Memory.poke(memAddr + 7083, -121);
+    do Memory.poke(memAddr + 7084, -31201);
+    do Memory.poke(memAddr + 7085, 8191);
+    do Memory.poke(memAddr + 7086, 30846);
+    do Memory.poke(memAddr + 7087, -7688);
+    do Memory.poke(memAddr + 7088, -31);
+    do Memory.poke(memAddr + 7089, -121);
+    do Memory.poke(memAddr + 7090, 24607);
+    do Memory.poke(memAddr + 7091, -30728);
+    do Memory.poke(memAddr + 7092, 7711);
+    do Memory.poke(memAddr + 7093, 8070);
+    do Memory.poke(memAddr + 7094, 7710);
+    do Memory.poke(memAddr + 7095, 32280);
+    do Memory.poke(memAddr + 7096, 30840);
+    do Memory.poke(memAddr + 7097, 120);
+    do Memory.poke(memAddr + 7103, 14848);
+    do Memory.poke(memAddr + 7104, 92);
+    do Memory.poke(memAddr + 7110, -31232);
+    do Memory.poke(memAddr + 7111, 7711);
+    do Memory.poke(memAddr + 7112, 32256);
+    do Memory.poke(memAddr + 7113, -2048);
+    do Memory.poke(memAddr + 7114, -8185);
+    do Memory.poke(memAddr + 7115, -32737);
+    do Memory.poke(memAddr + 7116, 7711);
+    do Memory.poke(memAddr + 7117, 8064);
+    do Memory.poke(memAddr + 7118, 30846);
+    do Memory.poke(memAddr + 7119, -7688);
+    do Memory.poke(memAddr + 7120, -31);
+    do Memory.poke(memAddr + 7121, -32761);
+    do Memory.poke(memAddr + 7122, 24583);
+    do Memory.poke(memAddr + 7123, -31112);
+    do Memory.poke(memAddr + 7124, 7711);
+    do Memory.poke(memAddr + 7125, 8070);
+    do Memory.poke(memAddr + 7126, 7710);
+    do Memory.poke(memAddr + 7127, 32280);
+    do Memory.poke(memAddr + 7128, 504);
+    do Memory.poke(memAddr + 7129, 126);
+    do Memory.poke(memAddr + 7135, 14848);
+    do Memory.poke(memAddr + 7136, 92);
+    do Memory.poke(memAddr + 7142, -31232);
+    do Memory.poke(memAddr + 7143, 7711);
+    do Memory.poke(memAddr + 7144, 32256);
+    do Memory.poke(memAddr + 7145, -2048);
+    do Memory.poke(memAddr + 7146, -8185);
+    do Memory.poke(memAddr + 7147, -32737);
+    do Memory.poke(memAddr + 7148, 7711);
+    do Memory.poke(memAddr + 7149, 8064);
+    do Memory.poke(memAddr + 7150, 30846);
+    do Memory.poke(memAddr + 7151, -7688);
+    do Memory.poke(memAddr + 7152, -31);
+    do Memory.poke(memAddr + 7153, -32761);
+    do Memory.poke(memAddr + 7154, 24583);
+    do Memory.poke(memAddr + 7155, -31112);
+    do Memory.poke(memAddr + 7156, 7711);
+    do Memory.poke(memAddr + 7157, 8070);
+    do Memory.poke(memAddr + 7158, 7710);
+    do Memory.poke(memAddr + 7159, 32280);
+    do Memory.poke(memAddr + 7160, 504);
+    do Memory.poke(memAddr + 7161, 126);
+    do Memory.poke(memAddr + 7167, 14848);
+    do Memory.poke(memAddr + 7168, 92);
+    do Memory.poke(memAddr + 7174, 1536);
+    do Memory.poke(memAddr + 7175, 8064);
+    do Memory.poke(memAddr + 7176, 30846);
+    do Memory.poke(memAddr + 7177, -8);
+    do Memory.poke(memAddr + 7178, -30721);
+    do Memory.poke(memAddr + 7179, 8191);
+    do Memory.poke(memAddr + 7180, -482);
+    do Memory.poke(memAddr + 7181, 7711);
+    do Memory.poke(memAddr + 7182, 32256);
+    do Memory.poke(memAddr + 7183, -8192);
+    do Memory.poke(memAddr + 7184, -31);
+    do Memory.poke(memAddr + 7185, -121);
+    do Memory.poke(memAddr + 7186, 24583);
+    do Memory.poke(memAddr + 7187, -31112);
+    do Memory.poke(memAddr + 7188, 7711);
+    do Memory.poke(memAddr + 7189, -32762);
+    do Memory.poke(memAddr + 7190, 7711);
+    do Memory.poke(memAddr + 7191, 24);
+    do Memory.poke(memAddr + 7192, -30728);
+    do Memory.poke(memAddr + 7193, 127);
+    do Memory.poke(memAddr + 7199, 14848);
+    do Memory.poke(memAddr + 7200, 92);
+    do Memory.poke(memAddr + 7206, 1536);
+    do Memory.poke(memAddr + 7207, 8064);
+    do Memory.poke(memAddr + 7208, 30846);
+    do Memory.poke(memAddr + 7209, -8);
+    do Memory.poke(memAddr + 7210, -30721);
+    do Memory.poke(memAddr + 7211, 8191);
+    do Memory.poke(memAddr + 7212, -482);
+    do Memory.poke(memAddr + 7213, 7711);
+    do Memory.poke(memAddr + 7214, 32256);
+    do Memory.poke(memAddr + 7215, -8192);
+    do Memory.poke(memAddr + 7216, -31);
+    do Memory.poke(memAddr + 7217, -121);
+    do Memory.poke(memAddr + 7218, 24583);
+    do Memory.poke(memAddr + 7219, -31112);
+    do Memory.poke(memAddr + 7220, 7711);
+    do Memory.poke(memAddr + 7221, -32762);
+    do Memory.poke(memAddr + 7222, 7711);
+    do Memory.poke(memAddr + 7223, 24);
+    do Memory.poke(memAddr + 7224, -30728);
+    do Memory.poke(memAddr + 7225, 127);
+    do Memory.poke(memAddr + 7231, 14848);
+    do Memory.poke(memAddr + 7232, 92);
+    do Memory.poke(memAddr + 7238, -31232);
+    do Memory.poke(memAddr + 7239, 8191);
+    do Memory.poke(memAddr + 7240, 30846);
+    do Memory.poke(memAddr + 7241, -8);
+    do Memory.poke(memAddr + 7242, -30751);
+    do Memory.poke(memAddr + 7243, 8071);
+    do Memory.poke(memAddr + 7244, -31202);
+    do Memory.poke(memAddr + 7245, 7711);
+    do Memory.poke(memAddr + 7246, 32766);
+    do Memory.poke(memAddr + 7247, -7688);
+    do Memory.poke(memAddr + 7248, -30751);
+    do Memory.poke(memAddr + 7249, -121);
+    do Memory.poke(memAddr + 7250, 24583);
+    do Memory.poke(memAddr + 7251, -31112);
+    do Memory.poke(memAddr + 7252, 7711);
+    do Memory.poke(memAddr + 7253, -122);
+    do Memory.poke(memAddr + 7254, -481);
+    do Memory.poke(memAddr + 7255, 32287);
+    do Memory.poke(memAddr + 7256, -31112);
+    do Memory.poke(memAddr + 7257, 31);
+    do Memory.poke(memAddr + 7263, 14848);
+    do Memory.poke(memAddr + 7264, 92);
+    do Memory.poke(memAddr + 7270, -31232);
+    do Memory.poke(memAddr + 7271, 8191);
+    do Memory.poke(memAddr + 7272, 30846);
+    do Memory.poke(memAddr + 7273, -8);
+    do Memory.poke(memAddr + 7274, -30751);
+    do Memory.poke(memAddr + 7275, 8071);
+    do Memory.poke(memAddr + 7276, -31202);
+    do Memory.poke(memAddr + 7277, 7711);
+    do Memory.poke(memAddr + 7278, 32766);
+    do Memory.poke(memAddr + 7279, -7688);
+    do Memory.poke(memAddr + 7280, -30751);
+    do Memory.poke(memAddr + 7281, -121);
+    do Memory.poke(memAddr + 7282, 24583);
+    do Memory.poke(memAddr + 7283, -31112);
+    do Memory.poke(memAddr + 7284, 7711);
+    do Memory.poke(memAddr + 7285, -122);
+    do Memory.poke(memAddr + 7286, -481);
+    do Memory.poke(memAddr + 7287, 32287);
+    do Memory.poke(memAddr + 7288, -31112);
+    do Memory.poke(memAddr + 7289, 31);
+    do Memory.poke(memAddr + 7295, 14848);
+    do Memory.poke(memAddr + 7296, 92);
+    do Memory.poke(memAddr + 7302, -31232);
+    do Memory.poke(memAddr + 7303, 8191);
+    do Memory.poke(memAddr + 7304, 30846);
+    do Memory.poke(memAddr + 7305, -8192);
+    do Memory.poke(memAddr + 7306, -8185);
+    do Memory.poke(memAddr + 7307, -32737);
+    do Memory.poke(memAddr + 7308, 7711);
+    do Memory.poke(memAddr + 7309, 8064);
+    do Memory.poke(memAddr + 7310, 32766);
+    do Memory.poke(memAddr + 7311, -7688);
+    do Memory.poke(memAddr + 7312, -8185);
+    do Memory.poke(memAddr + 7313, 7);
+    do Memory.poke(memAddr + 7314, 24606);
+    do Memory.poke(memAddr + 7315, 7800);
+    do Memory.poke(memAddr + 7316, 8064);
+    do Memory.poke(memAddr + 7317, -122);
+    do Memory.poke(memAddr + 7318, 31);
+    do Memory.poke(memAddr + 7319, 32286);
+    do Memory.poke(memAddr + 7320, -31112);
+    do Memory.poke(memAddr + 7321, 7);
+    do Memory.poke(memAddr + 7327, 14848);
+    do Memory.poke(memAddr + 7328, 92);
+    do Memory.poke(memAddr + 7334, -31232);
+    do Memory.poke(memAddr + 7335, 8191);
+    do Memory.poke(memAddr + 7336, 30846);
+    do Memory.poke(memAddr + 7337, -8192);
+    do Memory.poke(memAddr + 7338, -8185);
+    do Memory.poke(memAddr + 7339, -32737);
+    do Memory.poke(memAddr + 7340, 7711);
+    do Memory.poke(memAddr + 7341, 8064);
+    do Memory.poke(memAddr + 7342, 32766);
+    do Memory.poke(memAddr + 7343, -7688);
+    do Memory.poke(memAddr + 7344, -8185);
+    do Memory.poke(memAddr + 7345, 7);
+    do Memory.poke(memAddr + 7346, 24606);
+    do Memory.poke(memAddr + 7347, 7800);
+    do Memory.poke(memAddr + 7348, 8064);
+    do Memory.poke(memAddr + 7349, -122);
+    do Memory.poke(memAddr + 7350, 31);
+    do Memory.poke(memAddr + 7351, 32286);
+    do Memory.poke(memAddr + 7352, -31112);
+    do Memory.poke(memAddr + 7353, 7);
+    do Memory.poke(memAddr + 7359, 14848);
+    do Memory.poke(memAddr + 7360, 92);
+    do Memory.poke(memAddr + 7366, -512);
+    do Memory.poke(memAddr + 7367, -2041);
+    let i = 7368;
+    while(i < 7372){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 7372, -2017);
+    do Memory.poke(memAddr + 7373, -1);
+    do Memory.poke(memAddr + 7374, -8161);
+    let i = 7375;
+    while(i < 7378){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 7378, -8161);
+    do Memory.poke(memAddr + 7379, -1921);
+    do Memory.poke(memAddr + 7380, 8191);
+    do Memory.poke(memAddr + 7381, 2046);
+    do Memory.poke(memAddr + 7382, -8);
+    do Memory.poke(memAddr + 7383, -1);
+    do Memory.poke(memAddr + 7384, -385);
+    do Memory.poke(memAddr + 7385, 7);
+    do Memory.poke(memAddr + 7391, 14848);
+    do Memory.poke(memAddr + 7392, 92);
+    do Memory.poke(memAddr + 7398, -512);
+    do Memory.poke(memAddr + 7399, -2041);
+    let i = 7400;
+    while(i < 7404){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 7404, -2017);
+    do Memory.poke(memAddr + 7405, -1);
+    do Memory.poke(memAddr + 7406, -8161);
+    let i = 7407;
+    while(i < 7410){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 7410, -8161);
+    do Memory.poke(memAddr + 7411, -1921);
+    do Memory.poke(memAddr + 7412, 8191);
+    do Memory.poke(memAddr + 7413, 2046);
+    do Memory.poke(memAddr + 7414, -8);
+    do Memory.poke(memAddr + 7415, -1);
+    do Memory.poke(memAddr + 7416, -385);
+    do Memory.poke(memAddr + 7417, 7);
+    do Memory.poke(memAddr + 7423, 14848);
+    do Memory.poke(memAddr + 7424, 92);
+    do Memory.poke(memAddr + 7430, -2048);
+    do Memory.poke(memAddr + 7431, -8185);
+    do Memory.poke(memAddr + 7432, -97);
+    do Memory.poke(memAddr + 7433, -1);
+    do Memory.poke(memAddr + 7434, -7);
+    do Memory.poke(memAddr + 7435, -31);
+    do Memory.poke(memAddr + 7436, -8185);
+    do Memory.poke(memAddr + 7437, -6145);
+    do Memory.poke(memAddr + 7438, -32737);
+    do Memory.poke(memAddr + 7439, -385);
+    let i = 7440;
+    while(i < 7442){
+      do Memory.poke(memAddr + i, -7);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 7442, -32737);
+    do Memory.poke(memAddr + 7443, -8065);
+    do Memory.poke(memAddr + 7444, 2047);
+    do Memory.poke(memAddr + 7445, 2040);
+    do Memory.poke(memAddr + 7446, -32);
+    do Memory.poke(memAddr + 7447, -24577);
+    do Memory.poke(memAddr + 7448, -1921);
+    do Memory.poke(memAddr + 7449, 7);
+    do Memory.poke(memAddr + 7455, 14848);
+    do Memory.poke(memAddr + 7456, 92);
+    do Memory.poke(memAddr + 7462, -2048);
+    do Memory.poke(memAddr + 7463, -8185);
+    do Memory.poke(memAddr + 7464, -97);
+    do Memory.poke(memAddr + 7465, -1);
+    do Memory.poke(memAddr + 7466, -7);
+    do Memory.poke(memAddr + 7467, -31);
+    do Memory.poke(memAddr + 7468, -8185);
+    do Memory.poke(memAddr + 7469, -6145);
+    do Memory.poke(memAddr + 7470, -32737);
+    do Memory.poke(memAddr + 7471, -385);
+    let i = 7472;
+    while(i < 7474){
+      do Memory.poke(memAddr + i, -7);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 7474, -32737);
+    do Memory.poke(memAddr + 7475, -8065);
+    do Memory.poke(memAddr + 7476, 2047);
+    do Memory.poke(memAddr + 7477, 2040);
+    do Memory.poke(memAddr + 7478, -32);
+    do Memory.poke(memAddr + 7479, -24577);
+    do Memory.poke(memAddr + 7480, -1921);
+    do Memory.poke(memAddr + 7481, 7);
+    do Memory.poke(memAddr + 7487, 14848);
+    do Memory.poke(memAddr + 7488, 92);
+    do Memory.poke(memAddr + 7519, 14848);
+    do Memory.poke(memAddr + 7520, 92);
+    do Memory.poke(memAddr + 7551, 14848);
+    do Memory.poke(memAddr + 7552, 92);
+    do Memory.poke(memAddr + 7583, 14848);
+    do Memory.poke(memAddr + 7584, 92);
+    do Memory.poke(memAddr + 7615, 14848);
+    do Memory.poke(memAddr + 7616, 92);
+    do Memory.poke(memAddr + 7647, 14848);
+    do Memory.poke(memAddr + 7648, 92);
+    do Memory.poke(memAddr + 7679, 14848);
+    do Memory.poke(memAddr + 7680, 92);
+    do Memory.poke(memAddr + 7711, 14848);
+    do Memory.poke(memAddr + 7712, 92);
+    do Memory.poke(memAddr + 7743, 14848);
+    do Memory.poke(memAddr + 7744, 92);
+    do Memory.poke(memAddr + 7775, 14848);
+    do Memory.poke(memAddr + 7776, 92);
+    do Memory.poke(memAddr + 7807, 14848);
+    do Memory.poke(memAddr + 7808, 92);
+    do Memory.poke(memAddr + 7839, 14848);
+    do Memory.poke(memAddr + 7840, 92);
+    do Memory.poke(memAddr + 7871, 14848);
+    do Memory.poke(memAddr + 7872, 92);
+    do Memory.poke(memAddr + 7903, 14848);
+    do Memory.poke(memAddr + 7904, 92);
+    do Memory.poke(memAddr + 7935, 14848);
+    do Memory.poke(memAddr + 7936, 92);
+    do Memory.poke(memAddr + 7967, 14848);
+    do Memory.poke(memAddr + 7968, -36);
+    let i = 7969;
+    while(i < 7999){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 7999, 15359);
+    do Memory.poke(memAddr + 8000, 28);
+    do Memory.poke(memAddr + 8031, 14336);
+    do Memory.poke(memAddr + 8032, -4);
+    let i = 8033;
+    while(i < 8063){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 8063, 16383);
+    do Memory.poke(memAddr + 8064, -4);
+    let i = 8065;
+    while(i < 8095){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 8095, 16383);
+    do Memory.poke(memAddr + 8096, -4);
+    let i = 8097;
+    while(i < 8127){
+      do Memory.poke(memAddr + i, -1);
+      let i = i + 1;
+    }
+    do Memory.poke(memAddr + 8127, 16383);
+    return;
+  }
+}
