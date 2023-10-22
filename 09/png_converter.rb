@@ -14,8 +14,6 @@ image = ChunkyPNG::Image.from_file(file_path)
 width = image.width
 height = image.height
 
-white = 0
-black = 0
 words = []
 word = []
 (0..height - 1).each do |y|
@@ -42,7 +40,8 @@ instruction_arr = []
 i = 0
 while i < twos_comp_arr.length
   num = twos_comp_arr[i]
-  if num == 0
+  # num can be either an int or a string. String.zero? is not a valid method
+  if num == 0 # rubocop:disable Style/NumericPredicate
     instruction_arr << ''
   elsif num != twos_comp_arr[i + 1]
     instruction_arr << "    do Memory.poke(memAddr + #{i}, #{num});"
