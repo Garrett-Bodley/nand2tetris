@@ -1,4 +1,4 @@
-function LSFR.new 0
+function LFSR.new 0
 push constant 1
 call Memory.alloc 1
 pop pointer 0
@@ -6,14 +6,14 @@ push argument 0
 pop this 0
 push pointer 0
 return
-function LSFR.setState 0
+function LFSR.setState 0
 push argument 0
 pop pointer 0
 push argument 1
 pop this 0
 push constant 0
 return
-function LSFR.nextRNG 1
+function LFSR.nextRNG 1
 push argument 0
 pop pointer 0
 push this 0

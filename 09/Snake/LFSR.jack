@@ -1,6 +1,6 @@
-class LSFR {
+class LFSR {
   field int state;
-  constructor LSFR new(int seed){
+  constructor LFSR new(int seed){
     let state = seed;
     return this;
   }
