@@ -1,4 +1,4 @@
-function LSFR.new 0
+function LFSR.new 0
 push constant 1
 call Memory.alloc 1
 pop pointer 0
@@ -6,33 +6,33 @@ push constant 20251
 pop this 0
 push pointer 0
 return
-function LSFR.setState 0
+function LFSR.setState 0
 push argument 0
 pop pointer 0
 push argument 1
 pop this 0
 push constant 0
 return
-function LSFR.nextRNG 1
+function LFSR.nextRNG 1
 push argument 0
 pop pointer 0
 push this 0
 push constant 9
-call Shift.logicalRight 2
+call Shift.arithmeticRight 2
 push this 0
 push constant 1
-call Shift.logicalRight 2
+call Shift.arithmeticRight 2
 call Gates.xor 2
 push constant 1
 and
 pop local 0
 push this 0
 push constant 1
-call Shift.logicalRight 2
+call Shift.arithmeticRight 2
 push local 0
 push constant 15
 call Shift.left 2
-or
+and
 pop this 0
 push this 0
 return

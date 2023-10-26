@@ -1,6 +1,6 @@
-class LSFR {
+class LFSR {
   field int state;
-  constructor LSFR new(){
+  constructor LFSR new(){
     let state = 20251;
     return this;
   }
@@ -12,8 +12,8 @@ class LSFR {
 
   method int nextRNG(){
     var int carry;
-    let carry = Gates.xor(Shift.logicalRight(state, 9), Shift.logicalRight(state, 1)) & 1;
-    let state = Shift.logicalRight(state, 1) | Shift.left(carry, 15);
+    let carry = Gates.xor(Shift.arithmeticRight(state, 9), Shift.arithmeticRight(state, 1)) & 1;
+    let state = Shift.arithmeticRight(state, 1) & Shift.left(carry, 15);
     return state;
   }
 }
