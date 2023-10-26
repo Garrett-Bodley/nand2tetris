@@ -71,13 +71,13 @@
 class SnakeGame {
   field int counter, foodCount, padding, pixelSize;
   field ListNode food;
-  field LSFR lsfr;
+  field LFSR lfsr;
   field Snake snake;
 
   constructor SnakeGame new(){
     let foodCount = 0;
     let counter = 0;
-    let pixelSize = 16;
+    let pixelSize = 32;
     let padding = 1;
     let snake = Snake.new(pixelSize, padding);
     return this;
@@ -115,7 +115,7 @@ class SnakeGame {
 
 
     // initialize snake to be moving right
-    let lsfr = LSFR.new(counter);
+    let lfsr = LFSR.new(counter);
     do Screen.setColor(false);
     do Screen.drawRectangle(0, 0, 511, 255);
     do snake.drawInit();
@@ -130,11 +130,11 @@ class SnakeGame {
       
       do getKeyboardInput();
 
-      if(Utils.mod(counter, 1000) = 0){
+      if(Utils.mod(counter, 3000) = 0){
         do move(Direction.get());
       }
       let counter = counter + 1;
-      if(counter = 32767){ let counter = 0; }
+      if(counter = 3000){ let counter = 0; }
     }
     return;
   }
@@ -142,6 +142,9 @@ class SnakeGame {
   method void gameWon(){
     do GameState.setVictory(true);
     do Output.printString("CONGRATULATIONS!");
+    do Output.println();
+    do Output.printString("SCORE: ");
+    do Output.printInt(snake.getLength());
     do Output.println();
     return;
   }
@@ -200,7 +203,7 @@ class SnakeGame {
     if(~status.ate()){ 
       do snake.chopTail();
     }else{
-      if(snake.getLength() = ((512/pixelSize) - 1) * ((256/pixelSize) - 1)){ do gameWon(); }
+      if(snake.getLength() = ((512/pixelSize) * (256/pixelSize))) { do gameWon(); }
       do makeFood();
     }
     do snake.updateHead(direction, newCoordinates);
@@ -313,20 +316,12 @@ class SnakeGame {
     let xRange = (512/pixelSize) - 1;
     let yRange = (256/pixelSize) - 1;
 
-    let x = Utils.mod((lsfr.nextRNG() + foodCount - head.getX()), xRange);
+    let x = Utils.mod((lfsr.nextRNG() + foodCount - head.getX()), xRange);
     if(x < 0){ let x = x * -1; }
-    let y = Utils.mod((lsfr.nextRNG() + head.getY() - snake.getLength()), yRange);
+    let y = Utils.mod((lfsr.nextRNG() + head.getY() - snake.getLength()), yRange);
     if(y < 0){ let y = y * -1; }
     let foodCoords = ListNode.new(x, y);
     
-    if(snake.doesInhabit(foodCoords)){
-      let x = Utils.mod((lsfr.nextRNG() & counter), xRange);
-      if(x < 0){ let x = x * -1; }
-      let y = Utils.mod((lsfr.nextRNG() | ((snake.getLength() * foodCount) + head.getX() - head.getY())), yRange);
-      if(y < 0){ let y = y * -1; }
-      do foodCoords.setX(x);
-      do foodCoords.setY(y);
-    }
     return foodCoords;
   }
 
