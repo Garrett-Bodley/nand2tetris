@@ -1,0 +1,19 @@
+class Quotes {
+  constructor Quotes new(){
+    return this;
+  }
+
+  function void test(){
+    do Output.printString("This is a valid string?");
+    do Output.println();
+    do Output.printString("String with newline character \n\n\n");
+    do Output.println();
+    // do Output.printString('String declared with single quotes');
+    // do Output.println();
+    // do Output.printString(`String declared with back ticks`);
+    // do Output.println();
+    do Output.printString("Normal string");
+    do Output.println();
+    return;
+  }
+}
