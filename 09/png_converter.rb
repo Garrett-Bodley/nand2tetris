@@ -7,7 +7,7 @@ require 'pry-nav'
 argument = ARGV.shift
 
 file_path = Pathname.new(File.expand_path(argument))
-out_path = Pathname.new(Dir.getwd).join("Draw#{file_path.basename('.*').to_s.capitalize}.jack")
+out_path = Pathname.new(Dir.getwd).join("#{file_path.basename('.*').to_s.capitalize}.jack")
 output = File.new(out_path, 'w+')
 image = ChunkyPNG::Image.from_file(file_path)
 
