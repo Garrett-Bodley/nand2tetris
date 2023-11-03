@@ -6,6 +6,9 @@ require 'pry-nav'
 require_relative 'jack_tokenizer'
 require_relative 'compilation_engine'
 
+flags = ARGV.select { |el| el.match(/-\S?/) }
+ARGV.delete_if { |el| flags.include?(el) }
+
 raise ArgumentError, 'Expected a filepath argument (received none)' if ARGV.empty?
 
 DIRECTORY_NAME = 'Output'
