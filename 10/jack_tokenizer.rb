@@ -5,7 +5,7 @@ require_relative 'token'
 require 'pry-nav'
 
 # Reads a single file and tokenizes each line
-class JackTokenizer
+class JackTokenizer # rubocop:disable Metrics/ClassLength
   attr_accessor :current_line, :errors, :lines, :line_num, :current_token, :tokens
 
   InvalidCharacter = Class.new(StandardError)
@@ -47,38 +47,27 @@ class JackTokenizer
     end
   end
 
-  def scan_line(string)
-    # build a substring character by character until it matches one of the terminal dictionary options
-    # continue to build substring until it no longer matches
-    # remove the last char that made it not match
-    # determine what type of terminal token it is, and create a token of that type
-
-    # the above assumes valid input
-    # how do we handle errors?
-    # If invalid token, create an ERROR token
-    # How do we build an error token?
-    #   Start building a sub string
-    #   It does not match a regex
-    #     this will only happen if an invalid character is present
-    #   continue building the substring until we hit a space OR a valid token appears?
-    #     ex: ident!fi3r>3
-    #   maybe we don't care?
+  def scan_line(string) # rubocop:disable Metrics/MethodLength
     until string.empty?
       char = string[0]
       if LexicalDictionary.contains(char)
+        # if valid char and not an edge case
         sub_s = maximal_munch(string)
         type = LexicalDictionary.type(sub_s)
         token = Token.new(type, sub_s, @line_num)
         @tokens << token
         string.sub!(sub_s, '')
       else
-        char = string.slice(0)
+        # handle edge cases
         case char
         when ' '
+          # consume and ignore spaces
           string.sub!(' ', '')
         when '"'
           handle_single_quote(string)
         else
+          # If it's not a space or double quote it's an invalid character
+          # therefore, generate an error token to report at the end of scanning process
           string.sub!(char, '')
           type = LexicalDictionary.type(char)
           error = Token.new(type, char, @line_num)
@@ -101,7 +90,7 @@ class JackTokenizer
   end
 
   def string_max_munch(string)
-    # either returns a valid string literal or consume the rest of the line
+    # either returns a valid string literal or consumes the rest of the line
     cur = 1
     sub_s = string.slice(0, cur)
     until sub_s.match?(/"[^\n"]*"/) || sub_s.length == string.length
