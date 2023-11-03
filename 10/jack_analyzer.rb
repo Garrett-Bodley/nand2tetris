@@ -33,7 +33,6 @@ Dir.mkdir(dir_path) unless Dir.exist?(dir_path)
 files.each do |file|
   tokenizer = JackTokenizer.new(file)
   # compiler = CompilationEngine.new(file)
-  binding.pry
   output_path = dir_path.join(file.basename('.*').to_s + 'T').sub_ext('.xml')
   output_file = File.open(output_path, 'w+')
   tokenizer.scan_lines
@@ -43,7 +42,6 @@ files.each do |file|
     end
     break
   end
-  binding.pry
   output_file.puts '<tokens>'
   tokenizer.tokens.each do |token|
     output_file.puts token.to_s
