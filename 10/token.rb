@@ -11,6 +11,14 @@ class Token
   end
 
   def to_s
-    @string
+    case @type
+    when 'INT_CONST'
+      type_string = 'integerConstant'
+    when 'STRING_CONST'
+      type_string = 'stringConstant'
+    else
+      type_string = @type.downcase
+    end
+    "<#{type_string}> #{string} </#{type_string}>"
   end
 end
