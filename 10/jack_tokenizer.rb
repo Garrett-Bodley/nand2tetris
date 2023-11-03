@@ -31,25 +31,19 @@ class JackTokenizer
     @lines.empty?
   end
 
-  def advance
-    # return @current_token = tokens.shift unless tokens.empty?
-
-    # advance_line
-    # @current_token = @tokens.shift
-  end
-
-  def advance_line
-    # @current_line = sanitize_line(@lines.shift) if @current_line.empty?
+  def errors?
+    @errors.count.positive?
   end
 
   def scan_lines
     @line_num = 1
+    skip_empty_or_comments
     until @lines.empty?
       # binding.pry
-      skip_empty_or_comments
-      string = sanitize_line(@lines.shift)
-      scan_line(string)
+      line = sanitize_line(@lines.shift)
+      scan_line(line)
       @line_num += 1
+      skip_empty_or_comments
     end
   end
 
@@ -70,19 +64,20 @@ class JackTokenizer
     #     ex: ident!fi3r>3
     #   maybe we don't care?
     until string.empty?
-      sub_s = string[0]
-      # string handling is broken rn
-      binding.pry if sub_s == "\""
-      if LexicalDictionary.contains(sub_s)
-        sub_s = maximal_munch(sub_s, string)
+      char = string[0]
+      if LexicalDictionary.contains(char)
+        sub_s = maximal_munch(string)
         type = LexicalDictionary.type(sub_s)
-        @tokens << Token.new(type, sub_s, @line_num)
+        token = Token.new(type, sub_s, @line_num)
+        @tokens << token
         string.sub!(sub_s, '')
       else
         char = string.slice(0)
         case char
         when ' '
           string.sub!(' ', '')
+        when '"'
+          handle_single_quote(string)
         else
           string.sub!(char, '')
           type = LexicalDictionary.type(char)
@@ -93,30 +88,43 @@ class JackTokenizer
     end
   end
 
-  # def build_until_match_or_end_of_token(string)
-  #   cur = 0
-  #   sub_s = string[0]
-  #   until LexicalDictionary.contains(sub_s) || string[cur] == ' '
-  #     cur += 1
-  #     sub_s = string.slice(0, cur + 1)
-  #   end
-  # end
+  def maximal_munch(string)
+    return string[0] if string.length == 1
 
-  def maximal_munch(sub_s, string)
-    # if LexicalDictionary.contains(sub_s) == false
-    #   raise ArgumentError, "Provided substring not found in Dictionary (given: #{sub_s})"
-    # end
-    return sub_s if sub_s.length == string.length
-
-    cur = 1
+    sub_s = string[0]
+    cur = 2
     while LexicalDictionary.contains(sub_s) && sub_s.length < string.length
-      sub_s = string.slice(0, cur + 1)
+      sub_s = string.slice(0, cur)
       cur += 1
     end
-    sub_s.slice(0, cur - 1)
+    sub_s.slice(0, cur - 2)
   end
 
+  def string_max_munch(string)
+    # either returns a valid string literal or consume the rest of the line
+    cur = 1
+    sub_s = string.slice(0, cur)
+    until sub_s.match?(/"[^\n"]*"/) || sub_s.length == string.length
+      cur += 1
+      sub_s = string.slice(0, cur)
+    end
+    sub_s
+  end
 
+  def handle_single_quote(string) # rubocop:disable Metrics/MethodLength
+    sub_s = string_max_munch(string)
+    type = LexicalDictionary.type(sub_s)
+    string.sub!(sub_s, '')
+    if type == 'ERROR'
+      token = Token.new(type, sub_s, @line_num)
+      @errors << token
+    else
+      # remove quotation marks
+      stripped_s = sub_s.slice(1, sub_s.length - 2)
+      token = Token.new(type, stripped_s, @line_num)
+      @tokens << token
+    end
+  end
 
   def token_type
     # returns the type of the current token
@@ -144,7 +152,7 @@ class JackTokenizer
   def skip_empty_or_comments
     # check if current line is any type of comment or is empty
     # increment @line_num and remove comment line
-    while LexicalDictionary.comment?(@lines.first)
+    while !@lines.empty? && LexicalDictionary.comment?(@lines.first)
       if @lines.first.match?(LexicalDictionary::API_COMMENT_MULTI_START)
         skip_multi_line_comment
       else
