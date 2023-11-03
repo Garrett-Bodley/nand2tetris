@@ -31,6 +31,30 @@ class Main {
     // }
     // do snake.dispose();
 
+    // Testing one right shift
+    var int res;
+    let res = -7;
+    do Output.printString("-7 >> 1 => ");
+    do Output.printInt(Shift.singleArithmeticRight(res));
+    do Output.println();
+    let res = -15;
+    do Output.printString("-15 >> 1 => ");
+    do Output.printInt(Shift.singleArithmeticRight(res));
+    do Output.println();
+    let res = -15;
+    do Output.printString("-15 >> 2 => ");
+    do Output.printInt(Shift.arithmeticRight(res, 2));
+    do Output.println();
+    do Output.printString("-15 >> 3 => ");
+    do Output.printInt(Shift.arithmeticRight(res, 3));
+    do Output.println();
+    do Output.printString("-15 >> 4 => ");
+    do Output.printInt(Shift.arithmeticRight(res, 4));
+    do Output.println();
+    do Output.printString("-15 >> 15 => ");
+    do Output.printInt(Shift.arithmeticRight(res, 15));
+    do Output.println();
+
     // Testing bit shifting
     // var int res;
     // let res = Shift.logicalRight(-1, 1);
@@ -139,7 +163,8 @@ class Main {
 
     // do ScreenCharWidthTest.testWidth();
 
-    do DrawSnake.draw();
+    // do DrawSnake.draw();
+    // do Quotes.test();
 
     return;
   }
