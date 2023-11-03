@@ -1,3 +1,4 @@
+# rubocop:disable Style/ConditionalAssignment
 # frozen_string_literal: true
 
 # Represents a Token
@@ -10,7 +11,7 @@ class Token
     @line_num = line_num
   end
 
-  def to_s
+  def to_s # rubocop:disable Metrics/MethodLength
     case @type
     when 'INT_CONST'
       type_string = 'integerConstant'
@@ -19,6 +20,20 @@ class Token
     else
       type_string = @type.downcase
     end
-    "<#{type_string}> #{string} </#{type_string}>"
+
+    case @string
+    when '<'
+      content = '&lt;'
+    when '>'
+      content = '&gt;'
+    when '&'
+      content = '&amp;'
+    else
+      content = @string
+    end
+
+    "<#{type_string}> #{content} </#{type_string}>"
   end
 end
+
+# rubocop:enable Style/ConditionalAssignment
