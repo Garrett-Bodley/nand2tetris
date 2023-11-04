@@ -11,20 +11,27 @@ class JackTokenizer # rubocop:disable Metrics/ClassLength
   InvalidCharacter = Class.new(StandardError)
   InvalidExpression = Class.new(StandardError)
   INLINE_COMMENT = %r{(?<=\S)\s*//.*}.freeze
-  # COMMENT_LINE = %r{^//.*$}.freeze
-  # API_COMMENT_LINE = %r{^/\*\*.*\*/$}.freeze
-  # API_COMMENT_MULTI_START = %r{^(?!\s*.*\*/\s*$)/\*\*.*$}.freeze
-  # API_COMMENT_MULTI_END = %r{^(?!/\*\*).*\*/$}.freeze
-  # EMPTY = %r{^$}.freeze # rubocop:disable Style/RegexpLiteral
 
   def initialize(filepath)
     @file = File.open(filepath)
     @lines = @file.readlines(chomp: true).map(&:strip)
-    # current line is an array resulting from calling .split on the next line
-    # @line_num = 1
-    # @current_line = @lines.first
     @tokens = []
     @errors = []
+    scan_lines
+    @current_token = @tokens.first
+    @idx = 0
+  end
+
+  def advance
+    @current_token = @tokens[@idx += 1]
+  end
+
+  def more_tokens?
+    @idx != @tokens.length - 1
+  end
+
+  def peek
+    @tokens[@idx + 1]
   end
 
   def more_lines?
