@@ -53,6 +53,8 @@ class JackTokenizer
       'SYMBOL' => Regexp.union(SYMBOLS),
       'INT_CONST' => /^\d+$/,
       'STRING_CONST' => /"[^\n"]*"/,
+      # 'STRING_CONST_START' => /^"$/,
+      # 'STRING_CONST_SUBSTR' => /^"[^\n"]*/,
       'IDENTIFIER' => /^[a-zA-Z_][a-zA-Z0-9_]*$/
     }
 
