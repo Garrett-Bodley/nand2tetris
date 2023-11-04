@@ -35,19 +35,20 @@ Dir.mkdir(dir_path) unless Dir.exist?(dir_path)
 
 files.each do |file|
   tokenizer = JackTokenizer.new(file)
-  # compiler = CompilationEngine.new(file)
-  output_path = dir_path.join(file.basename('.*').to_s + 'T').sub_ext('.xml')
-  output_file = File.open(output_path, 'w+')
+  output_path = dir_path.join(file.basename).sub_ext('.xml')
   tokenizer.scan_lines
   if tokenizer.errors?
     tokenizer.errors.each do |err|
       puts "Invalid character(s) '\e[4:3m#{err.string}\e[0m' in #{file.basename} on line #{err.line_num}"
     end
     break
+  else
+    compiler = CompilationEngine.new(output_path, tokenizer)
+    compiler.compile_class
   end
-  output_file.puts '<tokens>'
-  tokenizer.tokens.each do |token|
-    output_file.puts token.to_s
-  end
-  output_file.puts '</tokens>'
+  # output_file.puts '<tokens>'
+  # tokenizer.tokens.each do |token|
+  #   output_file.puts token.to_s
+  # end
+  # output_file.puts '</tokens>'
 end
