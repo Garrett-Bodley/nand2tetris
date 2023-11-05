@@ -43,12 +43,19 @@ files.each do |file|
     end
     break
   else
-    compiler = CompilationEngine.new(output_path, tokenizer)
-    compiler.compile_class
+    if(flags.include?('-T'))
+      output_filename = file.basename('.*').to_s + 'T.xml'
+      output_path = dir_path.join(output_filename)
+      output_file = File.open(output_path, 'w+')
+
+      output_file.puts '<tokens>'
+      tokenizer.tokens.each do |token|
+        output_file.puts token.to_s
+      end
+      output_file.puts '</tokens>'
+    else
+      compiler = CompilationEngine.new(output_path, tokenizer)
+      compiler.compile_class
+    end
   end
-  # output_file.puts '<tokens>'
-  # tokenizer.tokens.each do |token|
-  #   output_file.puts token.to_s
-  # end
-  # output_file.puts '</tokens>'
 end
