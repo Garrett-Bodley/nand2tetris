@@ -19,43 +19,37 @@ class CompilationEngine
   end
 
   def compile_class
-    @block.push('Class Declaration')
-    write_string('<class>')
-    @space_count += 2
+    open_structure_tag 'Class Declaration', '<class>'
 
-    expect(@current_token.string == 'class') # and advance token
-    write_token_and_advance # then do business logic
+    expect(@current_token.string == 'class')
+    advance
 
     expect(@current_token.type == 'IDENTIFIER')
     @table.define(@current_token.string, 'className', :CLASSNAME)
-    write_token_and_advance
+    write_table_info_and_advance
 
     expect(@current_token.string == '{')
-    write_token_and_advance
+    advance
 
     compile_class_var_dec while @current_token.string.match?(/static|field/)
 
     compile_subroutine while @current_token.string.match?(/constructor|method|function/)
 
     expect(@current_token.string == '}')
-    write_token_and_advance
+    advance
 
-    @space_count -= 2
-    write_string('</class>')
-    @block.pop
+    close_structure_tag '</class>'
   end
 
   def compile_class_var_dec
     # ('static' | 'field') type varName (',' varName)* ';'
-    @block.push('Class Var Declaration')
-    write_string('<classVarDec>')
-    @space_count += 2
+    open_structure_tag 'Class Var Declaration', '<classVarDec>'
 
-#     the identifier category (var, argument, static, field, class, subroutine);
-#     ■ whether the identifier is presently being defined (e.g., the identifier stands for a variable declared in a
-#      var statement) or used (e.g., the identifier stands for a variable in an expression);
-#     ■ whether the identifier represents a variable of one of the four kinds (var, argument, static, field), and the
-#     running index assigned to the identifier by the symbol table.
+    #     the identifier category (var, argument, static, field, class, subroutine);
+    #     ■ whether the identifier is presently being defined (e.g., the identifier stands for a variable declared in a
+    #      var statement) or used (e.g., the identifier stands for a variable in an expression);
+    #     ■ whether the identifier represents a variable of one of the four kinds (var, argument, static, field), and the
+    #       running index assigned to the identifier by the symbol table.
 
 
     expect(@current_token.string.match?(/static|field/))
@@ -67,31 +61,32 @@ class CompilationEngine
     advance
 
     expect(@current_token.type == 'IDENTIFIER')
-    @table.define(@current_token.string, type, kind)
-    write_token_and_advance
+    name = @current_token.string
+    @table.define(name, type, kind)
+    write_table_info_and_advance
 
     while @current_token.string == ','
       advance
       expect(@current_token.type == 'IDENTIFIER')
-      @table.define(@current_token.string, type, kind)
+      name = @current_token.string
+      @table.define(name, type, kind)
       write_token_and_advance
     end
 
     expect(@current_token.string == ';')
     advance
 
-    @space_count -= 2
-    write_string('</classVarDec>')
-    @block.pop
+    close_structure_tag '</classVarDec>'
   end
 
   def compile_subroutine
     # compiles a complete method, function, or constructor
     # ('constructor'|'function'|'method') ('void'|type) subroutineName '(' parameterList ')' subRoutineBody
-    @block.push('Subroutine Declaration')
-    write_string('<subroutineDec>')
-    @space_count += 2
+    open_structure_tag 'Subroutine Declaration', '<subroutineDec>'
 
+    @table.new_subroutine
+
+    # Will have to compile constructor functions differently
     expect(@current_token.string.match?(/constructor|method|function/))
     write_token_and_advance
 
@@ -111,100 +106,100 @@ class CompilationEngine
 
     compile_subroutine_body
 
-    @space_count -= 2
-    write_string('</subroutineDec>')
-    @block.push('Subroutine Declaration')
-
+    close_structure_tag '</subroutineDec>'
   end
+
+  # def compile_constructor
+
+  # end
 
   def compile_param_list
     # compiles a possibly empty parameter list
     # not including the enclosing "()"
-    @block.push('Parameter List')
-    write_string('<parameterList>')
-    @space_count += 2
+    open_structure_tag 'Parameter List', '<parameterList>'
 
+
+    kind = :ARG
     unless @current_token.string == ')'
       expect(@current_token.string.match?(/void|int|char|boolean/) || @current_token.type == 'IDENTIFIER')
-      write_token_and_advance
+      type = @current_token.string
+      advance
 
       expect(@current_token.type == 'IDENTIFIER')
-      write_token_and_advance
+      name = @current_token.string
+      @table.define(name, type, kind)
+      write_table_info_and_advance
 
       while @current_token.string == ','
-        write_token_and_advance
+        advance
         expect(@current_token.string.match?(/void|int|char|boolean/) || @current_token.type == 'IDENTIFIER')
-        write_token_and_advance
+        type = @current_token.string
+        advance
         expect(@current_token.type == 'IDENTIFIER')
-        write_token_and_advance
+        name = @current_token.string
+        @table.define(name, type, kind)
+        write_table_info_and_advance
       end
     end
 
-    @space_count -= 2
-    write_string('</parameterList>')
-    @block.pop
+    close_structure_tag '</parameterList>'
   end
 
   def compile_subroutine_body
     # '{' varDec* statements '}'
-    @block.push('Subroutine Body')
-    write_string('<subroutineBody>')
-    @space_count += 2
+    open_structure_tag 'Subroutine Body', '<subroutineBody>'
 
     expect(@current_token.string == '{')
-    write_token_and_advance
+    advance
 
     compile_var_dec while @current_token.string == 'var'
 
     compile_statements
 
     expect(@current_token.string == '}')
-    write_token_and_advance
+    advance
 
-    @space_count -= 2
-    write_string('</subroutineBody>')
-    @block.pop
+    close_structure_tag '</subroutineBody>'
   end
 
   def compile_var_dec
     # compiles a var declaration
     # 'var' type varName (',' varName)* ';'
-    @block.push('Var Declaration')
-    write_string('<varDec>')
-    @space_count += 2
+    open_structure_tag 'Var Declaration', '</varDec>'
 
     expect(@current_token.string == 'var')
-    write_token_and_advance
+    kind = :VAR
+    advance
 
     # expect type
     expect(@current_token.string.match?(/void|int|char|boolean/) || @current_token.type == 'IDENTIFIER')
-    write_token_and_advance
+    type = @current_token.string
+    advance
 
     expect(@current_token.type == 'IDENTIFIER')
-    write_token_and_advance
+    name = @current_token.string
+
+    @table.define(name, type, kind)
+    write_table_info_and_advance
 
     while @current_token.string == ','
-      write_token_and_advance
+      advance
       expect(@current_token.type == 'IDENTIFIER')
-      write_token_and_advance
+      name = @current_token.string
+      @table.define(name, type, kind)
+      write_table_info_and_advance
     end
 
     expect(@current_token.string == ';')
-    write_token_and_advance
+    advance
 
-    @space_count -= 2
-    write_string('</varDec>')
-    @block.pop
+    close_structure_tag '</varDec>'
   end
 
   def compile_statements
     # compiles a sequence of statements, not including the enclosing "{}"
     # binding.pry
-
-    @block.push('Statements')
-    write_string('<statements>')
-    @space_count += 2
-
+    open_structure_tag 'Statements', '<statements>'
 
     while @current_token.string != '}'
       case @current_token.string
@@ -221,17 +216,13 @@ class CompilationEngine
       end
     end
 
-    @space_count -= 2
-    write_string('</statements>')
-    @block.pop
+    close_structure_tag '</statements>'
   end
 
   def compile_do
     # compiles a do statement
     # binding.pry
-    @block.push('Do Statement')
-    write_string('<doStatement>')
-    @space_count += 2
+    open_structure_tag 'Do Statement', '<doStatement>'
 
     expect(@current_token.string == 'do')
     write_token_and_advance
@@ -264,9 +255,7 @@ class CompilationEngine
     expect(@current_token.string == ';')
     write_token_and_advance
 
-    @space_count -= 2
-    write_string('</doStatement>')
-    @block.pop
+    close_structure_tag '</doStatement>'
   end
 
   def compile_subroutine_call
@@ -293,15 +282,13 @@ class CompilationEngine
 
   def compile_let
     # compiles a let statement
-    @block.push('Let Statement')
-    write_string('<letStatement>')
-    @space_count += 2
+    open_structure_tag 'Let Statement', '<letStatement>'
 
     expect(@current_token.string == 'let')
     write_token_and_advance
 
     expect(@current_token.type == 'IDENTIFIER')
-    write_token_and_advance
+    write_table_info_and_advance
 
     if @current_token.string == '['
       write_token_and_advance
@@ -318,9 +305,7 @@ class CompilationEngine
     expect(@current_token.string == ';')
     write_token_and_advance
 
-    @space_count -= 2
-    write_string('</letStatement>')
-    @block.pop
+    close_structure_tag '</letStatement>'
   end
 
   def compile_while
@@ -330,10 +315,14 @@ class CompilationEngine
     write_token_and_advance
 
     expect(@current_token.string == '(')
+    write_token_and_advance
+
     compile_expression
+
     expect(@current_token.string == ')')
     write_token_and_advance
     expect(@current_token.string == '{')
+    write_token_and_advance
     compile_statements
     expect(@current_token.string == '}')
     write_token_and_advance
@@ -346,7 +335,7 @@ class CompilationEngine
     # compiles a return statement
     expect(@current_token.string == 'return')
     write_token_and_advance
-    compile_expression if(@current_token.string != ';')
+    compile_expression if @current_token.string != ';'
     expect(@current_token.string == ';')
     write_token_and_advance
 
@@ -356,7 +345,6 @@ class CompilationEngine
   def compile_if
     # compiles an if statement, possible with a a trailing else clause
     open_structure_tag('If Statement', '<ifStatement>')
-
 
     expect(@current_token.string == 'if')
     write_token_and_advance
@@ -375,6 +363,7 @@ class CompilationEngine
 
     close_structure_tag('</ifStatement>') && return unless @current_token.string == 'else'
 
+    # else{}
     write_token_and_advance
     expect(@current_token.string == '{')
     write_token_and_advance
@@ -396,9 +385,7 @@ class CompilationEngine
     # three possibilities
 
     # Any other token is not part of this term and should not be advanced over
-    @block.push('Term')
-    write_string '<term>'
-    @space_count += 2
+    open_structure_tag 'Term', '<term>'
 
     case @current_token.type
     when 'IDENTIFIER'
@@ -419,9 +406,7 @@ class CompilationEngine
       compile_keyword_term
     end
 
-    @space_count -= 2
-    write_string '</term>'
-    @block.pop
+    close_structure_tag '</term>'
   end
 
   def compile_keyword_term
@@ -442,6 +427,7 @@ class CompilationEngine
   def compile_unary_op
     expect(@current_token.string.match?(/-|~/))
     write_token_and_advance
+    compile_term
   end
 
   def compile_paren_term
@@ -461,14 +447,14 @@ class CompilationEngine
       compile_subroutine_call
     else
       expect(@current_token.type == 'IDENTIFIER')
-      write_token_and_advance
+      write_table_info_and_advance
     end
   end
 
   def compile_array_entry
     # array[expression]
     expect(@current_token.type == 'IDENTIFIER')
-    write_token_and_advance
+    write_table_info_and_advance
 
     expect(@current_token.string == '[')
     write_token_and_advance
@@ -481,7 +467,7 @@ class CompilationEngine
 
   def compile_expression_list
     # compiles a (possibly empty) comma-separated list of expressions
-    open_structure_tag('Expression List', '<expressionList>')
+    open_structure_tag 'Expression List', '<expressionList>'
 
     if @current_token.string != ')'
       compile_expression
@@ -495,9 +481,8 @@ class CompilationEngine
   end
 
   def compile_expression
-    @block.push('Expression')
-    write_string('<expression>')
-    @space_count += 2
+    # term (op term)*
+    open_structure_tag 'Expression', '<expression>'
 
     compile_term
     while @current_token.string.match?(%r{\+|-|\*|/|&|\||<|>|=})
@@ -505,9 +490,7 @@ class CompilationEngine
       compile_term
     end
 
-    @space_count -= 2
-    write_string('</expression>')
-    @block.pop
+    close_structure_tag '</expression>'
   end
 
   def expect(boolean)
@@ -515,7 +498,8 @@ class CompilationEngine
   end
 
   def syntax_error(block, token)
-    raise SyntaxError, "Unexpected '#{token.string}' in #{block} on line #{token.line_num}"
+    source_filename = Pathname.new(File.basename(@file)).sub_ext('.jack')
+    raise SyntaxError, "Unexpected '#{token.string}' in #{block} on line #{token.line_num} in #{source_filename}"
   end
 
   def write_string(string)
@@ -523,7 +507,17 @@ class CompilationEngine
   end
 
   def write_token_and_advance
-    write_string(@current_token.to_s(@table))
+    write_string(@current_token.to_s)
+    advance
+  end
+
+  def write_table_info_and_advance
+    name = @current_token.string
+    type = @table.type?(name)
+    kind = @table.kind?(name)
+    index = @table.index?(name)
+    tag_string = [kind.to_s.downcase, type.capitalize, index].join
+    write_string "<#{tag_string}> #{name} </#{tag_string}>"
     advance
   end
 
@@ -542,7 +536,6 @@ class CompilationEngine
     write_string tag
     @block.pop
   end
-
 end
 
 # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/ClassLength
