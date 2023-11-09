@@ -1,47 +1,68 @@
 # frozen_string_literal: true
 
-require_relative 'symbol'
-
 # Symbol Table for each frame of code in Jack
 class SymbolTable
+  SyntaxError = Class.new(StandardError)
+  Symbol = Struct.new(:name, :type)
+  attr_accessor :dict
 
   def initialize
-    @static = []
-    @field = []
-    @arg = []
-    @
-    @index = 0
-    @class_hash = {}
-    @subroutine_hash = {}
-    var = []
+    # @dict = Dict.new(KlassDict.new([], []), SubroutineDict.new([], []))
+    # @subroutine = []
+    # @klass = []
+    @dict = {
+      STATIC: {},
+      FIELD: {},
+      ARG: {},
+      VAR: {}
+    }
   end
 
   def define(name, type, kind)
-    table << Symbol.new(name, type, kind, @index)
+    unless %i[STATIC FIELD ARG VAR].include?(kind)
+      raise SyntaxError,
+            "Invalid kind provided to Symbol Table (Expected one of: STATIC, FIELD, ARG, VAR. Received: #{kind})"
+    end
+
+    # should probably check if it was previously defined
+    @dict.each_value do |kind_dict|
+      raise SyntaxError, "Variable with name '#{name}' was previously defined" unless kind_dict[name].nil?
+    end
+    @dict[kind][name] = Symbol.new(name, type)
   end
 
-  def var_count(type)
-    @table.select { |el| el.type == type }.count
+  def var_count(kind)
+    unless %i[STATIC FIELD ARG VAR].include?(kind)
+      raise SyntaxError,
+            "Invalid kind provided to Symbol Table (Expected one of: STATIC, FIELD, ARG, VAR. Received: #{kind})"
+    end
+
+    @dict[kind].count
   end
 
   def kind?(name)
-    table.select { |el| el.name == name }[0].kind
+    @dict.each do |kind, kind_dict|
+      return kind if kind_dict[name]
+    end
+    raise SyntaxError, "Provided Identifier name not previously defined in SymbolTable (Received: #{name})"
   end
 
   def type?(name)
-    table.select { |el| el.name == name }[0].kind
+    @dict.each_value do |kind_dict|
+      return kind_dict[name].type if kind_dict[name]
+    end
+    raise SyntaxError, "Provided Identifier name not previously defined in SymbolTable (Received: #{name})"
   end
 
   def index?(name)
-    table.select { |el| el.name == name }[0].index
+    @dict.each_value do |kind_dict|
+      return kind_dict.keys.index_of(name) if kind_dict[name]
+    end
+    raise SyntaxError, "Provided Identifier name not previously defined in SymbolTable (Received: #{name})"
+  end
+
+  def new_subroutine
+    @dict[:ARG] = {}
+    @dict[:VAR] = {}
   end
 end
-
-# Main.vm
-#
-# pop static 4
-
-
-subroutine_dictionary
-
-class_dictionary
