@@ -10,7 +10,9 @@ class SymbolTable
     # @dict = Dict.new(KlassDict.new([], []), SubroutineDict.new([], []))
     # @subroutine = []
     # @klass = []
+    @static_idx = 0
     @dict = {
+      CLASSNAME: {},
       STATIC: {},
       FIELD: {},
       ARG: {},
@@ -19,12 +21,15 @@ class SymbolTable
   end
 
   def define(name, type, kind)
-    unless %i[STATIC FIELD ARG VAR].include?(kind)
+    raise SyntaxError, "Variable name cannot match name of class. (Received: #{name})" if name == @dict[:CLASSNAME]
+
+    unless %i[STATIC FIELD ARG VAR CLASSNAME].include?(kind)
       raise SyntaxError,
             "Invalid kind provided to Symbol Table (Expected one of: STATIC, FIELD, ARG, VAR. Received: #{kind})"
     end
 
-    # should probably check if it was previously defined
+    return @dict[:CLASSNAME][name] = Symbol.new(name, type) if kind == :CLASSNAME
+
     @dict.each_value do |kind_dict|
       raise SyntaxError, "Variable with name '#{name}' was previously defined" unless kind_dict[name].nil?
     end
@@ -56,7 +61,7 @@ class SymbolTable
 
   def index?(name)
     @dict.each_value do |kind_dict|
-      return kind_dict.keys.index_of(name) if kind_dict[name]
+      return kind_dict.keys.find_index(name) if kind_dict[name]
     end
     raise SyntaxError, "Provided Identifier name not previously defined in SymbolTable (Received: #{name})"
   end
@@ -64,5 +69,11 @@ class SymbolTable
   def new_subroutine
     @dict[:ARG] = {}
     @dict[:VAR] = {}
+  end
+
+  def new_class
+    @dict[:CLASSNAME] = {}
+    @dict[:FIELD] = {}
+    @dict[:STATIC] = {}
   end
 end
