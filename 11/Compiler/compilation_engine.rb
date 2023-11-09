@@ -1,27 +1,22 @@
 # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/ClassLength
 # frozen_string_literal: true
 
-require_relative './compilation_dictionary'
+require_relative './symbol_table'
 
 # Recursive Top-Down parser
 class CompilationEngine
   SyntaxError = Class.new(StandardError)
   def initialize(output_path, tokenizer)
     @file = File.open(output_path, 'w+')
-    @dict = CompilationDictionary.new
+    @table = SymbolTable.new
+
     @tokenizer = tokenizer
     @current_token = tokenizer.current_token
+
     @idx = 0
     @block = []
     @space_count = 0
   end
-
-  # [:type, literal]
-  # [:string, literal]
-  # dummy_token
-  # def eat(token, expect_type, expect_string)
-
-  # end
 
   def compile_class
     @block.push('Class Declaration')
@@ -32,6 +27,7 @@ class CompilationEngine
     write_token_and_advance # then do business logic
 
     expect(@current_token.type == 'IDENTIFIER')
+    @table.define(@current_token.string, 'className', :CLASSNAME)
     write_token_and_advance
 
     expect(@current_token.string == '{')
@@ -55,26 +51,34 @@ class CompilationEngine
     write_string('<classVarDec>')
     @space_count += 2
 
-    # CLASS_VAR_GRAMMAR = [[:match, pattern], [:type, stringconst], ]
-    #
+#     the identifier category (var, argument, static, field, class, subroutine);
+#     ■ whether the identifier is presently being defined (e.g., the identifier stands for a variable declared in a
+#      var statement) or used (e.g., the identifier stands for a variable in an expression);
+#     ■ whether the identifier represents a variable of one of the four kinds (var, argument, static, field), and the
+#     running index assigned to the identifier by the symbol table.
+
 
     expect(@current_token.string.match?(/static|field/))
-    write_token_and_advance
+    kind = @current_token.string.upcase.to_sym
+    advance
 
     expect(@current_token.type.match?(/IDENTIFIER|KEYWORD/))
-    write_token_and_advance
+    type = @current_token.string
+    advance
 
     expect(@current_token.type == 'IDENTIFIER')
+    @table.define(@current_token.string, type, kind)
     write_token_and_advance
 
     while @current_token.string == ','
-      write_token_and_advance
+      advance
       expect(@current_token.type == 'IDENTIFIER')
+      @table.define(@current_token.string, type, kind)
       write_token_and_advance
     end
 
     expect(@current_token.string == ';')
-    write_token_and_advance
+    advance
 
     @space_count -= 2
     write_string('</classVarDec>')
@@ -519,7 +523,11 @@ class CompilationEngine
   end
 
   def write_token_and_advance
-    write_string(@current_token.to_s)
+    write_string(@current_token.to_s(@table))
+    advance
+  end
+
+  def advance
     @current_token = @tokenizer.advance
   end
 
