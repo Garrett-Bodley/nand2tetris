@@ -1,23 +1,11 @@
 <class>
-  <keyword> class </keyword>
-  <identifier> Square </identifier>
-  <symbol> { </symbol>
+  <classnameClassname0> Square </classnameClassname0>
   <classVarDec>
-  <fieldVarDec>
-    <keyword> field </keyword>
-    <keyword> int </keyword>
-    <identifier> x </identifier>
-    <index> 0 </index>
-  </fieldVarDec>
-    <symbol> , </symbol>
+    <fieldInt0> x </fieldInt0>
     <identifier> y </identifier>
-    <symbol> ; </symbol>
   </classVarDec>
   <classVarDec>
-    <keyword> field </keyword>
-    <keyword> int </keyword>
-    <identifier> size </identifier>
-    <symbol> ; </symbol>
+    <fieldInt2> size </fieldInt2>
   </classVarDec>
   <subroutineDec>
     <keyword> constructor </keyword>
@@ -25,52 +13,42 @@
     <identifier> new </identifier>
     <symbol> ( </symbol>
     <parameterList>
-      <keyword> int </keyword>
-      <defineVariable>
-        <argumentVariable>
-          <identifier> Ax </identifier>
-        </argumentVariable>
-      </defineVariable>
-      <symbol> , </symbol>
-      <keyword> int </keyword>
-      <identifier> Ay </identifier>
-      <symbol> , </symbol>
-      <keyword> int </keyword>
-      <identifier> Asize </identifier>
+      <argInt0> Ax </argInt0>
+      <argInt1> Ay </argInt1>
+      <argInt2> Asize </argInt2>
     </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
-      <symbol> { </symbol>
       <statements>
         <letStatement>
           <keyword> let </keyword>
-          <identifier> x </identifier>
+          <fieldInt0> x </fieldInt0>
           <symbol> = </symbol>
           <expression>
             <term>
-              <identifier> Ax </identifier>
+              <argInt0> Ax </argInt0>
             </term>
           </expression>
           <symbol> ; </symbol>
         </letStatement>
         <letStatement>
           <keyword> let </keyword>
-          <identifier> y </identifier>
+          <fieldInt1> y </fieldInt1>
           <symbol> = </symbol>
           <expression>
             <term>
-              <identifier> Ay </identifier>
+              <argInt1> Ay </argInt1>
             </term>
           </expression>
           <symbol> ; </symbol>
         </letStatement>
         <letStatement>
           <keyword> let </keyword>
-          <identifier> size </identifier>
+          <fieldInt2> size </fieldInt2>
           <symbol> = </symbol>
           <expression>
             <term>
-              <identifier> Asize </identifier>
+              <argInt2> Asize </argInt2>
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -88,13 +66,12 @@
           <keyword> return </keyword>
           <expression>
             <term>
-              <keyword> this </keyword>
+              <fieldInt0> x </fieldInt0>
             </term>
           </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
-      <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
   <subroutineDec>
@@ -106,7 +83,6 @@
     </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
-      <symbol> { </symbol>
       <statements>
         <doStatement>
           <keyword> do </keyword>
@@ -129,7 +105,6 @@
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
-      <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
   <subroutineDec>
@@ -141,7 +116,6 @@
     </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
-      <symbol> { </symbol>
       <statements>
         <doStatement>
           <keyword> do </keyword>
@@ -152,7 +126,7 @@
           <expressionList>
             <expression>
               <term>
-                <keyword> true </keyword>
+                <fieldInt0> x </fieldInt0>
               </term>
             </expression>
           </expressionList>
@@ -168,33 +142,25 @@
           <expressionList>
             <expression>
               <term>
-                <identifier> x </identifier>
+                <fieldInt0> x </fieldInt0>
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
-                <identifier> y </identifier>
+                <fieldInt1> y </fieldInt1>
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
-                <identifier> x </identifier>
-              </term>
-              <symbol> + </symbol>
-              <term>
-                <identifier> size </identifier>
+                <fieldInt0> x </fieldInt0>
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
-                <identifier> y </identifier>
-              </term>
-              <symbol> + </symbol>
-              <term>
-                <identifier> size </identifier>
+                <fieldInt1> y </fieldInt1>
               </term>
             </expression>
           </expressionList>
@@ -206,7 +172,6 @@
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
-      <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
   <subroutineDec>
@@ -218,7 +183,6 @@
     </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
-      <symbol> { </symbol>
       <statements>
         <doStatement>
           <keyword> do </keyword>
@@ -229,7 +193,7 @@
           <expressionList>
             <expression>
               <term>
-                <keyword> false </keyword>
+                <fieldInt0> x </fieldInt0>
               </term>
             </expression>
           </expressionList>
@@ -245,33 +209,25 @@
           <expressionList>
             <expression>
               <term>
-                <identifier> x </identifier>
+                <fieldInt0> x </fieldInt0>
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
-                <identifier> y </identifier>
+                <fieldInt1> y </fieldInt1>
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
-                <identifier> x </identifier>
-              </term>
-              <symbol> + </symbol>
-              <term>
-                <identifier> size </identifier>
+                <fieldInt0> x </fieldInt0>
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
-                <identifier> y </identifier>
-              </term>
-              <symbol> + </symbol>
-              <term>
-                <identifier> size </identifier>
+                <fieldInt1> y </fieldInt1>
               </term>
             </expression>
           </expressionList>
@@ -283,7 +239,6 @@
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
-      <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
   <subroutineDec>
@@ -295,58 +250,13 @@
     </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
-      <symbol> { </symbol>
       <statements>
         <ifStatement>
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
             <term>
-              <symbol> ( </symbol>
-              <expression>
-                <term>
-                  <symbol> ( </symbol>
-                  <expression>
-                    <term>
-                      <identifier> y </identifier>
-                    </term>
-                    <symbol> + </symbol>
-                    <term>
-                      <identifier> size </identifier>
-                    </term>
-                  </expression>
-                  <symbol> ) </symbol>
-                </term>
-                <symbol> &lt; </symbol>
-                <term>
-                  <integerConstant> 254 </integerConstant>
-                </term>
-              </expression>
-              <symbol> ) </symbol>
-            </term>
-            <symbol> &amp; </symbol>
-            <term>
-              <symbol> ( </symbol>
-              <expression>
-                <term>
-                  <symbol> ( </symbol>
-                  <expression>
-                    <term>
-                      <identifier> x </identifier>
-                    </term>
-                    <symbol> + </symbol>
-                    <term>
-                      <identifier> size </identifier>
-                    </term>
-                  </expression>
-                  <symbol> ) </symbol>
-                </term>
-                <symbol> &lt; </symbol>
-                <term>
-                  <integerConstant> 510 </integerConstant>
-                </term>
-              </expression>
-              <symbol> ) </symbol>
+              <fieldInt0> x </fieldInt0>
             </term>
           </expression>
           <symbol> ) </symbol>
@@ -363,15 +273,11 @@
             </doStatement>
             <letStatement>
               <keyword> let </keyword>
-              <identifier> size </identifier>
+              <fieldInt2> size </fieldInt2>
               <symbol> = </symbol>
               <expression>
                 <term>
-                  <identifier> size </identifier>
-                </term>
-                <symbol> + </symbol>
-                <term>
-                  <integerConstant> 2 </integerConstant>
+                  <fieldInt2> size </fieldInt2>
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -393,7 +299,6 @@
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
-      <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
   <subroutineDec>
@@ -405,18 +310,13 @@
     </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
-      <symbol> { </symbol>
       <statements>
         <ifStatement>
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
             <term>
-              <identifier> size </identifier>
-            </term>
-            <symbol> &gt; </symbol>
-            <term>
-              <integerConstant> 2 </integerConstant>
+              <fieldInt2> size </fieldInt2>
             </term>
           </expression>
           <symbol> ) </symbol>
@@ -433,15 +333,11 @@
             </doStatement>
             <letStatement>
               <keyword> let </keyword>
-              <identifier> size </identifier>
+              <fieldInt2> size </fieldInt2>
               <symbol> = </symbol>
               <expression>
                 <term>
-                  <identifier> size </identifier>
-                </term>
-                <symbol> - </symbol>
-                <term>
-                  <integerConstant> 2 </integerConstant>
+                  <fieldInt2> size </fieldInt2>
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -463,7 +359,6 @@
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
-      <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
   <subroutineDec>
@@ -475,18 +370,13 @@
     </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
-      <symbol> { </symbol>
       <statements>
         <ifStatement>
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
             <term>
-              <identifier> y </identifier>
-            </term>
-            <symbol> &gt; </symbol>
-            <term>
-              <integerConstant> 1 </integerConstant>
+              <fieldInt1> y </fieldInt1>
             </term>
           </expression>
           <symbol> ) </symbol>
@@ -501,7 +391,7 @@
               <expressionList>
                 <expression>
                   <term>
-                    <keyword> false </keyword>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
               </expressionList>
@@ -517,47 +407,25 @@
               <expressionList>
                 <expression>
                   <term>
-                    <identifier> x </identifier>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <symbol> ( </symbol>
-                    <expression>
-                      <term>
-                        <identifier> y </identifier>
-                      </term>
-                      <symbol> + </symbol>
-                      <term>
-                        <identifier> size </identifier>
-                      </term>
-                    </expression>
-                    <symbol> ) </symbol>
-                  </term>
-                  <symbol> - </symbol>
-                  <term>
-                    <integerConstant> 1 </integerConstant>
+                    <fieldInt1> y </fieldInt1>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> x </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <identifier> size </identifier>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> y </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <identifier> size </identifier>
+                    <fieldInt1> y </fieldInt1>
                   </term>
                 </expression>
               </expressionList>
@@ -566,15 +434,11 @@
             </doStatement>
             <letStatement>
               <keyword> let </keyword>
-              <identifier> y </identifier>
+              <fieldInt1> y </fieldInt1>
               <symbol> = </symbol>
               <expression>
                 <term>
-                  <identifier> y </identifier>
-                </term>
-                <symbol> - </symbol>
-                <term>
-                  <integerConstant> 2 </integerConstant>
+                  <fieldInt1> y </fieldInt1>
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -588,7 +452,7 @@
               <expressionList>
                 <expression>
                   <term>
-                    <keyword> true </keyword>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
               </expressionList>
@@ -604,33 +468,25 @@
               <expressionList>
                 <expression>
                   <term>
-                    <identifier> x </identifier>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> y </identifier>
+                    <fieldInt1> y </fieldInt1>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> x </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <identifier> size </identifier>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> y </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <integerConstant> 1 </integerConstant>
+                    <fieldInt1> y </fieldInt1>
                   </term>
                 </expression>
               </expressionList>
@@ -645,7 +501,6 @@
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
-      <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
   <subroutineDec>
@@ -657,28 +512,13 @@
     </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
-      <symbol> { </symbol>
       <statements>
         <ifStatement>
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
             <term>
-              <symbol> ( </symbol>
-              <expression>
-                <term>
-                  <identifier> y </identifier>
-                </term>
-                <symbol> + </symbol>
-                <term>
-                  <identifier> size </identifier>
-                </term>
-              </expression>
-              <symbol> ) </symbol>
-            </term>
-            <symbol> &lt; </symbol>
-            <term>
-              <integerConstant> 254 </integerConstant>
+              <fieldInt1> y </fieldInt1>
             </term>
           </expression>
           <symbol> ) </symbol>
@@ -693,7 +533,7 @@
               <expressionList>
                 <expression>
                   <term>
-                    <keyword> false </keyword>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
               </expressionList>
@@ -709,33 +549,25 @@
               <expressionList>
                 <expression>
                   <term>
-                    <identifier> x </identifier>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> y </identifier>
+                    <fieldInt1> y </fieldInt1>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> x </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <identifier> size </identifier>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> y </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <integerConstant> 1 </integerConstant>
+                    <fieldInt1> y </fieldInt1>
                   </term>
                 </expression>
               </expressionList>
@@ -744,15 +576,11 @@
             </doStatement>
             <letStatement>
               <keyword> let </keyword>
-              <identifier> y </identifier>
+              <fieldInt1> y </fieldInt1>
               <symbol> = </symbol>
               <expression>
                 <term>
-                  <identifier> y </identifier>
-                </term>
-                <symbol> + </symbol>
-                <term>
-                  <integerConstant> 2 </integerConstant>
+                  <fieldInt1> y </fieldInt1>
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -766,7 +594,7 @@
               <expressionList>
                 <expression>
                   <term>
-                    <keyword> true </keyword>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
               </expressionList>
@@ -782,47 +610,25 @@
               <expressionList>
                 <expression>
                   <term>
-                    <identifier> x </identifier>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <symbol> ( </symbol>
-                    <expression>
-                      <term>
-                        <identifier> y </identifier>
-                      </term>
-                      <symbol> + </symbol>
-                      <term>
-                        <identifier> size </identifier>
-                      </term>
-                    </expression>
-                    <symbol> ) </symbol>
-                  </term>
-                  <symbol> - </symbol>
-                  <term>
-                    <integerConstant> 1 </integerConstant>
+                    <fieldInt1> y </fieldInt1>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> x </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <identifier> size </identifier>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> y </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <identifier> size </identifier>
+                    <fieldInt1> y </fieldInt1>
                   </term>
                 </expression>
               </expressionList>
@@ -837,7 +643,6 @@
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
-      <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
   <subroutineDec>
@@ -849,18 +654,13 @@
     </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
-      <symbol> { </symbol>
       <statements>
         <ifStatement>
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
             <term>
-              <identifier> x </identifier>
-            </term>
-            <symbol> &gt; </symbol>
-            <term>
-              <integerConstant> 1 </integerConstant>
+              <fieldInt0> x </fieldInt0>
             </term>
           </expression>
           <symbol> ) </symbol>
@@ -875,7 +675,7 @@
               <expressionList>
                 <expression>
                   <term>
-                    <keyword> false </keyword>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
               </expressionList>
@@ -891,47 +691,25 @@
               <expressionList>
                 <expression>
                   <term>
-                    <symbol> ( </symbol>
-                    <expression>
-                      <term>
-                        <identifier> x </identifier>
-                      </term>
-                      <symbol> + </symbol>
-                      <term>
-                        <identifier> size </identifier>
-                      </term>
-                    </expression>
-                    <symbol> ) </symbol>
-                  </term>
-                  <symbol> - </symbol>
-                  <term>
-                    <integerConstant> 1 </integerConstant>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> y </identifier>
+                    <fieldInt1> y </fieldInt1>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> x </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <identifier> size </identifier>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> y </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <identifier> size </identifier>
+                    <fieldInt1> y </fieldInt1>
                   </term>
                 </expression>
               </expressionList>
@@ -940,15 +718,11 @@
             </doStatement>
             <letStatement>
               <keyword> let </keyword>
-              <identifier> x </identifier>
+              <fieldInt0> x </fieldInt0>
               <symbol> = </symbol>
               <expression>
                 <term>
-                  <identifier> x </identifier>
-                </term>
-                <symbol> - </symbol>
-                <term>
-                  <integerConstant> 2 </integerConstant>
+                  <fieldInt0> x </fieldInt0>
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -962,7 +736,7 @@
               <expressionList>
                 <expression>
                   <term>
-                    <keyword> true </keyword>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
               </expressionList>
@@ -978,33 +752,25 @@
               <expressionList>
                 <expression>
                   <term>
-                    <identifier> x </identifier>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> y </identifier>
+                    <fieldInt1> y </fieldInt1>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> x </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <integerConstant> 1 </integerConstant>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> y </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <identifier> size </identifier>
+                    <fieldInt1> y </fieldInt1>
                   </term>
                 </expression>
               </expressionList>
@@ -1019,7 +785,6 @@
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
-      <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
   <subroutineDec>
@@ -1031,28 +796,13 @@
     </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
-      <symbol> { </symbol>
       <statements>
         <ifStatement>
           <keyword> if </keyword>
           <symbol> ( </symbol>
           <expression>
             <term>
-              <symbol> ( </symbol>
-              <expression>
-                <term>
-                  <identifier> x </identifier>
-                </term>
-                <symbol> + </symbol>
-                <term>
-                  <identifier> size </identifier>
-                </term>
-              </expression>
-              <symbol> ) </symbol>
-            </term>
-            <symbol> &lt; </symbol>
-            <term>
-              <integerConstant> 510 </integerConstant>
+              <fieldInt0> x </fieldInt0>
             </term>
           </expression>
           <symbol> ) </symbol>
@@ -1067,7 +817,7 @@
               <expressionList>
                 <expression>
                   <term>
-                    <keyword> false </keyword>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
               </expressionList>
@@ -1083,33 +833,25 @@
               <expressionList>
                 <expression>
                   <term>
-                    <identifier> x </identifier>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> y </identifier>
+                    <fieldInt1> y </fieldInt1>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> x </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <integerConstant> 1 </integerConstant>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> y </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <identifier> size </identifier>
+                    <fieldInt1> y </fieldInt1>
                   </term>
                 </expression>
               </expressionList>
@@ -1118,15 +860,11 @@
             </doStatement>
             <letStatement>
               <keyword> let </keyword>
-              <identifier> x </identifier>
+              <fieldInt0> x </fieldInt0>
               <symbol> = </symbol>
               <expression>
                 <term>
-                  <identifier> x </identifier>
-                </term>
-                <symbol> + </symbol>
-                <term>
-                  <integerConstant> 2 </integerConstant>
+                  <fieldInt0> x </fieldInt0>
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -1140,7 +878,7 @@
               <expressionList>
                 <expression>
                   <term>
-                    <keyword> true </keyword>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
               </expressionList>
@@ -1156,47 +894,25 @@
               <expressionList>
                 <expression>
                   <term>
-                    <symbol> ( </symbol>
-                    <expression>
-                      <term>
-                        <identifier> x </identifier>
-                      </term>
-                      <symbol> + </symbol>
-                      <term>
-                        <identifier> size </identifier>
-                      </term>
-                    </expression>
-                    <symbol> ) </symbol>
-                  </term>
-                  <symbol> - </symbol>
-                  <term>
-                    <integerConstant> 1 </integerConstant>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> y </identifier>
+                    <fieldInt1> y </fieldInt1>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> x </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <identifier> size </identifier>
+                    <fieldInt0> x </fieldInt0>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <identifier> y </identifier>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <identifier> size </identifier>
+                    <fieldInt1> y </fieldInt1>
                   </term>
                 </expression>
               </expressionList>
@@ -1211,8 +927,6 @@
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
-      <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
-  <symbol> } </symbol>
 </class>
