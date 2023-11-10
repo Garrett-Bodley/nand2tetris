@@ -19,6 +19,7 @@ class CompilationEngine
   end
 
   def compile_class
+    # 'class' className '{' classVarDec* subroutineDec* '}'
     open_structure_tag 'Class Declaration', '<class>'
 
     expect(@current_token.string == 'class')
@@ -114,6 +115,7 @@ class CompilationEngine
   # end
 
   def compile_param_list
+    # ((type varName)(',' type varName)*)?
     # compiles a possibly empty parameter list
     # not including the enclosing "()"
     open_structure_tag 'Parameter List', '<parameterList>'
@@ -198,7 +200,7 @@ class CompilationEngine
 
   def compile_statements
     # compiles a sequence of statements, not including the enclosing "{}"
-    # binding.pry
+    # statement*
     open_structure_tag 'Statements', '<statements>'
 
     while @current_token.string != '}'
@@ -221,7 +223,7 @@ class CompilationEngine
 
   def compile_do
     # compiles a do statement
-    # binding.pry
+    # 'do' subroutineCall ';'
     open_structure_tag 'Do Statement', '<doStatement>'
 
     expect(@current_token.string == 'do')
@@ -259,6 +261,8 @@ class CompilationEngine
   end
 
   def compile_subroutine_call
+    # subroutineName '(' expressionList ')' |
+    # (className|varName) '.' subroutineName '(' expressionList ')'
     expect(@current_token.type == 'IDENTIFIER')
     write_token_and_advance
 
@@ -282,6 +286,7 @@ class CompilationEngine
 
   def compile_let
     # compiles a let statement
+    # 'let' varName('[' expression ']')? '=' expression ';'
     open_structure_tag 'Let Statement', '<letStatement>'
 
     expect(@current_token.string == 'let')
@@ -309,6 +314,7 @@ class CompilationEngine
   end
 
   def compile_while
+    # 'while' '(' expression ')' '{' statements '}'
     open_structure_tag('While Statement', '<whileStatement>')
     # compiles a while statement
     expect(@current_token.string == 'while')
@@ -331,6 +337,7 @@ class CompilationEngine
   end
 
   def compile_return
+    # 'return' expression? ';'
     open_structure_tag('Return Statement', '<returnStatement>')
     # compiles a return statement
     expect(@current_token.string == 'return')
@@ -343,6 +350,7 @@ class CompilationEngine
   end
 
   def compile_if
+    # 'if' '(' expression ')' '{' statements '}' ('else' '{' statements '}')?
     # compiles an if statement, possible with a a trailing else clause
     open_structure_tag('If Statement', '<ifStatement>')
 
@@ -375,6 +383,7 @@ class CompilationEngine
   end
 
   def compile_term
+    # term (op term)*
     # compiles a "term". This routine is faced with a slight difficulty when trying to decide between some of the
     # alternative parsing rules.
 
@@ -399,7 +408,7 @@ class CompilationEngine
       when '('
         compile_paren_term
       when /-|~/
-        compile_unary_op
+        compile_unary_op_term
       end
     when 'KEYWORD'
       expect(@current_token.string.match?(/true|false|this|null/))
@@ -410,6 +419,7 @@ class CompilationEngine
   end
 
   def compile_keyword_term
+    # 'true' | 'false' | 'null' | 'this'
     expect(@current_token.type == 'KEYWORD')
     write_token_and_advance
   end
@@ -424,7 +434,8 @@ class CompilationEngine
     write_token_and_advance
   end
 
-  def compile_unary_op
+  def compile_unary_op_term
+    # unaryOp term
     expect(@current_token.string.match?(/-|~/))
     write_token_and_advance
     compile_term
@@ -452,7 +463,7 @@ class CompilationEngine
   end
 
   def compile_array_entry
-    # array[expression]
+    # varName '[' expression ']'
     expect(@current_token.type == 'IDENTIFIER')
     write_table_info_and_advance
 
@@ -466,6 +477,7 @@ class CompilationEngine
   end
 
   def compile_expression_list
+    # (expression (',' expression)*)?
     # compiles a (possibly empty) comma-separated list of expressions
     open_structure_tag 'Expression List', '<expressionList>'
 
