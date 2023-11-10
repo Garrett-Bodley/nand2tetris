@@ -13,10 +13,10 @@ class SymbolTable
     @static_idx = 0
     @dict = {
       CLASSNAME: {},
-      STATIC: {},
-      FIELD: {},
       ARG: {},
-      VAR: {}
+      VAR: {},
+      STATIC: {},
+      FIELD: {}
     }
   end
 
