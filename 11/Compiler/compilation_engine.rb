@@ -27,8 +27,8 @@ class CompilationEngine
     advance
 
     expect(@current_token.type == 'IDENTIFIER')
-    @table.define(@current_token.string, 'className', :CLASSNAME)
-    write_table_info_and_advance
+    @table.classname = @current_token.string
+    write_token_and_advance
     expect(@current_token.string == '{')
     advance
 
@@ -89,7 +89,23 @@ class CompilationEngine
 
     # Will have to compile constructor functions differently
     expect(@current_token.string.match?(/constructor|method|function/))
+    @table.subroutine_type = @current_token.string
     write_token_and_advance
+    # if @current_token.string == 'constructor'
+    #   field_count = @table.var_count(:FIELD)
+    #   @writer.write_push('constant', field_count)
+    #   @writer.write_call('Memory.alloc', field_count)
+    # elsif @current_token.string == 'method'
+
+    # end
+    # # case @current_token.string
+    # when 'constructor'
+    #   compile_constructor
+    # when 'method'
+    #   compile_method
+    # when 'function'
+    #   compile_function
+    # end
 
     expect(@current_token.string.match?(/void|int|char|boolean/) || @current_token.type == 'IDENTIFIER')
     return_type = @current_token.string
@@ -112,8 +128,38 @@ class CompilationEngine
     close_structure_tag '</subroutineDec>'
   end
 
-  # def compile_constructor
+  def compile_constructor
+    # 'constructor' className 'new' '(' parameterList ')' subRoutineBody
+    expect(@current_token.string == 'constructor')
+    write_token_and_advance
+    expect(@current_token.string == @table.classname)
+    return_type = @current_token.string
+    write_token_and_advance
+    expect(@current_token.string == 'new')
+    write_token_and_advance
+    expect(@current_token.string == '(')
+    write_token_and_advance
+    compile_param_list
+    expect(@current_token.string == ')')
+    compile_constructor_body
+  end
 
+  # def compile_constructor_body
+  #   # '{' varDec* statements '}'
+  #   open_structure_tag 'Subroutine Body', '<subroutineBody>'
+
+  #   expect(@current_token.string == '{')
+  #   advance
+
+  #   compile_var_dec while @current_token.string == 'var'
+
+  #   @writer.write_function("#{@table.classname}.#{@table.func_name}", @table.var_count(:VAR))
+  #   compile_statements
+
+  #   expect(@current_token.string == '}')
+  #   advance
+
+  #   clos
   # end
 
   def compile_param_list
@@ -155,6 +201,17 @@ class CompilationEngine
 
     expect(@current_token.string == '{')
     advance
+
+    case @table.subroutine_type
+    when 'constructor'
+      field_count = @table.var_count(:FIELD)
+      @writer.write_push('constant', field_count)
+      @writer.write_call('Memory.alloc', field_count)
+      @writer.write_pop('pointer', 0)
+    when 'method'
+      @writer.write_push('argument', 0)
+      @writer.write_pop('pointer', 0)
+    end
 
     compile_var_dec while @current_token.string == 'var'
 
@@ -232,77 +289,97 @@ class CompilationEngine
     expect(@current_token.string == 'do')
     write_token_and_advance
 
-    # compile subroutine call
-    # test file wants you to write out empty expressionList tags for some reason
-    # So I have to rewrite the same logic with one minor tweek
-    #
-    # if identifier()
-    # assumed to be a method
+    compile_subroutine_call
+    # # compile subroutine call
+    # # test file wants you to write out empty expressionList tags for some reason
+    # # So I have to rewrite the same logic with one minor tweek
+    # #
+    # # if identifier()
+    # # assumed to be a method
 
-    # if identifier()
-    #   push current instance of class onto pointer (i think pointer?)
-    #   push expressionList values
-    #   call function
+    # # if identifier()
+    # #   push current instance of class onto pointer (i think pointer?)
+    # #   push expressionList values
+    # #   call function
 
-    # if identifier.subroutine()
-    #   if table.has?(identifier) == true
-    #     push identifier val onto stack
-    #     push top stack value into pointer (i think?)
-    #     compile expressionList
-    #     call function
-    #   else (isAClassFunction)
-    #     compile expressionList
-    #     call function
+    # # if identifier.subroutine()
+    # #   if table.has?(identifier) == true
+    # #     push identifier val onto stack
+    # #     push top stack value into pointer (i think?)
+    # #     compile expressionList
+    # #     call function
+    # #   else (isAClassFunction)
+    # #     compile expressionList
+    # #     call function
 
-    expect(@current_token.type == 'IDENTIFIER')
-    binding.pry
-    identifier = @current_token.string
+    # expect(@current_token.type == 'IDENTIFIER')
+    # identifier = @current_token.string
 
-    if tokenizer.peek.string != '.'
-      # method call of current class
-    end
+    # # maybe do this? Gotta figure this logic out
+    # # write_token_and_advance
 
-    # if method
-    # push class instance base address onto stack
-    # push local 0
+    # expect(@current_token.string.match?(/\(|\./))
+    # if @current_token.string == '('
+    #   # doSomething()
+    #   # method call of current class instance
+    #   @writer.write_push('pointer', 0)
+    # elsif @current_token.string == '.'
+    #   write_token_and_advance
+    #   if @table.has?(identifier)
+    #     # varName.doSomething()
+    #     kind = @table.kind(identifier)
+    #     segment = parse_segment(kind)
+    #     index = @table.index?(identifier)
+    #     @writer.write_push(segment, index)
+    #   elsif identifier == 'this'
+    #     # this.doSomething()
+    #     @writer.write_push('pointer', 0)
+    #   end
+    # end
 
-    is_method = @table.has?(identifier)
-    if is_method
+    # # METHOD CALL
+    # # this.doSomething()
+    # # varName.doSomething()
+    # #
+    # # FUNCTION CALL
+    # # ClassName.doSomething()
 
-    end
-    write_token_and_advance
+    # # if method
+    # # push class instance base address onto stack
+    # # push local 0
+    # write_token_and_advance
 
-    expect(@current_token.string.match?(/\(|\./))
+    # expect(@current_token.string.match?(/\(|\./))
 
-    if @current_token.string == '.'
-      # if identifier.subroutine()
-      # find identifier in table. Subroutine is a method of that identifier.
-      #   we must set pointer 0 to the instance's base address
-      # if no entry in table, assumed to be a Class function
-      write_token_and_advance
-      expect(@current_token.type == 'IDENTIFIER')
-      subroutine_name = @current_token.string
-      write_token_and_advance
-      func_name = "#{identifier}.#{subroutine_name}"
-      # i need to know how many arguments are being passed to the subroutine call
-      # call func_name n_args
-    end
+    # if @current_token.string == '.'
+    #   # if identifier.subroutine()
+    #   # find identifier in table. Subroutine is a method of that identifier.
+    #   #   we must set pointer 0 to the instance's base address
+    #   # if no entry in table, assumed to be a Class function
+    #   write_token_and_advance
+    #   expect(@current_token.type == 'IDENTIFIER')
+    #   subroutine_name = @current_token.string
+    #   write_token_and_advance
+    #   func_name = "#{identifier}.#{subroutine_name}"
+    #   # i need to know how many arguments are being passed to the subroutine call
+    #   # call func_name n_args
+    # end
 
-    expect(@current_token.string == '(')
-    write_token_and_advance
-    # needs to return n_args
-    n_args = compile_expression_list
+    # expect(@current_token.string == '(')
+    # write_token_and_advance
+    # # needs to return n_args
+    # n_args = compile_expression_list
 
-    expect(@current_token.string == ')')
-    write_token_and_advance
-    binding.pry
-    if is_method
-      kind = @table.kind?(identifier)
-      index = @table.index?(identifier)
+    # expect(@current_token.string == ')')
+    # write_token_and_advance
+    # binding.pry
+    # if is_method
+    #   kind = @table.kind?(identifier)
+    #   index = @table.index?(identifier)
 
-      @writer.write_call(func_name, n_args)
+    #   @writer.write_call(func_name, n_args)
 
-    end
+    # end
 
     # end subroutine call
 
@@ -315,29 +392,138 @@ class CompilationEngine
   end
 
   def compile_subroutine_call
-    # subroutineName '(' expressionList ')' |
-    # (className|varName) '.' subroutineName '(' expressionList ')'
+
+    # compile subroutine call
+    #
+    # METHOD CALL
+    # this.doSomething(x, y)
+    # varName.doSomething(x, y)
+    # doSomething(x, y)
+    #
+    # FUNCTION CALL
+    # ClassName.doSomething(x, y)
+    #
+    # doSomething(x, y)
+    #   push pointer 0
+    #   push x
+    #   push y
+    #   call ClassName.doSomething n_args + 1
+    #
+    # this.doSomething(x, y)
+    #   push pointer 0
+    #   push x
+    #   push y
+    #   call ClassName.doSomething n_args + 1
+    #
+    # varName.doSomething(x, y)
+    #   segment = parse_segment(@table.kind?(varName))
+    #   index = @table.index?(varName)
+    #
+    #   push segment index
+    #   push x
+    #   push y
+    #   call ClassName.doSomething n_args + 1
+    #
+    # ClassName.doSomething(x, y)
+    #   push x
+    #   push y
+    #   call ClassName.doSomething n_args
+
     expect(@current_token.type == 'IDENTIFIER')
-    subroutine_name = @current_token.string
-    write_token_and_advance
 
-    expect(@current_token.string.match?(/\(|\./))
-
-    if @current_token.string == '.'
+    if @current_token.string == 'this'
+      # this.doSomething(x, y)
+      @writer.write_push('pointer', 0)
       write_token_and_advance
-
+      expect(@current_token.string == '.')
+      write_token_and_advance
       expect(@current_token.type == 'IDENTIFIER')
-      subroutine_name += ".#{current_token.string}"
+      func_name = @current_token.string
+      classname = @table.classname
       write_token_and_advance
+      expect(@current_token.string == '(')
+      write_token_and_advance
+      n_args = compile_expression_list
+      expect(@current_token.string == ')')
+      write_token_and_advance
+      @writer.write_call("#{classname}.#{func_name}", n_args + 1)
+    elsif @tokenizer.peek.string == '('
+      # doSomething(x, y)
+      @writer.write_push('pointer', 0)
+      func_name = @current_token.string
+      classname = @table.classname
+      write_token_and_advance
+      expect(@current_token.string == '(')
+      write_token_and_advance
+      n_args = compile_expression_list
+      expect(@current_token.string == ')')
+      write_token_and_advance
+      expect(@current_token.string == ';')
+      @writer.write_call("#{classname}.#{func_name}", n_args + 1)
+    elsif @table.has?(@current_token.string) && @tokenizer.peek.string == '.'
+      # varName.doSomething(x, y)
+      classname = @table.type?(@current_token.string)
+      segment = parse_segment(@table.kind?(@current_token.string))
+      index = @table.index?(@current_token.string)
+      @writer.write_push(segment, index)
+      write_token_and_advance
+      expect(@current_token.string == '.')
+      write_token_and_advance
+      expect(@current_token.type == 'IDENTIFIER')
+      func_name = @current_token.string
+      write_token_and_advance
+      expect(@current_token.string == '(')
+      write_token_and_advance
+      n_args = compile_expression_list
+      expect(@current_token.string == ')')
+      write_token_and_advance
+      @writer.write_call("#{classname}.#{func_name}", n_args + 1)
+    elsif @tokenizer.peek.string == '.'
+      # ClassName.doSomething(x, y)
+      classname = @current_token.string
+      write_token_and_advance
+      expect(@current_token.string == '.')
+      write_token_and_advance
+      expect(@current_token.type == 'IDENTIFIER')
+      func_name = @current_token.string
+      write_token_and_advance
+      expect(@current_token.string == '(')
+      write_token_and_advance
+      n_args = compile_expression_list
+      expect(@current_token.string == ')')
+      write_token_and_advance
+      @writer.write_call("#{classname}.#{func_name}", n_args)
     end
 
-    expect(@current_token.string == '(')
-    write_token_and_advance
-    n_args = compile_expression_list
+    # maybe do this? Gotta figure this logic out
+    # write_token_and_advance
 
-    expect(@current_token.string == ')')
-    write_token_and_advance
-    @writer.write_call(subroutine_name, n_args)
+
+
+    # # OLD CODE
+    # # subroutineName '(' expressionList ')' |
+    # # (className|varName) '.' subroutineName '(' expressionList ')'
+    # expect(@current_token.type == 'IDENTIFIER')
+    # subroutine_name = @current_token.string
+    # write_token_and_advance
+
+    # expect(@current_token.string.match?(/\(|\./))
+
+    # if @current_token.string == '.'
+    #   write_token_and_advance
+
+    #   expect(@current_token.type == 'IDENTIFIER')
+    #   subroutine_name += ".#{current_token.string}"
+    #   write_token_and_advance
+    # end
+
+    # expect(@current_token.string == '(')
+    # write_token_and_advance
+    # n_args = compile_expression_list
+
+    # expect(@current_token.string == ')')
+    # write_token_and_advance
+    # @writer.write_call(subroutine_name, n_args)
   end
 
   def compile_let
@@ -348,13 +534,23 @@ class CompilationEngine
     expect(@current_token.string == 'let')
     write_token_and_advance
 
-    expect(@current_token.type == 'IDENTIFIER')
+    is_array = false
+    expect(@current_token.type == 'IDENTIFIER' && @table.has?(@current_token.string))
+    type = @table.type?(@current_token.string)
+    kind = @table.kind?(@current_token.string)
+    segment = parse_segment(kind)
+    index = @table.index?(@current_token.string)
+
     write_table_info_and_advance
 
     if @current_token.string == '['
+      is_array = true
       write_token_and_advance
-      compile_term
+      compile_expression
       expect(@current_token.string == ']')
+      @writer.write_push(segment, index)
+      @writer.write_arithmetic('add')
+      @writer.write_pop('pointer', 1)
       write_token_and_advance
     end
 
@@ -362,6 +558,12 @@ class CompilationEngine
     write_token_and_advance
 
     compile_expression
+
+    if is_array
+      @writer.write_pop('that', 0)
+    else
+      @writer.write_pop(segment, index)
+    end
 
     expect(@current_token.string == ';')
     write_token_and_advance
@@ -444,6 +646,9 @@ class CompilationEngine
   end
 
   def compile_term # rubocop:disable Metrics/CyclomaticComplexity
+    # integerConstant | stringConstant | keywordConstant | varName | varName '[' expression ']'| subroutineCall |
+    # '(' expression ')' | unaryOp term
+    #
     # term (op term)*
     # compiles a "term". This routine is faced with a slight difficulty when trying to decide between some of the
     # alternative parsing rules.
@@ -459,6 +664,7 @@ class CompilationEngine
 
     case @current_token.type
     when 'IDENTIFIER'
+      # DONE
       compile_identifier_term
     when 'INT_CONST'
       compile_int_const
@@ -523,6 +729,10 @@ class CompilationEngine
       compile_subroutine_call
     else
       expect(@current_token.type == 'IDENTIFIER')
+      kind = @table.kind?(@current_token.string)
+      segment = parse_segment(kind)
+      index = @table.index?(@current_token.string)
+      @writer.write_push(segment, index)
       write_table_info_and_advance
     end
   end
@@ -530,12 +740,19 @@ class CompilationEngine
   def compile_array_entry
     # varName '[' expression ']'
     expect(@current_token.type == 'IDENTIFIER')
+    kind = @table.kind?(@current_token.string)
+    segment = parse_segment(kind)
+    index = @table.index?(@current_token.string)
     write_table_info_and_advance
 
     expect(@current_token.string == '[')
     write_token_and_advance
 
-    compile_term
+    compile_expression
+    @writer.write_push(segment, index)
+    @writer.write_arithmetic('add')
+    @writer.write_pop('pointer', 1)
+    @writer.write_push('that', 0)
 
     expect(@current_token.string == ']')
     write_token_and_advance
@@ -592,6 +809,19 @@ class CompilationEngine
     end
 
     close_structure_tag '</expression>'
+  end
+
+  def parse_segment(kind)
+    case kind
+    when :ARG
+      'argument'
+    when :VAR
+      'local'
+    when :FIELD
+      'this'
+    when :STATIC
+      'static'
+    end
   end
 
   def expect(boolean)
