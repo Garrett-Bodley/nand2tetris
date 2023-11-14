@@ -4,7 +4,7 @@
 class SymbolTable
   SyntaxError = Class.new(StandardError)
   Symbol = Struct.new(:name, :type)
-  attr_accessor :dict, :func_name
+  attr_accessor :dict, :func_name, :classname, :subroutine_type
 
   def initialize
     # @dict = Dict.new(KlassDict.new([], []), SubroutineDict.new([], []))
@@ -60,10 +60,14 @@ class SymbolTable
   end
 
   def index?(name)
+    idx = -Infinity
     @dict.each_value do |kind_dict|
-      return kind_dict.keys.find_index(name) if kind_dict[name]
+      idx = kind_dict.keys.find_index(name) if kind_dict[name]
     end
-    raise SyntaxError, "Provided Identifier name not previously defined in SymbolTable (Received: #{name})"
+    raise SyntaxError, "Provided Identifier name not previously defined in SymbolTable (Received: #{name})" if idx = -Infinity
+
+    idx += 1 if kind?(name) == :ARG && @subroutine_type == 'method'
+    idx
   end
 
   def has?(name)
@@ -73,12 +77,13 @@ class SymbolTable
     return false
   end
 
-  def classname
-    @dict[:CLASSNAME].keys[0]
-  end
+  # def classname
+  #   @dict[:CLASSNAME].keys[0]
+  # end
 
   def new_subroutine
     @func_name = nil
+    @subroutine_type = nil
     @dict[:ARG] = {}
     @dict[:VAR] = {}
   end
