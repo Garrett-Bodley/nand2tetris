@@ -1,6 +1,7 @@
 function Main.main 1
 push constant 8000
-push constant 7
+push constant 21846
+neg
 call Memory.poke 2
 pop temp 0
 push constant 8001

@@ -6,6 +6,11 @@ require_relative './vm_writer'
 
 # Recursive Top-Down parser
 class CompilationEngine
+  WHILE_EXP = 'WHILE_EXP'
+  WHILE_END = 'WHILE_END'
+  IF_TRUE = 'IF_TRUE'
+  IF_FALSE = 'IF_FALSE'
+  IF_END = 'IF_END'
   SyntaxError = Class.new(StandardError)
   def initialize(output_path, tokenizer)
     @file = File.open(output_path, 'w+')
@@ -13,6 +18,9 @@ class CompilationEngine
     @writer = VMWriter.new(output_path.sub_ext('.vm'))
     @tokenizer = tokenizer
     @current_token = tokenizer.current_token
+
+    @if_idx = 0
+    @while_idx = 0
 
     @idx = 0
     @block = []
@@ -270,9 +278,14 @@ class CompilationEngine
       when 'let'
         compile_let
       when 'while'
-        compile_while
+        # I wish @while_idx++ was valid ruby 🙁
+        temp = @while_idx
+        @while_idx += 1
+        compile_while(temp)
       when 'if'
-        compile_if
+        temp = @if_idx
+        @if_idx += 1
+        compile_if(temp)
       when 'return'
         compile_return
       end
@@ -536,7 +549,6 @@ class CompilationEngine
 
     is_array = false
     expect(@current_token.type == 'IDENTIFIER' && @table.has?(@current_token.string))
-    type = @table.type?(@current_token.string)
     kind = @table.kind?(@current_token.string)
     segment = parse_segment(kind)
     index = @table.index?(@current_token.string)
@@ -571,7 +583,7 @@ class CompilationEngine
     close_structure_tag '</letStatement>'
   end
 
-  def compile_while
+  def compile_while(idx)
     # 'while' '(' expression ')' '{' statements '}'
     open_structure_tag('While Statement', '<whileStatement>')
     # compiles a while statement
@@ -581,7 +593,12 @@ class CompilationEngine
     expect(@current_token.string == '(')
     write_token_and_advance
 
+    @writer.write_label("#{WHILE_EXP}#{idx}")
+
     compile_expression
+    @writer.write_arithmetic('not')
+
+    @writer.write_if("#{WHILE_END}#{idx}")
 
     expect(@current_token.string == ')')
     write_token_and_advance
@@ -590,6 +607,8 @@ class CompilationEngine
     compile_statements
     expect(@current_token.string == '}')
     write_token_and_advance
+    @writer.write_goto("#{WHILE_EXP}#{idx}")
+    @writer.write_label("#{WHILE_END}#{idx}")
 
     close_structure_tag('</whileStatement>')
   end
@@ -612,7 +631,7 @@ class CompilationEngine
     close_structure_tag('</returnStatement>')
   end
 
-  def compile_if
+  def compile_if(idx)
     # 'if' '(' expression ')' '{' statements '}' ('else' '{' statements '}')?
     # compiles an if statement, possible with a a trailing else clause
     open_structure_tag('If Statement', '<ifStatement>')
@@ -626,22 +645,30 @@ class CompilationEngine
     expect(@current_token.string == ')')
     write_token_and_advance
 
+    @writer.write_if("#{IF_TRUE}#{idx}")
+    @writer.write_goto("#{IF_FALSE}#{idx}")
+
     expect(@current_token.string == '{')
     write_token_and_advance
+
+    @writer.write_label("#{IF_TRUE}#{idx}")
     compile_statements
+
     expect(@current_token.string == '}')
     write_token_and_advance
-
-    close_structure_tag('</ifStatement>') && return unless @current_token.string == 'else'
+    @writer.write_goto("#{IF_END}#{idx}")
+    @writer.write_label("#{IF_FALSE}#{idx}")
 
     # else{}
-    write_token_and_advance
-    expect(@current_token.string == '{')
-    write_token_and_advance
-    compile_statements
-    expect(@current_token.string == '}')
-    write_token_and_advance
-
+    if @current_token.string == 'else'
+      write_token_and_advance
+      expect(@current_token.string == '{')
+      write_token_and_advance
+      compile_statements
+      expect(@current_token.string == '}')
+      write_token_and_advance
+    end
+    @writer.write_label("#{IF_END}#{idx}")
     close_structure_tag('</ifStatement>')
   end
 
@@ -688,6 +715,17 @@ class CompilationEngine
   def compile_keyword_term
     # 'true' | 'false' | 'null' | 'this'
     expect(@current_token.type == 'KEYWORD')
+    case @current_token.string
+    when 'true'
+      @writer.write_push('constant', 0)
+      @writer.write_arithmetic('not')
+    when 'false'
+      @writer.write_push('constant', 0)
+    when 'null'
+      @writer.write_push('constant', 0)
+    when 'this'
+      @writer.write_push('pointer', 0)
+    end
     write_token_and_advance
   end
 

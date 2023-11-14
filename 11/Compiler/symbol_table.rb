@@ -60,11 +60,13 @@ class SymbolTable
   end
 
   def index?(name)
-    idx = -Infinity
+    idx = -Float::INFINITY
     @dict.each_value do |kind_dict|
       idx = kind_dict.keys.find_index(name) if kind_dict[name]
     end
-    raise SyntaxError, "Provided Identifier name not previously defined in SymbolTable (Received: #{name})" if idx = -Infinity
+    if idx == -Float::INFINITY
+      raise SyntaxError, "Provided Identifier name not previously defined in SymbolTable (Received: #{name})"
+    end
 
     idx += 1 if kind?(name) == :ARG && @subroutine_type == 'method'
     idx
