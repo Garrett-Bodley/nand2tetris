@@ -738,6 +738,13 @@ class CompilationEngine
 
   def compile_string_const
     expect(@current_token.type == 'STRING_CONST')
+    string = @current_token.string
+    @writer.write_push('constant', string.length)
+    @writer.write_call('String.new', 1)
+    string.chars.each do |char|
+      @writer.write_push('constant', char.ord)
+      @writer.write_call('String.appendChar', 2)
+    end
     write_token_and_advance
   end
 
