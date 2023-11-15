@@ -563,7 +563,12 @@ class CompilationEngine
       expect(@current_token.string == ']')
       @writer.write_push(segment, index)
       @writer.write_arithmetic('add')
-      @writer.write_pop('pointer', 1)
+      # DO NOT SET POINTER 1 TO THE COMPUTED ADDRESS
+      # The right side of the expression might also access an array
+      # If it does this, then pointer 1 will be set to a different value
+      #
+      # Instead, store the address on the stack, and set pointer 1 to that address
+      # at the moment before assigning a value to that segment
       write_token_and_advance
     end
 
@@ -573,6 +578,17 @@ class CompilationEngine
     compile_expression
 
     if is_array
+      # Gotta shift things around a bit.
+      # Target memory address is below the computed expression value on the stack
+
+
+      # Therefore, pop computed expression value to temp
+      @writer.write_pop('temp', 0)
+      # Pop computed memory address to pointer 1
+      @writer.write_pop('pointer', 1)
+      # Push temp to the stack
+      @writer.write_push('temp', 0)
+      # Pop top of stack to that 0
       @writer.write_pop('that', 0)
     else
       @writer.write_pop(segment, index)
