@@ -1,0 +1,13 @@
+class Add {
+  field int foo;
+  constructor Add new(){
+    let foo = 1;
+    return this;
+  }
+
+  method int add(int x, int y){
+    var int res;
+    let res = x + y;
+    return res;
+  }
+}

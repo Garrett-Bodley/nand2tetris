@@ -1,0 +1,19 @@
+class Main {
+  function void main(){
+    var boolean flag;
+    var int res;
+    let flag = true;
+    if(flag){
+      let res = 1;
+    }else{
+      let res = 0;
+    }
+    do Output.printInt(res);
+
+    let res = 0;
+    while(res < 5){
+      let res = res + 1;
+    }
+    return;
+  }
+}
