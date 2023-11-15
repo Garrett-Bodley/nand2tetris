@@ -210,20 +210,21 @@ class CompilationEngine
     expect(@current_token.string == '{')
     advance
 
+
+    compile_var_dec while @current_token.string == 'var'
+
+    @writer.write_function("#{@table.classname}.#{@table.func_name}", @table.var_count(:VAR))
     case @table.subroutine_type
     when 'constructor'
       field_count = @table.var_count(:FIELD)
       @writer.write_push('constant', field_count)
-      @writer.write_call('Memory.alloc', field_count)
+      @writer.write_call('Memory.alloc', 1)
       @writer.write_pop('pointer', 0)
     when 'method'
       @writer.write_push('argument', 0)
       @writer.write_pop('pointer', 0)
     end
 
-    compile_var_dec while @current_token.string == 'var'
-
-    @writer.write_function("#{@table.classname}.#{@table.func_name}", @table.var_count(:VAR))
     compile_statements
 
     expect(@current_token.string == '}')
