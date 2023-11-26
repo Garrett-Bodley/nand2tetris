@@ -46,16 +46,6 @@ class Math {
     function int multiply(int x, int y) {
       var int j, sign, sum, shiftedX;
 
-      // let sign = 1;
-      // if(x < 0){
-      //   let x = -x;
-      //   let sign = -sign;
-      // }
-      // if(y < 0){
-      //   let y = -y;
-      //   let sign = -sign;
-      // }
-
       let sum = 0;
       let shiftedX = x;
       let j = 0;
@@ -106,16 +96,15 @@ class Math {
 
     /** Returns the integer part of the square root of x. */
     function int sqrt(int x) {
-      var int j, y, yPlusTwoToTheJ;
+      var int j, y, yPlusTwoToTheJ, yplusTwoToTheJSquared;
       // n = 16
       let y = 0;
       let j = (16/2) - 1;
       while(j > -1){
-        // if((y + 2 ** j) ** 2 <= x){ y = y + 2 ** j}
-        // if( ( (y + 2 ** j) * (y + 2 ** j) ) <= x )
         let yPlusTwoToTheJ = y + twoToThe[j];
-        if( ( ~((yPlusTwoToTheJ * yPlusTwoToTheJ) > x) ) & ( (yPlusTwoToTheJ * yPlusTwoToTheJ) > 0 )){
-          let y = y + twoToThe[j];
+        let yplusTwoToTheJSquared = yPlusTwoToTheJ * yPlusTwoToTheJ;
+        if( ( ~(yplusTwoToTheJSquared > x) ) & ( yplusTwoToTheJSquared > 0 )){
+          let y = yPlusTwoToTheJ;
         }
         let j = j - 1;
       }
