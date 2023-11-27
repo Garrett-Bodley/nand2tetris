@@ -180,10 +180,21 @@ class Screen {
 
     /** Draws a filled rectangle whose top left corner is (x1, y1)
      * and bottom right corner is (x2,y2), using the current color. */
-     function void drawRectangle(int x1, int y1, int x2, int y2) {
-      while(~(y1 > y2)){
-        do Screen.drawLine(x1, y1, x2, y1);
-        let y1 = y1 + 1;
+    function void drawRectangle(int x1, int y1, int x2, int y2) {
+      var int dx, dy;
+      let dx = x2 - x1;
+      let dy = y2 - y1;
+      if((dx > 0) & (dy > 0)){
+        while(~(y1 > y2)){
+          do Screen.drawHorizontalLine(x1, x2, y1);
+          let y1 = y1 + 1;
+        }
+      }else{
+        if(dx = 0){
+          do Screen.drawLine(x1, y1, x2, y2);
+        }else{
+          do Screen.drawHorizontalLine(x1, x2, y1);
+        }
       }
       return;
     }
