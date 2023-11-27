@@ -95,10 +95,7 @@ class Screen {
             let b = b + 1;
           }
         }else{
-          while(~(a > dx)){
-            do Screen.drawPixel(x1 + a, y2);
-            let a = a + 1;
-          }
+          do Screen.drawHorizontalLine(x1, x2, y1);
         }
       }
       return;
