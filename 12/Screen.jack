@@ -104,6 +104,83 @@ class Screen {
       return;
     }
 
+    /** Draws a line from pixel (x1, y) to pixel (x2, y) using the current color. */
+    function void drawHorizontalLine(int x1, int x2, int y) {
+      var int startWord, endWord, offsetStart, offsetEnd, mask;
+
+      let startWord = 16384 + (y * 32) + (x1 / 16);
+      let endWord = 16384 + (y * 32) + (x2 / 16);
+      let offsetStart = x1 - (16 * (x1 / 16));
+      let offsetEnd = x2 - (16 * (x2 / 16));
+
+      if(startWord = endWord){
+        let mask = 0;
+        while(~(offsetStart > offsetEnd)){
+          let mask = mask | twoToThe[offsetStart];
+          let offsetStart = offsetStart + 1;
+        }
+        if(color){
+          do Memory.poke(startWord, Memory.peek(startWord) | mask);
+        }else{
+          let mask = ~mask;
+          do Memory.poke(startWord, Memory.peek(startWord) & mask);
+        }
+        return;
+      }
+
+      if(offsetStart > 0){
+        let mask = 0;
+        while(offsetStart < 16){
+          let mask = mask | twoToThe[offsetStart];
+          let offsetStart = offsetStart + 1;
+        }
+        if(color){
+          do Memory.poke(startWord, Memory.peek(startWord) | mask);
+        }else{
+          let mask = ~mask;
+          do Memory.poke(startWord, Memory.peek(startWord) & mask);
+        }
+      }else{
+        if(color){
+          do Memory.poke(startWord, -1);
+        }else{
+          do Memory.poke(startWord, 0);
+        }
+      }
+      let startWord = startWord + 1;
+
+      while(startWord < endWord){
+        if(color){
+          do Memory.poke(startWord, -1);
+        }else{
+          do Memory.poke(startWord, 0);
+        }
+        let startWord = startWord + 1;
+      }
+
+      if(offsetEnd = 15){
+        if(color){
+          do Memory.poke(startWord, -1);
+        }else{
+          do Memory.poke(startWord, 0);
+        }
+      }else{
+        let offsetStart = 0;
+        let mask = 0;
+        while(~(offsetStart > offsetEnd)){
+          let mask = mask | twoToThe[offsetStart];
+          let offsetStart = offsetStart + 1;
+        }
+        if(color){
+          do Memory.poke(startWord, Memory.peek(startWord) | mask);
+        }else{
+          let mask = ~mask;
+          do Memory.poke(startWord, Memory.peek(startWord) & mask);
+        }
+      }
+      return;
+    }
+
     /** Draws a filled rectangle whose top left corner is (x1, y1)
      * and bottom right corner is (x2,y2), using the current color. */
     function void drawRectangle(int x1, int y1, int x2, int y2) {
