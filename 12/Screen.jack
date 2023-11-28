@@ -261,7 +261,44 @@ class Screen {
     }
 
     /** Draws a filled circle of radius r<=181 around (x,y), using the current color. */
-    function void drawCircle(int x, int y, int r) {
+    function void drawCircle(int x0, int y0, int r) {
+      // Algo based off of this article: 
+      // https://sachithradangalla.medium.com/mid-point-algorithm-how-to-draw-a-circle-b6ed7c47c803
+      var int p, dx, dy;
+
+      // Throw errors for invald x
+      if( ((x0 | y0) < 0) | (x0 > 511) | (0 > 255) ){ do Sys.error(12); }
+      if( (r > 181) | (((x0 - r) | (y0 - r)) < 0) | ((x0 + r) > 511) | ((y0 + r) > 255) ){ do Sys.error(13); }
+
+      let p = -r + 1;
+      let dx = 0;
+      let dy = 0;
+      // dy >= dx
+      while(((r - dx) > dy)){
+        // Middle octants
+        do Screen.drawHorizontalLine(x0 + r - dx, x0 - r + dx, y0 + dy);
+        do Screen.drawHorizontalLine(x0 + r - dx, x0 - r + dx, y0 - dy);
+
+        // if py <= 0
+        if(~(p > 0)){
+          let p = p + (2 * dy) + 3;
+        }else{
+          let p = p + (2 * dy) - (2 * (r - dx)) + 5;
+        }
+        // Previous iterations of this algorithm would have repetitive calls to drawHorizontalLine that would overwrite each other.
+        // By only drawing the top/bottom octants when dx gets incremented we minimize the number of calls to drawHorizontalLine.
+        if(p > 0){
+          do Screen.drawHorizontalLine(x0 + dy, x0 - dy, y0 - r + dx);
+          do Screen.drawHorizontalLine(x0 + dy, x0 - dy, y0 + r - dx);
+          let dx = dx + 1;
+        }
+        let dy = dy + 1;
+      }
+      // the final line for the upper/lower octants does not get drawn before we break from the while loop
+      // This draws the final line to complete the circle
+      do Screen.drawHorizontalLine(x0 + dy, x0 - dy, y0 - r + dx);
+      do Screen.drawHorizontalLine(x0 + dy, x0 - dy, y0 + r - dx);
+
       return;
     }
 }
