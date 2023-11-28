@@ -86,18 +86,35 @@ class Screen {
       
       let dx = x2 - x1;
       let dy = y2 - y1;
-      if((dx > 0) & (dy > 0)){
-        let a = 0;
-        let b = 0;
-        let adyMinusbdx = 0;
-        while(~(a > dx) & ~(b > dy)){
-          do Screen.drawPixel(x1 + a, y1 + b);
-          if(adyMinusbdx < 0){
-            let a = a + 1;
-            let adyMinusbdx = adyMinusbdx + dy;
-          }else{
-            let b = b + 1;
-            let adyMinusbdx = adyMinusbdx - dx;
+      let a = 0;
+      let b = 0;
+
+      if(~(dx = 0) & ~(dy = 0)){
+        if(dy < 0){
+          // Line slopes up
+          let adyMinusbdx = 0;
+          while(~(a > dx) & ~(b < dy)){
+            do Screen.drawPixel(x1 + a, y1 + b);
+            if(adyMinusbdx < 0){
+              let a = a + 1;
+              let adyMinusbdx = adyMinusbdx - dy;
+            }else{
+              let b = b - 1;
+              let adyMinusbdx = adyMinusbdx - dx;
+            }
+          }
+        }else{
+          // Line slopes down
+          let adyMinusbdx = 0;
+          while(~(a > dx) & ~(b > dy)){
+            do Screen.drawPixel(x1 + a, y1 + b);
+            if(adyMinusbdx < 0){
+              let a = a + 1;
+              let adyMinusbdx = adyMinusbdx + dy;
+            }else{
+              let b = b + 1;
+              let adyMinusbdx = adyMinusbdx - dx;
+            }
           }
         }
       }else{
