@@ -72,6 +72,18 @@ class Screen {
     /** Draws a line from pixel (x1,y1) to pixel (x2,y2), using the current color. */
     function void drawLine(int x1, int y1, int x2, int y2) {
       var int a, b, dx, dy, adyMinusbdx;
+      
+      // Ensure we draw from left to right
+      // Using a as a temp var since it gets reinitialized later
+      if(x1 > x2){
+        let a = x1;
+        let x1 = x2;
+        let x2 = a;
+        let a = y1;
+        let y1 = y2;
+        let y2 = a;
+      }
+      
       let dx = x2 - x1;
       let dy = y2 - y1;
       if((dx > 0) & (dy > 0)){
