@@ -143,6 +143,10 @@ class Screen {
     function void drawHorizontalLine(int x1, int x2, int y) {
       var int startWord, endWord, offsetStart, offsetEnd, mask;
 
+      if((x1 < 0) | (x1 > 511) | (x2 < 0) | (x2 > 511) | (y < 0) | (y > 255)){
+        do Sys.error(8);
+      }
+
       // Draw a pixel if x1 == x2
       if(x1 = x2){ 
         do Screen.drawPixel(x1, y); 
