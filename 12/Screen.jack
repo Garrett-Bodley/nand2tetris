@@ -56,14 +56,14 @@ class Screen {
 
     /** Draws the (x,y) pixel, using the current color. */
     function void drawPixel(int x, int y) {
-      var int word, yOffset, mask;
+      var int word, offset, mask;
       let word = 16384 + (y * 32) + (x / 16);
-      let yOffset = x - (16 * (x / 16));
+      let offset = x - (16 * (x / 16));
       if(color){
-        let mask = twoToThe[yOffset];
+        let mask = twoToThe[offset];
         do Memory.poke(word, Memory.peek(word) | mask);
       }else{
-        let mask = ~twoToThe[yOffset];
+        let mask = ~twoToThe[offset];
         do Memory.poke(word, Memory.peek(word) & mask);
       }
       return;
