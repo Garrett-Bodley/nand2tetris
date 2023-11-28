@@ -128,6 +128,11 @@ class Screen {
         }
       }else{
         if(dx = 0){
+          if(dy < 0){ 
+            let dy = -dy; 
+            let y1 = y2;
+          }
+          // while b <= dy
           while(~(b > dy)){
             do Screen.drawPixel(x2, y1 + b);
             let b = b + 1;
