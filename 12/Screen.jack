@@ -105,6 +105,20 @@ class Screen {
     function void drawHorizontalLine(int x1, int x2, int y) {
       var int startWord, endWord, offsetStart, offsetEnd, mask;
 
+      // Draw a pixel if x1 == x2
+      if(x1 = x2){ 
+        do Screen.drawPixel(x1, y); 
+        return;
+      }
+
+      // Ensures x2 > x1
+      // Using mask as a temp variable as it gets initialized to 0 later on.
+      if(x2 < x1){
+        let mask = x1;
+        let x1 = x2;
+        let x2 = mask;
+      }
+
       let startWord = 16384 + (y * 32) + (x1 / 16);
       let endWord = 16384 + (y * 32) + (x2 / 16);
       let offsetStart = x1 - (16 * (x1 / 16));
