@@ -63,7 +63,33 @@ class Keyboard {
      * and returns its value. Also handles user backspaces.
      */
     function String readLine(String message) {
-    }   
+      var String input, temp;
+      var char key;
+      var int i, strLength;
+
+      let strLength = 8;
+      let input = String.new(strLength);
+      do Output.printInt(input.length());
+      do Output.printString(message);
+      while(~(key = 128)){
+        let key = Keyboard.readChar();
+        if(~(key = 129) & ~(key = 128)){
+          do input.appendChar(key);
+          if(input.length() = strLength){
+            let strLength = strLength + strLength;
+            let temp = String.new(strLength);
+            let i = 0;
+            while(i < input.length()){
+              do temp.appendChar(input.charAt(i));
+              let i = i + 1;
+            }
+            do input.dispose();
+            let input = temp;
+          }
+        }
+      }
+      return input;
+    }
 
     /**								
      * Displays the message on the screen, reads from the keyboard the entered
