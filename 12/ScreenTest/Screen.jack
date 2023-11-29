@@ -56,14 +56,19 @@ class Screen {
 
     /** Draws the (x,y) pixel, using the current color. */
     function void drawPixel(int x, int y) {
-      var int word, yOffset, mask;
+      var int word, offset, mask;
+
+      if( ((x | y) < 0) | (x > 511) | (y > 255) ){
+        do Sys.error(7);
+      }
+
       let word = 16384 + (y * 32) + (x / 16);
-      let yOffset = x - (16 * (x / 16));
+      let offset = x - (16 * (x / 16));
       if(color){
-        let mask = twoToThe[yOffset];
+        let mask = twoToThe[offset];
         do Memory.poke(word, Memory.peek(word) | mask);
       }else{
-        let mask = ~twoToThe[yOffset];
+        let mask = ~twoToThe[offset];
         do Memory.poke(word, Memory.peek(word) & mask);
       }
       return;
@@ -72,33 +77,163 @@ class Screen {
     /** Draws a line from pixel (x1,y1) to pixel (x2,y2), using the current color. */
     function void drawLine(int x1, int y1, int x2, int y2) {
       var int a, b, dx, dy, adyMinusbdx;
+
+      if( ((x1 | y1 | x2 | y2) < 0) | ((y1 | y2) > 255) | ((x1 | x2) > 511) ){
+        do Sys.error(8);
+      }
+      
+      // Ensure we draw from left to right
+      // Using a as a temp var since it gets reinitialized later
+      if(x1 > x2){
+        let a = x1;
+        let x1 = x2;
+        let x2 = a;
+        let a = y1;
+        let y1 = y2;
+        let y2 = a;
+      }
+      
       let dx = x2 - x1;
       let dy = y2 - y1;
-      if((dx > 0) & (dy > 0)){
-        let a = 0;
-        let b = 0;
-        let adyMinusbdx = 0;
-        while(~(a > dx) & ~(b > dy)){
-          do Screen.drawPixel(x1 + a, y1 + b);
-          if(adyMinusbdx < 0){
-            let a = a + 1;
-            let adyMinusbdx = adyMinusbdx + dy;
-          }else{
-            let b = b + 1;
-            let adyMinusbdx = adyMinusbdx - dx;
+      let a = 0;
+      let b = 0;
+
+      if(~(dx = 0) & ~(dy = 0)){
+        if(dy < 0){
+          // Line slopes up
+          let adyMinusbdx = 0;
+          while(~(a > dx) & ~(b < dy)){
+            do Screen.drawPixel(x1 + a, y1 + b);
+            if(adyMinusbdx < 0){
+              let a = a + 1;
+              let adyMinusbdx = adyMinusbdx - dy;
+            }else{
+              let b = b - 1;
+              let adyMinusbdx = adyMinusbdx - dx;
+            }
+          }
+        }else{
+          // Line slopes down
+          let adyMinusbdx = 0;
+          while(~(a > dx) & ~(b > dy)){
+            do Screen.drawPixel(x1 + a, y1 + b);
+            if(adyMinusbdx < 0){
+              let a = a + 1;
+              let adyMinusbdx = adyMinusbdx + dy;
+            }else{
+              let b = b + 1;
+              let adyMinusbdx = adyMinusbdx - dx;
+            }
           }
         }
       }else{
         if(dx = 0){
+          if(dy < 0){ 
+            let dy = -dy; 
+            let y1 = y2;
+          }
+          // while b <= dy
           while(~(b > dy)){
             do Screen.drawPixel(x2, y1 + b);
             let b = b + 1;
           }
         }else{
-          while(~(a > dx)){
-            do Screen.drawPixel(x1 + a, y2);
-            let a = a + 1;
-          }
+          do Screen.drawHorizontalLine(x1, x2, y1);
+        }
+      }
+      return;
+    }
+
+    /** Draws a line from pixel (x1, y) to pixel (x2, y) using the current color. */
+    function void drawHorizontalLine(int x1, int x2, int y) {
+      var int startWord, endWord, offsetStart, offsetEnd, mask;
+
+      if( ((x1 | x2 | y) < 0) | ((x1 | x2) > 511) | (y > 255) ){
+        do Sys.error(8);
+      }
+
+      // Draw a pixel if x1 == x2
+      if(x1 = x2){ 
+        do Screen.drawPixel(x1, y); 
+        return;
+      }
+
+      // Ensures x2 > x1
+      // Using mask as a temp variable as it gets initialized to 0 later on.
+      if(x2 < x1){
+        let mask = x1;
+        let x1 = x2;
+        let x2 = mask;
+      }
+
+      let startWord = 16384 + (y * 32) + (x1 / 16);
+      let endWord = 16384 + (y * 32) + (x2 / 16);
+      let offsetStart = x1 - (16 * (x1 / 16));
+      let offsetEnd = x2 - (16 * (x2 / 16));
+
+      if(startWord = endWord){
+        let mask = 0;
+        while(~(offsetStart > offsetEnd)){
+          let mask = mask | twoToThe[offsetStart];
+          let offsetStart = offsetStart + 1;
+        }
+        if(color){
+          do Memory.poke(startWord, Memory.peek(startWord) | mask);
+        }else{
+          let mask = ~mask;
+          do Memory.poke(startWord, Memory.peek(startWord) & mask);
+        }
+        return;
+      }
+
+      if(offsetStart > 0){
+        let mask = 0;
+        while(offsetStart < 16){
+          let mask = mask | twoToThe[offsetStart];
+          let offsetStart = offsetStart + 1;
+        }
+        if(color){
+          do Memory.poke(startWord, Memory.peek(startWord) | mask);
+        }else{
+          let mask = ~mask;
+          do Memory.poke(startWord, Memory.peek(startWord) & mask);
+        }
+      }else{
+        if(color){
+          do Memory.poke(startWord, -1);
+        }else{
+          do Memory.poke(startWord, 0);
+        }
+      }
+      let startWord = startWord + 1;
+
+      while(startWord < endWord){
+        if(color){
+          do Memory.poke(startWord, -1);
+        }else{
+          do Memory.poke(startWord, 0);
+        }
+        let startWord = startWord + 1;
+      }
+
+      if(offsetEnd = 15){
+        if(color){
+          do Memory.poke(startWord, -1);
+        }else{
+          do Memory.poke(startWord, 0);
+        }
+      }else{
+        let offsetStart = 0;
+        let mask = 0;
+        while(~(offsetStart > offsetEnd)){
+          let mask = mask | twoToThe[offsetStart];
+          let offsetStart = offsetStart + 1;
+        }
+        if(color){
+          do Memory.poke(startWord, Memory.peek(startWord) | mask);
+        }else{
+          let mask = ~mask;
+          do Memory.poke(startWord, Memory.peek(startWord) & mask);
         }
       }
       return;
@@ -107,11 +242,68 @@ class Screen {
     /** Draws a filled rectangle whose top left corner is (x1, y1)
      * and bottom right corner is (x2,y2), using the current color. */
     function void drawRectangle(int x1, int y1, int x2, int y2) {
+      var int dx, dy;
+
+      if(((x1 | x2 | y1 | y2) < 0) | ((y1 | y2) > 255) | ((x1 | x2) > 511) | (x2 < x1) | (y2 < y1)){
+        do Sys.error(9);
+      }
+
+      let dx = x2 - x1;
+      let dy = y2 - y1;
+      if((dx > 0) & (dy > 0)){
+        while(~(y1 > y2)){
+          do Screen.drawHorizontalLine(x1, x2, y1);
+          let y1 = y1 + 1;
+        }
+      }else{
+        if(dx = 0){
+          do Screen.drawLine(x1, y1, x2, y2);
+        }else{
+          do Screen.drawHorizontalLine(x1, x2, y1);
+        }
+      }
       return;
     }
 
     /** Draws a filled circle of radius r<=181 around (x,y), using the current color. */
-    function void drawCircle(int x, int y, int r) {
+    function void drawCircle(int x0, int y0, int r) {
+      // Algo based off of this article: 
+      // https://sachithradangalla.medium.com/mid-point-algorithm-how-to-draw-a-circle-b6ed7c47c803
+      var int p, dx, dy;
+
+      // Throw errors for invald x
+      if( ((x0 | y0) < 0) | (x0 > 511) | (0 > 255) ){ do Sys.error(12); }
+      if( (r > 181) | (((x0 - r) | (y0 - r)) < 0) | ((x0 + r) > 511) | ((y0 + r) > 255) ){ do Sys.error(13); }
+
+      let p = -r + 1;
+      let dx = 0;
+      let dy = 0;
+      // dy >= dx
+      while(((r - dx) > dy)){
+        // Middle octants
+        do Screen.drawHorizontalLine(x0 + r - dx, x0 - r + dx, y0 + dy);
+        do Screen.drawHorizontalLine(x0 + r - dx, x0 - r + dx, y0 - dy);
+
+        // if py <= 0
+        if(~(p > 0)){
+          let p = p + (2 * dy) + 3;
+        }else{
+          let p = p + (2 * dy) - (2 * (r - dx)) + 5;
+        }
+        // Previous iterations of this algorithm would have repetitive calls to drawHorizontalLine that would overwrite each other.
+        // By only drawing the top/bottom octants when dx gets incremented we minimize the number of calls to drawHorizontalLine.
+        if(p > 0){
+          do Screen.drawHorizontalLine(x0 + dy, x0 - dy, y0 - r + dx);
+          do Screen.drawHorizontalLine(x0 + dy, x0 - dy, y0 + r - dx);
+          let dx = dx + 1;
+        }
+        let dy = dy + 1;
+      }
+      // the final line for the upper/lower octants does not get drawn before we break from the while loop
+      // This draws the final line to complete the circle
+      do Screen.drawHorizontalLine(x0 + dy, x0 - dy, y0 - r + dx);
+      do Screen.drawHorizontalLine(x0 + dy, x0 - dy, y0 + r - dx);
+
       return;
     }
 }
