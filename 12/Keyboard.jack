@@ -51,7 +51,9 @@ class Keyboard {
         }
       }
       do Output.backSpace();
-      do Output.printChar(key);
+      if(~(key = 128) | ~(key = 129)){
+        do Output.printChar(key);
+      }
       return key;
     }
 
