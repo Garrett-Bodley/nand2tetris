@@ -103,7 +103,7 @@ class String {
         let neg = true;
       }
   
-      // last = val % 10
+      // last = 48 + val % 10
       let last = 48 + (val - (10 * (val / 10)));
 
       if(val < 10){
@@ -115,6 +115,7 @@ class String {
         let length = length + 1;
       }
 
+      // Shift all chars over by one and prepend '-'
       if(neg){
         let i = length;
         while(i > 0){
