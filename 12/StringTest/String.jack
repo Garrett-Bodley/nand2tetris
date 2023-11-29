@@ -12,11 +12,15 @@
  */
 class String {
     field Array chars;
-    field int length;
+    field int length, maxLength;
     /** constructs a new empty string with a maximum length of maxLength
      *  and initial length of 0. */
-    constructor String new(int maxLength) {
-      let chars = Array.new(maxLength + 1);
+    constructor String new(int argMaxLength) {
+      // Error 14: Maximum length must be non-negative
+      if(maxLength < 0){ do Sys.error(14); }
+
+      let chars = Array.new(argMaxLength + 1);
+      let maxLength = argMaxLength;
       let length = 0;
       return this;
     }
@@ -35,17 +39,26 @@ class String {
 
     /** Returns the character at the j-th location of this string. */
     method char charAt(int j) {
+      // Error 15: String index out of bounds
+      if(~(j < length)){ do Sys.error(15); }
+      if(j < 0){ let j = length + j; }
       return chars[j];
     }
 
     /** Sets the character at the j-th location of this string to c. */
     method void setCharAt(int j, char c) {
+      // Error 16: String index out of bounds
+      if(~(j < length)){ do Sys.error(16); }
+      if(j < 0){ let j = length + j; }
       let chars[j] = c;
       return;
     }
 
     /** Appends c to this string's end and returns this string. */
     method String appendChar(char c) {
+      // Error 17: String is full
+      if(length = maxLength){ do Sys.error(17); }
+
       let chars[length] = c;
       let length = length + 1;
       return this;
@@ -53,6 +66,9 @@ class String {
 
     /** Erases the last character from this string. */
     method void eraseLastChar() {
+      // Error 18: String is empty
+      if(length = 0){ do Sys.error(18); }
+
       let chars[length - 1] = 0;
       let length = length - 1;
       return;
@@ -86,8 +102,33 @@ class String {
     method void setInt(int val) {
       var bool neg;
       var char last;
-      var int i;
+      var int i, j;
       
+      // make int positive if it is negative and set a flag
+      if(val < 0){
+        let val = -val;
+        let neg = true;
+      }
+
+      // string length algorithm doesn't work for values > 9999 because of integer overflow
+      // so we must hardcode that condition
+      if(val > 9999){
+        let j = 5;
+      }else{
+        // Calculate string length of int
+        let i = 10;
+        let j = 1;
+        while(~(i > val)){
+          let i = i * 10;
+          let j = j + 1;
+        }
+      }
+
+      if(neg){ let j = j + 1; }
+      // Error 19: Insufficient string capacity
+      if(j > maxLength){ do Sys.error(19); }
+
+
       // Erase string contents if present
       if(length > 0){
         let i = 0;
@@ -97,13 +138,8 @@ class String {
         }
         let length = 0;
       }
-      
-      if(val < 0){
-        let val = -val;
-        let neg = true;
-      }
-  
-      // last = val % 10
+
+      // last = 48 + val % 10
       let last = 48 + (val - (10 * (val / 10)));
 
       if(val < 10){
@@ -115,6 +151,7 @@ class String {
         let length = length + 1;
       }
 
+      // Shift all chars over by one and prepend '-'
       if(neg){
         let i = length;
         while(i > 0){
