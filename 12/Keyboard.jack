@@ -41,17 +41,16 @@ class Keyboard {
      * then echoes the key to the screen, and returns the character 
      * of the pressed key.
      */
-    function char readChar() {
-      var char key;
-      while(key = 0){
-        let key = Memory.peek(24576);
-        // Stay in a loop until keyUp event
-        // while Memory.peek != 0
-        while(~(Memory.peek(24576) = 0)){
-          let key = Memory.peek(24576);
-          if(key= 0){ do Output.printString("Race condition"); }
+     function char readChar() {
+      var char c, key;
+      do Output.printChar(0);
+      while((key = 0) | (c > 0)){
+        let c = Keyboard.keyPressed();
+        if(c > 0){
+          let key = c;
         }
       }
+      do Output.backSpace();
       do Output.printChar(key);
       return key;
     }
