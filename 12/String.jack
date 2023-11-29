@@ -12,11 +12,12 @@
  */
 class String {
     field Array chars;
-    field int length;
+    field int length, maxLength;
     /** constructs a new empty string with a maximum length of maxLength
      *  and initial length of 0. */
     constructor String new(int maxLength) {
       let chars = Array.new(maxLength + 1);
+      let maxLength = maxLength;
       let length = 0;
       return this;
     }
