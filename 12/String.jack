@@ -87,8 +87,26 @@ class String {
     method void setInt(int val) {
       var bool neg;
       var char last;
-      var int i;
+      var int i, j;
       
+      // make int positive if it is negative and set a flag
+      if(val < 0){
+        let val = -val;
+        let neg = true;
+      }
+
+      // Calculate string length of int
+      let i = 10;
+      let j = 1;
+      while(~(i > val)){
+        let i = i * 10;
+        let j = j + 1;
+      }
+      if(neg){ let j = j + 1; }
+      // Error 19: Insufficient string capacity
+      if(j > maxLength){ do Sys.error(19); }
+
+
       // Erase string contents if present
       if(length > 0){
         let i = 0;
@@ -98,12 +116,7 @@ class String {
         }
         let length = 0;
       }
-      
-      if(val < 0){
-        let val = -val;
-        let neg = true;
-      }
-  
+
       // last = 48 + val % 10
       let last = 48 + (val - (10 * (val / 10)));
 
