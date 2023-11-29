@@ -49,6 +49,7 @@ class Keyboard {
         // while Memory.peek != 0
         while(~(Memory.peek(24576) = 0)){
           let key = Memory.peek(24576);
+          if(key= 0){ do Output.printString("Race condition"); }
         }
       }
       do Output.printChar(key);
