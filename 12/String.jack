@@ -39,17 +39,26 @@ class String {
 
     /** Returns the character at the j-th location of this string. */
     method char charAt(int j) {
+      // Error 15: String index out of bounds
+      if((j < 0) | ~(j < length)){ do Sys.error(15); }
+
       return chars[j];
     }
 
     /** Sets the character at the j-th location of this string to c. */
     method void setCharAt(int j, char c) {
+      // Error 16: String index out of bounds
+      if((j < 0) | ~(j < length)){ do Sys.error(16); }
+
       let chars[j] = c;
       return;
     }
 
     /** Appends c to this string's end and returns this string. */
     method String appendChar(char c) {
+      // Error 17: String is full
+      if(length = maxLength){ do Sys.error(17); }
+
       let chars[length] = c;
       let length = length + 1;
       return this;
@@ -57,6 +66,9 @@ class String {
 
     /** Erases the last character from this string. */
     method void eraseLastChar() {
+      // Error 18: String is empty
+      if(length = 0){ do Sys.error(18); }
+
       let chars[length - 1] = 0;
       let length = length - 1;
       return;
