@@ -15,9 +15,12 @@ class String {
     field int length, maxLength;
     /** constructs a new empty string with a maximum length of maxLength
      *  and initial length of 0. */
-    constructor String new(int maxLength) {
-      let chars = Array.new(maxLength + 1);
-      let maxLength = maxLength;
+    constructor String new(int argMaxLength) {
+      // Error 14: Maximum length must be non-negative
+      if(maxLength < 0){ do Sys.error(14); }
+
+      let chars = Array.new(argMaxLength + 1);
+      let maxLength = argMaxLength;
       let length = 0;
       return this;
     }
