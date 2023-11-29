@@ -40,16 +40,16 @@ class String {
     /** Returns the character at the j-th location of this string. */
     method char charAt(int j) {
       // Error 15: String index out of bounds
-      if((j < 0) | ~(j < length)){ do Sys.error(15); }
-
+      if(~(j < length)){ do Sys.error(15); }
+      if(j < 0){ let j = length + j; }
       return chars[j];
     }
 
     /** Sets the character at the j-th location of this string to c. */
     method void setCharAt(int j, char c) {
       // Error 16: String index out of bounds
-      if((j < 0) | ~(j < length)){ do Sys.error(16); }
-
+      if(~(j < length)){ do Sys.error(16); }
+      if(j < 0){ let j = length + j; }
       let chars[j] = c;
       return;
     }
