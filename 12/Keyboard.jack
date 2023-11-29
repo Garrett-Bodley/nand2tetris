@@ -45,7 +45,7 @@ class Keyboard {
       var char c, key;
       do Output.printChar(0);
       while((key = 0) | (c > 0)){
-        let c = Keyboard.keyPressed();
+        let c = Memory.peek(24576);
         if(c > 0){
           let key = c;
         }
