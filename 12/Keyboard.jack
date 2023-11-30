@@ -72,23 +72,34 @@ class Keyboard {
       let input = String.new(strLength);
       do Output.printInt(input.length());
       do Output.printString(message);
+      // newLine = 128
+      // backspace = 129
       while(~(key = 128)){
         let key = Keyboard.readChar();
-        if(~(key = 129) & ~(key = 128)){
-          do input.appendChar(key);
-          if(input.length() = strLength){
-            let strLength = strLength + strLength;
-            let temp = String.new(strLength);
-            let i = 0;
-            while(i < input.length()){
-              do temp.appendChar(input.charAt(i));
-              let i = i + 1;
+        // if key = backspace
+        if(key = 129){
+          if(input.length() > 0){
+            do input.eraseLastChar();
+            do Output.backSpace();
+          }
+        }else{
+          if(~(key = 128)){
+            do input.appendChar(key);
+            if(input.length() = strLength){
+              let strLength = strLength + strLength;
+              let temp = String.new(strLength);
+              let i = 0;
+              while(i < input.length()){
+                do temp.appendChar(input.charAt(i));
+                let i = i + 1;
+              }
+              do input.dispose();
+              let input = temp;
             }
-            do input.dispose();
-            let input = temp;
           }
         }
       }
+      do Output.println();
       return input;
     }
 
