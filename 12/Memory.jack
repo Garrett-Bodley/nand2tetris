@@ -9,22 +9,86 @@
  * consists of 32,768 words, each holding a 16-bit binary number.
  */ 
 class Memory {
-
+    static Array mem;
+    static int free;
     /** Initializes the class. */
     function void init() {
+      // The Hack platform specifies that the heap resides at RAM locations 2048-16383
+      let mem = 0;
+      let free = 2048;
+      // Heap is initially one segment of free memory. baseAddress + length => baseAddress of next segment of memory
+      let mem[free] = -14336
+      // For simplicity we will start allocating at 2048.
+      // Convention would be to allocate starting at the opposite part of memory from the stack
+      // I have chosen to start at 2048 to help me understand the general principles behind memory allocation.
+
+      // Design:
+      // 1. The first word of each memory segment contains an integer value that is that segment's length
+        // a. The length of the segment will be 1 indexed
+      // 2. A negative integer value indicates that the segment is "free" memory
+      // 3. Free (unallocated) segments have a pointer to the next unallocated segment of memory at the address memory[base + 1]
+        // a. For free segments, if(baseAddress + length == 16384) it is the last free segment of memory
+        // b.
     }
 
     /** Returns the RAM value at the given address. */
     function int peek(int address) {
+      return mem[address];
     }
 
     /** Sets the RAM value at the given address to the given value. */
     function void poke(int address, int value) {
+      let mem[address] = value;
     }
 
     /** Finds an available RAM block of the given size and returns
      *  a reference to its base address. */
-    function int alloc(int size) {
+    function int alloc(int argSize) {
+      // when allocating
+      // first word of memory in allocated block points to the end of the allocated segment
+      // this is true for both allocated and free memory
+      // when a segment is free, that first register value will be negative
+      // This is handy, because when I deallocate something, I can just set that pointer register to be negative
+      // However, inserting that into the linked list at the correct position will be a thing
+
+      // Algorithm for finding the "best-fit" segment:
+      // 1. Scan through each segment of free memory
+      // 2. While scanning:
+        // a. Grab current free block's size
+        // b. If currentBlock.size >= argSize
+        // c. have a variable that holds the size of the smallest sufficiently large segment
+        // d. Have another variable that is the address of that smallest sufficient segment
+        // e. If smallest > currentBlock.size; let smallest = currentBlock.size
+        // d. let smallestPointer = currentBlock.address
+      // 3. If we get to the end and no segment is large enough, defrag
+        // a. What's the flag for that condition?
+      var Array current, smallestPointer;
+      var int smallest;
+
+      // Error 5: Allocated memory size must be positive
+      if(argSize < 1){ do Sys.error(5); }
+      // If we somehow have allocated all available memory, free is -1;
+      // Error 6: Heap overflow
+      if(free = -1){ do Sys.error(6); }
+      // Free segments use negative values for their length. 
+      // The smallest valid segment length is 2. 1 word for length and 1 word for value.
+      // This line repurposes an error code, but if "free" points to an allocated segment something has gone very wrong.
+      if(~(free[0] < -1)){ do Sys.error(6); }
+      
+      let current = free;
+
+
+      if((-current[0]) = (argSize + 1)){
+        // if free block == argSize, allocate freeBlock and update free
+        let free = current[1];
+      }
+      let smallest = -current[0];
+      let smallestPointer = current;
+
+      while(current + current[0] < 16384){
+        if(~current[0] < 0){ do Sys.error(6); }
+        if(current[0] > argSize)
+      }
     }
 
     /** De-allocates the given object (cast as an array) by making
