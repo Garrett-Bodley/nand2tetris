@@ -19,7 +19,7 @@ class Memory {
       // Heap is initially one segment of free memory. baseAddress + length => baseAddress of next segment of memory
       let mem[free] = -14336
       // For simplicity we will start allocating at 2048.
-      // Convention would be to allocate starting at the opposite part of memory from the stack
+      // Convention would be to allocate starting at the opposite side of memory from the stack
       // I have chosen to start at 2048 to help me understand the general principles behind memory allocation.
 
       // Design:
@@ -72,7 +72,8 @@ class Memory {
       if(free = -1){ do Sys.error(6); }
       // Free segments use negative values for their length. 
       // The smallest valid segment length is 2. 1 word for length and 1 word for value.
-      // This line repurposes an error code, but if "free" points to an allocated segment something has gone very wrong.
+      // This line repurposes an error code, but if "free" points to an allocated segment, 
+      // or if free has an invalid length something has gone very wrong.
       if(~(free[0] < -1)){ do Sys.error(6); }
       
       let current = free;
