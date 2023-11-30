@@ -111,5 +111,8 @@ class Keyboard {
      * entered text is detected). Also handles user backspaces. 
      */
     function int readInt(String message) {
+      var String input;
+      let input = Keyboard.readLine(message);
+      return input.intValue();
     }
 }
