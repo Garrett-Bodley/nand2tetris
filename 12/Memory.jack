@@ -18,6 +18,9 @@ class Memory {
       let free = 2048;
       // Heap is initially one segment of free memory. baseAddress + length => baseAddress of next segment of memory
       let mem[free] = -14336
+      // We set free to mem[segmentBase + 1] when allocating a segment
+      // If all memory has been allocated free == -1
+      let mem[free + 1] = -1;
       // For simplicity we will start allocating at 2048.
       // Convention would be to allocate starting at the opposite side of memory from the stack
       // I have chosen to start at 2048 to help me understand the general principles behind memory allocation.
@@ -82,12 +85,16 @@ class Memory {
       if((-current[0]) = (argSize + 1)){
         // if free block == argSize, allocate freeBlock and update free
         let free = current[1];
+        // Make header length bit positive to signal allocated memory
+        let current[0] = -current[0];
+        // return base address which is 1 greater than the header bit
+        return current + 1;
       }
       let smallest = -current[0];
       let smallestPointer = current;
 
       while(current + current[0] < 16384){
-        if(~current[0] < 0){ do Sys.error(6); }
+        if(~(current[0] < -1)){ do Sys.error(6); }
         if(current[0] > argSize)
       }
     }
