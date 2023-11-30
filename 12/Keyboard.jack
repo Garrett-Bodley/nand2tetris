@@ -70,7 +70,6 @@ class Keyboard {
 
       let strLength = 8;
       let input = String.new(strLength);
-      do Output.printInt(input.length());
       do Output.printString(message);
       // newLine = 128
       // backspace = 129
