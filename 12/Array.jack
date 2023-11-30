@@ -15,6 +15,8 @@ class Array {
 
     /** Constructs a new Array of the given size. */
     function Array new(int size) {
+      // Error 2: Array size must be positive
+      if(size < 1){ do Sys.error(2); }
       return Memory.alloc(size);
     }
 
