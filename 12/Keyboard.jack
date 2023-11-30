@@ -52,7 +52,7 @@ class Keyboard {
         }
       }
       do Output.backSpace();
-      if(~(key = 128) | ~(key = 129)){
+      if(~(key = 128) & ~(key = 129)){
         do Output.printChar(key);
       }
       return key;
