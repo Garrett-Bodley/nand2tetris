@@ -85,6 +85,8 @@ class Keyboard {
         }else{
           if(~(key = 128)){
             do input.appendChar(key);
+            // Handles the case where the input is greater than the initially allocated string size.
+            // Doubles string length, allocates a new string, and disposes of the old string
             if(input.length() = strLength){
               let strLength = strLength + strLength;
               let temp = String.new(strLength);
