@@ -328,7 +328,7 @@ class Output {
       var int y;
       let y = cursor[1];
 
-      if(y < 10){
+      if(y < 22){
         do Output.moveCursor(y + 1, 0);
       }else{
         do Output.scrollTextDown();
