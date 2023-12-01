@@ -146,11 +146,13 @@ class Memory {
             // j points to base address of remaining free segment
             let j = smallestPointer + smallestPointer[0];
             // whats the size of the remaining segment?
-            // -original length - new
-            let j[0] = -((-i) - smallestPointer[0]);
-            // what is thre remaining segment's next node?
+            // original length - new
+            // -(-ORIGINAL LENGTH)-(NEW LENGTH) => ORIGINAL LENGTH + NEW LENGTH
+            let j[0] = i + smallestPointer[0];
+            // what is the remaining segment's next node?
             // It's what smallestPointer originally pointed to!
             // Did we overwrite smallestPointer[1]?
+            // no
             let current[1] = smallestPointer + smallestPointer[0];
             let j[1] = smallestPointer[1];
             return smallestPointer + 1;
