@@ -163,9 +163,96 @@ class Memory {
       return -1;
     }
 
+    // I think this should mostly work? Unsure of how to handle the edge cases
     /** De-allocates the given object (cast as an array) by making
      *  it available for future allocations. */
     function void deAlloc(Array o) {
+      var Array base, next, current, temp;
+      var int baseLength;
+
+
+      let base = o - 1;
+      let baseLength = base[0];  // POSITIVE VALUE
+
+      // // if next.length is negative it is a free segment
+      // let next = base + baseLength;
+      // if(next[0] < 0){ let nextIsFree = true; }
+
+      let current = free;
+      while(~(current = -1)){
+        // if current.next > base
+        if(current[1] > base){
+          // if current.address + current.length == base
+          // (current.length is a negative value bc it is a free segment)
+          if(current - current[0] = base){
+            // preceding segment is free
+            // combine segment at base with preceding segment
+            // no need to update current.next
+            // let current.length = current.length + base.length
+            let current[0] = current[0] - baseLength;
+            // let next = current + current.length
+            let next = current + current[0];
+            // if(next.isFree)
+            if(next[0] < 0){
+              // current.next = next.next
+              let current[1] = next[1];
+              // current.length = current.length + next.length
+              let current[0] = current[0] + next[0];
+            }
+          }else{
+            let temp = current[1];
+            let current[1] = base;
+            let base[0] = -base[0];
+            let base[1] = temp;
+
+            let current = base;
+            let next = current - current[0];
+            if(next[0] < 0){
+              let current[1] = next[1];
+              let current[0] = current[0] + next[0];
+            }
+          }
+        }
+        let current = current[1];
+      }
+      
+      // how do I figure out if the previous segment is free?
+      // Iterate through the linked list of free segments
+      // While (current < base && current !== -1){ current = current.next }
+      // if(current > base){
+
+      // DEALLOCATION ALGORITHM
+      // let current = head
+      // while(current.next.address < obj.address){
+      //   // Traverse linked list until current.next.address > obj.address
+      //   if(current.address + current.length == obj.address){
+      //     // preceding segment is free
+      //     // combine segment at base with preceding segment
+      //     // no need to update current.next
+      //     current.length = current.length + obj.length
+      //     let subsequentSegment = current.address + current.length
+      //     if(subsequentSegment.isFree){
+      //       current.next = subsequentSegment.next
+      //       current.length = current.length + subsequentSegment
+      //     }
+      //   }else{
+      //     // Preceding segment is not free
+      //     // Insert base into linked list
+      //     temp = current.next
+      //     current.next = base
+      //     base.isFree = true
+      //     base.next = temp
+  
+      //     // check if subsequent segment is free
+      //     let subsequentSegment = base + base.length
+      //     if(subsequentSegment.isFree){
+      //       base.next = subsequentSegment.next;
+      //       base.length = base.length + subsequentSegment.length
+      //     }
+      //   }
+      // }
+
+      // I want to figure out if the following segment or preceeding segment is free.
       return;
     }    
 }
