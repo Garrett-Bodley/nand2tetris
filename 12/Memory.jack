@@ -69,8 +69,8 @@ class Memory {
         // d. let smallestPointer = currentBlock.address
       // 3. If we get to the end and no segment is large enough, defrag
         // a. What's the flag for that condition?
-      var Array current, smallestPointer;
-      var int smallest, prev, i, j;
+      var Array current, smallestPointer, next;
+      var int smallest, prev, originalLength, remaining;
 
       let smallest = -1;
 
@@ -134,27 +134,46 @@ class Memory {
         // if(current.next == smallestPointer){ deleteNode(current.next)}
         if(current[1] = smallestPointer){
           // let current.next = smallestPointer.next
-          if((-smallestPointer[0]) - (argSize + 1) < 2){
+          // if smallestSegment.length - argSize + 1 < 2
+          if(((-smallestPointer[0]) - (argSize + 1)) < 2){
+            // allocate smallestSegment
+            // current.next = smallestSegment.next
             let current[1] = smallestPointer[1];
+            // smallestSegment.isFree = false
             let smallestPointer[0] = -smallestPointer[0];
             return smallestPointer + 1;
           }else{
-            // i = smallestPointer.length NEGATIVE
-            let i = smallestPointer[0];
+            // We must check the adjacent segment located immediately after the one we are allocating
+            // If that is free, we want to merge the remaining free memory with the adjacent free memory
+
+            // originalLength = smallest.length;
+            // smallest.length = argSize + 1
+            // remainingSegment = smallest.baseAddress + smallest.length
+            // next = smallest.baseAddress + Math.abs(originalLength)
+
+            // smallestPointer.length NEGATIVE
+            let originalLength = smallestPointer[0];
             // smallestPointer.length = argSize + 1
             let smallestPointer[0] = argSize + 1;
-            // j points to base address of remaining free segment
-            let j = smallestPointer + smallestPointer[0];
-            // whats the size of the remaining segment?
-            // original length - new
-            // -(-ORIGINAL LENGTH)-(NEW LENGTH) => ORIGINAL LENGTH + NEW LENGTH
-            let j[0] = i + smallestPointer[0];
-            // what is the remaining segment's next node?
-            // It's what smallestPointer originally pointed to!
-            // Did we overwrite smallestPointer[1]?
-            // no
-            let current[1] = smallestPointer + smallestPointer[0];
-            let j[1] = smallestPointer[1];
+            // points to base address of remaining free segment
+            let remaining = smallestPointer + smallestPointer[0];
+            // next = remaining + remaining.length
+            let next = smallestPointer - originalLength;
+            // is the following segment free?
+            // if the following segment is free we should merge j and following segment
+  
+            // if(next.isFree){ merge remaining with next}
+            if(next[0] < 0){
+              // remaining.length = next.length + (original length - new length)
+              // -(-original length) - new length => original length + new length
+              let remaining[0] = originalLength + smallestPointer[0] + next[0];
+              let remaining[1] = next[1];
+              let current[1] = remaining;
+            }else{
+              let remaining[0] = originalLength + smallestPointer[0];
+              let current[1] = remaining;
+              let remaining[1] = smallestPointer[1];
+            }
             return smallestPointer + 1;
           }
         }
