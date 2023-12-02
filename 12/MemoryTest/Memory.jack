@@ -1,0 +1,288 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Memory.jack
+
+/**
+ * This library provides two services: direct access to the computer's main
+ * memory (RAM), and allocation and recycling of memory blocks. The Hack RAM
+ * consists of 32,768 words, each holding a 16-bit binary number.
+ */ 
+class Memory {
+    static Array mem;
+    static int free;
+    /** Initializes the class. */
+    function void init() {
+      // The Hack platform specifies that the heap resides at RAM locations 2048-16383
+      let mem = 0;
+      let free = 2048;
+      // Heap is initially one segment of free memory. baseAddress + length => baseAddress of next segment of memory
+      let mem[free] = -2;
+      // We set free to mem[segmentBase + 1] when allocating a segment
+      // If all memory has been allocated free == -1
+      let mem[free + 1] = 2050;
+      let mem[2050] = -14334;
+      let mem[2051] = -1;
+      // For simplicity we will start allocating at 2048.
+      // Convention would be to allocate starting at the opposite side of memory from the stack
+      // I have chosen to start at 2048 to help me understand the general principles behind memory allocation.
+
+      // Design:
+      // 1. The first word of each memory segment contains an integer value that is that segment's length
+        // a. The length of the segment will be 1 indexed
+      // 2. A negative integer value indicates that the segment is "free" memory
+      // 3. Free (unallocated) segments have a pointer to the next unallocated segment of memory at the address memory[base + 1]
+        // a. For free segments, if(baseAddress + length == 16384) it is the last free segment of memory
+        // b.
+      return;
+    }
+
+    /** Returns the RAM value at the given address. */
+    function int peek(int address) {
+      return mem[address];
+    }
+
+    /** Sets the RAM value at the given address to the given value. */
+    function void poke(int address, int value) {
+      let mem[address] = value;
+      return;
+    }
+
+    /** Finds an available RAM block of the given size and returns
+     *  a reference to its base address. */
+    function int alloc(int argSize) {
+      // when allocating
+      // first word of memory in allocated block points to the end of the allocated segment
+      // this is true for both allocated and free memory
+      // when a segment is free, that first register value will be negative
+      // This is handy, because when I deallocate something, I can just set that pointer register to be negative
+      // However, inserting that into the linked list at the correct position will be a thing
+
+      // Algorithm for finding the "best-fit" segment:
+      // 1. Scan through each segment of free memory
+      // 2. While scanning:
+        // a. Grab current free block's size
+        // b. If currentBlock.size >= argSize
+        // c. have a variable that holds the size of the smallest sufficiently large segment
+        // d. Have another variable that is the address of that smallest sufficient segment
+        // e. If smallest > currentBlock.size; let smallest = currentBlock.size
+        // d. let smallestPointer = currentBlock.address
+      // 3. If we get to the end and no segment is large enough, defrag
+        // a. What's the flag for that condition?
+      var Array current, smallestPointer, next;
+      var int smallest, prev, originalLength, remaining;
+
+      let smallest = -1;
+
+      // Error 5: Allocated memory size must be positive
+      if(argSize < 1){ do Sys.error(5); }
+      // If we somehow have allocated all available memory, free is -1;
+      // Error 6: Heap overflow
+      // maybe make free < 0 do error() ???
+      if(free = -1){ do Sys.error(6); }
+      // Free segments use negative values for their length. 
+      // The smallest valid segment length is 2. 1 word for length and 1 word for value.
+      // This line repurposes an error code, but if "free" points to an allocated segment, 
+      // or if free has an invalid length something has gone very wrong.
+      if(~(free[0] < -1)){ do Sys.error(6); }
+      
+      // current[0] => current.length
+      // current[1] => current.next
+
+      let prev = free;
+      let current = free[1];
+
+      // // do-while
+      // // blockSize == argSize + 1
+      // if((-current[0]) = (argSize + 1)){
+      //   // if free block == argSize, allocate freeBlock and update free
+      //   let free = current[1];
+      //   // Make header length bit positive to signal allocated memory
+      //   let current[0] = -current[0];
+      //   // return base address which is 1 greater than the header bit
+      //   return current + 1;
+      // }
+      // // blockSize > argSize && (blockSize < smallest || smallest == -1)
+      // if(-current[0] > (argSize + 1) & ((-current[0] < smallest) | (smallest = -1))){
+      //   let smallest = -current[0];
+      //   let smallestPointer = current;
+      // }
+
+      // let prev = current;
+      // let current = current[1];
+
+      // I have to do some sort of linked list node removal thingy here and that's kind of hard actually
+      // if my initial condition is checking if current + current.next == 16384 it'll never work because 
+      while(~(current = -1)){
+        if(current[0] > -2){ do Sys.error(6); }
+        if(argSize + current[0] + 1 = 0){
+          // let prev.next = current.next
+          let prev[1] = current[1];
+          let current[0] = -current[0];
+          return current + 1;
+        }
+        if((-current[0] > argSize) & ((-current[0] < smallest) | (smallest = -1))){
+          let smallest = -current[0];
+          let smallestPointer = current;
+        }
+        let prev = current;
+        let current = current[1];
+      }
+
+      let current = free;
+      while(~(current = -1)){
+        // if(current.next == smallestPointer){ deleteNode(current.next)}
+        if(current[1] = smallestPointer){
+          // let current.next = smallestPointer.next
+          // if smallestSegment.length - argSize + 1 < 2
+          if(((-smallestPointer[0]) - (argSize + 1)) < 2){
+            // allocate smallestSegment
+            // current.next = smallestSegment.next
+            let current[1] = smallestPointer[1];
+            // smallestSegment.isFree = false
+            let smallestPointer[0] = -smallestPointer[0];
+            return smallestPointer + 1;
+          }else{
+            // We must check the adjacent segment located immediately after the one we are allocating
+            // If that is free, we want to merge the remaining free memory with the adjacent free memory
+
+            // originalLength = smallest.length;
+            // smallest.length = argSize + 1
+            // remainingSegment = smallest.baseAddress + smallest.length
+            // next = smallest.baseAddress + Math.abs(originalLength)
+
+            // smallestPointer.length NEGATIVE
+            let originalLength = smallestPointer[0];
+            // smallestPointer.length = argSize + 1
+            let smallestPointer[0] = argSize + 1;
+            // points to base address of remaining free segment
+            let remaining = smallestPointer + smallestPointer[0];
+            // next = remaining + remaining.length
+            let next = smallestPointer - originalLength;
+            // is the following segment free?
+            // if the following segment is free we should merge j and following segment
+  
+            // if(next.isFree){ merge remaining with next}
+            if(next[0] < 0){
+              // remaining.length = next.length + (original length - new length)
+              // -(-original length) - new length => original length + new length
+              let remaining[0] = originalLength + smallestPointer[0] + next[0];
+              let remaining[1] = next[1];
+              let current[1] = remaining;
+            }else{
+              let remaining[0] = originalLength + smallestPointer[0];
+              let current[1] = remaining;
+              let remaining[1] = smallestPointer[1];
+            }
+            return smallestPointer + 1;
+          }
+        }
+        let current = current[1];
+      }
+      return -1;
+    }
+
+    // I think this should mostly work? Unsure of how to handle the edge cases
+    /** De-allocates the given object (cast as an array) by making
+     *  it available for future allocations. */
+    function void deAlloc(Array o) {
+      var Array base, next, current, temp;
+      var int baseLength;
+
+
+      let base = o - 1;
+      let baseLength = base[0];  // POSITIVE VALUE
+
+      // // if next.length is negative it is a free segment
+      // let next = base + baseLength;
+      // if(next[0] < 0){ let nextIsFree = true; }
+
+      let current = free;
+      while(~(current = -1)){
+        // if current.next > base
+        if((current[1] > base) | (current[1] = -1)){
+          // if current.address + current.length == base
+          // (current.length is a negative value bc it is a free segment)
+          if((current - current[0] = base) & ~(current = 2048)){
+            // preceding segment is free
+            // combine segment at base with preceding segment
+            // no need to update current.next
+            // let current.length = current.length + base.length
+            let current[0] = current[0] - baseLength;
+            // let next = current + current.length
+            let next = current - current[0];
+            // if(next.isFree)
+          }else{
+            let temp = current[1];
+            let current[1] = base;
+            let base[0] = -base[0];
+            let base[1] = temp;
+            
+            let current = base;
+            let next = current - current[0];
+          }
+          if(next[0] < 0){
+            // current.next = next.next
+            let current[1] = next[1];
+            // current.length = current.length + next.length
+            let current[0] = current[0] + next[0];
+          }
+          return;
+        }
+        let current = current[1];
+      }
+      
+      // how do I figure out if the previous segment is free?
+      // Iterate through the linked list of free segments
+      // While (current < base && current !== -1){ current = current.next }
+      // if(current > base){
+
+      // DEALLOCATION ALGORITHM
+      // let current = head
+      // while(current.next.address < obj.address){
+      //   // Traverse linked list until current.next.address > obj.address
+      //   if(current.address + current.length == obj.address){
+      //     // preceding segment is free
+      //     // combine segment at base with preceding segment
+      //     // no need to update current.next
+      //     current.length = current.length + obj.length
+      //     let subsequentSegment = current.address + current.length
+      //     if(subsequentSegment.isFree){
+      //       current.next = subsequentSegment.next
+      //       current.length = current.length + subsequentSegment
+      //     }
+      //   }else{
+      //     // Preceding segment is not free
+      //     // Insert base into linked list
+      //     temp = current.next
+      //     current.next = base
+      //     base.isFree = true
+      //     base.next = temp
+  
+      //     // check if subsequent segment is free
+      //     let subsequentSegment = base + base.length
+      //     if(subsequentSegment.isFree){
+      //       base.next = subsequentSegment.next;
+      //       base.length = base.length + subsequentSegment.length
+      //     }
+      //   }
+      // }
+
+      // I want to figure out if the following segment or preceeding segment is free.
+      return;
+    }
+
+    function int findPrevFreeSegment(Array segment){
+      var Array prev, current;
+      let prev = free;
+      let current = prev[1];
+      while(~(current = -1)){
+        if(current = segment){
+          return prev;
+        }
+        let prev = current;
+        let current = current[1];
+      }
+      return -1;
+    }
+}

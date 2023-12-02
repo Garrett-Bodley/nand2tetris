@@ -8,6 +8,37 @@ class Main {
 
     /** Performs various memory manipulations. */
     function void main() {
+      // var int pointer;
+      // var Array arr;
+      // var String s;
+
+      // let pointer = Array.new(10);
+      // let pointer[0] = 1;
+      // let pointer[1] = 2;
+      // let pointer[2] = 3;
+      // let pointer[3] = 4;
+      // let pointer[4] = 5;
+      // let pointer[5] = 6;
+      // let pointer[6] = 7;
+      // let pointer[7] = 8;
+      // let pointer[8] = 9;
+      // let pointer[9] = 10;
+
+      // let arr = Array.new(35);
+      // do Output.printInt(pointer);
+      // do Output.println();
+      // do Output.printInt(arr);
+      // do Output.println();
+      // let s = "Hello World";
+      // do Output.printString(s);
+      // do Output.println();
+      // do Output.printInt(s);
+      // do Output.println();
+      // do Memory.deAlloc(arr);
+      // let s = "new";
+      // do Output.printString(s);
+      // do Output.println();
+      // do Output.printInt(s);
         var int temp, err;
         var Array a, b, c;
         

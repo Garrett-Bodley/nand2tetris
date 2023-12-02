@@ -1,0 +1,641 @@
+function Memory.init 0
+push constant 0
+pop static 0
+push constant 2048
+pop static 1
+push static 1
+push static 0
+add
+push constant 2
+neg
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push static 1
+push constant 1
+add
+push static 0
+add
+push constant 2050
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 2050
+push static 0
+add
+push constant 14334
+neg
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 2051
+push static 0
+add
+push constant 1
+neg
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+function Memory.peek 0
+push argument 0
+push static 0
+add
+pop pointer 1
+push that 0
+return
+function Memory.poke 0
+push argument 0
+push static 0
+add
+push argument 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+function Memory.alloc 7
+push constant 1
+neg
+pop local 3
+push argument 0
+push constant 1
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 5
+call Sys.error 1
+pop temp 0
+label IF_FALSE0
+push static 1
+push constant 1
+neg
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 6
+call Sys.error 1
+pop temp 0
+label IF_FALSE1
+push constant 0
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 1
+neg
+lt
+not
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 6
+call Sys.error 1
+pop temp 0
+label IF_FALSE2
+push static 1
+pop local 4
+push constant 1
+push static 1
+add
+pop pointer 1
+push that 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push constant 1
+neg
+eq
+not
+not
+if-goto WHILE_END0
+push constant 0
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 2
+neg
+gt
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 6
+call Sys.error 1
+pop temp 0
+label IF_FALSE3
+push argument 0
+push constant 0
+push local 0
+add
+pop pointer 1
+push that 0
+add
+push constant 1
+add
+push constant 0
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 1
+push local 4
+add
+push constant 1
+push local 0
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+push local 0
+add
+push constant 0
+push local 0
+add
+pop pointer 1
+push that 0
+neg
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 1
+add
+return
+label IF_FALSE4
+push constant 0
+push local 0
+add
+pop pointer 1
+push that 0
+neg
+push argument 0
+gt
+push constant 0
+push local 0
+add
+pop pointer 1
+push that 0
+neg
+push local 3
+lt
+push local 3
+push constant 1
+neg
+eq
+or
+and
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push constant 0
+push local 0
+add
+pop pointer 1
+push that 0
+neg
+pop local 3
+push local 0
+pop local 1
+label IF_FALSE5
+push local 0
+pop local 4
+push constant 1
+push local 0
+add
+pop pointer 1
+push that 0
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push static 1
+pop local 0
+label WHILE_EXP1
+push local 0
+push constant 1
+neg
+eq
+not
+not
+if-goto WHILE_END1
+push constant 1
+push local 0
+add
+pop pointer 1
+push that 0
+push local 1
+eq
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push constant 0
+push local 1
+add
+pop pointer 1
+push that 0
+neg
+push argument 0
+push constant 1
+add
+sub
+push constant 2
+lt
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push constant 1
+push local 0
+add
+push constant 1
+push local 1
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+push local 1
+add
+push constant 0
+push local 1
+add
+pop pointer 1
+push that 0
+neg
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 1
+push constant 1
+add
+return
+goto IF_END7
+label IF_FALSE7
+push constant 0
+push local 1
+add
+pop pointer 1
+push that 0
+pop local 5
+push constant 0
+push local 1
+add
+push argument 0
+push constant 1
+add
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 1
+push constant 0
+push local 1
+add
+pop pointer 1
+push that 0
+add
+pop local 6
+push local 1
+push local 5
+sub
+pop local 2
+push constant 0
+push local 2
+add
+pop pointer 1
+push that 0
+push constant 0
+lt
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push constant 0
+push local 6
+add
+push local 5
+push constant 0
+push local 1
+add
+pop pointer 1
+push that 0
+add
+push constant 0
+push local 2
+add
+pop pointer 1
+push that 0
+add
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 1
+push local 6
+add
+push constant 1
+push local 2
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 1
+push local 0
+add
+push local 6
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto IF_END8
+label IF_FALSE8
+push constant 0
+push local 6
+add
+push local 5
+push constant 0
+push local 1
+add
+pop pointer 1
+push that 0
+add
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 1
+push local 0
+add
+push local 6
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 1
+push local 6
+add
+push constant 1
+push local 1
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_END8
+push local 1
+push constant 1
+add
+return
+label IF_END7
+label IF_FALSE6
+push constant 1
+push local 0
+add
+pop pointer 1
+push that 0
+pop local 0
+goto WHILE_EXP1
+label WHILE_END1
+push constant 1
+neg
+return
+function Memory.deAlloc 5
+push argument 0
+push constant 1
+sub
+pop local 0
+push constant 0
+push local 0
+add
+pop pointer 1
+push that 0
+pop local 4
+push static 1
+pop local 2
+label WHILE_EXP0
+push local 2
+push constant 1
+neg
+eq
+not
+not
+if-goto WHILE_END0
+push constant 1
+push local 2
+add
+pop pointer 1
+push that 0
+push local 0
+gt
+push constant 1
+push local 2
+add
+pop pointer 1
+push that 0
+push constant 1
+neg
+eq
+or
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 2
+push constant 0
+push local 2
+add
+pop pointer 1
+push that 0
+sub
+push local 0
+eq
+push local 2
+push constant 2048
+eq
+not
+and
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+push local 2
+add
+push constant 0
+push local 2
+add
+pop pointer 1
+push that 0
+push local 4
+sub
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 2
+push constant 0
+push local 2
+add
+pop pointer 1
+push that 0
+sub
+pop local 1
+goto IF_END1
+label IF_FALSE1
+push constant 1
+push local 2
+add
+pop pointer 1
+push that 0
+pop local 3
+push constant 1
+push local 2
+add
+push local 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+push local 0
+add
+push constant 0
+push local 0
+add
+pop pointer 1
+push that 0
+neg
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 1
+push local 0
+add
+push local 3
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+pop local 2
+push local 2
+push constant 0
+push local 2
+add
+pop pointer 1
+push that 0
+sub
+pop local 1
+label IF_END1
+push constant 0
+push local 1
+add
+pop pointer 1
+push that 0
+push constant 0
+lt
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 1
+push local 2
+add
+push constant 1
+push local 1
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+push local 2
+add
+push constant 0
+push local 2
+add
+pop pointer 1
+push that 0
+push constant 0
+push local 1
+add
+pop pointer 1
+push that 0
+add
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_FALSE2
+push constant 0
+return
+label IF_FALSE0
+push constant 1
+push local 2
+add
+pop pointer 1
+push that 0
+pop local 2
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Memory.findPrevFreeSegment 2
+push static 1
+pop local 0
+push constant 1
+push local 0
+add
+pop pointer 1
+push that 0
+pop local 1
+label WHILE_EXP0
+push local 1
+push constant 1
+neg
+eq
+not
+not
+if-goto WHILE_END0
+push local 1
+push argument 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+return
+label IF_FALSE0
+push local 1
+pop local 0
+push constant 1
+push local 1
+add
+pop pointer 1
+push that 0
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push constant 1
+neg
+return
