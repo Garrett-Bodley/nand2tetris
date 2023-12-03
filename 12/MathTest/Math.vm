@@ -148,12 +148,12 @@ label IF_FALSE0
 push argument 0
 return
 function Math.multiply 4
-push constant 0
-pop local 2
 push argument 0
 pop local 3
 push constant 0
 pop local 0
+push constant 1
+pop local 1
 label WHILE_EXP0
 push local 0
 push constant 16
@@ -161,8 +161,10 @@ lt
 not
 if-goto WHILE_END0
 push argument 1
-push local 0
-call Math.bit 2
+push local 1
+and
+push local 1
+eq
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
@@ -171,6 +173,10 @@ push local 3
 add
 pop local 2
 label IF_FALSE0
+push local 1
+push local 1
+add
+pop local 1
 push local 3
 push local 3
 add
