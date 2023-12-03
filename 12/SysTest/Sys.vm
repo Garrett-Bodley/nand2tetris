@@ -1,0 +1,184 @@
+function Sys.init 0
+call Memory.init 0
+pop temp 0
+call Math.init 0
+pop temp 0
+call Output.init 0
+pop temp 0
+call Screen.init 0
+pop temp 0
+call Keyboard.init 0
+pop temp 0
+call Main.main 0
+pop temp 0
+call Sys.halt 0
+pop temp 0
+push constant 0
+return
+function Sys.halt 0
+label WHILE_EXP0
+push constant 0
+not
+not
+if-goto WHILE_END0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Sys.wait 1
+push constant 0
+pop local 0
+call Sys.bigLoop 0
+pop temp 0
+call Sys.bigLoop 0
+pop temp 0
+push constant 0
+return
+function Sys.bigLoop 10
+push constant 0
+pop local 0
+push constant 0
+pop local 1
+push constant 0
+pop local 2
+push constant 0
+pop local 3
+push constant 0
+pop local 4
+push constant 0
+pop local 5
+push constant 0
+pop local 6
+push constant 0
+pop local 7
+push constant 0
+pop local 8
+push constant 0
+pop local 9
+label WHILE_EXP0
+push local 0
+push constant 32767
+lt
+not
+if-goto WHILE_END0
+label WHILE_EXP1
+push local 1
+push constant 32767
+lt
+not
+if-goto WHILE_END1
+label WHILE_EXP2
+push local 2
+push constant 32767
+lt
+not
+if-goto WHILE_END2
+label WHILE_EXP3
+push local 3
+push constant 32767
+lt
+not
+if-goto WHILE_END3
+label WHILE_EXP4
+push local 4
+push constant 32767
+lt
+not
+if-goto WHILE_END4
+label WHILE_EXP5
+push local 5
+push constant 32767
+lt
+not
+if-goto WHILE_END5
+label WHILE_EXP6
+push local 6
+push constant 32767
+lt
+not
+if-goto WHILE_END6
+label WHILE_EXP7
+push local 7
+push constant 32767
+lt
+not
+if-goto WHILE_END7
+label WHILE_EXP8
+push local 8
+push constant 32767
+lt
+not
+if-goto WHILE_END8
+push local 8
+push constant 1
+add
+pop local 8
+goto WHILE_EXP8
+label WHILE_END8
+push local 7
+push constant 1
+add
+pop local 7
+goto WHILE_EXP7
+label WHILE_END7
+push local 6
+push constant 1
+add
+pop local 6
+goto WHILE_EXP6
+label WHILE_END6
+push local 5
+push constant 1
+add
+pop local 5
+goto WHILE_EXP5
+label WHILE_END5
+push local 4
+push constant 1
+add
+pop local 4
+goto WHILE_EXP4
+label WHILE_END4
+push local 3
+push constant 1
+add
+pop local 3
+goto WHILE_EXP3
+label WHILE_END3
+push local 2
+push constant 1
+add
+pop local 2
+goto WHILE_EXP2
+label WHILE_END2
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP1
+label WHILE_END1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Sys.error 0
+push constant 69
+call Output.printChar 1
+pop temp 0
+push constant 82
+call Output.printChar 1
+pop temp 0
+push constant 82
+call Output.printChar 1
+pop temp 0
+push argument 0
+call Output.printInt 1
+pop temp 0
+call Sys.halt 0
+pop temp 0
+push constant 0
+return
