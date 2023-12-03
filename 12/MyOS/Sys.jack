@@ -1,0 +1,90 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Sys.jack
+
+/**
+ * A library that supports various program execution services.
+ */
+class Sys {
+
+    /** Performs all the initializations required by the OS. */
+    function void init() {
+      do Memory.init();
+      do Math.init();
+      do Output.init();
+      do Screen.init();
+      do Keyboard.init();
+      do Main.main();
+      do Sys.halt();
+      return;
+    }
+
+    /** Halts the program execution. */
+    function void halt() {
+      while(true){}
+      return;
+    }
+
+    /** Waits approximately duration milliseconds and returns.  */
+    function void wait(int duration) {
+      var int i;
+      let i = 0;
+      do Sys.bigLoop();
+      do Sys.bigLoop();
+      return;
+    }
+
+    function void bigLoop(){
+      var int i, j, k, l, m, n, o, p, q, r;
+      let i = 0;
+      let j = 0;
+      let k = 0;
+      let l = 0;
+      let m = 0;
+      let n = 0;
+      let o = 0;
+      let p = 0;
+      let q = 0;
+      let r = 0;
+      // while(i < 32767){
+      //   // while(j < 32767){
+      //   //   while(k < 32767){
+      //   //     while(l < 32767){
+      //   //       while(m < 32767){
+      //   //         while(n < 32767){
+      //   //           while(o < 32767){
+      //   //             while(p < 32767){
+      //   //               while(q < 32767){
+      //   //                 let q = q + 1;
+      //   //               }
+      //   //               let p = p + 1;
+      //   //             }
+      //   //             let o = o + 1;
+      //   //           }
+      //   //           let n = n + 1;
+      //   //         }
+      //   //         let m = m + 1;
+      //   //       }
+      //   //       let l = l + 1;
+      //   //     }
+      //   //     let k = k + 1;
+      //   //   }
+      //   //   let j = j + 1;
+      //   // }
+      //   let i = i + 1;
+      // }
+      return;
+    }
+
+    /** Displays the given error code in the form "ERR<errorCode>",
+     *  and halts the program's execution. */
+    function void error(int errorCode) {
+      do Output.printChar(69);
+      do Output.printChar(82);
+      do Output.printChar(82);
+      do Output.printInt(errorCode);
+      do Sys.halt();
+      return;
+    }
+}
