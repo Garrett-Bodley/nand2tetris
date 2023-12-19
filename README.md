@@ -16,11 +16,11 @@ This repository contains my work for the various Nand2Tetris projects. The proje
 
 ###  **[Part 2](#Part-II)**
 
-1. [Virtual Machine I: Processing](#Virtual-Machine-I:-Processing)
-2. [Virtual Machine II: Control](#Virtual-Machine-II:-Control)
+1. [Virtual Machine I: Processing](#Virtual-Machine-I-Processing)
+2. [Virtual Machine II: Control](#Virtual-Machine-II-Control)
 3. [High-Level Language](#High-Level-Language)
-4. [Compiler I: Syntax Analysis](#Compiler-I:-Syntax-Analysis)
-5. [Compiler II: Code Generation](#Compiler-II:-Code-Generation)
+4. [Compiler I: Syntax Analysis](#Compiler-I-Syntax-Analysis)
+5. [Compiler II: Code Generation](#Compiler-II-Code-Generation)
 6. [Operating System](#Operating-System)
 
 ## Part 1
@@ -63,11 +63,11 @@ Part 2 continues our ascent through the layers of abstraction by building a VM t
 
 After writing our compiler, we are not fully done. The final project involves writing an Operating System, a library of Classes that are tightly coupled to the hardware context and abstract away details of memory management, IO memory mapping, and provide a few basic primitives (strings and arrays)
 
-1. [Virtual Machine I: Processing](#Virtual-Machine-I:-Processing)
-2. [Virtual Machine II: Control](#Virtual-Machine-II:-Control)
+1. [Virtual Machine I: Processing](#Virtual-Machine-I-Processing)
+2. [Virtual Machine II: Control](#Virtual-Machine-II-Control)
 3. [High-Level Language](#High-Level-Language)
-4. [Compiler I: Syntax Analysis](#Compiler-I:-Syntax-Analysis)
-5. [Compiler II: Code Generation](#Compiler-II:-Code-Generation)
+4. [Compiler I: Syntax Analysis](#Compiler-I-Syntax-Analysis)
+5. [Compiler II: Code Generation](#Compiler-II-Code-Generation)
 6. [Operating System](#Operating-System)
 
 ### Virtual Machine I: Processing
